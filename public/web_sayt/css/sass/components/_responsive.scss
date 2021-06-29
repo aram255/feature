@@ -1,0 +1,2275 @@
+@media(min-width:320px) and (max-width:600px) {
+
+  /* edite profile user*/
+  .add-card{
+     flex-direction: column;
+     
+  }
+  .add-card img{
+     display: none;
+  }
+  .add_card-h1{
+     margin-top: 20px;
+  }
+  .edit-profile-save{
+   margin: 30px 0!important;
+  }
+
+
+  .edit-profile-save input{
+     margin:30px 0!important;
+  }
+    /*dite profile user*/
+
+
+
+   /* login user */
+
+   .modal__form.lg-header-form {
+      margin: 25px 19px 46px 19px;
+   }
+
+   .modal__form.sg-header-form {
+      margin: 0 20px;
+      padding: 36px 0 49px 0;
+   }
+
+   /*end login user */
+
+
+
+
+
+   /* filter */
+   .filter {
+      position: absolute;
+      top: -1296px;
+      width: 100%;
+      height: auto;
+   }
+
+   .body .nav-top {
+      box-shadow: none;
+   }
+
+   .container-filter .find-result {
+      max-width: 1075px;
+      width: 100%;
+   }
+
+   .person__content {
+      margin-left: 0;
+   }
+
+   .person {
+      padding: 20px;
+   }
+
+   .container-filter {
+      padding:10px 10px 60px 10px;
+   }
+
+   .person__info {
+      flex-direction: column;
+      justify-content: center;
+      width: 100%;
+      align-items: center;
+      position: relative;
+   }
+
+   .person__info-cont2 {
+      text-align: center;
+      margin-left: 0;
+   }
+
+   .person__info-heart {
+      position: absolute;
+      top: 0;
+      right: 0;
+   }
+
+   .person__content {
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      width: 100%;
+      align-content: center;
+      margin: 0 auto;
+   }
+
+   .mobile-filter {
+      display: flex;
+      justify-content: space-between;
+      padding: 20px 30px;
+      background-color: #F6FAFE;
+      align-items: center;
+   }
+
+
+   .mobile-filter h1 {
+      font-weight: 600;
+      font-size: 30px;
+      line-height: 49px;
+      letter-spacing: 0px;
+      color: #8BA9EE;
+   }
+
+   .container-filter {
+      margin-top: 20px;
+
+   }
+
+   .filter__content {
+      padding: 45px 20px 86px 20px;
+   }
+
+
+   /*end filter */
+
+   /* home */
+   .section1 .find__title {
+      font-size: 23px;
+      line-height: 30px;
+      text-align: center;
+   }
+
+   .section1 .find {
+      margin: 0;
+   }
+
+   .section1 .find__text {
+      padding-top: 18px;
+      font-size: 20px;
+      text-align: center;
+   }
+
+   .section1 .find__input {
+      padding: 10px;
+      width: 60%;
+      font-size: 12px;
+   }
+
+   .find__form-settings .settings-button i {
+      font-size: 35px;
+   }
+
+   .find__form {
+      padding: 0 20px;
+      align-items: center;
+      justify-content: center;
+      align-content: center;
+   }
+
+   .input-group {
+      margin: 0 !important;
+   }
+
+   .input-group-prepend img {
+      width: 20px;
+   }
+
+   .section1 .find__button {
+      margin-top: 24px;
+      display: flex;
+      justify-content: center;
+   }
+
+   .section1 .find__button a {
+      width: 80%;
+      padding: 11px 0px;
+      font-size: 20px;
+      text-align: center;
+   }
+
+   .lang {
+      display: none;
+   }
+
+   .nav-content {
+      display: block !important;
+      text-align: center;
+   }
+
+   header .nav-top .nav-items {
+      padding: 0 30px;
+   }
+
+   header {
+      padding: 0 20px;
+   }
+
+   .border-blue {
+      border-bottom: 1px solid #8BA9EE;
+   }
+
+   .section1 .find__button {
+      margin-bottom: 50px;
+   }
+
+   .section2 .practit__title {
+      font-size: 20px;
+      line-height: 24px;
+      width: 80%;
+      padding-bottom: 55px;
+   }
+
+   .section2 .practit__border {
+      max-width: 79px;
+   }
+
+   .live__chat {
+      display: none;
+   }
+
+   .section2 .card__flex .cd {
+      width: 161px;
+      height: 140px;
+      margin-bottom: 32px;
+   }
+
+   .section2 .card__flex .cd__content {
+      padding: 0;
+   }
+
+   .cd__content img {
+      width: 30%;
+   }
+
+   .section2 .card__flex .cd__content p {
+      font-size: 13px;
+      padding: 0;
+   }
+
+   .section2 .card__flex .cd:last-child p {
+      padding-top: 0;
+   }
+
+   .cd__content1,
+   .cd__content3,
+   .cd__content4,
+   .cd__content5 {
+      margin-top: 25px;
+   }
+
+   .cd__content2 {
+      margin-top: 10px;
+   }
+
+   .cd__content6 {
+      margin-top: 28px;
+   }
+
+
+   .section3 .card__flex {
+      margin-top: 46px;
+      margin-bottom: 20px;
+   }
+
+   .section3 .card__flex .cd {
+      width: 338px;
+      height: 227px;
+      margin-bottom: 50px;
+   }
+
+   .section3 .card__flex .cd__content p {
+      font-size: 24px;
+      padding: 7px 0;
+   }
+
+   .section3 .card__flex .cd__content {
+      padding: 17px 0 73px 0;
+   }
+
+   .footer__content-link {
+      flex-wrap: wrap;
+      padding: 20px;
+
+   }
+
+   .footer__content-link .footer-link {
+      font-size: 14px;
+   }
+
+   .footer__content-logo a {
+      font-size: 25px;
+   }
+
+   .footer__content {
+      padding: 30px 20px;
+   }
+
+   .follow {
+      color: #FED638;
+   }
+
+   /* end home */
+
+   /* login practitioners */
+
+   .lg-sg__img img {
+      width: 80%;
+
+   }
+
+   .lg-sg__img {
+      display: flex;
+      justify-content: center;
+   }
+
+   .lg-sg {
+      padding: 20px;
+   }
+
+   .lg-sg__form-text {
+      margin-bottom: 41px;
+      margin-top: 30px;
+   }
+
+   .lg-sg__forgot,
+   .lg-sg__check label {
+      font-size: 14px;
+   }
+
+   /*end login practitioners */
+
+
+   /* signup practitioners */
+
+
+   .body-create {
+      overflow: visible;
+   }
+
+   .create__img img {
+      width: 80%;
+      display: block;
+      margin: 0 auto;
+   }
+
+
+   .create__img p {
+      font-size: 30px;
+      padding-bottom: 30px;
+   }
+
+   .user-info {
+      display: inline;
+      padding-left: 0;
+   }
+
+   .create__img {
+      margin-top: 0;
+   }
+
+   .create__form {
+      width: 80%;
+      margin: 0 auto;
+   }
+
+   .box input[type="file"]+label {
+      width: 100%;
+   }
+
+   .box .upload {
+      margin-left: 91%;
+   }
+
+   .create__button {
+      padding-left: 0;
+   }
+
+   .create__signup {
+      padding-left: 0;
+      padding-bottom: 30px;
+   }
+
+   .user-info .fadeIn {
+      width: 100%;
+   }
+
+   .user-info.create__checkbox~.user-info.create__checkbox {
+      float: none;
+      padding-right: 0;
+   }
+
+   /*end signup practitioners */
+
+   /* intake form view */
+
+   .intake-form-view {
+      width: 90%;
+      margin: 0 auto;
+   }
+
+   .protocol__section-button {
+      margin-bottom: 50px;
+   }
+
+
+   .intake-form__title-p {
+      font-size: 30px;
+      text-align: center;
+   }
+
+   /*end intake form view */
+
+
+
+   /* protocol view */
+
+   .protocol__section-product-cont {
+      width: 95%;
+      margin: 0 auto;
+      padding: 20px;
+      margin-top: 30px;
+   }
+
+   .protocol-container-view {
+      width: 90%;
+      margin: 0 auto;
+   }
+
+   .protocol__section-product-view-cont-img {
+      margin: 0 auto;
+   }
+
+   .protocol__section-product-link-view .protocol__section-product-view-cont-title {
+      margin-left: 0;
+   }
+
+   .protocol-product-table {
+      margin-top: 20px;
+   }
+
+
+   .protocol__section-product-link-view .protocol-product-table-tbody-tr-td {
+      padding-left: 15px;
+   }
+
+   .protocol__section-link-cont-view {
+      margin: 20px auto;
+   }
+
+   .protocol__section-link-title {
+      margin-top: 52px;
+   }
+
+   /*end protocol view */
+
+
+
+   /* intake form */
+
+   .protocol__section-button {
+      margin: 30px 0;
+   }
+
+   /* end intake form */
+
+}
+
+
+
+
+
+@media(min-width:600px) and (max-width:768px) {
+
+   /* edite profile user*/
+  .add-card{
+   flex-direction: column;
+   
+}
+.add-card img{
+   display: none;
+}
+.add_card-h1{
+   margin-top: 20px;
+}
+.edit-profile-save{
+ margin: 30px 0!important;
+}
+
+
+.edit-profile-save input{
+   margin:30px 0!important;
+}
+  /*dite profile user*/
+
+
+
+ /* login user */
+
+ .modal__form.lg-header-form {
+    margin: 25px 19px 46px 19px;
+ }
+
+ .modal__form.sg-header-form {
+    margin: 0 20px;
+    padding: 36px 0 49px 0;
+ }
+
+ /*end login user */
+
+
+   /* filter */
+   .filter {
+      position: absolute;
+      top: -1296px;
+      width: 100%;
+      height: auto;
+   }
+
+   .body .nav-top {
+      box-shadow: none;
+   }
+
+   .container-filter .find-result {
+      max-width: 1075px;
+      width: 100%;
+   }
+
+   .person__content {
+      margin-left: 0;
+   }
+
+   .person {
+      padding: 20px;
+   }
+
+   .container-filter {
+     padding:10px 10px 60px 10px;
+   }
+
+   .person__info {
+      flex-direction: column;
+      justify-content: center;
+      width: 100%;
+      align-items: center;
+      position: relative;
+   }
+
+   .person__info-cont2 {
+      text-align: center;
+      margin-left: 0;
+   }
+
+   .person__info-heart {
+      position: absolute;
+      top: 0;
+      right: 0;
+   }
+
+   .person__content {
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      width: 100%;
+      align-content: center;
+      margin: 0 auto;
+   }
+
+   .mobile-filter {
+      display: flex;
+      justify-content: space-between;
+      padding: 20px 30px;
+      background-color: #F6FAFE;
+      align-items: center;
+   }
+
+
+   .mobile-filter h1 {
+      font-weight: 600;
+      font-size: 30px;
+      line-height: 49px;
+      letter-spacing: 0px;
+      color: #8BA9EE;
+   }
+
+   .container-filter {
+      margin-top: 20px;
+   }
+
+   .filter__content {
+      padding: 45px 20px 86px 20px;
+   }
+
+
+   /*end filter */
+
+
+
+
+
+
+
+
+
+   /* home */
+   .section1 .find__title {
+      font-size: 35px;
+      line-height: 45px;
+      text-align: center;
+   }
+
+   .section1 .find {
+      margin: 0;
+   }
+
+   .section1 .find__text {
+      padding-top: 18px;
+      font-size: 16px;
+      text-align: center;
+   }
+
+   .section1 .find__input {
+      padding: 10px;
+      width: 60%;
+      font-size: 12px;
+   }
+
+   .find__form-settings .settings-button i {
+      font-size: 35px;
+   }
+
+   .find__form {
+      padding: 0 20px;
+      align-items: center;
+      justify-content: center;
+      align-content: center;
+   }
+
+   .input-group {
+      margin: 0 !important;
+   }
+
+   .input-group-prepend img {
+      width: 20px;
+   }
+
+   .section1 .find__button {
+      margin-top: 24px;
+      display: flex;
+      justify-content: center;
+   }
+
+   .section1 .find__button a {
+      width: 50%;
+      padding: 11px 0px;
+      font-size: 20px;
+      text-align: center;
+   }
+
+   .lang {
+      display: none
+   }
+
+   .nav-content {
+      display: block !important;
+      text-align: center;
+   }
+
+   header .nav-top .nav-items {
+      padding: 0 30px;
+   }
+
+   header {
+      padding: 0 20px;
+   }
+
+   .border-blue {
+      border-bottom: 1px solid #8BA9EE;
+   }
+
+   .section1 .find__button {
+      margin-bottom: 50px;
+   }
+
+   .section2 .practit__title {
+      font-size: 20px;
+      line-height: 24px;
+      width: 80%;
+      padding-bottom: 55px;
+   }
+
+   .section2 .practit__border {
+      max-width: 79px;
+   }
+
+
+   .section2 .card__flex .cd {
+      width: 230px;
+      height: 174px;
+      margin-bottom: 32px;
+   }
+
+   .section2 .card__flex .cd__content {
+      padding: 0;
+   }
+
+   .cd__content img {
+      width: 30%;
+   }
+
+   .section2 .card__flex .cd__content p {
+      font-size: 13px;
+      padding: 0;
+   }
+
+   .section2 .card__flex .cd:last-child p {
+      padding-top: 0;
+   }
+
+   .cd__content1,
+   .cd__content3,
+   .cd__content4,
+   .cd__content5 {
+      margin-top: 25px;
+   }
+
+   .cd__content2 {
+      margin-top: 10px;
+   }
+
+   .cd__content6 {
+      margin-top: 28px;
+   }
+
+
+   .section3 .card__flex {
+      margin-top: 46px;
+      margin-bottom: 20px;
+   }
+
+   .section3 .card__flex .cd {
+      width: 338px;
+      height: 227px;
+      margin-bottom: 50px;
+   }
+
+   .section3 .card__flex .cd__content p {
+      font-size: 24px;
+      padding: 7px 0;
+   }
+
+   .section3 .card__flex .cd__content {
+      padding: 17px 0 73px 0;
+   }
+
+   .footer__content-link {
+      flex-wrap: wrap;
+      padding: 20px;
+
+   }
+
+   .footer__content-link .footer-link {
+      font-size: 14px;
+   }
+
+   .footer__content-logo a {
+      font-size: 25px;
+   }
+
+   .footer__content {
+      padding: 30px 20px;
+   }
+
+   .follow {
+      color: #FED638;
+   }
+
+   /* end home */
+
+
+
+   /* login practitioner */
+
+   .lg-sg__img img {
+      width: 80%;
+
+   }
+
+   .lg-sg__img {
+      display: flex;
+      justify-content: center;
+   }
+
+   /*end login practitioner */
+
+
+
+
+
+   /* signup practitioner */
+   .body-create {
+      overflow: visible;
+   }
+
+   .create__img img {
+      width: 80%;
+      display: block;
+      margin: 0 auto;
+   }
+
+
+   .create__img p {
+      font-size: 30px;
+      padding-bottom: 30px;
+   }
+
+   .user-info {
+      display: inline;
+      padding-left: 0;
+   }
+
+   .create__img {
+      margin-top: 0;
+   }
+
+   .create__form {
+      width: 80%;
+      margin: 0 auto;
+   }
+
+   .box input[type="file"]+label {
+      width: 100%;
+   }
+
+   .box .upload {
+      margin-left: 91%;
+   }
+
+   .create__button {
+      padding-left: 0;
+   }
+
+   .create__signup {
+      padding-left: 0;
+      padding-bottom: 30px;
+   }
+
+   .user-info .fadeIn {
+      width: 100%;
+   }
+
+   .user-info.create__checkbox~.user-info.create__checkbox {
+      float: none;
+      padding-right: 0;
+   }
+
+   .user-info p {
+      margin-top: 20px;
+   }
+
+   .box p {
+      margin-top: 10px !important;
+   }
+
+   /*end signup practitioner */
+
+   /* intake form view */
+
+   .intake-form-view {
+      width: 90%;
+      margin: 0 auto;
+   }
+
+   .protocol__section-button {
+      margin-bottom: 50px;
+   }
+
+   .intake-form__title-p {
+      font-size: 35px;
+      text-align: center;
+   }
+
+   /*end intake form view */
+
+
+   /* protocol view */
+
+   .protocol-container-view {
+      width: 95%;
+      margin: 0 auto;
+   }
+
+   .protocol__section-product-cont {
+
+      margin: 20px auto;
+   }
+
+   .protocol-product-table {
+      margin-top: 20px;
+   }
+
+   /*end protocol view */
+}
+
+
+@media(min-width:768px) and (max-width:1000px) {
+
+
+   
+   /* edite profile user*/
+.cvc input{
+   width: 200px!important;
+}
+  /*dite profile user*/
+
+
+
+ /* login user */
+
+ .modal__form.lg-header-form {
+    margin: 25px 19px 46px 19px;
+ }
+
+ .modal__form.sg-header-form {
+    margin: 0 20px;
+    padding: 36px 0 49px 0;
+ }
+
+ /*end login user */
+
+   /* filter */
+   .mobile-filter {
+      display: none;
+   }
+
+   .container-filter {
+      max-width: 1075px;
+      width: 100%;
+      padding: 20px;
+      margin-top: 0;
+   }
+
+   .filter__content {
+      padding: 45px 26px 187px 27px;
+   }
+
+   .container-filter .find-result {
+      max-width: 1075px;
+      width: 100%;
+
+   }
+
+   .person__info {
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+   }
+
+   .person {
+      padding: 20px 0;
+      position: relative;
+   }
+
+   .person__info-cont2 {
+      text-align: center;
+
+
+   }
+
+   .person__content {
+      margin: 0 auto;
+
+   }
+
+   .person__info-heart {
+      position: absolute;
+      top: 23px;
+      right: 23px;
+   }
+
+   /* end filter */
+
+
+
+
+
+   /* signup practitioner */
+   .body-create {
+      overflow: visible;
+   }
+
+   .create__img {
+      width: 80%;
+      margin: 0 auto;
+   }
+
+   .create__form {
+      width: 87%;
+      margin: 0 auto;
+   }
+
+   /*end signup practitioner */
+   /* home */
+   header .nav-top {
+      padding: 35px 20px;
+   }
+
+   .section1 .find {
+      margin: 53px 170px;
+   }
+
+   .section1 .find__title {
+      font-size: 45px;
+      font-weight: bold;
+      line-height: 56px;
+      color: #462847;
+   }
+
+   .section1 .find__text {
+      padding-top: 33px;
+   }
+
+   .section1 .find__input {
+      padding: 20px;
+   }
+
+   .input-group {
+      margin: 0 !important;
+   }
+
+   .section1 .find__form .input-group-prepend {
+      padding: 0;
+   }
+
+   .section1 .find__input {
+
+      width: 80%;
+   }
+
+   .input-group-prepend img {
+      margin-left: 20px;
+   }
+
+   .border-blue {
+      border-bottom: 1px solid #8BA9EE;
+   }
+
+   header .nav-top .nav-items {
+      padding: 0 30px;
+   }
+
+   .nav-content {
+      display: block !important;
+      text-align: center;
+   }
+
+   .lang {
+      display: none;
+   }
+
+   .section2 .card__flex .cd {
+      width: 340px;
+   }
+
+   /* end home */
+
+
+   /* login practitioner */
+
+   .lg-sg__img img {
+      width: 80%;
+
+   }
+
+   .lg-sg__img {
+      display: flex;
+      justify-content: center;
+   }
+
+   /*end login practitioner */
+
+   /* intake form view */
+
+   .intake-form-view {
+      width: 90%;
+      margin: 0 auto;
+   }
+
+   .protocol__section-button {
+      margin-bottom: 50px;
+   }
+
+
+   .intake-form__title-p {
+      font-size: 40px;
+      text-align: center;
+   }
+
+
+   /*end intake form view */
+
+
+   /* protocol view */
+
+   .protocol-container-view {
+      width: 95%;
+      margin: 0 auto;
+   }
+
+   .protocol__section-product-cont {
+
+      margin: 20px auto;
+   }
+
+   .protocol-product-table {
+      margin-top: 20px;
+   }
+
+   /*end protocol view */
+}
+
+@media(min-width:1000px) and (max-width:1360px) {
+
+   .edite-card-check{
+      padding:10px!important;
+      margin:0;
+   }
+
+
+
+   /* signup practitioner */
+   .body-create {
+      overflow: visible;
+   }
+
+   .create__img {
+      width: 73%;
+      margin: 0 auto;
+   }
+
+   .create__form {
+      width: 70%;
+      margin: 0 auto;
+   }
+
+   /*end signup practitioner */
+   /* home */
+   .section1 .find__input {
+      width: 80%;
+   }
+
+   .section3 .card__flex .cd {
+      width: 500px;
+   }
+
+   /* end home */
+
+
+   /* filter */
+
+   .container-filter .find-result {
+      max-width: 1075px;
+      width: 100%;
+
+   }
+
+   .filter__content {
+
+      padding: 45px 20px 204px 20px;
+   }
+
+   .person__info {
+      width: 40%;
+   }
+
+   .person__info-heart {
+      width: 49px;
+   }
+
+   /* end filter */
+}
+
+
+@media(min-width:1360px) and (max-width:1511px) {
+
+   /* signup practitioner */
+   .body-create {
+      overflow: visible;
+   }
+
+   .create__img {
+      width: 73%;
+      margin: 0 auto;
+   }
+
+   .create__form {
+      width: 60%;
+      margin: 0 auto;
+   }
+
+   .create__img img {
+      display: block;
+      margin: 0 auto
+   }
+
+   /*end signup practitioner */
+}
+
+@media(min-width:1000px) and (max-width:1650px) {
+
+   /* intake form view */
+
+   .intake-form-view {
+      width: 90%;
+      margin: 0 auto;
+   }
+
+   .protocol__section-button {
+      margin-bottom: 50px;
+   }
+
+   /*end intake form view */
+
+   /* protocol view */
+
+   .protocol-container-view {
+      width: 95%;
+      margin: 0 auto;
+   }
+
+   .protocol__section-product-cont {
+
+      margin: 20px auto;
+   }
+
+   .protocol-product-table {
+      margin-top: 20px;
+   }
+
+   /*end protocol view */
+   
+
+}
+
+@media(min-width:1000px) and (max-width:2000px) {
+
+   /* home */
+   .lang-mob {
+      display: none;
+   }
+
+   /* end home */
+
+
+
+   /* filter */
+   .mobile-filter {
+      display: none;
+   }
+
+   /*end  filter */
+}
+
+@media(min-width:320px) and (max-width:600px) {
+
+
+   /* index */
+   .cd__content {
+      margin-top: 25px;
+   }
+
+
+   /* end index */
+
+   /* edit profil */
+
+   .edit-profile-section{
+      flex-direction: column;
+   }
+   .profile-edit-flex{
+ justify-content: space-around;
+   }
+
+   .edit-profile {
+      flex-direction: column;
+   }
+
+   .edit-profile__other-service-content-flex {
+      flex-direction: column;
+   }
+   .edit-profile__contact-img {
+      margin:10px auto;
+      width: 100%;
+      padding: 38px 64px;
+      display: flex;
+      justify-content: center;
+   }
+
+   .add-card-edit{
+      flex-direction: column;
+   }
+
+
+   .user-info.create__checkbox{
+      padding-left: 0;
+   }
+   .edit-card{
+      display: flex;
+      align-items: center;
+   }
+   .add-card-edit-link{
+      margin-left: 0;
+   }
+   .lg-sg__button {
+    margin-top: 0;
+    margin-bottom: 40px;
+  }
+  .form-info>div{
+     margin-top: 10px;
+  }
+  .user-info p{
+     margin-top: 20px;
+  }
+
+  .user-info{
+     padding-bottom: 10px;
+  }
+// ------------------
+   .edit-profile__contact,
+   .edit-profile__other {
+      max-width: 100%;
+   }
+
+
+   .edit-profile-info {
+      margin-left: 0;
+   }
+
+   .add-photo-edit > p {
+      margin-left: 0px;
+  }
+   // .user-info p {
+   //    margin-top: 20px;
+   // }
+
+
+   .edit-profile__contact .user-info-about textarea {
+      width: 98%;
+   }
+
+   .profile-practitioner__consultation-video,
+   .edit-profile__other-video {
+      margin: 0 auto;
+      display: block;
+      margin-top: 42px;
+      width: 68%;
+      padding: 81px 0;
+   }
+
+   .edit-profile__other-time-content {
+      padding-left: 0;
+   }
+
+   .edit-profile__other {
+      width: 80%;
+      margin: 0 auto;
+   }
+
+   .edit-profile__other-service-content {
+      padding-left: 0;
+   }
+
+
+   .edit-profile__contact .form-info .user-info.odd {
+      padding-right: 0;
+   }
+
+   .edit-profile__other-time .edit-profile__other-time-content {
+      padding: 10px;
+   }
+
+   .edit-profile__other-time-content .user-info .btn {
+      margin: 20px 0;
+   }
+
+   .time-content-title {
+      margin: 20px 0;
+   }
+
+
+   .edit-profile__other-service .edit-profile__other-service-content {
+      padding: 10px;
+   }
+
+   .edit-profile__other-service-content-flex .user-info .user-info-p {
+      padding-top: 0;
+   }
+
+
+   .edit-profile__other-service-content-flex .user-info {
+      width: 100%;
+   }
+
+   .edit-profile__other-service-content-flex .user-info-consultation-info {
+      padding-left: 0;
+
+   }
+
+   .edit-profile__other-service-content-flex .user-info-consultation-info textarea {
+      width: 100%;
+   }
+
+   .edit-profile__other-service-content .btn {
+      margin-bottom: 30px;
+   }
+
+   .mob_save {
+      display: none !important;
+   }
+
+   .lg-sg__button input {
+      width: 80%;
+      margin: 0 auto;
+      display: block;
+   }
+
+   /*end edit profil */
+
+
+   /* my appointment */
+
+   .my-appointments {
+      width: 93%;
+   }
+
+   .my-appointments__complete-process-content-flex {
+      padding: 25px 16px;
+      flex-direction: column;
+   }
+
+   .my-appointments-person__info {
+      justify-content: center;
+   }
+
+   .my-appointments-person__info-cont2 {
+      text-align: center;
+   }
+
+   /* end my appointment */
+
+
+
+
+   /* Profile Practitioner */
+   .profile-practitioner {
+      flex-direction: column;
+   }
+
+   .profile-practitioner__user,
+   .profile-practitioner__consultation {
+      max-width: 80% !important;
+      margin: 0 auto;
+   }
+
+   .profile-practitioner__consultation {
+      padding-left: 0;
+   }
+
+   .profile-practitioner .person__info {
+      margin-left: 0;
+   }
+
+   .profile-practitioner__consultation-time-content {
+      padding-left: 10px;
+   }
+
+   .profile-practitioner__consultation-time-content .time-content-title img {
+      margin-left: 9px;
+      padding-left: 0;
+   }
+
+
+   .services__content {
+      padding: 20px;
+   }
+
+   /* end Profile Practitioner */
+
+   /* protocol */
+
+   .protocol__section-product-cont-title-item input,
+   .protocol__section-link-cont-title-item input {
+      max-width: 311px;
+      width: 100%;
+   }
+
+   .protocol__section-product-cont {
+      flex-direction: column;
+
+   }
+
+   .protocol__section-product-cont-img {
+      margin: 20px auto;
+   }
+
+   .protocol__section-product-cont-title {
+      margin-left: 0;
+   }
+
+   .protocol-container {
+      margin: 0 auto;
+      width: 90%;
+   }
+
+   .protocol__section-button {
+      text-align: center;
+   }
+
+   /* end protocol */
+
+
+   /* intake form */
+   .intake-form__section-checkbox-answer {
+      flex-direction: column;
+      width: 100%;
+   }
+
+   .intake-form__section-checkbox-answer .create__checkbox~.create__checkbox {
+      margin-left: 0;
+      margin-top: 13px;
+
+   }
+
+   .intake-form__section-checkbox-radio {
+      margin-bottom: 20px;
+      margin-top: 20px;
+      margin-right: 0;
+      width: 100%;
+   }
+
+
+
+   .intake-form {
+      width: 90%;
+      margin: 0 auto;
+   }
+
+   .intake-form__section-checkbox {
+      margin-top: 0;
+   }
+
+   .protocol__section-add {
+      margin-bottom: 30px;
+   }
+
+   /*end intake form */
+
+}
+
+
+
+@media(min-width:600px) and (max-width:768px) {
+
+   /* intake form */
+   .intake-form__section-checkbox-answer {
+      flex-direction: column;
+      width: 100%;
+   }
+
+   .intake-form__section-checkbox-answer .create__checkbox~.create__checkbox {
+      margin-left: 0;
+      margin-top: 13px;
+
+   }
+
+   .intake-form__section-checkbox-radio {
+      margin-bottom: 20px;
+      margin-top: 20px;
+      margin-right: 0;
+      width: 100%;
+   }
+
+
+
+   .intake-form {
+      width: 90%;
+      margin: 0 auto;
+   }
+
+   .intake-form__section-checkbox {
+      margin-top: 0;
+   }
+
+   .protocol__section-add {
+      margin-bottom: 30px;
+   }
+
+   /*end intake form */
+   /* edit profil */
+  
+
+
+
+
+
+
+ 
+   .edit-profile-section{
+      flex-direction: column;
+   }
+   .profile-edit-flex{
+ justify-content: space-around;
+   }
+
+   .edit-profile {
+      flex-direction: column;
+   }
+
+   .edit-profile__other-service-content-flex {
+      flex-direction: column;
+   }
+   .edit-profile__contact-img {
+      margin:10px auto;
+      width: 100%;
+      padding: 38px 64px;
+      display: flex;
+      justify-content: center;
+   }
+
+   .add-card-edit{
+      flex-direction: column;
+   }
+
+
+   .user-info.create__checkbox{
+      padding-left: 0;
+   }
+   .edit-card{
+      display: flex;
+      align-items: center;
+   }
+   .add-card-edit-link{
+      margin-left: 0;
+   }
+   .lg-sg__button {
+    margin-top: 0;
+    margin-bottom: 40px;
+  }
+  .form-info>div{
+     margin-top: 10px;
+  }
+  .user-info p{
+     margin-top: 20px;
+  }
+
+  .user-info{
+     padding-bottom: 10px;
+  }
+
+//   ---------------
+
+
+   .mob_save {
+      display: none !important;
+   }
+
+   .lg-sg__button input {
+      width: 80%;
+      margin: 0 auto;
+      display: block;
+   }
+
+   .edit-profile {
+      flex-direction: column;
+   }
+
+   .edit-profile__other-service-content-flex {
+      flex-direction: column;
+   }
+
+
+   .edit-profile__contact,
+   .edit-profile__other {
+      max-width: 100%;
+   }
+
+
+   .edit-profile-info {
+      margin-left: 0;
+   }
+
+   .edit-profile__contact-img {
+      margin: 0 auto;
+      display: block;
+      width: 191px;
+      padding: 55px 72px;
+   }
+
+   .user-info p {
+      margin-top: 20px;
+   }
+
+
+   .edit-profile__contact .user-info-about textarea {
+      width: 98%;
+   }
+
+   .profile-practitioner__consultation-video,
+   .edit-profile__other-video {
+      margin: 0 auto;
+      display: block;
+      margin-top: 42px;
+      width: 68%;
+      padding: 81px 0;
+   }
+
+   .edit-profile__other-time-content {
+      padding-left: 0;
+   }
+
+   .edit-profile__other {
+      width: 80%;
+      margin: 0 auto;
+   }
+
+   .edit-profile__other-service-content {
+      padding-left: 0;
+   }
+
+
+   .edit-profile__contact .form-info .user-info.odd {
+      padding-right: 0;
+   }
+
+   .edit-profile__other-time .edit-profile__other-time-content {
+      padding: 10px;
+   }
+
+   .edit-profile__other-time-content .user-info .btn {
+      margin: 20px 0;
+   }
+
+   .time-content-title {
+      margin: 20px 0;
+   }
+
+
+   .edit-profile__other-service .edit-profile__other-service-content {
+      padding: 10px;
+   }
+
+   .edit-profile__other-service-content-flex .user-info .user-info-p {
+      padding-top: 0;
+   }
+
+
+   .edit-profile__other-service-content-flex .user-info {
+      width: 100%;
+   }
+
+   .edit-profile__other-service-content-flex .user-info-consultation-info {
+      padding-left: 0;
+
+   }
+
+   .edit-profile__other-service-content-flex .user-info-consultation-info textarea {
+      width: 100%;
+   }
+
+   .edit-profile__other-service-content .btn {
+      margin-bottom: 30px;
+   }
+
+   /*end edit profil */
+
+   /* Profile Practitioner */
+   .profile-practitioner {
+      flex-direction: column;
+   }
+
+   .profile-practitioner__user,
+   .profile-practitioner__consultation {
+      max-width: 80% !important;
+      margin: 0 auto;
+   }
+
+   .profile-practitioner__consultation {
+      padding-left: 0;
+   }
+
+   .profile-practitioner .person__info {
+      margin-left: 0;
+   }
+
+   .profile-practitioner__consultation-time-content {
+      padding-left: 10px;
+   }
+
+   .profile-practitioner__consultation-time-content .time-content-title img {
+      margin-left: 9px;
+      padding-left: 0;
+   }
+
+
+   .services__content {
+      padding: 20px;
+   }
+
+   /* end Profile Practitioner */
+
+   /* protocol */
+
+   .protocol__section-product-cont-title-item input,
+   .protocol__section-link-cont-title-item input {
+      max-width: 311px;
+      width: 100%;
+   }
+
+   .protocol__section-product-cont {
+      flex-direction: column;
+
+   }
+
+   .protocol__section-product-cont-img {
+      margin: 20px auto;
+   }
+
+   .protocol__section-product-cont-title {
+      margin-left: 0;
+   }
+
+   .protocol-container {
+      margin: 0 auto;
+      width: 90%;
+   }
+
+   .protocol__section-button {
+      text-align: center;
+   }
+
+   /* end protocol */
+
+}
+
+
+
+@media(min-width:768px) and (max-width:1000px) {
+
+
+   /* intake form */
+
+   .intake-form__section-checkbox-answer .create__checkbox~.create__checkbox {
+      // margin-left: 0;
+      // margin-top: 13px;
+
+   }
+
+   .intake-form__section-checkbox-radio {
+      margin-bottom: 20px;
+      margin-top: 20px;
+
+
+   }
+
+
+
+   .intake-form {
+      width: 90%;
+      margin: 0 auto;
+   }
+
+   .intake-form__section-checkbox {
+      margin-top: 20px;
+   }
+
+   .protocol__section-add {
+      margin-bottom: 30px;
+   }
+
+   /*end intake form */
+
+
+
+
+
+
+   /* filter */
+   .person__info {
+      margin: 0 auto;
+   }
+
+   /*end filter */
+
+
+
+   /* edit profil */
+   .edit-profile__contact-img{
+      padding: 67px 53px;
+      display: flex;
+      justify-content: center;
+   }
+
+   .add-card-edit{
+      flex-direction: column;
+   }
+
+   .edit-card p{
+      max-width:285px ;
+      width: 100%;
+   }
+
+   .footer__content {
+      padding: 90px 60px;
+  }
+  .footer__content-link{
+     padding-bottom: 0;
+  }
+   // --------------
+
+
+   .edit-profile__other-service-content-flex {
+      flex-direction: column;
+   }
+
+
+   .edit-profile__other-video,
+   .edit-profile__other-time,
+   .edit-profile__other-service {
+      width: 90%;
+   }
+
+   .edit-profile__other-service-content .btn {
+      margin: 20px auto;
+      display: block;
+   }
+
+   /* end edit profil */
+
+
+   /* Profile Practitioner */
+
+
+   .profile-practitioner {
+      width: 90%;
+      margin: 30px auto;
+   }
+
+   .profile__reviews-person {
+      padding: 20px;
+   }
+
+   .profile__reviews-person>img {
+      display: block;
+      margin: 20px auto;
+   }
+
+   .profile__reviews-content {
+      margin: 0;
+   }
+
+   .profile__reviews-content-clock {
+      display: flex !important;
+      align-items: center;
+   }
+
+   .reviews-clock-data {
+      margin-left: 20px;
+      display: block;
+   }
+
+   /* end Profile Practitioner */
+
+
+   /* protocol */
+
+   .protocol__section-product-cont-title-item input,
+   .protocol__section-link-cont-title-item input {
+      max-width: 311px;
+      width: 100%;
+   }
+
+   .protocol__section-product-cont {
+      flex-direction: column;
+
+   }
+
+   .protocol__section-product-cont-img {
+      margin: 20px auto;
+   }
+
+   .protocol__section-product-cont-title {
+      margin-left: 0;
+   }
+
+   .protocol-container {
+      margin: 0 auto;
+      width: 90%;
+   }
+
+   .protocol__section-button {
+      text-align: center;
+   }
+
+   /* end protocol */
+}
+
+@media(min-width:1000px) and (max-width:1360px) {
+
+   /* intake form */
+
+   .intake-form__section-checkbox-answer .create__checkbox~.create__checkbox {
+      // margin-left: 0;
+      // margin-top: 13px;
+
+   }
+
+   .intake-form__section-checkbox-radio {
+      margin-bottom: 20px;
+      margin-top: 20px;
+
+
+   }
+
+
+
+   .intake-form {
+      width: 90%;
+      margin: 0 auto;
+   }
+
+   .intake-form__section-checkbox {
+      margin-top: 20px;
+   }
+
+   .protocol__section-add {
+      margin-bottom: 30px;
+   }
+
+   .intake-form__title-p {
+      margin-top: 20px;
+   }
+
+   /*end intake form */
+
+
+
+   .profile-practitioner {
+      width: 90%;
+      margin: 30px auto;
+   }
+
+   /* filter */
+   .container-filter .find-result {
+      max-width: 1075px;
+      width: 95%;
+      margin: 0 auto;
+   }
+
+   .find-result .person {
+      justify-content: space-between;
+   }
+
+   .person {
+      padding: 25px 6px 25px 6px;
+   }
+
+   .person__content {
+      margin-left: 0;
+   }
+
+   .person__info-name {
+      font-size: 20px;
+      line-height: 24px;
+   }
+
+   .person__info {
+      width: 53%;
+   }
+
+   .person__info-heart {
+      background-size: contain;
+   }
+
+   /*end filter */
+
+
+   /* edit profil */
+   .edit-profile__contact-img{
+      padding: 67px 53px;
+      display: flex;
+      justify-content: center;
+   }
+
+   .add-card-edit{
+      flex-direction: column;
+   }
+
+   .edit-card p{
+      max-width:285px ;
+      width: 100%;
+   }
+
+   .footer__content {
+      padding: 90px 60px;
+  }
+  .footer__content-link{
+     padding-bottom: 0;
+  }
+   // --------------
+   .edit-profile__other-service-content-flex {
+      flex-direction: column;
+   }
+
+
+   .edit-profile__other-video,
+   .edit-profile__other-time,
+   .edit-profile__other-service {
+      width: 90%;
+   }
+
+   header .navbar-brand {
+      margin-left: 30px;
+   }
+
+   .edit-profile__other-service-content .btn {
+      margin: 20px auto;
+      display: block;
+   }
+
+   /* end edit profil */
+
+   /* protocol */
+
+
+   .protocol-container {
+      margin: 0 auto;
+      width: 95%;
+   }
+
+
+   /* end protocol */
+}
+
+
+
+@media(min-width:1360px) and (max-width:1600px) {
+   /* intake form */
+
+   .intake-form__section-checkbox-answer .create__checkbox~.create__checkbox {
+      // margin-left: 0;
+      // margin-top: 13px;
+
+   }
+
+   .intake-form__section-checkbox-radio {
+      margin-bottom: 20px;
+      margin-top: 20px;
+
+
+   }
+
+
+
+   .intake-form {
+      width: 90%;
+      margin: 0 auto;
+   }
+
+   .intake-form__section-checkbox {
+      margin-top: 20px;
+   }
+
+   .protocol__section-add {
+      margin-bottom: 30px;
+   }
+
+   .intake-form__title-p {
+      margin-top: 20px;
+   }
+
+   /*end intake form */
+   .profile-practitioner {
+      width: 90%;
+      margin: 30px auto;
+   }
+
+   /* filter */
+
+   .container-filter .find-result {
+      max-width: 1075px;
+      width: 100%;
+   }
+
+   .filter__content {
+      padding: 45px 62px 204px 50px;
+   }
+
+   .container-filter .find-result {
+      max-width: 1075px;
+      width: 95%;
+      margin: 0 auto;
+   }
+
+   .find-result .person {
+      justify-content: space-between;
+   }
+
+   .person {
+      padding: 25px 30px 25px 30px;
+   }
+
+   .person__content {
+      margin-left: 0;
+   }
+
+   .person__info-name {
+      font-size: 20px;
+      line-height: 24px;
+   }
+
+   .person__info {
+      width: 53%;
+   }
+
+   .person__info-heart {
+      background-size: contain;
+      width: 43px;
+      height: 38px;
+   }
+
+   header .navbar-brand {
+      margin-left: 40px;
+   }
+
+
+   /*end filter*/
+
+   /* edit profil */
+
+   .footer__content {
+      padding: 90px 60px;
+  }
+
+   .edit-profile__other-video,
+   .edit-profile__other-time,
+   .edit-profile__other-service {
+      width: 90%;
+   }
+
+   header .navbar-brand {
+      margin-left: 30px;
+   }
+
+   /* end edit profil */
+}
+
+
+
+@media(min-width:768px) and (max-width:5000px) {
+   .mob_save {
+      display: block;
+   }
+
+   .but_web {
+      display: none;
+
+   }
+
+}
+
+.footer__content {
+   padding: 90px 60px;
+}

@@ -1,0 +1,920 @@
+/* @media(min-width:320px) and (max-width:600px){
+    .section1 .find__title{
+        font-size: 23px;
+        line-height: 30px;
+        text-align: center;
+    } 
+    .section1 .find{
+        margin:0;
+    }
+    .section1 .find__text{
+        padding-top:18px;
+        font-size: 20px;
+        text-align: center;
+    }
+    .section1 .find__input{
+        padding: 10px;
+        width: 60%;
+        font-size: 12px;
+    }
+    .find__form-settings .settings-button i{
+        font-size: 35px;
+    }
+    .find__form{
+        padding:0 20px;
+        align-items: center;
+        justify-content: center;
+        align-content: center;
+    }
+    .input-group{
+        margin: 0 !important;
+    }
+    .input-group-prepend img{
+        width: 20px;
+    } 
+    .section1 .find__button{
+        margin-top: 24px;
+      display: flex;
+      justify-content: center;
+    }
+    .section1 .find__button a{
+        width: 80%;
+        padding: 11px 0px;
+    font-size: 20px;
+    text-align: center;
+    }
+
+    .lang{
+        display:none
+    }
+
+    .nav-content{
+        display: block!important;
+        text-align: center;
+    }
+    header .nav-top .nav-items{
+        padding: 0 30px;
+    }
+    header {
+        padding: 0 20px;
+    }
+    .border-blue{
+        border-bottom:1px solid #8BA9EE;
+    }
+    .section1 .find__button{
+        margin-bottom: 50px;
+    }
+    .section2 .practit__title{
+        font-size: 20px;
+        line-height: 24px;
+        width: 80%;
+        padding-bottom: 55px;
+    }
+    .section2 .practit__border{
+        max-width: 79px;
+    }
+    .live__chat{
+        display: none;
+    }
+
+    .section2 .card__flex .cd {
+        width: 161px;
+        height: 140px;
+        margin-bottom: 32px;
+    }
+    .section2 .card__flex .cd__content{
+        padding: 0;
+    }
+    .cd__content img{
+        width: 30%;
+    }
+    .section2 .card__flex .cd__content p{
+        font-size: 13px;
+        padding: 0;
+    }
+    .section2 .card__flex .cd:last-child p{
+        padding-top: 0;
+    }
+    .cd__content1,.cd__content3,.cd__content4,.cd__content5{
+        margin-top:25px;
+    }
+    .cd__content2{
+        margin-top:10px;
+    }
+    .cd__content6{
+        margin-top:28px;
+    }
+  
+  
+    .section3 .card__flex{
+        margin-top: 46px;
+        margin-bottom: 20px;
+    }
+    .section3 .card__flex .cd{
+        width: 338px;
+        height: 227px;
+        margin-bottom: 50px;
+    }
+    .section3 .card__flex .cd__content p{
+        font-size: 24px;
+        padding: 7px 0;
+    }
+    .section3 .card__flex .cd__content {
+        padding: 17px 0 73px 0;
+    }
+
+    .footer__content-link{
+    flex-wrap: wrap;
+    padding: 20px;
+   
+    }
+    .footer__content-link .footer-link{
+        font-size: 14px;
+    }
+    .footer__content-logo a{
+        font-size: 25px;
+    }
+    .footer__content{
+        padding:30px 20px;
+    }
+    .follow{
+        color: #FED638;
+    }
+}
+
+
+
+
+
+@media(min-width:600px) and (max-width:768px){
+    .section1 .find__title{
+        font-size: 35px;
+        line-height: 45px;
+        text-align: center;
+    } 
+    .section1 .find{
+        margin:0;
+    }
+    .section1 .find__text{
+        padding-top:18px;
+        font-size: 16px;
+        text-align: center;
+    }
+    .section1 .find__input{
+        padding: 10px;
+        width: 60%;
+        font-size: 12px;
+    }
+    .find__form-settings .settings-button i{
+        font-size: 35px;
+    }
+    .find__form{
+        padding:0 20px;
+        align-items: center;
+        justify-content: center;
+        align-content: center;
+    }
+    .input-group{
+        margin: 0 !important;
+    }
+    .input-group-prepend img{
+        width: 20px;
+    } 
+    .section1 .find__button{
+        margin-top: 24px;
+      display: flex;
+      justify-content: center;
+    }
+    .section1 .find__button a{
+        width: 50%;
+        padding: 11px 0px;
+    font-size: 20px;
+    text-align: center;
+    }
+
+    .lang{
+        display:none
+    }
+
+    .nav-content{
+        display: block!important;
+        text-align: center;
+    }
+    header .nav-top .nav-items{
+        padding: 0 30px;
+    }
+    header {
+        padding: 0 20px;
+    }
+    .border-blue{
+        border-bottom:1px solid #8BA9EE;
+    }
+    .section1 .find__button{
+        margin-bottom: 50px;
+    }
+    .section2 .practit__title{
+        font-size: 20px;
+        line-height: 24px;
+        width: 80%;
+        padding-bottom: 55px;
+    }
+    .section2 .practit__border{
+        max-width: 79px;
+    }
+   
+
+    .section2 .card__flex .cd {
+        width: 230px;
+        height: 174px;
+        margin-bottom: 32px;
+    }
+    .section2 .card__flex .cd__content{
+        padding: 0;
+    }
+    .cd__content img{
+        width: 30%;
+    }
+    .section2 .card__flex .cd__content p{
+        font-size: 13px;
+        padding: 0;
+    }
+    .section2 .card__flex .cd:last-child p{
+        padding-top: 0;
+    }
+    .cd__content1,.cd__content3,.cd__content4,.cd__content5{
+        margin-top:25px;
+    }
+    .cd__content2{
+        margin-top:10px;
+    }
+    .cd__content6{
+        margin-top:28px;
+    }
+  
+  
+    .section3 .card__flex{
+        margin-top: 46px;
+        margin-bottom: 20px;
+    }
+    .section3 .card__flex .cd{
+        width: 338px;
+        height: 227px;
+        margin-bottom: 50px;
+    }
+    .section3 .card__flex .cd__content p{
+        font-size: 24px;
+        padding: 7px 0;
+    }
+    .section3 .card__flex .cd__content {
+        padding: 17px 0 73px 0;
+    }
+
+    .footer__content-link{
+    flex-wrap: wrap;
+    padding: 20px;
+   
+    }
+    .footer__content-link .footer-link{
+        font-size: 14px;
+    }
+    .footer__content-logo a{
+        font-size: 25px;
+    }
+    .footer__content{
+        padding:30px 20px;
+    }
+    .follow{
+        color: #FED638;
+    }
+}
+
+
+@media(min-width:768px) and (max-width:1000px){
+
+    header .nav-top{
+padding:35px  20px;
+    }
+    .section1 .find{
+        margin: 53px 170px;
+    }
+    .section1 .find__title {
+        font-size: 45px;
+        font-weight: bold;
+        line-height: 56px;
+        color: #462847;
+    }
+    .section1 .find__text {
+        padding-top: 33px;
+    }
+    .section1 .find__input{
+        padding: 20px;
+    }
+    .input-group {
+            margin:0!important;
+    }
+    .section1 .find__form .input-group-prepend{
+        padding: 0;
+    }
+    .section1 .find__input{
+      
+        width: 80%;
+    }
+    .input-group-prepend  img{
+        margin-left: 20px;
+    }
+    .border-blue {
+        border-bottom: 1px solid #8BA9EE;
+    }
+    header .nav-top .nav-items {
+        padding: 0 30px;
+    }
+    .nav-content {
+        display: block!important;
+        text-align: center;
+    }
+    .lang{
+        display: none;
+    }
+    .section2 .card__flex .cd {
+        width: 340px;
+}
+}
+
+@media(min-width:1000px) and (max-width:1360px){
+    .section1 .find__input {
+        width: 80%;
+    }
+    .section3 .card__flex .cd {
+        width: 500px;
+    }
+}
+
+@media(min-width:1000px) and (max-width:2000px){
+    .lang-mob{
+        display: none;
+    }
+} */
+
+
+
+@media(min-width:320px) and (max-width:600px){
+    /* home page */
+
+    .section3 .card__flex .cd__content {
+        padding: 17px 0 33px 0;
+    }
+
+    .section3 .card__flex .cd{
+        height: auto;
+    }
+ 
+/* end home page */
+
+    /* edit-profile-customer */
+
+
+
+
+  
+    .flex-container{
+        flex-direction: column;
+    
+    }
+
+
+    .form-customer{
+        margin-left: 0;
+    }
+    .upload_img_customer{
+        margin:0 auto;
+    }
+    .expiration_date div select{
+        width: 100%!important;
+        margin-top: 20px;
+      
+    }
+
+    .cvc{
+        margin-left: 0;
+    }
+
+    .cvc input{
+        width: 100%!important;
+    }
+    .expiration_date div select:last-of-type {
+        margin-left: 0;
+    }
+
+    .add_card_customer img{
+        margin-left: 10px;
+        margin-top: 10px;
+    }
+
+
+    .check-input{
+        display: flex;
+        flex-direction: row!important;
+    align-items: center;
+    }
+
+    .user-info.create__checkbox{
+        padding-left: 0;
+    }
+
+
+    .user-info p{
+        margin-bottom: 20px;
+       
+    }
+
+
+
+
+      /*end edit-profile-customer */
+    /* profile customer */
+    .profile-customer-reviews-cont__info{
+        flex-direction: column;
+    }
+
+    .profile-customer{
+        width: 90%;
+        margin: 0 auto;
+    }
+
+    .profile-customer__blok1-info .person__info-cont1 .person__info-name .edit-pen{
+        margin-left: 20px;
+    }
+
+    .person__info-name{
+        font-size: 20px;
+    }
+
+
+    .profile-customer__blok2 .profile-customer__my-appointments-button-edit{
+        width: 65%;
+        margin-left:0;
+        margin-top: 20px;
+    }
+
+    .profile-customer__blok1,.profile-customer__blok2{
+        margin:0 auto;
+    }
+
+    .profile-customer__blok2 .profile-customer-reviews-cont__info-name{
+        flex-direction: column;
+    }
+
+    .profile-customer-reviews-cont__info-cont1{
+        margin: 0 auto;
+    margin-bottom: 10px;
+    }
+
+
+    .profile-customer .profile-customer__button{
+        margin-bottom: 30px;
+        margin-top: 0;
+        text-align: center;
+    }
+
+    .profile-customer__blok2 .profile-customer-reviews-cont{
+        margin-bottom: 36px;
+    }
+
+    /* end profile customer */
+
+
+
+
+}
+
+
+@media(min-width:600px) and (max-width:768px){
+
+
+
+   /* edit-profile-customer */
+
+
+
+
+  
+   .flex-container{
+    flex-direction: column;
+
+}
+
+
+.form-customer{
+    margin-left: 0;
+}
+.upload_img_customer{
+    margin:0 auto;
+}
+.expiration_date div select{
+    width: 100%!important;
+    margin-top: 20px;
+  
+}
+
+.cvc{
+    margin-left: 0;
+}
+
+.cvc input{
+    width: 100%!important;
+}
+.expiration_date div select:last-of-type {
+    margin-left: 0;
+}
+
+.add_card_customer img{
+    margin-left: 10px;
+    margin-top: 10px;
+}
+
+
+.check-input{
+    display: flex;
+    flex-direction: row!important;
+align-items: center;
+}
+
+.user-info.create__checkbox{
+    padding-left: 0;
+}
+
+
+.user-info p{
+    margin-bottom: 20px;
+   
+}
+
+
+
+
+  /*end edit-profile-customer */
+    /* profile customer */
+    .profile-customer-reviews-cont__info{
+        flex-direction: column;
+    }
+
+    .profile-customer{
+        width: 90%;
+        margin: 0 auto;
+    }
+
+    .profile-customer__blok1-info .person__info-cont1 .person__info-name .edit-pen{
+        margin-left: 20px;
+    }
+
+    .person__info-name{
+        font-size: 20px;
+    }
+
+
+    .profile-customer__blok2 .profile-customer__my-appointments-button-edit{
+        width: 65%;
+        margin-left:0;
+        margin-top: 20px;
+    }
+
+    .profile-customer__blok1,.profile-customer__blok2{
+        margin:20px auto;
+    }
+
+    .profile-customer__blok2 .profile-customer-reviews-cont__info-name{
+        flex-direction: column;
+    }
+
+    .profile-customer-reviews-cont__info-cont1{
+        margin: 0 auto;
+    margin-bottom: 10px;
+    }
+
+
+    .profile-customer .profile-customer__button{
+        margin-bottom: 30px;
+        margin-top: 0;
+        text-align: center;
+    }
+
+    .profile-customer__blok2 .profile-customer-reviews-cont{
+        margin-bottom: 36px;
+    }
+    
+
+    .profile-customer__blok1{
+        height: auto;
+    }
+
+
+    .my-appointments__complete-process-content-flex{
+        flex-direction: column;
+    }
+
+    .my-appointments-person__info{
+        justify-content: center;
+        text-align: center;
+    }
+    /* end profile customer */
+
+}
+@media(min-width:599px) and (max-width:770px){
+/* home page */
+.section2 .card__flex .cd {
+    width: 197px;
+    height: 197px;
+}
+
+.section2 .card__flex .cd__content {
+
+    padding: 23px 0 10px 0;
+}
+.footer__content{
+    padding: 90px 40px 40px;
+}
+/* end home page */
+
+}
+
+@media(min-width:768px) and (max-width:1000px){
+
+
+
+ /* edit-profile-customer */
+
+.flex-container{
+    width: 95%;
+  margin:0 auto;
+}
+.form-customer{
+ margin-left: 0px;
+}
+
+.add-card input{
+   
+    margin-bottom: 20px;
+}
+
+.expiration_date div select:last-of-type{
+    margin-left: 0;
+    margin-top: 20px;
+}
+.add-card input{
+width:70%!important;
+}
+  /*end edit-profile-customer */
+
+
+    /* profile customer */
+    .profile-customer-reviews-cont__info{
+        flex-direction: column;
+    }
+
+    .profile-customer{
+        width: 90%;
+        margin: 0 auto;
+    }
+
+    .profile-customer__blok1-info .person__info-cont1 .person__info-name .edit-pen{
+        margin-left: 20px;
+    }
+
+    .person__info-name{
+        font-size: 20px;
+    }
+
+
+    .profile-customer__blok2 .profile-customer__my-appointments-button-edit{
+        width: 65%;
+        margin-left:0;
+        margin-top: 20px;
+    }
+
+    .profile-customer__blok1,.profile-customer__blok2{
+        margin:20px auto;
+    }
+
+    .profile-customer__blok2 .profile-customer-reviews-cont__info-name{
+        flex-direction: column;
+    }
+
+    .profile-customer-reviews-cont__info-cont1{
+        margin: 0 auto;
+    margin-bottom: 10px;
+    }
+
+
+    .profile-customer .profile-customer__button{
+        margin-bottom: 30px;
+        margin-top: 0;
+        text-align: center;
+    }
+
+    .profile-customer__blok2 .profile-customer-reviews-cont{
+        margin-bottom: 36px;
+    }
+    
+
+    .profile-customer__blok1{
+        height: auto;
+    }
+
+
+    .my-appointments__complete-process-content-flex{
+        flex-direction: column;
+    }
+
+    .my-appointments-person__info{
+        justify-content: center;
+        text-align: center;
+    }
+    /* end profile customer */
+/* home page */
+
+.footer__content{
+    padding: 90px 40px 40px;
+}
+/* end home page */
+
+}
+
+
+
+
+@media(min-width:1000px) and (max-width:1360px){
+
+/* home page */
+
+.footer__content{
+    padding: 90px 40px 40px;
+}
+/* end home page */
+
+     /* edit-profile-customer */
+
+.flex-container{
+    width: 95%;
+  margin:0 auto;
+}
+.form-customer{
+ margin-left: 0px;
+}
+
+.add-card input{
+   
+    margin-bottom: 20px;
+}
+
+.expiration_date div select:last-of-type{
+    margin-left: 0;
+    margin-top: 20px;
+}
+.add-card input{
+width: 70%!important;
+}
+
+  /*end edit-profile-customer */
+    .profile-customer{
+        width: 95%;
+    margin: 20px auto;
+    }
+
+
+    .profile-customer{
+        flex-wrap: nowrap;
+    }
+
+    .profile-customer-my-appointments,.profile-customer-favorites,.profile-customer-reviews{
+    width: 90%;
+    margin: 0 auto;
+    }
+
+    .profile-customer__blok2 .profile-customer__my-appointments-button-edit{
+    margin-left: 0;      
+    width: 80%;
+    margin-top: 126px;
+    }
+    .profile-customer-reviews-cont__info-name-rat-clock{
+        flex-direction: column;
+    }
+
+    .profile-customer-reviews-cont__info-name{
+        flex-direction: column;
+    }
+ .profile-customer-reviews-cont__info-name-rat-clock{
+     margin-top: 20px;
+ }
+
+ .profile-customer__blok2 .profile-customer-reviews-cont__info-name-rat-clock .profile-customer-cont-clock{
+         padding-left:0;
+         margin-top: 10px;
+ }
+
+ .profile-customer__blok2 .profile-customer-reviews-cont__info-text{
+     width: 80%;
+     font-size: 14px;
+ }
+ .profile-customer .profile-customer__button{
+     margin-left: 30px;
+ }
+}
+
+
+@media(min-width:1360px) and (max-width:1500px){
+
+     /* edit-profile-customer */
+
+     .flex-container{
+        width: 95%;
+      margin:0 auto;
+    }
+    .form-customer{
+     margin-left: 0px;
+    }
+    
+    .add-card input{
+       
+        margin-bottom: 20px;
+    }
+    
+    .expiration_date div select:last-of-type{
+        margin-left: 0;
+        margin-top: 20px;
+    }
+    .add-card input{
+    width: 70%!important;
+    }
+    
+      /*end edit-profile-customer */
+
+
+
+      /* home page */
+
+      .footer__content{
+        padding: 90px 40px 40px;
+    }
+
+      /* end home page */
+}
+
+
+
+@media(min-width:1270px) and (max-width:1760px){
+
+    /* home page */
+
+    .section2 .card__flex .cd{
+        width: 277px;
+    }
+
+
+
+    .section2 .card__flex .cd__content {
+        padding: 25px 0 30px 0;
+    }
+
+
+    .section2 .card__flex .cd__content p{
+        font-size: 25px;
+    }
+
+    .cd__content img{
+        width: 100px;
+        height: 100px;
+    }
+
+
+    .card-container{
+        max-width: 1100px;
+        width:100%;
+      margin:0 auto;
+    }
+    .section2 .card__flex .cd:last-child p {
+        padding-top: 25px;
+    }
+
+    .section3 .card__flex .cd{
+        width: 420px;
+    }
+
+
+    .section3 .card__flex .cd__content{
+        padding: 30px 0;
+    }
+
+    .section3 .card__flex .cd__content p{
+        font-size: 25px;
+    }
+    .section3 .card__flex{
+        margin-bottom: 0;
+    }
+
+    .footer__content{
+        padding: 90px 40px 40px;
+    }
+      /* end home page */
+
+
+}

@@ -1,0 +1,103 @@
+.content-middel{
+    text-align: center;
+}
+
+a.loading, span.loading, button.loading, button.loading:hover, a.loading:hover, span.loading:hover {
+    color: transparent !important;
+    position: relative;
+    pointer-events: none;
+}
+a.loading:after, span.loading:after, button.loading:after, a.loading:hover:after, span.loading:hover:after, button.loading:hover:after {
+    content: '';
+    position: absolute;
+    width: 43px;
+    height: 11px;
+    top: 50%;
+    left: 50%;
+    margin-top: -5px;
+    margin-left: -23px;
+    background-image: url("../img/ajax-loading.gif");
+    z-index: 6;
+    display: block;
+    pointer-events: none;
+}
+a.loading:before, span.loading:before, button.loading:before, a.loading:hover:before, span.loading:hover:before, button.loading:hover:before {
+    content: '';
+    position: absolute;
+    display: block;
+    background-color: transparent;
+    left: -5px;
+    top: -5px;
+    right: -5px;
+    bottom: -5px;
+    z-index: 5;
+    pointer-events: none; 
+}
+.nopadding {
+    padding: 0 !important;
+    margin: 0 !important;
+}
+.el_item{
+    display: block;
+    margin-bottom:.5rem
+}
+.el_item label{
+    font-weight: bold;
+}
+.capitalize{
+    text-transform:capitalize;
+}
+.fixed-height{
+    overflow: hidden;
+    max-height: 300px;
+    overflow-y: auto;
+}
+.sb-checkbox{
+    height: 15px;
+    width: 15px;
+}
+
+.image-upload-container .image-part{
+	width: 100px; 
+	height: 100px;
+	margin-bottom: 20px;
+}
+.image-upload-container .fileNotExist .img-exist{
+	display: none;
+}
+.image-upload-container .fileExist .img-not-exist{
+	display: none;
+}
+.image-upload-container .thumbnail{
+    display: block;
+    padding: 4px;
+    margin-bottom: 20px;
+    line-height: 1.42857143;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    -webkit-transition: all .2s ease-in-out;
+    -o-transition: all .2s ease-in-out;
+    transition: all .2s ease-in-out;
+}
+
+.service_container{
+    padding: 5px;
+}
+.service_sessions span, .service_title, .service_points span{
+    display: block;
+}
+.service_title, .service_price{
+    font-weight: bold;
+}
+.service_container .service_sessions, .service_container .service_price, .service_title{
+    text-align: center;
+}
+
+ul.service_points {
+    list-style: none;
+}
+ul.service_points li:before {
+    content: '✓';
+    margin-right: 10px;
+}

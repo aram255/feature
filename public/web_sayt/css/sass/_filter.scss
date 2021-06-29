@@ -1,0 +1,444 @@
+.body {
+   .nav-top {
+      box-shadow: 0px 0px 6px #00000029;
+   }
+   section {
+      display: flex;
+   }
+
+}
+.filter {
+   display: inline-block;
+   font-size: 16px;
+   font-weight: 500;
+
+      &__content {
+      background: #F6FAFE;
+      display: block;
+      padding: 45px 62px 204px 140px;
+   }
+   &__title {
+      font-weight: 600;
+      font-size: 40px;
+      line-height: 49px;
+      letter-spacing: 0px;
+      color: $light-blue;
+   }
+   & .user-info {
+      padding: 0;
+      margin: 0;
+      padding-bottom: 36px;
+
+      & p {
+         padding-bottom: 11px;
+      }
+
+   }
+   &__header {
+      margin-bottom: 68px;
+   }
+   .find__form-settings {
+      float: right;
+      padding: 0;
+      padding-top: 3px;
+      & button i {
+         font-size: 30px;
+      }
+   }
+   .create__checkbox {
+      padding-bottom: 48px;
+   }
+   .lg-sg__button input {
+      width: 100%;
+   }
+}
+
+.find-result {
+   .person {
+      display: flex;
+      flex-wrap: wrap;
+   }
+
+}
+
+.container-filter {
+   margin: 0 auto;
+   margin-top: 66px;
+   position: relative;
+   padding-bottom: 50px;
+   .find-result {
+          width: 1075px;
+      box-shadow: 0px 0px 6px #00000029;
+      border-radius: 32px;
+   }
+}
+.person {
+   padding: 32px 50px 35px 32px;
+
+   &__info {
+      text-align: center;
+      display: flex;
+
+      &-img {
+         display: block;
+         max-width: 100%;
+         height: auto;
+      }
+
+      &-rating {
+         padding: 16px 0;
+      }
+
+      &-session {
+         font-size: 16px;
+         line-height: 19px;
+         letter-spacing: 0px;
+      }
+
+      & .btn {
+         width: 100%;
+         margin-top: 16px;
+         font-size: 16px;
+         line-height: 22px;
+         font-weight: 500;
+         padding: 9px;
+      }
+
+      &-name {
+         font-size: 25px;
+         line-height: 30px;
+         font-weight: 600;
+         letter-spacing: 0px;
+         margin-bottom: 11px;
+      }
+
+      &-specialist {
+         font-weight: 500;
+         font-size: 16px;
+         line-height: 19px;
+         color:#00309E;
+         letter-spacing: 0px;
+         margin-bottom: 14px;
+      }
+
+      &-cont2 {
+         text-align: left;
+         margin-left: 45px;
+         margin-top: 35px;
+      }
+
+      &-skin {
+         font-size: 12px;
+         line-height: 15px;
+         font-weight: 500;
+         margin-bottom: 29px;
+
+         &-tag {
+            background: #D9EAFD9E 0% 0% no-repeat padding-box;
+            border-radius: 5px;
+            padding: 3px 7px;
+
+         }
+      }
+
+      &-rate {
+         font-size: 16px;
+         line-height: 19px;
+         font-weight: 500;
+         color: #979797;
+         text-transform: uppercase;
+         margin-bottom: 21px;
+      }
+
+      &-aed {
+         font-weight: 500;
+         font-size: 20px;
+         line-height: 24px;
+
+         &-number {
+            color: $light-blue;
+         }
+      }
+
+      &-heart {
+         background: url(../../img/heart-cl.svg) no-repeat center top / cover;
+         width: 25px;
+         height: 22px;
+         cursor: pointer;
+         margin-left: 26px;
+         transition: 0.2s linear;
+
+         &:hover {
+            background: url(../../img/heart-hv.svg) no-repeat center top / cover;
+            width: 25px;
+            height: 22px;
+            cursor: pointer;
+         }
+
+         &.active {
+            background: url(../../img/heart-hv.svg) no-repeat center top / cover;
+            width: 25px;
+            height: 22px;
+            cursor: pointer;
+         }
+      }
+   }
+
+   &__content {
+      margin-left: 124px;
+      flex: 0 0 24%;
+
+      &-nav {
+         display: flex;
+
+         & li {
+            font-weight: 500;
+            font-size: 15px;
+            line-height: 19px;
+            margin-right: 24px;
+         }
+
+         &-category {
+            color: $purple;
+            padding: 10px;
+            // border: 1px solid $base-yellow;
+            // border-radius: 8px;
+            border: none;
+            background: transparent;
+            outline: none;
+            cursor: pointer;
+
+            .borderbg {
+               transition: 0.5s all;
+
+            }
+         }
+
+
+
+         & .active {
+            border: 1px solid $base-yellow;
+            border-radius: 8px;
+         }
+
+         & li:last-child {
+            margin: 0;
+         }
+      }
+
+      &-intro {
+         font-size: 16px;
+         line-height: 21px;
+         color: #585858;
+         padding-top: 50px;
+         padding-left: 9px
+      }
+
+      &-video {
+         margin-top: 41px;
+      }
+
+      .ds-none {
+         transition: all 0.5s;
+         display: none;
+
+      }
+   }
+}
+// Star
+.gl-star-rating--stars::before {
+   display: none;
+}
+[data-star-rating] .gl-star-rating--stars[aria-label]:after {
+       background: transparent;
+
+       background: transparent;
+       color: #FED638;
+       font-size: 18px;
+       line-height: 22px;
+       letter-spacing: 0;
+       font-weight: 600;
+       margin-left: 2.84px;
+       padding: 0;
+
+}
+[data-star-rating] .gl-star-rating--stars[class*=" s"]>span {
+   background-position: 50%;
+   background-repeat: no-repeat;
+   background-size: 65%;
+   /* display: block; */
+   width: 18px;
+   height: 18px;
+   margin-right: 5.26px;
+   background-size: cover;
+}
+
+// Video
+
+.video_wrapper {
+   margin: 0 auto;
+   position: relative;
+
+}
+
+.video_wrapper_full {
+   padding-top: 208px;
+}
+
+
+.videoIframe {
+   position: absolute;
+   top: 0;
+   bottom: 0;
+   right: 0;
+   left: 0;
+   width: 100%;
+   height: 100%;
+   background-color: transparent;
+   border-radius: 16px;
+}
+
+.videoPoster {
+   position: absolute;
+   top: 0px;
+   left: 0px;
+   width: 100%;
+   height: 100%;
+
+   background-size: 100%;
+   border: none;
+   text-indent: -999em;
+   overflow: hidden;
+   opacity: 1;
+   transition: opacity 800ms, height 0s;
+   transition-delay: 0s, 0s;
+   background: #FBFDFF 0% 0% no-repeat padding-box;
+   box-shadow: 0px 0px 6px #00000029;
+   border-radius: 16px;
+}
+
+.videoPoster:before {
+   content: '';
+   background-image: url(../../img/play-button.svg);
+   position: absolute;
+   top: 50%;
+   left: 50%;
+   width: 79px;
+   height: 79px;
+   margin: -40px 0 0 -40px;
+   transition: border-color 300ms;
+}
+
+.videoWrapperActive .videoPoster {
+   opacity: 0;
+   height: 0;
+   border: 0px;
+   box-shadow: none;
+   transition: all 0.8s;
+}
+// Calendar
+
+.container-calendar {
+   background: #ffffff;
+   max-width: 475px;
+   margin: 0 auto;
+   margin-top: 43px;
+   overflow: auto;
+}
+
+.button-container-calendar button {
+   cursor: pointer;
+
+   display: inline-block;
+   font-size: 49px;
+   background: transparent;
+   color: #8BA9EE;
+   border: none;
+   border-radius: 4px;
+   padding: 5px 10px;
+   outline: none;
+   cursor: pointer;
+}
+
+.table-calendar {
+   border-collapse: collapse;
+   width: 100%;
+}
+
+.table-calendar td {
+   color: #1268B3;
+}
+
+.table-calendar th {
+   color: #6D6E71;
+}
+
+.table-calendar td,
+.table-calendar th {
+   padding: 5px;
+   font-weight: bold;
+   text-align: center;
+   vertical-align: top;
+}
+
+.date-picker.selected {
+   font-weight: bold;
+   // border: 5px solid;
+}
+
+.date-picker.selected span {
+   border-bottom: 2px solid currentColor;
+}
+
+/* sunday */
+.date-picker:nth-child(1) {
+   color: #EF4056;
+}
+
+#monthAndYear {
+   text-align: center;
+   margin-top: 0;
+   font-weight: bold;
+   font-size: 21px;
+}
+
+.button-container-calendar {
+   text-align: center;
+   position: relative;
+   margin-top: 25px;
+   margin-bottom: 1em;
+   overflow: hidden;
+   clear: both;
+}
+
+.footer-container-calendar {
+   margin-top: 1em;
+   border-top: 1px solid #dadada;
+   padding: 10px 0;
+}
+
+.footer-container-calendar select {
+   cursor: pointer;
+   display: inline-block;
+   zoom: 1;
+   background: #ffffff;
+   color: #585858;
+   border: 1px solid #bfc5c5;
+   border-radius: 3px;
+   padding: 5px 1em;
+}
+
+#thead-month {
+
+   border-bottom: 1px solid #231F20;
+}
+
+#thead-month tr th:nth-child(1) {
+   color: #EF4056;
+}
+
+.pagination-filter{
+   position: absolute;
+   bottom: 0;
+   right: 20px;
+}

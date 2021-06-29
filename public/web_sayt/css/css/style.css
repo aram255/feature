@@ -1,0 +1,75 @@
+/* edit-profile-user */
+.flex-container{
+   display: flex;
+   justify-content: space-around;
+   margin-top: 60px;
+}
+
+.user-info-editprofile label{
+    padding-right: 20px!important;
+
+}
+
+
+.add_card-h1{
+    font-size: 25px;
+    font-weight: 600;
+    color: #462847;
+    margin-bottom: 20px;
+}
+
+
+.add_card_customer p{
+    margin-top: 20px;
+}
+
+.add-card img{
+margin-left: 20px;
+}
+
+.add-card {
+    display: flex;
+    align-content: center;
+}
+
+
+.edit-profil-card{
+margin-top: 0!important;
+display: flex;
+justify-content: flex-start;
+}
+
+
+.edit-profil-card select{
+max-width: 200px;
+width: 100%;
+margin-right: 20px;
+}
+
+.edite-card-check{
+ float: none!important;
+ margin-top: 20px;
+ max-width: 500px!important;
+ width: 100%;
+ padding-right: 0!important;
+
+}
+
+
+.edit-profile-save{
+max-width: 323px;
+width: 100%;
+margin-top: 10px;
+margin-bottom: 50px;
+}
+
+.add-new-card a{
+    font-weight: 600;
+}
+
+.edit-profile-save{
+    margin-left: 33px;
+}
+
+
+/* end-editprofile-user */

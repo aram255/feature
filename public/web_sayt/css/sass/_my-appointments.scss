@@ -1,0 +1,157 @@
+.my-appointments {
+   max-width: 1075px;
+   margin: 0 auto;
+   margin-top: 51px;
+   margin-bottom: 91px;
+   
+   &__title {
+      font-weight: 500;
+      font-size: 25px;
+      line-height: 30px;
+      & p:first-child {
+         margin-bottom: 27.5px;
+      }
+      &-li {
+         font-weight: 500;
+         font-size: 16px;
+         line-height: 19px;
+         color: #585858;
+         transition: 0.5s linear;
+         cursor: pointer;
+         &:hover {
+            color: $light-blue;
+         }
+      }
+      .active {
+         color:#00309E;
+      }
+      &-border {
+         border: 1px solid #707070;
+         font-size: 16px;
+         margin: 0 11px;
+      }
+   }
+}
+.my-appointments {
+
+   &__complete-process {
+    margin-top: 37px;
+   }
+
+   &__complete-process-content {
+      background-color:$white;
+      box-shadow: 0px 0px 6px #00000029;
+      border-radius: 32px;
+      margin-bottom: 60px;
+      &:last-child {
+         margin: 0;
+      }
+
+      &-flex {
+         display: flex;
+         justify-content: space-between;
+         align-items: center;
+         padding:32px 33px 44px 33px;
+      }
+   }
+
+   &-person__info {
+      display: flex;
+      flex-wrap: wrap;
+      &-cont2 {
+         padding-left: 26px;
+         padding-top: 15px;
+
+      }
+      &-name {
+         font-weight: 600;
+         font-size: 25px;
+         line-height: 30px;
+         margin-bottom: 10px;
+      }
+      &-specialist {
+         font-weight: 500;
+         font-size: 16px;
+         line-height: 19px;
+         color: #00309E;
+         letter-spacing: 0px;
+         margin-bottom: 16px;
+      }
+      &-data {
+         font-weight: 500;
+
+         font-size: 20px;
+         line-height: 24px;
+      }
+   }
+
+   &-person__complete-process {
+      text-align: center;
+      padding-top: 17px;
+         &-time {
+            font-size: 18px;
+            line-height: 22px;
+            color:#00309E;
+            padding-bottom: 18px;
+            font-weight: 600;
+         }
+
+         &-session {
+            font-size: 18px;
+            line-height: 22px;
+            font-weight: 500;
+            text-decoration: underline;
+            padding-bottom: 25px;
+            color: #1057FB;
+           
+         }
+         &-button {
+            font-weight: 500;
+            font-size: 18px;
+            line-height: 22px;
+            padding: 8px 14px;
+         }
+         .procces-button {
+            margin-top: 45px;
+         }
+   }
+
+}
+
+
+
+
+
+
+
+.my-appointments__pagination {
+   cursor: pointer;
+   text-align: right;
+   margin-top: 50px;
+
+   .page-item {
+      font-weight: 500;
+      padding-right: 16px;
+      font-size: 18px;
+      line-height: 22px;
+      color: $purple;
+   }
+
+   .page-item:hover {
+      color: $light-blue;
+   }
+
+   .page-item-last {
+      padding: 0;
+   }
+   .page-item-sign {
+      font-weight: 500;
+      color: $purple;
+      padding-right: 11.83px;
+
+   }
+
+   .page-item-sign~.page-item-sign {
+      padding-left: 11.83px;
+   }
+}

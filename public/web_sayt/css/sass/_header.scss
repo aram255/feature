@@ -1,0 +1,92 @@
+header {
+    background-color: #fff;
+    display: flex;
+    align-items: center;
+    font-family: 'Montserrat', sans-serif;
+    // .header-nav {
+    //     width: 100%;
+    //     display: flex;
+    //     align-items: center;
+    // }
+    .nav-top {
+        width: 100%;
+        padding: 0;
+        padding-top: 37px;
+        padding-bottom: 35px;
+        .nav-items {
+            padding-right: 28px;
+            &.active {
+                .nav-link {
+                    color: #387DFF;
+                }
+            }
+            .nav-link {
+                font-family: 'Montserrat', sans-serif;
+                padding-left: 28px;
+                font-size: 16px;
+                line-height: 19px;
+                padding: 14px;
+                font-weight: normal;
+                color: #585858;
+                transition: 0.5s linear;
+                border-radius: 10px;
+                &:hover {
+                    color: $light-blue;
+                    
+                }
+                
+            }
+            .active {
+                background-color: $base-yellow;
+                box-shadow: 0px 0px 6px #00000029;
+                border-radius: 10px;
+            }
+            .active-blue {
+                color: $light-blue;
+            }
+        }
+    }
+    .navbar-brand {
+        font-size: 30px;
+        font-weight: bold;
+        line-height: 33px;
+        font-family: 'Comfortaa', sans-serif;
+        color: #585858;
+    }
+    .navbar-nav {
+        flex-direction: row;
+    }
+    .dropdown-menu {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        z-index: 1000;
+        display: none;
+        float: left;
+        min-width: 5rem;
+        padding: .5rem 0;
+        margin: .125rem 0 0;
+        font-size: 14px;
+        border: 0;
+        border-radius: .25rem;
+    }
+    .dropdown-a {
+        display: block;
+        width: 100%;
+        padding: 14px;
+        font-weight: 400;
+        text-align: inherit;
+        white-space: nowrap;
+        color: #585858;
+        background-color: transparent;
+        border: 0;
+        &:hover {
+            background-color: $base-yellow;
+            box-shadow: 0px 0px 6px #00000029;
+            border-radius: 10px;
+        }
+    }
+    .change-pass .field-icon ~ .field-icon {
+         padding-top: 0px; 
+    }
+}

@@ -1,0 +1,413 @@
+/* ======================================== CSS RESET STYLE ======================================== */
+* {
+  padding: 0;
+  margin: 0;
+  border: 0
+}
+
+*,
+:after,
+:before {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box
+}
+
+:active,
+:focus {
+  outline: 0
+}
+
+a:active,
+a:focus {
+  outline: 0
+}
+
+aside,
+footer,
+header,
+nav {
+  display: block
+}
+
+body,
+html {
+  height: 100%;
+  width: 100%;
+  font-size: 100%;
+  line-height: 1;
+  font-size: 14px;
+  -ms-text-size-adjust: 100%;
+  -moz-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%
+}
+
+button,
+input,
+textarea {
+  font-family: inherit
+}
+
+input::-ms-clear {
+  display: none
+}
+
+button {
+  cursor: pointer
+}
+
+button::-moz-focus-inner {
+  padding: 0;
+  border: 0
+}
+
+a,
+a:visited {
+  text-decoration: none
+}
+
+a:hover {
+  text-decoration: none
+}
+
+ul li {
+  list-style: none
+}
+
+img {
+  vertical-align: top
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-size: inherit;
+  font-weight: inherit;
+  box-sizing: border-box
+}
+
+.open {
+  overflow: hidden;
+}
+
+body {
+  font-family: "Montserrat", sans-serif;
+  background-color: $white;
+  font-size: 14px;
+  line-height: 21px;
+  color: $purple;
+  font-weight: 400;
+  max-width: 1920px;
+  width: 100%;
+  margin: 0 auto;
+
+  &.body-bg {
+    position: relative;
+
+    &::after {
+      content: url("../../img/Group-14_2.svg");
+      position: absolute;
+      top: 0px;
+      right: 0px;
+
+    }
+
+  }
+}
+
+.section1 {
+
+  .find {
+      margin: 273px 170px;
+
+     &__title {
+       font-size: 60px;
+       font-weight: bold;
+       line-height: 73px;
+       color: $purple;
+       & span {
+         color:$light-blue
+       }
+     }
+    &__text {
+      padding-top: 44px;
+      padding-bottom:23px;
+      font-size: 30px;
+      line-height: 37px;
+      color: #00309E;
+      font-weight: 600;
+
+    }
+    &__input {
+      padding: 32px 0px 32px 14px;
+      font-size: 20px;
+      width: 95%;
+      line-height: 24px;
+      color: #AEAEAE;
+    }
+    &__form {
+      display: flex;
+      align-items: center;
+        .input-group {
+          background-color: #FFFFFF;
+          box-shadow: 0px 0px 6px #00000029;
+          border: 1px solid $light-blue;
+          border-radius: 10px;
+
+          &-prepend {
+            padding-left: 21px;
+            align-items: center;
+          }
+        }
+        
+    }
+    
+    &__button {
+      margin-top: 45px;
+      margin-bottom: 273px;
+      color: $purple;
+      & a {
+        width: 37%;
+        padding: 28px 0px;
+        font-size: 26px;
+        line-height: 32px;
+        font-weight: 500;
+      }
+
+    }
+  }
+
+  .live__chat {
+        position: fixed;
+        bottom: 0;
+        right: 0;
+        text-align: end;
+        margin-right: 30px;
+        margin-bottom: 29px;
+        cursor:pointer
+  }
+}
+.find__form-settings {
+  padding-left: 34px;
+
+  .settings-button {
+    background-color: transparent;
+
+    & i {
+      font-size: 51px;
+      color: $light-blue;
+    }
+  }
+
+}
+.section2 {
+  background-color: $blue-white;
+  .practit__title {
+    text-align: center;;
+    margin: 0 auto;
+    padding-top: 55px;
+    padding-bottom: 84px;
+    font-size: 40px;
+    line-height: 49px;
+    font-weight: 600;
+    color: $purple;
+    }
+    .practit__border {
+      max-width: 176px;
+      height: 7px;
+      background: #FFEB9E 0% 0% no-repeat padding-box;
+      border-radius: 4px;
+      margin: 0 auto;
+      margin-top: 21px;
+  }
+    .card__flex {
+      .cd {
+        width: 430px;
+        background-color: $white;
+        box-shadow: 0px 0px 6px #00000029;
+        border-radius: 32px;
+        margin-bottom: 111px;
+        &__content {
+           padding: 55px 0 49px 0;
+          & p {
+            font-size: 39px;
+            line-height: 48px;
+            font-weight: 600;
+            padding-top: 34px;
+            color: $purple;
+          }
+        }
+        &:last-child{
+          & p {
+            padding-top: 70px;
+          }
+        }
+      }
+    }
+  
+}
+.section3{
+
+  .card__flex {
+    margin-top: 111px;
+    margin-bottom: 115px;
+
+    .cd {
+      width: 558px;
+      background-color: $white;
+      box-shadow: 0px 0px 6px #00000029;
+      border-radius: 32px;
+      margin-bottom: 111px;
+      transition: all 0.5s;
+      &:hover {
+        background-color: #F6FAFF;
+        border: 0;
+      }
+      &__content {
+        padding: 46px 0 73px 0;
+
+        & p {
+          font-size: 40px;
+          line-height: 49px;
+          font-weight: 600;
+          margin: 0;
+          padding:23px 0;
+        }
+        & button {
+          width: 32%;
+          margin: 0;
+        }
+      }
+    }
+  }
+}
+
+// Find Setting Window 
+.modal {
+  &-content {
+    border: 1px solid #707070;
+    border-radius: 15px;
+  }
+  &-dialog {
+    max-width: 673px;
+  }
+  &__form {
+    margin: 0 auto;
+    padding: 67px 0 78px 0;
+    & .close {
+        position: absolute;
+        top: -3px;
+        right: 5px;
+        font-size: 50px;
+        font-weight: 300;
+        color: $light-blue;
+        transition: 0.5 linear ;
+        & :hover {
+
+          color:#225ee9;
+        }
+    }
+  }
+  & .user-info {
+    padding: 0;
+    margin: 0;
+    padding-bottom: 36px;
+    & p {
+      padding-bottom: 11px;
+    }
+
+  }
+  .main-title {
+    font-size: 40px;
+    font-weight: 600;
+    line-height: 49px;
+    letter-spacing: 0;
+    color: $light-blue;
+    padding-bottom: 13px;
+  }
+  .main-title2 {
+    font-size: 20px;
+    line-height: 24px;
+    letter-spacing: 0;
+    color:#00309E;
+    padding-bottom: 36px;
+    font-weight: 600;
+  }
+  & .lg-sg__button input {
+    width: 100%;
+  }
+
+}
+    
+
+ // Login Windows
+.modal {
+  &__form.lg-header-form{
+    margin: 87px 101px 109px 127px;
+    padding: 0;
+    
+    & .lg-sg__button input {
+      width: 57%;
+    }
+    & .lg-sg__form-text {
+      margin-bottom: 43px;
+      margin-left: -5px;
+    }
+    & .lg-sg__form .email {
+      margin-bottom: 29px;
+    }
+  }
+}
+//  Sign Up Windows
+.modal {
+  &__form.sg-header-form {
+    margin: 0 100px;
+    padding: 67px 0 63px 0;
+
+    & .lg-sg__form-text {
+      margin-bottom: 44px;
+      text-align: center;
+    }
+    & .lg-sg__form .email {
+       margin-bottom: 29px; 
+    }
+    & .lg-sg__button {
+      margin-top: 27px;
+      text-align: center;
+    }
+    & .lg-sg__button input {
+      width: 71%;
+    }
+    & .fadeIn {
+      margin-bottom: 29px;
+    }
+    & .lg-sg__signup {
+      text-align: center;
+    }
+
+  }
+}
+
+.create__checkbox {
+    font-size: 16px;
+    font-weight: 500;
+    letter-spacing: 0px;
+    padding-bottom: 33px;
+
+    & p {
+      padding-bottom: 15px;
+    }
+
+    label {
+      padding-right: 35px;
+    }
+
+}
+
+
+
+
+

@@ -1,0 +1,205 @@
+.edit-profile {
+       display: flex;
+       flex-wrap: wrap;
+       margin-top: 47px;
+       margin-bottom: 51px;
+   &-info {
+      margin-left: 36px;
+
+      .create__form {
+         padding-top: 29px;
+      }
+   }
+   &__contact {
+
+      position: relative;
+      width: 100%;
+      flex: 0 0 50%;
+      max-width: 50%;
+
+      &-img {
+         display: inline-block;
+         padding: 80px 78px;
+         background-color: #EFF4FE;
+         border-radius: 10px;
+
+         & input {
+            width: 0;
+         }
+
+         & label {
+            cursor: pointer;
+         }
+      }
+
+      .form-info {
+         .user-info {
+            padding-left: 0;
+         }
+         .user-info.odd{
+            padding-right: 40px;
+         }
+      }
+
+      .user-info.create__checkbox label {
+         padding: 0px 43px 0 0;
+      }
+      .create__checkbox input[type="checkbox"]+label::before {
+         margin: 0 11px 2px 0;
+      }
+      .user-info.create__checkbox {
+         max-width: 400px;
+         width: 100%;
+         & p {
+            padding-top: 14px;
+            padding-bottom: 23px;
+         }
+      }
+      .user-info-about {
+         display: block;
+         & textarea {
+            width: 88%;
+         }
+         & p {
+            padding-left: 3px;
+         }
+      }
+      .lg-sg__button {
+         display: inline-block;
+         width: 40%;
+         & input {
+            width: 100%;
+         }
+      }
+   }
+     
+   &__other {
+      position: relative;
+      width: 100%;
+      flex: 0 0 50%;
+      max-width: 50%;
+
+      &-video {
+         @extend .profile-practitioner__consultation-video;
+
+
+      }
+      &-time {
+         @extend .profile-practitioner__consultation-time;
+         &-content {
+            @extend .profile-practitioner__consultation-time-content;
+            .user-info {
+               padding: 0;
+               padding-top: 57px;
+               .btn {
+                  font-weight: 500;
+                  font-size: 18px;
+                  line-height: 22px;
+                  margin: 0;
+                  margin-left: 23px;
+                  padding: 10px 46px;
+               }
+            }
+         }
+      }
+      &-service {
+         @extend .profile-practitioner__consultation-time;
+
+         &-content {
+            @extend .profile-practitioner__consultation-time-content;
+
+            &-flex {
+               display: flex;
+               align-items: center;
+
+               .user-info {
+                  padding: 0;
+                  .user-info-p {
+                     padding-top: 32px;
+                  }
+                 .pt {
+                    padding-top: 28px;
+                 }
+               }
+               .user-info-consultation-info {
+                  padding-left: 43px;
+                  .user-info-p {
+                     padding-left: 5px;
+                  }
+                  & textarea {
+                     width: 90%;
+                  }
+               }
+               
+            }
+            .btn {
+               padding: 10px 46px;
+            }
+         }
+      }
+
+   }
+}
+.edit-profile__contact-video,.add-photo-edit>p{
+   margin-left: 41px;
+ 
+}
+
+.profile-edit-flex{
+   display: flex;
+
+   p{
+      color:#00309E;
+      font-weight: 600;
+      margin-bottom: 10px;
+      img{
+         margin-right: 10px;
+      }
+  
+   }
+
+}
+.add-card-edit{
+   display: flex;
+   input{
+      max-width: 150px;
+      width: 100%;
+   }
+}
+
+.edit-select{
+   margin-top: 28px;
+}
+
+.edit-card{
+   display: flex;
+   max-width: 500px!important;
+   width: 100% !important;
+   label{
+      padding: 0 10px 0 0!important;
+   }
+}
+
+.add_card-edit{
+   margin-left: 38px;
+   margin-bottom: 20px;
+font: normal normal 600 25px/30px Montserrat;
+letter-spacing: 0px;
+color: #462847;
+}
+
+.edit-profile__other{
+margin-top: 14%;
+
+}
+
+.user-info span{
+   color: #FFC400;
+}
+
+.add-card-edit-link{
+   margin-left: 41px;
+   color: #00309E;
+   font-weight: 600;
+
+}
