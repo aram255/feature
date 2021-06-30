@@ -77,13 +77,17 @@ class ZoomController extends Controller
 
     public function addZoomMeeting(request $request)
     {
+
+
         $request->validate([
             'm_name' => 'required',
             'type' => 'required',
             'birthdaytime' => 'required',
             'time' => 'required',
-            'time' => 'password',
+            'password' => 'required',
         ]);
+
+       // dd($request->all());
 
           $client = new \GuzzleHttp\Client(['base_uri' => 'https://api.zoom.us']);
 

@@ -13,6 +13,7 @@ use App\Models\CityModel;
 use App\Models\CountryModel;
 use App\Models\PracticeModel;
 use App\Models\SpecialitiesModel;
+use App\Models\TimeZoneModel;
 
 
 class AuthPractitionersController extends Controller
@@ -38,6 +39,11 @@ class AuthPractitionersController extends Controller
           return response()->json($city);
     }
 
+    public function timeZone()
+    {
+        return TimeZoneModel::orderby("timezones","asc")->get();
+    }
+
     public function practice()
     {
         return PracticeModel::orderby("title","asc")->get();
@@ -54,8 +60,9 @@ class AuthPractitionersController extends Controller
          $GetCountry      = $this->country();
          $GetPractice     = $this->practice();
          $GetSpecialities = $this->specialities();
+         $GetTimeZone     = $this->timeZone();
 
-          return view('sign-up-practitioners',compact("GetCountry","GetPractice","GetSpecialities"));
+          return view('sign-up-practitioners',compact("GetCountry","GetPractice","GetSpecialities","GetTimeZone"));
     }
 
     public function customRegistration(request $request)

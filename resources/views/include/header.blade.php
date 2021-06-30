@@ -24,7 +24,7 @@
                     <li class="nav-items border-blue">
                         <a class="nav-link" href="{{route('blog',[app()->getLocale()])}}">Blog</a>
                     </li>
-                    @if (!isset(auth()->user()->id))
+                    @if (!isset(auth()->user()->id) and !Session::has('UserID'))
                     <li class="nav-items border-blue">
                         <a class="nav-link" href="./login-practitioners.html" ml-3="" data-toggle="modal"
                            data-target="#login">Login</a>
@@ -38,7 +38,7 @@
                         <form class="nav-items" method="POST" action="{{route("logout",[app()->getLocale()])}}">
                             @csrf
                             <a class="nav-link" href="{{route("logout",[app()->getLocale()])}}" onclick="event.preventDefault();
-                                                this.closest('form').submit();">Log Out users</a>
+                                                this.closest('form').submit();">Log Out</a>
                         </form>
                     </li>
                     @endif
@@ -47,51 +47,51 @@
                         <a class="nav-link" href="{{route("logout.custom",[app()->getLocale()])}}" ml-3="" >Log Out</a>
                      </li>
                     <li class="nav-items">
-                        <a class="nav-link" href="{{route('profile-practitioner',[app()->getLocale()])}}" ml-3=""  >Name Surname practitioner</a>
+                        <a class="nav-link" href="{{route('profile-practitioner',[app()->getLocale()])}}" ml-3=""  >{{session()->get('UserLastName')}}</a>
                     </li>
                     @endif
-                    @if (isset(auth()->user()->id))
+                    @if (!empty(Auth::user()->first_name))
                     <li class="nav-items">
-                        <a class="nav-link" href="{{route('profile-customer',[app()->getLocale()])}}" ml-3=""  >Name Surname Customers</a>
+                        <a class="nav-link" href="{{route('profile-customer',[app()->getLocale()])}}" ml-3=""  >{{Auth::user()->first_name}}</a>
                     </li>
                     @endif
-                    @if(!Session::has('UserID'))
+                    @if(!Session::has('UserID') and !isset(auth()->user()->id))
                     <li class="nav-items">
-                        <a class="nav-link active" href="{{route('login-practitioners',[app()->getLocale()])}}">For Practitioners</a>
+                        <a class="nav-link " href="{{route('login-practitioners',[app()->getLocale()])}}">For Practitioners</a>
                     </li>
                     @endif
 
-                    <li class="nav-items dropdown lang">
+{{--                    <li class="nav-items dropdown lang">--}}
 
-                        @if(app()->getLocale() != 'en')
-                                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                    <a class="dropdown-a" href="javascript:;" onclick="var url = window.location.toString(); window.location = url.replace('/{{ app()->getLocale() }}',
-                                        '/'+'en');">En</a>
-                                </div>
-                        @endif
+{{--                        @if(app()->getLocale() != 'en')--}}
+{{--                                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">--}}
+{{--                                    <a class="dropdown-a" href="javascript:;" onclick="var url = window.location.toString(); window.location = url.replace('/{{ app()->getLocale() }}',--}}
+{{--                                        '/'+'en');">En</a>--}}
+{{--                                </div>--}}
+{{--                        @endif--}}
 
-                        @if(app()->getLocale() != 'fr')
-                                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                    <a class="dropdown-a" href="javascript:;" onclick="var url = window.location.toString(); window.location = url.replace('/{{ app()->getLocale() }}',
-                                        '/'+'fr');">Fr</a>
-                                </div>
-                        @endif
+{{--                        @if(app()->getLocale() != 'fr')--}}
+{{--                                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">--}}
+{{--                                    <a class="dropdown-a" href="javascript:;" onclick="var url = window.location.toString(); window.location = url.replace('/{{ app()->getLocale() }}',--}}
+{{--                                        '/'+'fr');">Fr</a>--}}
+{{--                                </div>--}}
+{{--                        @endif--}}
 
-                        @if(app()->getLocale() == 'en')
-                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown"
-                                   aria-haspopup="true" aria-expanded="false">
-                                    En
-                                </a>
-                        @endif
+{{--                        @if(app()->getLocale() == 'en')--}}
+{{--                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown"--}}
+{{--                                   aria-haspopup="true" aria-expanded="false">--}}
+{{--                                    En--}}
+{{--                                </a>--}}
+{{--                        @endif--}}
 
-                        @if(app()->getLocale() == 'fr')
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown"
-                               aria-haspopup="true" aria-expanded="false">
-                                Fr
-                            </a>
-                        @endif
+{{--                        @if(app()->getLocale() == 'fr')--}}
+{{--                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown"--}}
+{{--                               aria-haspopup="true" aria-expanded="false">--}}
+{{--                                Fr--}}
+{{--                            </a>--}}
+{{--                        @endif--}}
 
-                    </li>
+{{--                    </li>--}}
                 </ul>
             </div>
         </div>
