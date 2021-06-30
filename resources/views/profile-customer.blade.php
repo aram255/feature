@@ -12,7 +12,6 @@
 
 @extends('app.layouts.app_home')
 
-
 @section('content')
     <script>var body = document.body; body.classList.add("body");</script>
 
@@ -33,11 +32,11 @@
                             </div>
                             <div class="person-customer-my-pay">My payments</div>
                             <div class="person-customer__payments">
-                                <div class="person-customer__payments-phone">
+                                <div class="person-customer__payments-phone d-none">
                                     <p class="person-customer-number">Phone Number</p>
                                     <p class="person-customer-tel">{{auth()->user()->phone_number }}</p>
                                 </div>
-                                <div class="person-customer__payments-email">
+                                <div class="person-customer__payments-email d-none">
                                     <p class="person-customer-email">Email</p>
                                     <p class="person-customer-email-addres">{{auth()->user()->email }}</p>
                                 </div>
@@ -75,7 +74,7 @@
                             <div class="my-appointments__complete-process-content">
                                 <div class="my-appointments__complete-process-content-flex">
                                     <div class="my-appointments-person__info">
-                                        <div class="my-appointments-person__info-cont1">
+                                        <div class="my-appointments-person__info-cont1 mr-4">
                                             <img class="my-appointments-person__info-img" src="{{ asset('web_sayt/img/person-foto.png') }}" alt="">
                                         </div>
                                         <div class="my-appointments-person__info-cont2">
@@ -116,7 +115,7 @@
                             <div class="my-appointments__complete-process-content">
                                 <div class="my-appointments__complete-process-content-flex">
                                     <div class="my-appointments-person__info">
-                                        <div class="my-appointments-person__info-cont1">
+                                        <div class="my-appointments-person__info-cont1 mr-4">
                                             <img class="my-appointments-person__info-img" src="{{ asset('web_sayt/img/person-foto.png') }}" alt="">
                                         </div>
                                         <div class="my-appointments-person__info-cont2">

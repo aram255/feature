@@ -3,7 +3,7 @@
    margin: 0 auto;
    margin-top: 51px;
    margin-bottom: 91px;
-   
+
    &__title {
       font-weight: 500;
       font-size: 25px;
@@ -50,19 +50,15 @@
       &-flex {
          display: flex;
          justify-content: space-between;
-         align-items: center;
+         align-items: flex-end;
          padding:32px 33px 44px 33px;
       }
    }
 
    &-person__info {
       display: flex;
+       align-items: center;
       flex-wrap: wrap;
-      &-cont2 {
-         padding-left: 26px;
-         padding-top: 15px;
-
-      }
       &-name {
          font-weight: 600;
          font-size: 25px;
@@ -103,7 +99,7 @@
             text-decoration: underline;
             padding-bottom: 25px;
             color: #1057FB;
-           
+
          }
          &-button {
             font-weight: 500;

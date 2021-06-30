@@ -2,15 +2,15 @@
     <nav class="navbar navbar-expand-lg nav-top">
         <div class="container">
             <a class="navbar-brand" href="{{route('index',[app()->getLocale()])}}">Balancd</a>
-            <div class="dropdown lang-mob">
-                <div class="dropdown-toggle" data-toggle="dropdown">
-                    En
-                </div>
-                <div class="dropdown-menu">
-                    <a class="dropdown-item" href="#">Fr</a>
+{{--            <div class="dropdown lang-mob">--}}
+{{--                <div class="dropdown-toggle" data-toggle="dropdown">--}}
+{{--                    En--}}
+{{--                </div>--}}
+{{--                <div class="dropdown-menu">--}}
+{{--                    <a class="dropdown-item" href="#">Fr</a>--}}
 
-                </div>
-            </div>
+{{--                </div>--}}
+{{--            </div>--}}
 
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                     aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -33,15 +33,7 @@
                         <a class="nav-link" href="#" ml-3="" data-toggle="modal" data-target="#sign-up">Sign Up</a>
                     </li>
                     @endif
-                    <li class="nav-items">
-                    @if (isset(auth()->user()->id))
-                        <form class="nav-items" method="POST" action="{{route("logout",[app()->getLocale()])}}">
-                            @csrf
-                            <a class="nav-link" href="{{route("logout",[app()->getLocale()])}}" onclick="event.preventDefault();
-                                                this.closest('form').submit();">Log Out users</a>
-                        </form>
-                    </li>
-                    @endif
+
                     @if(Session::has('UserID'))
                     <li class="nav-items">
                         <a class="nav-link" href="{{route("logout.custom",[app()->getLocale()])}}" ml-3="" >Log Out</a>
@@ -52,7 +44,7 @@
                     @endif
                     @if (isset(auth()->user()->id))
                     <li class="nav-items">
-                        <a class="nav-link" href="{{route('profile-customer',[app()->getLocale()])}}" ml-3=""  >Name Surname Customers</a>
+                        <a class="nav-link" href="{{route('profile-customer',[app()->getLocale()])}}" ml-3=""  >Hello </a>
                     </li>
                     @endif
                     @if(!Session::has('UserID'))
@@ -92,6 +84,16 @@
                         @endif
 
                     </li>
+                    <li class="nav-items">
+                        @if (isset(auth()->user()->id))
+                            <form class="nav-items" method="POST" action="{{route("logout",[app()->getLocale()])}}">
+                                @csrf
+                                <a class="nav-link" href="{{route("logout",[app()->getLocale()])}}" onclick="event.preventDefault();
+                                                this.closest('form').submit();">Log Out users</a>
+                            </form>
+                    </li>
+                    @endif
+
                 </ul>
             </div>
         </div>
