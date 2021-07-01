@@ -41,11 +41,10 @@ button:focus {
   border: 0;
   outline: 0; }
 
-.container {
-  max-width: 1632px;
-  padding: 0;
-  margin: 0 auto; }
-
+@media (min-width: 1200px) {
+  .container {
+    max-width: 1632px;
+    padding: 0 30px; } }
 .card__flex {
   display: flex;
   text-align: center;
@@ -263,7 +262,7 @@ header {
         height: 22px;
         cursor: pointer; }
   .person__content {
-    margin-left: 124px;
+    margin-left: auto;
     flex: 0 0 24%; }
     .person__content-nav {
       display: flex; }
@@ -1104,14 +1103,12 @@ label {
   .my-appointments__complete-process-content-flex {
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: flex-end;
     padding: 32px 33px 44px 33px; }
 .my-appointments-person__info {
   display: flex;
+  align-items: center;
   flex-wrap: wrap; }
-  .my-appointments-person__info-cont2 {
-    padding-left: 26px;
-    padding-top: 15px; }
   .my-appointments-person__info-name {
     font-weight: 600;
     font-size: 25px;
@@ -1715,9 +1712,11 @@ label {
     .profile-customer__blok2 .profile-customer__my-appointments-button {
       width: 80%; }
       .profile-customer__blok2 .profile-customer__my-appointments-button-edit {
-        margin-top: 103px;
-        width: 17%;
-        margin-left: 100px; }
+        min-width: 200px;
+        margin-left: auto;
+        white-space: nowrap;
+        padding-left: 15px;
+        padding-right: 15px; }
     .profile-customer__blok2 .profile-customer-favorites .find-result {
       box-shadow: 0px 0px 6px #00000029;
       border-radius: 32px;
@@ -1769,7 +1768,7 @@ label {
       margin-bottom: 42px; }
     .profile-customer__blok2 .profile-customer-reviews-cont {
       background: #FFFFFF;
-      box-shadow: 0px 0px 6px #00000029;
+      box-shadow: 0 0 6px #00000029;
       border-radius: 32px;
       margin-bottom: 61px; }
       .profile-customer__blok2 .profile-customer-reviews-cont__info {
