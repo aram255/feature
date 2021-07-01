@@ -95,7 +95,7 @@
 
                                 <p>Card Number <span>*</span></p>
 
-                                <div class="add-card"><input type="text" class="fadeIn card-num" name="num" size='20' >
+                                <div class="add-card"><input type="text" class="fadeIn card-num" name="num" value="4242424242424242" size='20' >
                                     <img src="{{ asset('web_sayt/img/visa-and-mastercard-logos-logo-visa-png-logo-visa-mastercard-png-visa-logo-white-png-awesome-logos-1.png') }}" alt="">
                                     <img src="{{ asset('web_sayt/img/Group 1948.png') }}" alt="">
                                     <img src="{{ asset('web_sayt/img/American-Express-copy.png') }}" alt="">
@@ -163,12 +163,12 @@
                                         @foreach($cards as $card)
                                             <li class="list-group-item bg-light">
                                                 <i class="fas fa-credit-card mr-3"></i>
-                                                <span>{{$card->card_number}}</span>
+                                                <span>**** **** **** {{$card->number}}</span>
                                                 <button class="btn-sm btn-success ml-3">Do main</button>
-                                                <i class="fas fa-trash text-danger ml-3"></i>
-                                        {{--        <form action="{{route('remove-card', $card->id)}}" method="POST">
+                                                <i class="fas fa-trash text-danger ml-3" onclick="$(this).next().submit()"></i>
+                                                  <form action="{{route('remove-card', $card->id)}}" method="POST">
                                                     @csrf
-                                                </form>--}}
+                                                </form>
                                             </li>
                                         @endforeach
                                     </ul>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Card;
+use App\Models\Credential;
 use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\Auth;
@@ -43,17 +44,90 @@ class PaymentController extends Controller
     public function addCard(Request $request)
     {
 
-        Card::create([
-                'user_id' => Auth::id(),
-                'sender_name' => $request->sender_name,
-                'card_number' => Crypt::encryptString(trim($request->num)),
-                'month' => $request->month,
-                'year' => $request->year,
-                'cvc' => Crypt::encryptString($request->cvc),
-        ]);
+        $stripe = new \Stripe\StripeClient(env('STRIPE_SECRET'));
+        $customer_isset = false;
 
-        Session::flash('success', 'Card is created');
+        $credential = Credential::where('user_id', Auth::id())->first();
+
+        if(Auth::user()){
+
+            if($credential){
+                $customer = $stripe->customers->retrieve(
+                    $credential->customer_id
+                );
+                if($customer){
+                    $customer_isset = true;
+                }
+            }
+
+            if(!$customer_isset){
+                $customer = $stripe->customers->create([
+                    'name' => Auth::user()->first_name .' '. Auth::user()->last_name,
+                    'email' => Auth::user()->email,
+                ]);
+                $credential = Credential::create([
+                    'user_id' => Auth::id(),
+                    'customer_id' => $customer->id
+                ]);
+            }
+
+
+            $cards = $stripe->customers->allSources(
+                $customer->id,
+                ['object' => 'card']
+            );
+
+            $check_card = false;
+
+            foreach ($cards as $card){
+
+                if(Card::where('fingerprint', $card->fingerprint)->first()){
+                    $check_card = true;
+                }
+            }
+
+            if(!$check_card){
+                $card = $stripe->customers->createSource(
+                    $credential->customer_id,
+                    ['source' => $request->stripeToken]
+                );
+                Card::create([
+                    'user_id' => Auth::id(),
+                    'fingerprint' => $card->fingerprint,
+                    'card_id' => $card->id,
+                    'number' => $card->last4,
+                ]);
+                Session::flash('success', 'Card is created');
+            }else{
+                Session::flash('success', 'Card is already exist');
+            }
+
+        }
+
 
         return back();
     }
+
+    public function removeCard(Request $request, $id)
+    {
+        try{
+            $stripe = new \Stripe\StripeClient(env('STRIPE_SECRET'));
+            $card = Card::find($id);
+            $credential = Credential::where('user_id', Auth::id())->first();
+
+            $stripe->customers->deleteSource(
+                $credential->customer_id,
+                $card->card_id
+            );
+
+            $card->delete();
+
+        }catch(\Exception $exception){
+
+        }
+
+        return back();
+    }
+
+
 }

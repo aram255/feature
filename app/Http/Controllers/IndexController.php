@@ -128,10 +128,6 @@ class IndexController extends Controller
     public function blog()
     {
         $cards = Card::where('user_id', Auth::id())->orderBy('created_at','desc')->get();
-        foreach ($cards as $card){
-            $number = Crypt::decryptString($card->card_number);
-            $card->card_number = str_repeat("*", 12) . substr($number, -4);
-        }
         return view('blog', compact('cards'));
     }
 }

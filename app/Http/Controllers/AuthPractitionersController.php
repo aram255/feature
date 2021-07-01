@@ -140,6 +140,7 @@ class AuthPractitionersController extends Controller
 
         if($userInfo and $userInfo->status == 'accept')
         {
+
             //check password
             if(Hash::check($request->password, $userInfo->password)){
                 $request->session()->put('UserID', $userInfo->id);
@@ -147,6 +148,8 @@ class AuthPractitionersController extends Controller
                 $request->session()->put('UserName', $userInfo->first_name);
                 $request->session()->put('UserLastName', $userInfo->last_name);
                 $request->session()->put('UserImg', $userInfo->img);
+
+                Auth::login($userInfo);
                 return redirect(app()->getLocale()."/profile-practitioner");
 
             }else{
