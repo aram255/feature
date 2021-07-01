@@ -52,8 +52,8 @@
                     @endif
                     @if (!empty(Auth::user()->first_name))
                     <li class="nav-items">
-                        <a class="nav-link" href="{{route('profile-customer',[app()->getLocale()])}}" ml-3=""  >{{Auth::user()->first_name}}</a>
-                        <a class="nav-link" href="{{route('profile-customer',[app()->getLocale()])}}" ml-3=""  >Hello </a>
+                        <a class="nav-link" href="{{route('profile-customer',[app()->getLocale()])}}" ml-3=""  >Hello {{Auth::user()->first_name}}</a>
+
                     </li>
                     @endif
                     @if(!Session::has('UserID') and !isset(auth()->user()->id))
