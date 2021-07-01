@@ -45,7 +45,7 @@
          }
 
          .person-customer__payments {
-            
+
             &-phone {
                display: flex;
                font-size: 16px;
@@ -54,9 +54,9 @@
                margin-bottom: 22px;
                cursor: pointer;
                & .person-customer-tel {
-                 color: $purple; 
+                 color: $purple;
                  padding-left: 57px;
-               }  
+               }
             }
 
             &-email {
@@ -101,7 +101,7 @@
                      display: flex;
                      padding: 18px 64px 25px 18px;
                      align-items: center;
-                     
+
                      & .card-category {
                         height: 30px;
                         padding-left: 12px;
@@ -139,8 +139,11 @@
          width: 80%;
          &-edit {
             margin-top: 103px;
-            width: 17%;
+             min-width: 17%;
             margin-left: 100px;
+             white-space: nowrap;
+            padding-left: 15px;
+             padding-right: 15px;
          }
       }
       .profile-customer-favorites {
@@ -218,7 +221,7 @@
          }
          &-cont {
             background: #FFFFFF;
-            box-shadow: 0px 0px 6px #00000029;
+            box-shadow: 0 0 6px #00000029;
             border-radius: 32px;
             margin-bottom: 61px;
 
@@ -249,7 +252,7 @@
                      }
                   }
 
-                  
+
                }
                &-specialist {
                   font-size: 16px;
@@ -273,7 +276,7 @@
                   line-height: 13px;
                   vertical-align: text-top;
                }
-               
+
             }
 
          }
