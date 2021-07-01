@@ -11,7 +11,7 @@ use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\Auth\PasswordResetLinkController;
 use App\Http\Controllers\Auth\NewPasswordController;
-
+use \App\Http\Controllers\PaymentController;
  // reset Password
 use App\Http\Controllers\ForgotPasswordController;
 use App\Http\Controllers\ResetPasswordController;
@@ -111,9 +111,10 @@ Route::group(['prefix' => '{locale?}','where' => ['locale' => '[a-zA-Z]{2}']], f
 
 
 });
-
-
-
+Route::get('/transaction-page', [PaymentController::class, 'index']);
+Route::post('/transaction', [PaymentController::class, 'makePayment'])->name('make-payment');
+Route::post('/add-card', [PaymentController::class, 'addCard'])->name('add-card');
+//Route::post('/remove-card', [PaymentController::class, 'removeCard'])->name('remove-card');
 Route::get('/clear', function() {
     Artisan::call('cache:clear');
     Artisan::call('route:clear');

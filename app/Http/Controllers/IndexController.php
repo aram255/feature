@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Card;
 use Illuminate\Http\Request;
 use App\Models\LanguagesModel;
 use App\Models\TegManagements;
@@ -12,6 +13,8 @@ use App\Models\TegManagementsPractitionerModel;
 use App\Models\CategoryModel;
 use App\Models\CategoryTitleModel;
 use DB;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Crypt;
 use Session;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Pagination\Paginator;
@@ -124,6 +127,11 @@ class IndexController extends Controller
 
     public function blog()
     {
-        return view('blog');
+        $cards = Card::where('user_id', Auth::id())->orderBy('created_at','desc')->get();
+        foreach ($cards as $card){
+            $number = Crypt::decryptString($card->card_number);
+            $card->card_number = str_repeat("*", 12) . substr($number, -4);
+        }
+        return view('blog', compact('cards'));
     }
 }

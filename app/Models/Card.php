@@ -8,13 +8,15 @@ use Illuminate\Database\Eloquent\Model;
 class Card extends Model
 {
     use HasFactory;
-    protected $table = 'card';
+    protected $table = 'cards';
+
+    protected $guarded = [];
 
     // Old
     /*
     public function add($order){
         $card = \Session::get('card');
-        
+
         $card['username'] = $order->username;
         $card['email'] = $order->email;
 
@@ -27,7 +29,7 @@ class Card extends Model
             }
         } else {
             $card['items'][$order->game] = array();
-            $card['items'][$order->game]['game'] = $order->game; 
+            $card['items'][$order->game]['game'] = $order->game;
             $card['items'][$order->game]['amount'] = $order->gold_amount;
             $card['items'][$order->game]['order_currency_code'] = $order->order_currency_code;
             $card['items'][$order->game]['order_current_price'] = $order->order_current_price;
@@ -52,7 +54,7 @@ class Card extends Model
 
     // public function add($order){
     //     $card = \Session::get('card');
-        
+
     //     $card['username'] = $order->username;
     //     $card['email'] = $order->email;
 
@@ -62,7 +64,7 @@ class Card extends Model
     //         $card['order']['total_price_usd'] += $order->total_price_usd;
     //     } else {
     //         $card['order'] = array();
-    //         $card['order']['game'] = $order->game; 
+    //         $card['order']['game'] = $order->game;
     //         $card['order']['amount'] = $order->gold_amount;
     //         $card['order']['order_currency_code'] = $order->order_currency_code;
     //         $card['order']['order_current_price'] = $order->order_current_price;
