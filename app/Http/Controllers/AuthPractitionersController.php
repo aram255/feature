@@ -149,7 +149,7 @@ class AuthPractitionersController extends Controller
                 $request->session()->put('UserLastName', $userInfo->last_name);
                 $request->session()->put('UserImg', $userInfo->img);
 
-                Auth::login($userInfo);
+              // Auth::login($userInfo);
                 return redirect(app()->getLocale()."/profile-practitioner");
 
             }else{
