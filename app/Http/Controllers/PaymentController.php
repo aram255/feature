@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Balance;
 use App\Models\Card;
 use App\Models\Credential;
 use Illuminate\Http\Request;
@@ -21,22 +22,49 @@ class PaymentController extends Controller
     public function makePayment(Request $request)
     {
 
-        Stripe\Stripe::setApiKey(env('STRIPE_SECRET'));
-        Stripe\Charge::create ([
-            "amount" => 120 * 100,
-            "currency" => "aed",
-            "source" => $request->stripeToken,
-         /*   'source'   => [
-                'object'    => 'card',
-                'number'    => '...',
-                'exp_month' => '...',
-                'exp_year'  => '...',
-                'cvc'       => '...',
-                ],*/
-            "description" => "Make payment and chill."
+
+        $amount = $request->amount;
+        $credential = Credential::where('user_id', Auth::id())->first();
+        $card = Card::where('user_id',Auth::id())->where('id', $request->card)->first();
+
+
+        $stripe = new \Stripe\StripeClient(env('STRIPE_SECRET'));
+
+        $customer = $stripe->customers->retrieve(
+            $credential->customer_id
+        );
+
+        $card = $stripe->customers->retrieveSource(
+            $customer->id,
+            $card->card_id
+        );
+
+         $charge = $stripe->charges->create ([
+            "amount" => $amount * 100,
+            "currency" => "AED",
+            "description" => "Make payment and chill.",
+            "customer" => $customer->id,
+            "source" => $card->id
         ]);
 
-        Session::flash('success', 'Payment successfully made.');
+         if($charge->status == "succeeded"){
+             $balance = Balance::where('user_id', Auth::id())->first();
+             if(!$balance){
+                 $balance = Balance::create([
+                     'user_id' => Auth::id(),
+                     'balance' => 0
+                 ]);
+             }
+             $balance->balance += $amount;
+             $balance->save();
+
+             Session::flash('success', 'Payment successfully made.');
+
+         }else{
+
+             Session::flash('error', 'Something wrong');
+
+         }
 
         return back();
     }
@@ -79,31 +107,39 @@ class PaymentController extends Controller
 
             $check_card = false;
 
-            foreach ($cards as $card){
+            $card_created = $stripe->customers->createSource(
+                $credential->customer_id,
+                ['source' => $request->stripeToken]
+            );
 
-                if(Card::where('fingerprint', $card->fingerprint)->first()){
+            foreach ($cards as $card){
+                if($card->fingerprint == $card_created->fingerprint){
                     $check_card = true;
                 }
             }
 
             if(!$check_card){
-                $card = $stripe->customers->createSource(
-                    $credential->customer_id,
-                    ['source' => $request->stripeToken]
-                );
+
                 Card::create([
                     'user_id' => Auth::id(),
-                    'fingerprint' => $card->fingerprint,
-                    'card_id' => $card->id,
-                    'number' => $card->last4,
+                    'fingerprint' => $card_created->fingerprint,
+                    'card_id' => $card_created->id,
+                    'number' => $card_created->last4,
                 ]);
+
                 Session::flash('success', 'Card is created');
+
             }else{
+
+                $stripe->customers->deleteSource(
+                    $credential->customer_id,
+                    $card_created->id
+                );
+
                 Session::flash('success', 'Card is already exist');
             }
 
         }
-
 
         return back();
     }
