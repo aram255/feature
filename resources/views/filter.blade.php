@@ -6,6 +6,9 @@
     <link rel="stylesheet" href="{{ asset('web_sayt/css/star-rating.css') }}">
     <link rel="stylesheet" href="{{ asset('web_sayt/css/css/main.css') }}">
     <link rel="stylesheet" href="{{ asset('web_sayt/css/css/responsive.css') }}">
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+    <link rel="stylesheet" type="text/css" href="{{ asset('web_sayt/maps/style.css') }}" />
+    <script src="{{ asset('web_sayt/maps/index.js') }}"></script>
     <meta name="csrf-token" content="{{ csrf_token() }}">
 @endsection
 
@@ -141,6 +144,7 @@
                             <li class="borderbg"><a class="person__content-nav-category active">Video</a></li>
                             <li class="borderbg"><a class="person__content-nav-category">Intro</a></li>
                             <li class="borderbg"><a class="person__content-nav-category">Calendar</a></li>
+                            <li class="borderbg"><a class="person__content-nav-category">Map</a></li>
                         </ul>
 
                         <div class="person__content-video">
@@ -372,6 +376,56 @@
                                 </div>
                             </div>
                         </div>
+
+                        <div class="person__content-maps ds-none">
+                            <form method="post" style="position: relative" action="{{route('add-zoom-meeting',[app()->getLocale()])}}">
+                                {{csrf_field()}}
+
+                                <div class="pac-card map-pac-card"  >
+                                    <div id="pac-container">
+                                        <input id="pac-input" type="text" placeholder="Enter a location" />
+                                    </div>
+                                    <div>
+                                        <div id="title" style="display: none">Autocomplete search</div>
+                                        <div style="display: none;" id="type-selector" class="pac-controls">
+                                            <input style="display: none;"
+                                                   type="radio"
+                                                name="type"
+                                                id="changetype-all"
+                                                checked="checked"
+                                            />
+                                            <label for="changetype-all">All</label>
+
+{{--                                            <input type="radio" name="type" id="changetype-establishment" />--}}
+{{--                                            <label for="changetype-establishment">Establishments</label>--}}
+
+{{--                                            <input type="radio" name="type" id="changetype-address" />--}}
+{{--                                            <label for="changetype-address">Addresses</label>--}}
+
+{{--                                            <input type="radio" name="type" id="changetype-geocode" />--}}
+{{--                                            <label for="changetype-geocode">Geocodes</label>--}}
+                                        </div>
+                                        <br />
+{{--                                        <div id="strict-bounds-selector" class="pac-controls">--}}
+{{--                                            <input type="checkbox" id="use-location-bias" value="" checked />--}}
+{{--                                            <label for="use-location-bias">Bias to map viewport</label>--}}
+
+{{--                                            <input type="checkbox" id="use-strict-bounds" value="" />--}}
+{{--                                            <label for="use-strict-bounds">Strict bounds</label>--}}
+{{--                                        </div>--}}
+                                    </div>
+
+                                </div>
+                                <div id="map"></div>
+                                <div id="infowindow-content">
+                                    <span id="place-name" class="title"></span><br />
+                                    <span id="place-address"></span>
+                                </div>
+
+                            </form>
+
+                        </div>
+
                     </div>
                 </div>
             </div>
@@ -448,4 +502,9 @@
     <script src="{{ asset('web_sayt/js/star-run.js') }}"></script>
     <script src="{{ asset('web_sayt/js/filter.js') }}"></script>
     <script type="text/javascript" src="{{ asset('web_sayt/js/script.js') }}"></script>
+    <!-- Async script executes immediately and must be after any DOM elements used in callback. -->
+    <script
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDtOVd66AerMgd0A-mwKEFqdBQTrKGfngc&callback=initMap&libraries=places&v=weekly"
+        async
+    ></script>
 @endsection

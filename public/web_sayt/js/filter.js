@@ -152,16 +152,26 @@ $('.person__content-nav-category').click(function () {
       $('.person__content-video').removeClass('ds-none')
       $('.person__content-intro').addClass('ds-none')
       $('.person__content-calendar').addClass('ds-none')
+      $('.person__content-maps').addClass('ds-none')
 
    } else if (this.innerHTML === 'Intro') {
       $('.person__content-video').addClass('ds-none')
       $('.person__content-intro').removeClass('ds-none')
       $('.person__content-calendar').addClass('ds-none')
+       $('.person__content-maps').addClass('ds-none')
 
    } else if (this.innerHTML === 'Calendar') {
+
       $('.person__content-video').addClass('ds-none')
       $('.person__content-intro').addClass('ds-none')
       $('.person__content-calendar').removeClass('ds-none')
+       $('.person__content-maps').addClass('ds-none')
+   } else{
+
+       $('.person__content-video').addClass('ds-none')
+       $('.person__content-intro').addClass('ds-none')
+       $('.person__content-calendar').addClass('ds-none')
+       $('.person__content-maps').removeClass('ds-none')
    }
 
 });
