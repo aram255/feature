@@ -465,7 +465,7 @@ header {
   justify-content: space-around;
   align-items: center;
   flex-wrap: wrap;
-  padding-top: 202px; }
+  padding-top: 80px; }
   .lg-sg__form-text {
     font-size: 30px;
     font-weight: 600;
@@ -631,8 +631,10 @@ label {
 
 .user-info {
   display: inline-block;
-  padding-left: 40px;
-  padding-bottom: 23px; }
+  /*padding-left: 40px;*/
+  padding-bottom: 23px;
+    max-width: 342px;
+    width: 100%;}
   .user-info p {
     font-weight: 500;
     font-size: 16px;
@@ -641,8 +643,8 @@ label {
   .user-info select {
     color: #8BA9EE; }
   .user-info.create__checkbox {
-    padding-left: 45px;
-    max-width: 350px;
+    padding-left: 5px;
+    max-width: 323px;
     width: 100%; }
     .user-info.create__checkbox ~ .user-info.create__checkbox {
       float: right;
@@ -693,7 +695,7 @@ label {
   overflow: hidden;
   width: 0; }
 .box .upload {
-  margin-left: 272px; }
+  margin-left: auto }
 .box input[type="file"] + label {
   box-shadow: 0px 0px 6px #00000029;
   border-radius: 5px;
@@ -702,7 +704,11 @@ label {
   cursor: pointer;
   display: inline-block;
   transition: all 0.5s;
-  vertical-align: middle; }
+  vertical-align: middle;
+   max-width: 323px;
+    width: 100%;
+    text-align: right;
+  }
   .box input[type="file"] + label:hover {
     box-shadow: 0px 0px 6px #8BA9EE;
     border-radius: 5px; }
@@ -1625,7 +1631,7 @@ label {
   .profile-customer__blok1 {
     position: relative;
     width: 100%;
-    flex: 0 0 33.333333%;
+    flex: 0 0 25%;
     height: 600px; }
     .profile-customer__blok1-info .person__info-cont1 .person {
       margin: 0;
@@ -1708,7 +1714,7 @@ label {
   .profile-customer__blok2 {
     position: relative;
     width: 100%;
-    flex: 0 0 66.666667%; }
+    flex: 0 0 75%; }
     .profile-customer__blok2 .profile-customer__my-appointments-button {
       width: 80%; }
       .profile-customer__blok2 .profile-customer__my-appointments-button-edit {
@@ -1947,7 +1953,7 @@ body {
       right: 0px; }
 
 .section1 .find {
-  margin: 273px 170px; }
+  margin: 170px; }
   .section1 .find__title {
     font-size: 60px;
     font-weight: bold;
@@ -2428,7 +2434,7 @@ body {
     width: 100%; }
 
   .box .upload {
-    margin-left: 91%; }
+    margin-left: auto}
 
   .create__button {
     padding-left: 0; }
@@ -2761,7 +2767,7 @@ body {
     width: 100%; }
 
   .box .upload {
-    margin-left: 91%; }
+    margin-left: auto }
 
   .create__button {
     padding-left: 0; }

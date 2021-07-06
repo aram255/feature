@@ -186,7 +186,7 @@
             <img src="{{ asset('web_sayt/img/chat.svg') }}" alt="">
         </div>
     </section>
-    <section class="section2">
+    <section class="section2" id="all-services">
         <div class="container">
             <div class="card-container">
                 <div class="practit__title">

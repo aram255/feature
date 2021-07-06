@@ -83,7 +83,7 @@
                          @error('email')<a style="color: red">{{ $message }}</a>@enderror
                         @if (session('status'))<a style="color: red">{{ session('status') }}</a>  @endif
                         @if (session('success'))<a style="color: green">{{ session('success') }}</a>  @endif
-                        <a class="lg-sg__forgot-back " href="{{ route('login-practitioners',[app()->getLocale()]) }}">Back to again</a>
+                        <a class="lg-sg__forgot-back " href="{{ route('login-practitioners',[app()->getLocale()]) }}">Back to login</a>
                         <div class="lg-sg__button reset-pass">
                             <input type="submit"  class="btn bg-yellow" value="Reset Password">
                         </div>

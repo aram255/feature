@@ -19,7 +19,7 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ml-auto nav-content">
                     <li class="nav-items border-blue">
-                        <a class="nav-link" href="#">All Services</a>
+                        <a class="nav-link" href="#all-services">All Services</a>
                     </li>
                     <li class="nav-items border-blue">
                         <a class="nav-link" href="{{--route('blog',[app()->getLocale()])--}}">Blog</a>
