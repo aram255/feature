@@ -56,7 +56,7 @@ Route::group(['prefix' => '{locale?}','where' => ['locale' => '[a-zA-Z]{2}']], f
     Route::match(['get', 'post'],'Search', [IndexController::class, 'search'])->name('search');
     Route::match(['get', 'post'],'reset-field', [IndexController::class, 'resetField'])->name('reset-field');
     Route::get('/blog', [IndexController::class, 'blog'])->name('blog');
-
+    Route::get('/balance', [IndexController::class, 'balance'])->name('balance');
     // Practitioner
     Route::get('/profile-practitioner', [PractitionersController::class, 'profilePractitioner'])->name('profile-practitioner');
     Route::get('/edit-profile-practitioner', [PractitionersController::class, 'EditProfilePractitioner'])->name('edit-profile-practitioner');

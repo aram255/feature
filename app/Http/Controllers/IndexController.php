@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Balance;
 use App\Models\Card;
 use Illuminate\Http\Request;
 use App\Models\LanguagesModel;
@@ -129,5 +130,13 @@ class IndexController extends Controller
     {
         $cards = Card::where('user_id', Auth::id())->orderBy('created_at','desc')->get();
         return view('blog', compact('cards'));
+    }
+
+
+    public function balance()
+    {
+        $cards = Card::where('user_id', Auth::id())->orderBy('created_at','desc')->get();
+        $balance = Balance::where('user_id', Auth::id())->first();
+        return view('balance', compact('cards','balance'));
     }
 }

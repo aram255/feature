@@ -107,12 +107,13 @@
                             <div class="expiration_date user-info flex-container edit-profil-card">
                                 <div>
                                     <p>Expiration Date <span>*</span></p>
-                             {{--       <select class="fadeIn card-expiry-month" >
+
+                             {{--  <select class="fadeIn card-expiry-month" >
                                         <option value="select-sanguage">Month</option>
                                         <option value="January">January</option>
                                     </select>--}}
 
-                             {{--       <select class="fadeIn card-expiry-year">
+                             {{--  <select class="fadeIn card-expiry-year">
                                         <option value="Year">Year</option>
                                         <option value="2021">2021</option>
                                     </select>--}}
@@ -164,7 +165,6 @@
                                             <li class="list-group-item bg-light">
                                                 <i class="fas fa-credit-card mr-3"></i>
                                                 <span>**** **** **** {{$card->number}}</span>
-                                                <button class="btn-sm btn-success ml-3">Do main</button>
                                                 <i class="fas fa-trash text-danger ml-3" onclick="$(this).next().submit()"></i>
                                                   <form action="{{route('remove-card', $card->id)}}" method="POST">
                                                     @csrf
@@ -238,6 +238,7 @@
                     $form.find('input[type=text]').empty();
                     $form.append("<input type='hidden' name='stripeToken' value='" + token + "'/>");
                     $form.get(0).submit();
+                    $('.edit-prof-cust button').attr('disabled', true);
                 }
             }
 
