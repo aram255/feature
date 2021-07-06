@@ -142,9 +142,9 @@
                             @csrf
                             <div class="create__checkbox">
                                 <p>Mode of delivery</p>
-                                <input type="radio" name="vir" value="virtual" class="lg-sg__checkin"><label
+                                <input type="checkbox" name="vir" value="virtual" id="virtual" class="lg-sg__checkin"><label
                                     for="virtual">Virtual</label>
-                                <input type="radio" name="vir" value="in_persion" class="lg-sg__checkin"><label for="person">
+                                <input type="checkbox" name="per" value="in_persion"  id="in_persion" class="lg-sg__checkin"><label for="in_persion">
                                     In Person</label>
                             </div>
                             <div class="user-info">
@@ -158,16 +158,17 @@
                             </div>
                             <div class="create__checkbox">
                                 <p>Preferred Practitioner Gender</p>
-                                <input type="radio" name="gender" value="Male" class="lg-sg__checkin"><label
-                                    for="male">Male</label>
-                                <input type="radio" name="gender" value="Famale" class="lg-sg__checkin"><label for="female">
+                                <input type="radio" name="gender" value="Male" id="male" class="lg-sg__checkin">
+                                <label for="male" class="ml-2">Male</label>
+                                <input type="radio" name="gender" value="Famale"  id="female" class="lg-sg__checkin">
+                                <label for="female" class="ml-2">
                                     Female</label>
                             </div>
                             <div class="create__checkbox">
                                 <p>Avalible appointments this week</p>
                                 @foreach($TegManagements as $key=>$TegManagements)
-                                    <input type="checkbox" name="teg_management[{{$key}}]" value="{{$TegManagements->id}}" class="lg-sg__checkin">
-                                    <label for="remember">{{$TegManagements->name}}</label>
+                                    <input type="checkbox" id="check"  name="teg_management[{{$key}}]" value="{{$TegManagements->id}}" class="lg-sg__checkin">
+                                    <label for="check">{{$TegManagements->name}}</label>
                                 @endforeach
                             </div>
 
