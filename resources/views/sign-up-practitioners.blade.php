@@ -156,22 +156,28 @@
                                 </div>
                                 <div class="user-info box">
                                     <p>ID or Passport</p>
-                                    <input type="file" id="idPass" name="id_or_passport">
-                                    <label for="idPass"><img value="{{ old('id_or_passport') }}" name="id_or_poassport" class="upload" src="{{ asset('web_sayt/img/upload.svg') }}" alt=""></label>
+                                    <input type="file" id="idPass" name="id_or_passport" class="file_name_trigger">
+                                    <label for="idPass">
+                                        <span class="put_label"></span>
+                                        <img value="{{ old('id_or_passport') }}" name="id_or_poassport" class="upload" src="{{ asset('web_sayt/img/upload.svg') }}" alt=""></label>
                                     <p style="color: red;">@if ($errors->has('id_or_passport')){{ $errors->first('id_or_passport') }}@endif</p>
                                 </div>
                             </div>
                             <div class="d-flex justify-content-lg-around">
                                 <div class="user-info box">
                                     <p>Certifications and Licensing</p>
-                                    <input type="file" id="certificat" name="certifications_licensing">
-                                    <label for="certificat"><img class="upload" src="{{ asset('web_sayt/img/upload.svg') }}" alt=""></label>
+                                    <input type="file" id="certificat" class="file_name_trigger" name="certifications_licensing">
+                                    <label for="certificat">
+                                        <span class="put_label"></span>
+                                        <img class="upload" src="{{ asset('web_sayt/img/upload.svg') }}" alt=""></label>
                                     <p style="color: red;">@if ($errors->has('certifications_licensing')){{ $errors->first('certifications_licensing') }}@endif</p>
                                 </div>
                                 <div class="user-info box">
                                     <p>Additional documents</p>
-                                    <input type="file" id="document" name="additional_document">
-                                    <label for="document"><img class="upload" src="{{ asset('web_sayt/img/upload.svg') }}" alt=""></label>
+                                    <input type="file" id="document" name="additional_document" multiple class="file_name_trigger_multiple">
+                                    <label for="document">
+                                        <span class="put_label"></span>
+                                        <img class="upload" src="{{ asset('web_sayt/img/upload.svg') }}" alt=""></label>
                                     <p style="color: red;">@if ($errors->has('additional_document')){{ $errors->first('additional_document') }}@endif</p>
                                 </div>
                             </div>
@@ -197,6 +203,29 @@
     </script>
     <script type='text/javascript'>
         $(document).ready(function(){
+
+            $('.file_name_trigger').on('change', function () {
+                let name = $(this).val().split('\\').pop();
+                $(this).next().find('.put_label').html(name);
+            })
+
+            $('.file_name_trigger_multiple').on('change', function () {
+                let name = "";
+                var names = [];
+                for (var i = 0; i < $(this).get(0).files.length; ++i) {
+                    names.push(' ' + $(this).get(0).files[i].name.split('\\').pop());
+                }
+                if(names.length > 1){
+                    name = names.length + ' files';
+                }else{
+                    name = names[0];
+                }
+
+                $(this).next().find('.put_label').html(name);
+                $(this).next().attr('title',names);
+            })
+
+
 
             // Department Change
             $('#country').change(function(){
