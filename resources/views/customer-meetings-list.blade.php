@@ -53,7 +53,7 @@
                                     <th>Title</th>
                                     <th>Start Time</th>
                                     <th>Duration</th>
-                                    <th>Time Zone</th>
+{{--                                    <th>Time Zone</th>--}}
                                     <th>Remove</th>
                                 </tr>
                                 </thead>
@@ -64,7 +64,7 @@
                                         <td><a href="{{$val->join_url}}" target="_blank">{{$val->topic}}</a></td>
                                         <td>{{date('d-m-Y-H:i:s', strtotime($val->start_time)) }}</td>
                                         <td>{{$val->duration}}</td>
-                                        <td>{{$val->timezone}}</td>
+{{--                                        <td>{{$val->timezone}}</td>--}}
                                         <td>
 
                                                 <input type="hidden" name="delete_id" value="{{$val->id}}">
