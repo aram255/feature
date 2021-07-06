@@ -52,9 +52,9 @@
                     @csrf
                     <div class="create__checkbox">
                         <p>Mode of delivery</p>
-                        <input  type="radio" name="vir" value="virtual" class="lg-sg__checkin delivery" @if(!empty($Delivery)) @if($Delivery == 'virtual') checked="checked"  @endif @endif /><label
+                        <input  type="checkbox" name="vir" value="virtual" id="virtual" class="lg-sg__checkin delivery" @if(!empty($Delivery)) @if($Delivery == 'virtual') checked="checked"  @endif @endif /><label
                             for="virtual">Virtual</label>
-                        <input  type="radio" name="vir" value="in_persion" class="lg-sg__checkin delivery" @if(!empty($Delivery)) @if($Delivery == 'in_persion') checked="checked"  @endif @endif  /><label for="person">
+                        <input  type="checkbox" name="per" value="in_persion" id="person" class="lg-sg__checkin delivery" @if(!empty($Delivery)) @if($Delivery == 'in_persion') checked="checked"  @endif @endif  /><label for="person">
                             In Person</label>
                     </div>
                     <div class="user-info">
@@ -69,9 +69,10 @@
                     </div>
                     <div class="create__checkbox">
                         <p>Preferred Practitioner Gender</p>
-                        <input  type="radio" name="gender" value="Male" class="lg-sg__checkin"  @if(!empty($Gender)) @if($Gender == 'Male') checked="checked"  @endif @endif  /><label for="male">Male</label>
-                        <input  type="radio" name="gender" value="Famale" class="lg-sg__checkin" @if(!empty($Gender)) @if($Gender == 'Famale') checked="checked"  @endif @endif /><label for="female">
-                            Female</label>
+                        <input  type="radio" name="gender" id="male" value="Male" class="lg-sg__checkin"  @if(!empty($Gender)) @if($Gender == 'Male') checked="checked"  @endif @endif  />
+                        <label for="male" class="ml-2">Male</label>
+                        <input  type="radio" name="gender"  id="female" value="Famale" class="lg-sg__checkin" @if(!empty($Gender)) @if($Gender == 'Famale') checked="checked"  @endif @endif />
+                        <label for="female" class="ml-2">Female</label>
                     </div>
 
 
@@ -420,6 +421,9 @@
             $('input[type="radio"],input[type="checkbox"],#state').on('change', function () {
                 $(this).closest("form").submit();
             });
+            $('.find__form-settings').click(function () {
+                $(".filter__content").toggleClass("active")
+            })
         });
 
 
