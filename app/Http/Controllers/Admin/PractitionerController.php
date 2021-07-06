@@ -17,11 +17,11 @@ class PractitionerController extends Controller
         view()->share('menu', 'practitioners');
 
         $Practitioners = DB::table('practitioner')
-            ->select( 'practitioner.*', 'countries.title as country','cities.title as city','practice.title as practice','specialities.title as specialitie')
+            ->select( 'practitioner.*', 'countries.title as country','states.title as city','practice.title as practice','specialities.title as specialitie')
             ->join('practice','practice.id','practitioner.practice_id')
             ->join('specialities','specialities.id','practitioner.speciality_id')
             ->join('countries','countries.id','practitioner.country_id')
-            ->join('cities','cities.id','practitioner.city_id')
+            ->join('states','states.id','practitioner.city_id')
             ->where(function($query) use ($request) {
                 if (!empty($request->status)) {
                     return $query->where('practitioner.status', $request->input('status'));
@@ -42,6 +42,8 @@ class PractitionerController extends Controller
 
 
         $CheckStatus = $request->status;
+
+
 
         return view('admin.practitioner.index',compact('Practitioners','Lang','Reviews','CheckStatus','PractitionersNewCount'));
     }

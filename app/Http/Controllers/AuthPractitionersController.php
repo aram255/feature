@@ -41,7 +41,7 @@ class AuthPractitionersController extends Controller
 
     public function timeZone()
     {
-        return TimeZoneModel::orderby("timezones","asc")->get();
+        return TimeZoneModel::orderby("value","asc")->get();
     }
 
     public function practice()

@@ -18,6 +18,8 @@ use App\Http\Controllers\ResetPasswordController;
 
 use App\Http\Controllers\ZoomController;
 
+use App\Http\Controllers\SocialController;
+
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -78,9 +80,9 @@ Route::group(['prefix' => '{locale?}','where' => ['locale' => '[a-zA-Z]{2}']], f
     Route::get('/profile-view-customer', [CustomerController::class, 'profileViewCustomer'])->name('profile-view-customer');
 
     // ZOOM
-    Route::match(['get', 'post'],'/zoom', [ZoomController::class, 'index']);
+    Route::match(['get', 'post'],'/zoom', [ZoomController::class, 'index'])->name('meetings-list-zoom');
     Route::post('/add-zoom-meeting', [ZoomController::class, 'addZoomMeeting'])->name('add-zoom-meeting');
-    Route::post('/delete', [ZoomController::class, 'deleteZoomMeeting'])->name('zoom-delete');
+    Route::post('/delete-zoom-meeting', [ZoomController::class, 'deleteZoomMeeting'])->name('zoom-delete');
 
     // Practitioners
     Route::post('/custom-registration', [AuthPractitionersController::class, 'customRegistration'])->name('register.custom');
@@ -109,6 +111,15 @@ Route::group(['prefix' => '{locale?}','where' => ['locale' => '[a-zA-Z]{2}']], f
     Route::get('/password.reset/{token}', [NewPasswordController::class, 'create']);
     Route::post('/password.update', [NewPasswordController::class, 'store'])->name('password.update');
 
+
+
+    // login
+//    Route::get('/redirect', 'SocialController@redirect');
+//    Route::get('/callback/google', 'SocialController@callback');
+    Route::get('/index', 'SocialController@index');
+
+    Route::get('redirect', [SocialController::class, 'redirect']);
+    Route::get('callback/google', [SocialController::class, 'callback']);
 
 });
 Route::get('/transaction-page', [PaymentController::class, 'index']);

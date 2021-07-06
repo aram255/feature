@@ -60,7 +60,13 @@
                                     <a class="person-customer__payments-support-a" href="">Support <img
                                             class="person-customer__payments-support-img" src="{{ asset('web_sayt/img/headphones.svg') }}" alt="">
                                     </a>
+                                </div><br>
+                                @if(!empty(Auth::user()->api_secret))
+                                <div class="person-customer__payments-support">
+                                    <a class="person-customer__payments-support-a" href="{{route('meetings-list-zoom',[app()->getLocale()])}}">My Meetings List
+                                    </a>
                                 </div>
+                                 @endif
                             </div>
                         </div>
                     </div>

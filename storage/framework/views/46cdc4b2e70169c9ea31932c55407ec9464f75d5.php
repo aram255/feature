@@ -115,12 +115,16 @@
                                 <p class="user-info-p">Time Zone</p>
                                 <select class="fadeIn" id="country" name="time_zone">
                                     <option value=""></option>
-                                    <?php $__currentLoopData = $GetTimeZone; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $Country): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                      <?php  $Array = json_decode($Country->timezones); ?>
-                                        <?php $__currentLoopData = $Array; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $TimeZone): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                          <option value="<?php echo e($TimeZone->zoneName); ?> <?php echo e($TimeZone->gmtOffsetName); ?> <?php echo e($TimeZone->tzName); ?>" <?php if(old('time_zone') == $TimeZone->zoneName.' '.$TimeZone->gmtOffsetName.' '.$TimeZone->tzName): ?> selected="selected" <?php endif; ?> ><?php echo e($TimeZone->zoneName); ?> <?php echo e($TimeZone->gmtOffsetName); ?> <?php echo e($TimeZone->tzName); ?></option>
-                                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                    <?php $__currentLoopData = $GetTimeZone; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $TimeZone): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                        <option value="<?php echo e($TimeZone->title); ?>"  selected="selected" ><?php echo e($TimeZone->title); ?></option>
                                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+
+
+
+
+
+
+
                                 </select>
                                 <p style="color: red;"><?php if($errors->has('time_zone')): ?><?php echo e($errors->first('time_zone')); ?><?php endif; ?></p>
                             </div>

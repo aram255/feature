@@ -110,11 +110,8 @@
                                 <p class="user-info-p">Time Zone</p>
                                 <select class="fadeIn" id="country" name="time_zone">
                                     <option value=""></option>
-                                    @foreach($GetTimeZone as $Country)
-                                      @php  $Array = json_decode($Country->timezones); @endphp
-                                        @foreach($Array as $TimeZone)
-                                          <option value="{{$TimeZone->zoneName}} {{$TimeZone->gmtOffsetName}} {{$TimeZone->tzName}}" @if (old('time_zone') == $TimeZone->zoneName.' '.$TimeZone->gmtOffsetName.' '.$TimeZone->tzName) selected="selected" @endif >{{$TimeZone->zoneName}} {{$TimeZone->gmtOffsetName}} {{$TimeZone->tzName}}</option>
-                                        @endforeach
+                                    @foreach($GetTimeZone as $TimeZone)
+                                        <option value="{{$TimeZone->title}}"  @if (old('time_zone') == $TimeZone->title) selected="selected" @endif >{{$TimeZone->title}}</option>
                                     @endforeach
                                 </select>
                                 <p style="color: red;">@if ($errors->has('time_zone')){{ $errors->first('time_zone') }}@endif</p>

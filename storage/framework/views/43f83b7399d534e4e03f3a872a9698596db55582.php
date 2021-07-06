@@ -22,7 +22,7 @@
                         <a class="nav-link" href="#">All Services</a>
                     </li>
                     <li class="nav-items border-blue">
-                        <a class="nav-link" href="<?php echo e(route('blog',[app()->getLocale()])); ?>">Blog</a>
+                        <a class="nav-link" href="">Blog</a>
                     </li>
                     <?php if(!isset(auth()->user()->id) and !Session::has('UserID')): ?>
                     <li class="nav-items border-blue">
@@ -59,7 +59,7 @@
                     <?php endif; ?>
                     <?php if(!Session::has('UserID') and !isset(auth()->user()->id)): ?>
                     <li class="nav-items">
-                        <a class="nav-link " href="<?php echo e(route('login-practitioners',[app()->getLocale()])); ?>">For Practitioners</a>
+                        <a class="nav-link " href="<?php echo e(route('login-practitioners',[app()->getLocale()])); ?>" style=" background-color:#FED638 ;color: #212529;">For Practitioners</a>
                     </li>
                     <?php endif; ?>
 
@@ -129,7 +129,7 @@
                             <!-- id="password" -->
                             <input type="password" class="fadeIn" name="password" required>
                             <div class="lg-sg__check">
-                                <input type="checkbox" name="remember" value="Remember me" class="lg-sg__check-lg" required><label
+                                <input type="checkbox" name="remember" value="Remember me" class="lg-sg__check-lg" ><label
                                     for="remember"> Remember
                                     me</label>
                             </div>

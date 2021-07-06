@@ -34,7 +34,7 @@
     <!-- filter mob end -->
     <section>
 
-        <div class="filter">
+        <div class="filter" style="display: flex;justify-content: space-between; width: 100%;">
             <div class="filter__content">
                 <div class="filter__header">
                     <div class="find__form-settings">
@@ -93,11 +93,12 @@
         </div>
 
 
-        <div class="container-filter">
+        <div class="container-filter" style="display: flex;flex-direction: column;justify-content: space-around;">
       <!-- content -->
 
 
             @foreach($Practitioners as $Result)
+
             <div class="find-result">
 
                 <div class="person">
@@ -153,11 +154,16 @@
                             <form method="post" action="{{route('add-zoom-meeting',[app()->getLocale()])}}">
                                 {{csrf_field()}}
 
+                                <input type="hidden" name="email" value="{{$Result->email}}">
+                                <input type="hidden" name="first_name" value="{{$Result->first_name}}">
+                                <input type="hidden" name="last_name" value="{{$Result->last_name}}">
+                                <input type="hidden" name="phone_number" value="{{$Result->phone_number}}">
+
                                 <input type="text" name="m_name" placeholder="Meeting Name">
                                 <input type="text" name="password" placeholder="Password"><br>
                                 <input type="datetime-local" id="birthdaytime" name="birthdaytime">
                                 <input type="number" name="time" placeholder="Duration"><br>
-                                <input type="number" name="type" placeholder="Type"><br>
+{{--                                <input type="number" name="type" placeholder="Type"><br>--}}
 
                                 <input type="submit">
                             </form>
@@ -373,7 +379,7 @@
        <!-- content -->
             @if(!empty($Result))
 
-            <div class="pagination-filter">
+            <div class="pagination-filter" >
                 <nav aria-label="Page navigation example">
                     <ul class="pagination">
                         <li class="page-item">
