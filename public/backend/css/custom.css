@@ -104,3 +104,6 @@ ul.service_points li:before {
 .flex-1 {
     flex: 1;
 }
+.card-header a {
+    text-decoration: none;
+}
