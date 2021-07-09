@@ -152,17 +152,20 @@
                                                             class="el_item">Speciality: <label>{{$profile->specialitie}}</label></span>
                                                         <span class="el_item">Price selection: <label
                                                                 class="capitalize">{{$profile->price_selection}}</label></span>
-                                                        <span class="el_item">Mode of delivery: <label
+                                                        <span class="el_item d-flex">Mode of delivery: <label
                                                                 class="capitalize">
 {{--                                                                {{$profile->virtual == 'virtual' ? 'Virtual' : 'In Person'}}--}}
+                                                                <span class="mx-1 d-inline-block">
+                                                                    @if($profile->virtual == "virtual")
+                                                                        Virtual /
+                                                                    @endif
+                                                                </span>
+                                                                <span>
 
-                                                                @if($profile->virtual == "virtual")
-                                                                    Virtual<br>
-                                                                @endif
-
-                                                                @if($profile->in_persion == "in_persion")
-                                                                    In Person
-                                                                @endif
+                                                                    @if($profile->in_persion == "in_persion")
+                                                                        In Person
+                                                                    @endif
+                                                                </span>
                                                             </label></span>
                                                         <span
                                                             class="el_item">Illnesses and symtoms: <label> --- </label></span>
