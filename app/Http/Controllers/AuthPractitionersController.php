@@ -8,12 +8,13 @@ use Hash;
 use Session;
 use DB,File;
 use App\Models\AuthPractitionersModel;
-//use App\Models\PractitionersModel;
 use App\Models\CityModel;
 use App\Models\CountryModel;
 use App\Models\PracticeModel;
 use App\Models\SpecialitiesModel;
 use App\Models\TimeZoneModel;
+use App\Models\AdditionalModel;
+use App\Models\CertificationsModel;
 
 
 class AuthPractitionersController extends Controller
@@ -76,7 +77,8 @@ class AuthPractitionersController extends Controller
             'city_id'                  => 'required',
             'address'                  => 'required',
             'time_zone'                => 'required',
-            'mode_of_delivery'         => 'required',
+            'virtual'                  => 'required_without:in_persion',
+            'in_persion'                => 'required_without:virtual',
             'additional_document'      => 'required',
             'id_or_passport'           => 'required',
             'certifications_licensing' => 'required',
@@ -89,44 +91,86 @@ class AuthPractitionersController extends Controller
 
         $data = $request->all();
 
-        // $name = $data['additional_document']->getClientOriginalName();
-        // $path = $data['additional_document']->store('public');
-
-        $document_name     = rand() . '.' . $data['additional_document']->getClientOriginalExtension();
-        $data['additional_document']->move(public_path('web_sayt/upload_document/'), $document_name);
-
-
-        $certifications_licensing     = rand() . '.' . $data['certifications_licensing']->getClientOriginalExtension();
-        $data['certifications_licensing']->move(public_path('web_sayt/upload_document/'), $certifications_licensing);
-
         $id_or_passport     = rand() . '.' . $data['id_or_passport']->getClientOriginalExtension();
         $data['id_or_passport']->move(public_path('web_sayt/upload_document/'), $id_or_passport);
 
-        $check = $this->create($data,$document_name,$certifications_licensing,$id_or_passport);
+        if($files=$request->hasfile('additional_document'))
+        {
+            foreach($request->file('additional_document') as $file){
+                $name=rand() . '.' .$file->getClientOriginalExtension();
+                $file->move(public_path().'/web_sayt/upload_document/', $name);
+                $images[]=$name;
+                $form_data = array(
+                    'img' => $images
+                );
+         }
+        }
 
-        return redirect(app()->getLocale()."/profile-practitioner")->withSuccess('You have signed-in');
+        if($files=$request->hasfile('certifications_licensing'))
+        {
+            foreach($request->file('certifications_licensing') as $file){
+                $namee=rand() . '.' .$file->getClientOriginalExtension();
+                $file->move(public_path().'/web_sayt/upload_document/', $namee);
+                $imagess[]=$namee;
+                $Certifications = array(
+                    'certifications' => $imagess
+                );
+            }
+        }
+
+        $check = $this->create($form_data,$Certifications,$data,$id_or_passport);
+
+     return redirect(app()->getLocale()."/profile-practitioner")->withSuccess('You have signed-in');
     }
 
-    public function create(array $data,$document_name,$certifications_licensing,$id_or_passport)
+
+    public function create(array $form_data,$Certifications,$data,$id_or_passport)
     {
 
-        return AuthPractitionersModel::create([
-            'first_name'               => $data['first_name'],
-            'last_name'                => $data['last_name'],
-            'phone_number'             => $data['phone_number'],
-            'country_id'               => $data['country_id'],
-            'time_zone'                => $data['time_zone'],
-            'city_id'                  => $data['city_id'],
-            'address'                  => $data['address'],
-            'mode_of_delivery'         => $data['mode_of_delivery'],
-            'practice_id'              => $data['practice_id'],
-            'speciality_id'            => $data['speciality_id'],
-            'additional_document'      => $document_name,
-            'certifications_licensing' => $certifications_licensing,
-            'id_or_passport'           => $id_or_passport,
-            'email'                    => $data['email'],
-            'password'                 => Hash::make($data['password'])
-        ]);
+        $practitioner = new AuthPractitionersModel;
+
+        $practitioner->first_name      = $data['first_name'];
+        $practitioner->last_name       = $data['last_name'];
+        $practitioner->phone_number    = $data['phone_number'];
+        $practitioner->country_id      = $data['country_id'];
+        $practitioner->time_zone       = $data['time_zone'];
+        $practitioner->city_id         = $data['city_id'];
+        $practitioner->address         = $data['address'];
+        $practitioner->practice_id     = $data['practice_id'];
+        $practitioner->speciality_id   = $data['speciality_id'];
+        if(!empty($data['virtual']))
+        {
+        $practitioner->virtual         = $data['virtual'];
+        }
+        if(!empty($data['in_persion']))
+        {
+        $practitioner->in_persion       = $data['in_persion'];
+        }
+
+        $practitioner->id_or_passport  = $id_or_passport;
+        $practitioner->email           = $data['email'];
+        $practitioner->password        = Hash::make($data['password']);
+        $practitioner->save();
+
+
+
+        foreach ($form_data['img'] as $data)
+        {
+            $Ad = new AdditionalModel;
+            $Ad->additional_document = $data;
+            $Ad->practitioner_id = $practitioner->id;
+            $Ad->save();
+        }
+
+        foreach ($Certifications['certifications'] as $data)
+        {
+            $Add = new CertificationsModel;
+            $Add->certifications_licensing = $data;
+            $Add->practitioner_id = $practitioner->id;
+            $Add->save();
+        }
+
+
     }
 
     public function customLogin(Request $request)

@@ -92,9 +92,9 @@ class SocialController extends Controller
 //                Auth::login($newUser);
 //                return redirect('en/login');
 //            }
-        } catch (Exception $e) {
-            dd('qqqqqqqq');
-            dd($e->getMessage());
-        }
+//        } catch (Exception $e) {
+//            dd('qqqqqqqq');
+//            dd($e->getMessage());
+//        }
     }
 }

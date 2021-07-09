@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 use App\Models\Admin\Practitioner;
+use App\Models\Admin\AdditionalModel;
+use App\Models\Admin\CertificationsModel;
 use DB;
 use Carbon\Carbon;
 use Mail;
@@ -35,17 +37,20 @@ class PractitionerController extends Controller
                 ->select( 'practitioner_lang_rel.*', 'languages.title as language',)
                 ->join('languages','practitioner_lang_rel.lang_id','languages.id')
                 ->get();
-
+//        dd($Practitioners);
         $Reviews = DB::table('reviews')->get();
 
         $PractitionersNewCount = Practitioner::where('status','pending')->count();
+
+        $Additional     = AdditionalModel::all();
+        $Certifications = CertificationsModel::all();
 
 
         $CheckStatus = $request->status;
 
 
 
-        return view('admin.practitioner.index',compact('Practitioners','Lang','Reviews','CheckStatus','PractitionersNewCount'));
+        return view('admin.practitioner.index',compact('Practitioners','Lang','Reviews','CheckStatus','PractitionersNewCount','Additional','Certifications'));
     }
 
     public function data(Request $request){

@@ -153,7 +153,17 @@
                                                         <span class="el_item">Price selection: <label
                                                                 class="capitalize">{{$profile->price_selection}}</label></span>
                                                         <span class="el_item">Mode of delivery: <label
-                                                                class="capitalize">{{$profile->mode_of_delivery == 'virtual' ? 'Virtual' : 'In Person'}}</label></span>
+                                                                class="capitalize">
+{{--                                                                {{$profile->virtual == 'virtual' ? 'Virtual' : 'In Person'}}--}}
+
+                                                                @if($profile->virtual == "virtual")
+                                                                    Virtual<br>
+                                                                @endif
+
+                                                                @if($profile->in_persion == "in_persion")
+                                                                    In Person
+                                                                @endif
+                                                            </label></span>
                                                         <span
                                                             class="el_item">Illnesses and symtoms: <label> --- </label></span>
                                                     </div>
@@ -286,16 +296,30 @@
                                             <div class="card shadow mb-4">
 
                                                 <div class="card-header py-3">
-                                                    <h6 class="m-0 font-weight-bold text-primary"><a target="_blank" href="{{ asset('web_sayt/upload_document/'.$profile->id_or_passport) }}">ID or Passport</a></h6>
+                                                    <h4 class="m-0 font-weight-bold text-primary"><a target="_blank" href="#">ID or Passport</a></h4>
                                                 </div>
 
                                                 <div class="card-header py-3">
-                                                    <h6 class="m-0 font-weight-bold text-primary"><a target="_blank" href="{{ asset('web_sayt/upload_document/'.$profile->certifications_licensing) }}">Certifications and Licensing</a></h6>
+                                                    <h4 class="m-0 font-weight-bold text-primary"><a target="_blank" href="{{ asset('web_sayt/upload_document/'.$profile->id_or_passport) }}">{{$profile->id_or_passport}}</a></h4>
                                                 </div>
 
                                                 <div class="card-header py-3">
-                                                    <h6 class="m-0 font-weight-bold text-primary"><a target="_blank" href="{{ asset('web_sayt/upload_document/'.$profile->additional_document) }}">Additional documents</a></h6>
+                                                    <h4 class="m-0 font-weight-bold text-primary"><a  href="#">Additional documents</a></h4>
                                                 </div>
+                                                @foreach($Additional->where('practitioner_id',$profile->id) as $ValAdditional)
+                                                      <div class="card-header py-3">
+                                                          <h6 class="m-0 font-weight-bold text-primary"><a target="_blank" href="{{ asset('web_sayt/upload_document/'.$ValAdditional->additional_document) }}">{{$ValAdditional->additional_document}}</a></h6>
+                                                      </div>
+                                                @endforeach
+
+                                                <div class="card-header py-3">
+                                                    <h4 class="m-0 font-weight-bold text-primary"><a  href="#">Certifications and Licensing</a></h4>
+                                                </div>
+                                                @foreach($Certifications->where('practitioner_id',$profile->id) as $ValCertifications)
+                                                    <div class="card-header py-3">
+                                                        <h6 class="m-0 font-weight-bold text-primary"><a target="_blank" href="{{ asset('web_sayt/upload_document/'.$ValCertifications->certifications_licensing) }}">{{$ValCertifications->certifications_licensing}}</a></h6>
+                                                    </div>
+                                                @endforeach
 
                                             </div>
                                         </div>

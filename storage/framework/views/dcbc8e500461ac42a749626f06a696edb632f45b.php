@@ -16,13 +16,16 @@
 <body>
 <section>
     <div class="container">
+        <div class="mt-5">
+            <a href="<?php echo e(route('index')); ?>" style="color: #585858;"><i class="fas fa-long-arrow-alt-left mr-1"></i>Back</a>
+        </div>
         <div class="lg-sg">
             <div class="lg-sg__img">
                 <img src="<?php echo e(asset('web_sayt/img/Group 1613.svg')); ?>" alt="">
             </div>
             <?php if(session('status')): ?><a style="color: red"><?php echo e(session('status')); ?></a>  <?php endif; ?>
             <div class="lg-sg__form">
-                <div class="lg-sg__form-text">Login</div>
+                <div class="lg-sg__form-text">Login For Practitioner</div>
                 <form method="POST" action="<?php echo e(route('login.custom',[app()->getLocale()])); ?>">
                     <?php echo csrf_field(); ?>
                     <p class="lg-sg-p">E-mail</p>
@@ -32,7 +35,7 @@
                     <input type="password" class="fadeIn" name="password">
                     <a style="color: red;"><?php if($errors->has('password')): ?><?php echo e($errors->first('password')); ?><?php endif; ?></a>
                     <div class="lg-sg__check">
-                        <input type="checkbox" name="remember" value="Remember me" class="lg-sg__check-lg" />
+                        <input type="checkbox" name="remember" value="Remember me" id="remember" class="lg-sg__check-lg" />
                         <label for="remember"> Remember me</label>
                     </div>
                     <div class="lg-sg__forgot">

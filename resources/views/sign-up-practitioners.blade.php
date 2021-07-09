@@ -148,11 +148,12 @@
                             <div class="d-flex justify-content-lg-around">
                                 <div class="user-info create__checkbox">
                                     <p class="mb-3">Mode of delivery</p>
-                                    <input type="checkbox" name="mode_of_delivery" id="Virtual" value="virtual" @if(old('mode_of_delivery') == 'virtual') checked @endif class="lg-sg__checkin" />
+                                    <input type="checkbox" name="virtual" id="Virtual" value="virtual" @if(old('virtual') == 'virtual') checked @endif class="lg-sg__checkin" />
                                     <label for="Virtual"> Virtual</label>
-                                    <input type="checkbox" name="mode_of_delivery" id="in-person" value="in_persion" @if(old('mode_of_delivery') == 'in_persion')   checked @endif class="lg-sg__checkin" />
+                                    <input type="checkbox" name="in_persion" id="in-person" value="in_persion" @if(old('in_person') == 'in_persion')   checked @endif class="lg-sg__checkin" />
                                     <label for="in-person">In Person</label>
-                                    <p style="color: red;">@if ($errors->has('mode_of_delivery')){{ $errors->first('mode_of_delivery') }}@endif</p>
+                                    <p style="color: red;">@if ($errors->has('virtual')){{ $errors->first('virtual') }}@endif</p>
+{{--                                    <p style="color: red;">@if ($errors->has('in_person')){{ $errors->first('in_person') }}@endif</p>--}}
                                 </div>
                                 <div class="user-info box">
                                     <p>ID or Passport</p>
@@ -166,7 +167,7 @@
                             <div class="d-flex justify-content-lg-around">
                                 <div class="user-info box">
                                     <p>Certifications and Licensing</p>
-                                    <input type="file" id="certificat" class="file_name_trigger" name="certifications_licensing">
+                                    <input type="file" id="certificat" class="file_name_trigger_multiple"  multiple name="certifications_licensing[]">
                                     <label for="certificat">
                                         <span class="put_label"></span>
                                         <img class="upload" src="{{ asset('web_sayt/img/upload.svg') }}" alt=""></label>
@@ -174,7 +175,7 @@
                                 </div>
                                 <div class="user-info box">
                                     <p>Additional documents</p>
-                                    <input type="file" id="document" name="additional_document" multiple class="file_name_trigger_multiple">
+                                    <input type="file" id="document" name="additional_document[]" multiple class="file_name_trigger_multiple">
                                     <label for="document">
                                         <span class="put_label"></span>
                                         <img class="upload" src="{{ asset('web_sayt/img/upload.svg') }}" alt=""></label>

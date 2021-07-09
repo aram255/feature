@@ -56,10 +56,10 @@ body {
     padding: 5px;
 }
 
-#pac-container {
-  padding-bottom: 12px;
-  margin-right: 12px;
-}
+/*#pac-container {*/
+/*  padding-bottom: 12px;*/
+/*  margin-right: 12px;*/
+/*}*/
 
 .pac-controls {
   display: inline-block;
@@ -72,7 +72,7 @@ body {
   font-weight: 300;
 }
 
-#pac-input {
+.pac-input {
   background-color: #fff;
   font-family: Roboto;
   font-size: 15px;
@@ -84,11 +84,11 @@ body {
     width: 100%;
 }
 
-#pac-input:focus {
+.pac-input:focus {
   border-color: #4d90fe;
 }
 
-#title {
+.titlee {
   color: #fff;
   background-color: #4d90fe;
   font-size: 25px;
