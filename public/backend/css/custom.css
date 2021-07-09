@@ -31,7 +31,7 @@ a.loading:before, span.loading:before, button.loading:before, a.loading:hover:be
     right: -5px;
     bottom: -5px;
     z-index: 5;
-    pointer-events: none; 
+    pointer-events: none;
 }
 .nopadding {
     padding: 0 !important;
@@ -58,7 +58,7 @@ a.loading:before, span.loading:before, button.loading:before, a.loading:hover:be
 }
 
 .image-upload-container .image-part{
-	width: 100px; 
+	width: 100px;
 	height: 100px;
 	margin-bottom: 20px;
 }
@@ -100,4 +100,7 @@ ul.service_points {
 ul.service_points li:before {
     content: '✓';
     margin-right: 10px;
+}
+.flex-1 {
+    flex: 1;
 }

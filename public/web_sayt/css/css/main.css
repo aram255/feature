@@ -246,7 +246,7 @@ header {
       line-height: 15px;
       font-weight: 500;
       margin-bottom: 29px; }
-      .person__info-skin-tag {
+    .person__info-skin-tag {
         background: #D9EAFD9E 0% 0% no-repeat padding-box;
         border-radius: 5px;
         padding: 3px 7px; }
@@ -261,7 +261,7 @@ header {
       font-weight: 500;
       font-size: 20px;
       line-height: 24px; }
-      .person__info-aed-number {
+    .person__info-aed-number {
         color: #8BA9EE; }
     .person__info-heart {
       background: url(../../img/heart-cl.svg) no-repeat center top/cover;
@@ -270,16 +270,16 @@ header {
       cursor: pointer;
       margin-left: 26px;
       transition: 0.2s linear; }
-      .person__info-heart:hover {
-        background: url(../../img/heart-hv.svg) no-repeat center top/cover;
-        width: 25px;
-        height: 22px;
-        cursor: pointer; }
-      .person__info-heart.active {
-        background: url(../../img/heart-hv.svg) no-repeat center top/cover;
-        width: 25px;
-        height: 22px;
-        cursor: pointer; }
+  .person__info-heart:hover {
+    background: url(../../img/heart-hv.svg) no-repeat center top/cover;
+    width: 25px;
+    height: 22px;
+    cursor: pointer; }
+  .person__info-heart.active {
+    background: url(../../img/heart-hv.svg) no-repeat center top/cover;
+    width: 25px;
+    height: 22px;
+    cursor: pointer; }
   .person__content {
     margin-left: auto;
     flex: 0 0 24%; }

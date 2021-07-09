@@ -294,32 +294,48 @@
                                         </div>
                                         <div class="col-lg-12">
                                             <div class="card shadow mb-4">
-
-                                                <div class="card-header py-3">
-                                                    <h4 class="m-0 font-weight-bold text-primary"><a target="_blank" href="#">ID or Passport</a></h4>
-                                                </div>
-
-                                                <div class="card-header py-3">
-                                                    <h4 class="m-0 font-weight-bold text-primary"><a target="_blank" href="{{ asset('web_sayt/upload_document/'.$profile->id_or_passport) }}">{{$profile->id_or_passport}}</a></h4>
-                                                </div>
-
-                                                <div class="card-header py-3">
-                                                    <h4 class="m-0 font-weight-bold text-primary"><a  href="#">Additional documents</a></h4>
-                                                </div>
-                                                @foreach($Additional->where('practitioner_id',$profile->id) as $ValAdditional)
-                                                      <div class="card-header py-3">
-                                                          <h6 class="m-0 font-weight-bold text-primary"><a target="_blank" href="{{ asset('web_sayt/upload_document/'.$ValAdditional->additional_document) }}">{{$ValAdditional->additional_document}}</a></h6>
-                                                      </div>
-                                                @endforeach
-
-                                                <div class="card-header py-3">
-                                                    <h4 class="m-0 font-weight-bold text-primary"><a  href="#">Certifications and Licensing</a></h4>
-                                                </div>
-                                                @foreach($Certifications->where('practitioner_id',$profile->id) as $ValCertifications)
+                                                <div class="mb-3">
                                                     <div class="card-header py-3">
-                                                        <h6 class="m-0 font-weight-bold text-primary"><a target="_blank" href="{{ asset('web_sayt/upload_document/'.$ValCertifications->certifications_licensing) }}">{{$ValCertifications->certifications_licensing}}</a></h6>
+                                                        <h4 class="mb-0 mr-5 font-weight-bold text-primary"><a target="_blank" href="#">ID or Passport</a></h4>
                                                     </div>
-                                                @endforeach
+                                                    <div class="bg-white px-5 py-3">
+                                                        <a class="text-black-50" target="_blank" href="{{ asset('web_sayt/upload_document/'.$profile->id_or_passport) }}">{{$profile->id_or_passport}}</a>
+                                                    </div>
+                                                </div>
+
+
+
+
+                                                <div class="d-flex">
+                                                    <div class="flex-1">
+                                                        <div class="card-header py-3">
+                                                            <h4 class="m-0 font-weight-bold text-primary"><a  href="#">Additional documents</a></h4>
+                                                        </div>
+                                                        <div class="bg-white px-5 py-3">
+                                                            @foreach($Additional->where('practitioner_id',$profile->id) as $ValAdditional)
+                                                                <div class="py-3">
+                                                                    <h6 class="m-0 font-weight-bold">
+                                                                        <a class="text-black-50" target="_blank" href="{{ asset('web_sayt/upload_document/'.$ValAdditional->additional_document) }}">{{$ValAdditional->additional_document}}</a>
+                                                                    </h6>
+                                                                </div>
+                                                            @endforeach
+                                                        </div>
+                                                    </div>
+                                                    <div class="flex-1">
+                                                        <div class="card-header py-3">
+                                                            <h4 class="m-0 font-weight-bold text-primary"><a  href="#">Certifications and Licensing</a></h4>
+                                                        </div>
+                                                        <div class="bg-white px-5 py-3">
+                                                            @foreach($Certifications->where('practitioner_id',$profile->id) as $ValCertifications)
+                                                                <div class="py-3">
+                                                                    <h6 class="m-0 font-weight-bold">
+                                                                        <a class="text-black-50" target="_blank" href="{{ asset('web_sayt/upload_document/'.$ValCertifications->certifications_licensing) }}">{{$ValCertifications->certifications_licensing}}</a>
+                                                                    </h6>
+                                                                </div>
+                                                            @endforeach
+                                                        </div>
+                                                    </div>
+                                                </div>
 
                                             </div>
                                         </div>
