@@ -3,12 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Models\Admin\CategoryModel;
+use App\Models\Card;
 use Illuminate\Http\Request;
 //use App\Models\PractitionersModel;
 use App\Models\TegManagements;
 use App\Models\TegManagementsPractitionerModel;
 use App\Models\TypeFormModel;
 use DB;
+use Illuminate\Support\Facades\Auth;
 
 class PractitionersController extends Controller
 {
@@ -89,7 +91,8 @@ class PractitionersController extends Controller
 
     public  function EditProfilePractitioner()
     {
-        return view('edit-profile-practitioner');
+        $cards = Card::where('user_id', Auth::id())->orderBy('created_at','desc')->get();
+        return view('edit-profile-practitioner', compact('cards'));
     }
 
     public function myAppointmentsPractitioners()

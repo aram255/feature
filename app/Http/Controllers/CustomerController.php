@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Card;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CustomerController extends Controller
 {
@@ -18,7 +20,8 @@ class CustomerController extends Controller
 
     public  function editProfileCustomer()
     {
-        return view('edit-profile-customer');
+        $cards = Card::where('user_id', Auth::id())->orderBy('created_at','desc')->get();
+        return view('edit-profile-customer', compact('cards'));
     }
 
     public function profileViewCustomer()
