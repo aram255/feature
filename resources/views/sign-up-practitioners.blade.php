@@ -255,33 +255,10 @@
                             </p>
                         </div>
                     </form>
-                    <a  role="button" data-toggle="modal" data-target="#thankYouModal"><span> Sign In </span></a>
                 </div>
             </div>
         </div>
     </section>
-
-
-    <div class="modal fade" id="thankYouModal" tabindex="-1" role="dialog" aria-labelledby="thankYouModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="px-5 py-4">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body text-center">
-                    <img src="{{ asset('img/sand-clock.svg') }}" alt="dgs">
-                    <div class="mt-3 pb-5">
-                        Your request is being considered by the admin. <br> Please check your email.
-                    </div>
-                </div>
-            </div>
-        </div>
-
-    </div>
-
-
 
     <script type="text/javascript" src="{{ asset('web_sayt/js/jquery.js') }}"></script>
     <script type=text/javascript src="{{ asset('web_sayt/js/bootstrap/bootstrap.min.js') }}"></script>
