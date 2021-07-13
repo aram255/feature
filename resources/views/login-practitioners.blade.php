@@ -17,7 +17,10 @@
 <section>
     <div class="container">
         <div class="mt-5">
-            <a href="{{route('index')}}" style="color: #585858;"><i class="fas fa-long-arrow-alt-left mr-1"></i>Back</a>
+            <a href="{{route('index')}}" style="color: #585858; font-size: 26px">
+                <i class="fas fa-times"></i>
+{{--                <i class="fas fa-long-arrow-alt-left mr-1"></i>Back--}}
+            </a>
         </div>
         <div class="lg-sg">
             <div class="lg-sg__img">

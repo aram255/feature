@@ -166,10 +166,15 @@
                             </div>
                             <div class="create__checkbox">
                                 <p>Avalible appointments this week</p>
-                                @foreach($TegManagements as $key=>$TegManagements)
-                                    <input type="checkbox" id="check"  name="teg_management[{{$key}}]" value="{{$TegManagements->id}}" class="lg-sg__checkin">
-                                    <label for="check">{{$TegManagements->name}}</label>
-                                @endforeach
+                                    <input type="radio" name="yesNo" value="Yes" id="yes" class="lg-sg__checkin">
+                                    <label for="yes" class="ml-2">Yes</label>
+                                    <input type="radio" name="yesNo" value="No"  id="no" class="lg-sg__checkin">
+                                    <label for="no" class="ml-2">No</label>
+{{--                                --}}
+{{--                                @foreach($TegManagements as $key=>$TegManagements)--}}
+{{--                                    <input type="checkbox" id="check"  name="teg_management[{{$key}}]" value="{{$TegManagements->id}}" class="lg-sg__checkin">--}}
+{{--                                    <label for="check">{{$TegManagements->name}}</label>--}}
+{{--                                @endforeach--}}
                             </div>
 
 
