@@ -195,8 +195,6 @@
                                           <option value="Regions">Regions</option>
                                       </select>
                                   </div>
-
-
 {{--                                  <select class="fadeIn" name="speciality_id">--}}
 {{--                                      <option value=""></option>--}}
 {{--                                      @foreach($GetSpecialities as $Specialities)--}}

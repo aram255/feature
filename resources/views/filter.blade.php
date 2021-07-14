@@ -8,6 +8,13 @@
     <link rel="stylesheet" href="{{ asset('web_sayt/css/css/responsive.css') }}">
     <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
     <link rel="stylesheet" type="text/css" href="{{ asset('web_sayt/maps/style.css') }}" />
+    <style>
+        .create__checkbox input.lg-sg__checkin + label::before {
+            border: solid 1px #8BA9EE;
+            background: white;
+            border-radius: 3px;
+        }
+    </style>
     <script src="{{ asset('web_sayt/maps/index.js') }}"></script>
     <meta name="csrf-token" content="{{ csrf_token() }}">
 @endsection
@@ -44,21 +51,16 @@
                         <button class="settings-button ml-3" data-toggle="modal" data-target="#find__filter"><i
                                 class="fas fa-sliders-h"></i></button>
                     </div>
-
                     <p class="filter__title">Filters</p>
                 </div>
-
-
-
-
                 <form id="filter-form" method="POST" action="{{route('search',[app()->getLocale()])}}">
                     @csrf
                     <div class="create__checkbox">
                         <p>Mode of delivery</p>
-                        <input  type="checkbox" name="vir" value="virtual" id="virtual" class="lg-sg__checkin delivery" @if(!empty($Delivery)) @if($Delivery == 'virtual') checked="checked"  @endif @endif /><label
-                            for="virtual">Virtual</label>
-                        <input  type="checkbox" name="per" value="in_persion" id="person" class="lg-sg__checkin delivery" @if(!empty($Delivery)) @if($Delivery == 'in_persion') checked="checked"  @endif @endif  /><label for="person">
-                            In Person</label>
+                        <input  type="checkbox" name="vir" value="virtual" id="virtual1" class="lg-sg__checkin delivery" @if(!empty($Delivery)) @if($Delivery == 'virtual') checked="checked"  @endif @endif />
+                        <label for="virtual1">Virtual</label>
+                        <input  type="checkbox" name="per" value="in_persion" id="person1" class="lg-sg__checkin delivery" @if(!empty($Delivery)) @if($Delivery == 'in_persion') checked="checked"  @endif @endif  />
+                        <label for="person1">In Person</label>
                     </div>
                     <div class="user-info">
                         <p class="create-p">Language</p>
@@ -67,7 +69,6 @@
                             @foreach($Languages as $lang)
                                 <option value="{{ $lang->id }}"  @if(!empty($Lang)) @if($Lang == $lang->id) selected="selected"  @endif @endif >{{ $lang->title }}</option>
                             @endforeach
-
                         </select>
                     </div>
                     <div class="create__checkbox">
@@ -77,9 +78,6 @@
                         <input  type="radio" name="gender"  id="female" value="Famale" class="lg-sg__checkin" @if(!empty($Gender)) @if($Gender == 'Famale') checked="checked"  @endif @endif />
                         <label for="female" class="ml-2">Female</label>
                     </div>
-
-
-
                     <div class="create__checkbox">
                         <p>Avalible appointments this week</p>
 
@@ -110,20 +108,22 @@
                             <div class="person__info-cont1">
                                 <img class="person__info-img" src="{{ asset('web_sayt/img/person-foto.png') }}" alt="">
                                 <div class="person__info-rating">
-                        <span class="gl-star-rating gl-star-rating--ltr" data-star-rating=""><select
-                                class="star-rating">
-
+                        <span class="gl-star-rating gl-star-rating--ltr" data-star-rating="">
+                            <select class="star-rating">
                               <option value="5">5.0</option>
                               <option value="4">4.0</option>
                               <option value="3">3.0</option>
                               <option value="2">2.0</option>
                               <option value="1">1.0</option>
-                           </select><span class="gl-star-rating--stars s50" role="tooltip" aria-label="5.0"><span
-                                    data-index="0" data-value="1" class="gl-active"></span><span data-index="1"
-                                                                                                 data-value="2" class="gl-active"></span><span data-index="2" data-value="3"
-                                                                                                                                               class="gl-active"></span><span data-index="3" data-value="4"
-                                                                                                                                                                              class="gl-active"></span><span data-index="4" data-value="5"
-                                                                                                                                                                                                             class="gl-active gl-selected"></span></span></span>
+                           </select>
+                            <span class="gl-star-rating--stars s50" role="tooltip" aria-label="5.0">
+                                <span data-index="0" data-value="1" class="gl-active"></span>
+                                <span data-index="1" data-value="2" class="gl-active"></span>
+                                <span data-index="2" data-value="3" class="gl-active"></span>
+                                <span data-index="3" data-value="4" class="gl-active"></span>
+                                <span data-index="4" data-value="5" class="gl-active gl-selected"></span>
+                            </span>
+                        </span>
                                 </div>
                                 <p class="perion__info-session">256<span> Sessions</span></p>
                                 <a href="" class="btn bg-yellow">Book</a>

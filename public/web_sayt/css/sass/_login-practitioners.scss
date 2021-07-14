@@ -9,7 +9,7 @@
          font-size: 30px;
          font-weight: 600;
          color:#00309E;
-         margin-bottom: 73px;
+         margin-bottom: 30px;
          line-height: 37px;
       }
 
@@ -142,16 +142,16 @@
    // transition: all 0.5s;
    &:focus {
       box-shadow: 0px 0px 6px #8BA9EE;
-      
+
    }
 }
 
-// Forgat Passsword 
+// Forgat Passsword
 
 .forgot-pass {
    width: 500px;
    margin-right: 68px;
-   
+
    .lg-sg__button {
       margin-top: 23px;
    }
@@ -171,10 +171,10 @@
       text-decoration: underline;
       color: #585858;
    }
-   
+
 }
 
-// Change Password 
+// Change Password
  .change-pass {
       width: 500px;
       margin-right: 68px;
