@@ -176,8 +176,6 @@
                                           @endforeach
                                       </select>
                                   </div>
-
-
 {{--                                  <select class="fadeIn" name="speciality_id">--}}
 {{--                                      <option value=""></option>--}}
 {{--                                      @foreach($GetSpecialities as $Specialities)--}}
