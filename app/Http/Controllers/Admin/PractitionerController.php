@@ -19,9 +19,7 @@ class PractitionerController extends Controller
         view()->share('menu', 'practitioners');
 
         $Practitioners = DB::table('practitioner')
-            ->select( 'practitioner.*', 'countries.title as country','states.title as city','practice.title as practice','specialities.title as specialitie')
-            ->join('practice','practice.id','practitioner.practice_id')
-            ->join('specialities','specialities.id','practitioner.speciality_id')
+            ->select( 'practitioner.*', 'countries.title as country','states.title as city')
             ->join('countries','countries.id','practitioner.country_id')
             ->join('states','states.id','practitioner.city_id')
             ->where(function($query) use ($request) {
@@ -37,20 +35,31 @@ class PractitionerController extends Controller
                 ->select( 'practitioner_lang_rel.*', 'languages.title as language',)
                 ->join('languages','practitioner_lang_rel.lang_id','languages.id')
                 ->get();
-//        dd($Practitioners);
+
         $Reviews = DB::table('reviews')->get();
 
         $PractitionersNewCount = Practitioner::where('status','pending')->count();
 
-        $Additional     = AdditionalModel::all();
-        $Certifications = CertificationsModel::all();
+        $Additional                    = AdditionalModel::all();
+        $Certifications                = CertificationsModel::all();
 
+        $PractitionerSpecialities = DB::table('specialities')
+                                    ->select( 'specialities.*','practitioner_specialities.*')
+                                    ->join('practitioner_specialities','practitioner_specialities.specialities_id','specialities.id')
+                                    ->where('specialities.published',1)
+                                    ->get();
+
+        $PractitionerPractice      = DB::table('practice')
+                                    ->select( 'practice.*','practitioner_practice.*')
+                                    ->join('practitioner_practice','practitioner_practice.practice_id','practice.id')
+                                    ->where('practice.published',1)
+                                    ->get();
 
         $CheckStatus = $request->status;
 
 
 
-        return view('admin.practitioner.index',compact('Practitioners','Lang','Reviews','CheckStatus','PractitionersNewCount','Additional','Certifications'));
+        return view('admin.practitioner.index',compact('Practitioners','Lang','Reviews','CheckStatus','PractitionersNewCount','Additional','Certifications','PractitionerSpecialities','PractitionerPractice'));
     }
 
     public function data(Request $request){

@@ -69,6 +69,7 @@ class IndexController extends Controller
             $tags = implode(', ', $request->teg_management);
         }
 
+
         $Practitioner = DB::select(
             "select p.id, p.first_name, p.last_name, p.email, p.phone_number, group_concat(tm.id) as tag_ids, group_concat(tm.name)as tag_names from practitioner as p
             left join  practitioner_lang_rel as  plr on p.id=plr.practitioner_id
@@ -78,11 +79,14 @@ class IndexController extends Controller
             where 1=1"
             .(!empty($request->state)?" and l.id=$request->state":"")
             .(!empty($tags)? " and tm.id in ($tags)":"")
-            .(!empty($request->vir)?" and mode_of_delivery='$request->vir'":"")
+            .(!empty($request->vir)?" and virtuall='$request->vir'":"")
+            .(!empty($request->per)?" and in_persion='$request->per'":"")
             .(!empty($request->gender)?" and gender='$request->gender'":"")
             ." group by p.id, p.first_name, p.last_name, p.email, p.phone_number"
-            . (!empty($tags)?" having count(p.id)=".count($request->teg_management):"")
+            .(!empty($tags)?" having count(p.id)=".count($request->teg_management):"")
         );
+
+        //dd($Practitioner);
 
         foreach($Practitioner as $val)
         {
@@ -102,7 +106,8 @@ class IndexController extends Controller
         }
 
         $Tag      = $request->teg_management;
-        $Delivery = $request->vir;
+        $Virtual  = $request->vir;
+        $Person   = $request->per;
         $Gender   = $request->gender;
         $Lang     = $request->state;
 
@@ -114,7 +119,7 @@ class IndexController extends Controller
 
 
 
-        return view('filter',compact('Practitioners','Languages','TegManagements','Tag','Delivery','Gender','Lang'));
+        return view('filter',compact('Practitioners','Languages','TegManagements','Tag','Virtual','Person','Gender','Lang'));
 
     }
 

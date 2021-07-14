@@ -56,8 +56,20 @@
                                 <td class="sorting_1">{{$val->id}}</td>
                                 <td>{{$val->first_name}}</td>
                                 <td>Afghanistan Andaman and Nicobar Islands</td>
-                                <td>{{$val->specialitie}}</td>
-                                <td>{{$val->practice}}</td>
+                                <td>
+                                    @foreach($PractitionerSpecialities->where('practitioner_id',$val->id) as $ValPractitionerSpecialities)
+                                        @if(!empty($ValPractitionerSpecialities->title))
+                                            {{ $ValPractitionerSpecialities->title }}
+                                        @endif
+                                    @endforeach
+                                </td>
+                                <td>
+                                    @foreach($PractitionerPractice->where('practitioner_id',$val->id) as $ValPractitionerPractitionerPractice)
+                                        @if(!empty($ValPractitionerPractitionerPractice->title))
+                                            <label>{{ $ValPractitionerPractitionerPractice->title }}</label>
+                                        @endif
+                                    @endforeach
+                                </td>
                                 <td>{{$val->created_at}}</td>
                                 <td class=" status" @if($val->status == 'pending') style="color: red" @endif>{{$val->status}}</td>
                                 <td class=" content-middel"><a href="javascript:;" data-toggle="modal"
@@ -86,7 +98,6 @@
 
 
     @foreach($Practitioners as $profile)
-
         <div class="modal" id="show_info{{$profile->id}}">
             <div style="max-width: 1119px;" class="modal-dialog modal-lg">
                 <div class="modal-content">
@@ -147,16 +158,29 @@
                                                     <div class="form-group nopadding">
 
                                                         <span
-                                                            class="el_item">Practice: <label>{{$profile->practice}}</label></span>
+                                                            class="el_item">Practice:
+                                                            @foreach($PractitionerPractice->where('practitioner_id',$profile->id) as $ValPractitionerPractitionerPractice)
+                                                                @if(!empty($ValPractitionerPractitionerPractice->title))
+                                                                    <label>{{ $ValPractitionerPractitionerPractice->title }}</label>
+                                                                @endif
+                                                            @endforeach
+                                                        </span>
                                                         <span
-                                                            class="el_item">Speciality: <label>{{$profile->specialitie}}</label></span>
+                                                            class="el_item">Speciality:
+                                                             @foreach($PractitionerSpecialities->where('practitioner_id',$profile->id) as $ValPractitionerSpecialities)
+                                                                @if(!empty($ValPractitionerSpecialities->title))
+                                                                    <label>{{ $ValPractitionerSpecialities->title }}</label>
+                                                                @endif
+                                                             @endforeach
+
+                                                        </span>
                                                         <span class="el_item">Price selection: <label
                                                                 class="capitalize">{{$profile->price_selection}}</label></span>
                                                         <span class="el_item d-flex">Mode of delivery: <label
                                                                 class="capitalize">
 {{--                                                                {{$profile->virtual == 'virtual' ? 'Virtual' : 'In Person'}}--}}
                                                                 <span class="mx-1 d-inline-block">
-                                                                    @if($profile->virtual == "virtual")
+                                                                    @if($profile->virtuall == "virtuall")
                                                                         Virtual /
                                                                     @endif
                                                                 </span>

@@ -19,6 +19,7 @@ use App\Http\Controllers\ResetPasswordController;
 use App\Http\Controllers\ZoomController;
 
 use App\Http\Controllers\SocialController;
+use App\Http\Controllers\CalendarController;
 
 use Illuminate\Support\Facades\Route;
 
@@ -114,12 +115,16 @@ Route::group(['prefix' => '{locale?}','where' => ['locale' => '[a-zA-Z]{2}']], f
 
 
     // login
-//    Route::get('/redirect', 'SocialController@redirect');
-//    Route::get('/callback/google', 'SocialController@callback');
-    Route::get('/index', 'SocialController@index');
+
+//     Route::get('/redirect', 'SocialController@redirect');
+//     Route::get('/callback/google', 'SocialController@callback');
+     Route::get('/index', 'SocialController@index');
 
     Route::get('redirect', [SocialController::class, 'redirect']);
     Route::get('callback/google', [SocialController::class, 'callback']);
+
+    // Calendar
+    Route::get('calendar', [CalendarController::class, 'index']);
 
 });
 Route::get('/transaction-page', [PaymentController::class, 'index']);

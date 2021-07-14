@@ -149,20 +149,11 @@
 
 
                                   <div class="">
-                                      <select id="choices-multiple-remove-button" class="form-control" name="options[]" multiple>
-                                          <option value="Author" onclick="filterSelection('Author')">Author</option>
-                                          <option value="MSelect">Multiselect Dropdown</option>
-                                          <option value="Accordions" >Accordions</option>
-                                          <option value="Radio Buttons">Radio Buttons</option>
-                                          <option value="SearchBox">Search Boxes</option>
-                                          <option value="Tables">Tables</option>
-                                          <option value="Profiles">Profiles</option>
-                                          <option value="Sliders">Sliders</option>
-                                          <option value="Tabs">Tabs</option>
-                                          <option value="NavMenu">Navigation Menu</option>
-                                          <option value="Cities">Cities</option>
-                                          <option value="Countries">Countries</option>
-                                          <option value="Regions">Regions</option>
+                                      <select id="choices-multiple-remove-button" class="form-control" name="practice_id[]" multiple>
+{{--                                          <option value="Author" onclick="filterSelection('Author')">Author</option>--}}
+                                          @foreach($GetPractice as $Practice)
+                                            <option value="{{$Practice->id}}">{{$Practice->title}}</option>
+                                          @endforeach
                                       </select>
                                   </div>
 
@@ -179,20 +170,10 @@
                                   <p class="create-p">Speciality</p>
 
                                   <div class="">
-                                      <select id="choices-multiple-remove-button1" class="form-control" name="options[]" multiple>
-                                          <option value="Author" onclick="filterSelection('Author')">Author</option>
-                                          <option value="MSelect">Multiselect Dropdown</option>
-                                          <option value="Accordions" >Accordions</option>
-                                          <option value="Radio Buttons">Radio Buttons</option>
-                                          <option value="SearchBox">Search Boxes</option>
-                                          <option value="Tables">Tables</option>
-                                          <option value="Profiles">Profiles</option>
-                                          <option value="Sliders">Sliders</option>
-                                          <option value="Tabs">Tabs</option>
-                                          <option value="NavMenu">Navigation Menu</option>
-                                          <option value="Cities">Cities</option>
-                                          <option value="Countries">Countries</option>
-                                          <option value="Regions">Regions</option>
+                                      <select id="choices-multiple-remove-button1" class="form-control" name="speciality_id[]" multiple>
+                                          @foreach($GetSpecialities as $Specialities)
+                                            <option value="{{$Specialities->id}}">{{$Specialities->title}}</option>
+                                          @endforeach
                                       </select>
                                   </div>
 

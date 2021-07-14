@@ -55,9 +55,9 @@
                     @csrf
                     <div class="create__checkbox">
                         <p>Mode of delivery</p>
-                        <input  type="checkbox" name="vir" value="virtual" id="virtual" class="lg-sg__checkin delivery" @if(!empty($Delivery)) @if($Delivery == 'virtual') checked="checked"  @endif @endif /><label
+                        <input  type="checkbox" name="vir" value="virtual" id="virtual" class="lg-sg__checkin delivery" @if(!empty($Virtual)) @if($Virtual == 'virtual') checked="checked"  @endif @endif /><label
                             for="virtual">Virtual</label>
-                        <input  type="checkbox" name="per" value="in_persion" id="person" class="lg-sg__checkin delivery" @if(!empty($Delivery)) @if($Delivery == 'in_persion') checked="checked"  @endif @endif  /><label for="person">
+                        <input  type="checkbox" name="per" value="in_persion" id="person" class="lg-sg__checkin delivery" @if(!empty($Person)) @if($Person == 'in_persion') checked="checked"  @endif @endif  /><label for="person">
                             In Person</label>
                     </div>
                     <div class="user-info">
@@ -83,10 +83,15 @@
                     <div class="create__checkbox">
                         <p>Avalible appointments this week</p>
 
-                        @foreach($TegManagements as $key=>$TegManagement)
-                            <input  type="checkbox" name="teg_management[{{$TegManagement->id}}]" @if(!empty($Tag)) @if(in_array($TegManagement->id, $Tag)) checked="checked"  @endif @endif value="{{$TegManagement->id}}" class="lg-sg__checkin">
-                            <label for="remember">{{$TegManagement->name}}</label>
-                    @endforeach
+                        <input type="radio" name="yesNo" value="Yes" id="yes" class="lg-sg__checkin">
+                        <label for="yes" class="ml-2">Yes</label>
+                        <input type="radio" name="yesNo" value="No"  id="no" class="lg-sg__checkin">
+                        <label for="no" class="ml-2">No</label>
+
+{{--                    @foreach($TegManagements as $key=>$TegManagement)--}}
+{{--                            <input  type="checkbox" name="teg_management[{{$TegManagement->id}}]" @if(!empty($Tag)) @if(in_array($TegManagement->id, $Tag)) checked="checked"  @endif @endif value="{{$TegManagement->id}}" class="lg-sg__checkin">--}}
+{{--                            <label for="remember">{{$TegManagement->name}}</label>--}}
+{{--                    @endforeach--}}
                 </form>
             </div>
             {{-- Reset fild--}}

@@ -166,10 +166,15 @@
                             </div>
                             <div class="create__checkbox">
                                 <p>Avalible appointments this week</p>
-                                <?php $__currentLoopData = $TegManagements; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key=>$TegManagements): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                    <input type="checkbox" id="check"  name="teg_management[<?php echo e($key); ?>]" value="<?php echo e($TegManagements->id); ?>" class="lg-sg__checkin">
-                                    <label for="check"><?php echo e($TegManagements->name); ?></label>
-                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                    <input type="radio" name="yesNo" value="Yes" id="yes" class="lg-sg__checkin">
+                                    <label for="yes" class="ml-2">Yes</label>
+                                    <input type="radio" name="yesNo" value="No"  id="no" class="lg-sg__checkin">
+                                    <label for="no" class="ml-2">No</label>
+
+
+
+
+
                             </div>
 
 

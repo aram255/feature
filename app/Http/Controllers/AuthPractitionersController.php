@@ -15,6 +15,8 @@ use App\Models\SpecialitiesModel;
 use App\Models\TimeZoneModel;
 use App\Models\AdditionalModel;
 use App\Models\CertificationsModel;
+use App\Models\PractitionerPracticeModel;
+use App\Models\PractitionerSpecialitiesModel;
 
 
 class AuthPractitionersController extends Controller
@@ -89,6 +91,8 @@ class AuthPractitionersController extends Controller
         ]);
 
 
+
+
         $data = $request->all();
 
         $id_or_passport     = rand() . '.' . $data['id_or_passport']->getClientOriginalExtension();
@@ -118,13 +122,13 @@ class AuthPractitionersController extends Controller
             }
         }
 
-        $check = $this->create($form_data,$Certifications,$data,$id_or_passport);
+        $check = $this->create($form_data,$Certifications,$data,$id_or_passport,$request->practice_id,$request->speciality_id);
 
      return redirect(app()->getLocale()."/profile-practitioner")->withSuccess('You have signed-in');
     }
 
 
-    public function create(array $form_data,$Certifications,$data,$id_or_passport)
+    public function create(array $form_data,$Certifications,$data,$id_or_passport,$practiceID,$specialitiesID)
     {
 
         $practitioner = new AuthPractitionersModel;
@@ -136,11 +140,9 @@ class AuthPractitionersController extends Controller
         $practitioner->time_zone       = $data['time_zone'];
         $practitioner->city_id         = $data['city_id'];
         $practitioner->address         = $data['address'];
-        $practitioner->practice_id     = $data['practice_id'];
-        $practitioner->speciality_id   = $data['speciality_id'];
         if(!empty($data['virtual']))
         {
-        $practitioner->virtual         = $data['virtual'];
+        $practitioner->virtuall         = $data['virtual'];
         }
         if(!empty($data['in_persion']))
         {
@@ -151,7 +153,6 @@ class AuthPractitionersController extends Controller
         $practitioner->email           = $data['email'];
         $practitioner->password        = Hash::make($data['password']);
         $practitioner->save();
-
 
 
         foreach ($form_data['img'] as $data)
@@ -170,6 +171,21 @@ class AuthPractitionersController extends Controller
             $Add->save();
         }
 
+        foreach ($practiceID as $value)
+        {
+            $AddPractice                  = new PractitionerPracticeModel;
+            $AddPractice->practice_id     = $value;
+            $AddPractice->practitioner_id = $practitioner->id;
+            $AddPractice->save();
+        }
+
+        foreach ($specialitiesID as $value)
+        {
+            $AddSpecialities                  = new PractitionerSpecialitiesModel;
+            $AddSpecialities->specialities_id = $value;
+            $AddSpecialities->practitioner_id = $practitioner->id;
+            $AddSpecialities->save();
+        }
 
     }
 
