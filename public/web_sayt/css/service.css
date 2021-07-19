@@ -1,0 +1,321 @@
+.profile-practitioner {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 63px;
+    margin-bottom: 26px;
+}
+.profile-practitioner__user {
+    position: relative;
+    width: 100%;
+    flex: 0 0 33.333333%;
+    max-width: 33.333333%;
+}
+.profile-practitioner__consultation {
+    position: relative;
+    width: 100%;
+    flex: 0 0 66.666667%;
+    max-width: 66.666667%;
+    padding-left: 69px;
+}
+.profile-practitioner .gl-star-rating--stars::before {
+    display: none;
+}
+.profile-practitioner [data-star-rating] .gl-star-rating--stars[aria-label]:after {
+    background: transparent;
+    background: transparent;
+    color: #fed638;
+    font-size: 18px;
+    line-height: 22px;
+    letter-spacing: 0;
+    font-weight: 600;
+    margin-left: 2.84px;
+    padding: 0;
+}
+.profile-practitioner [data-star-rating] .gl-star-rating--stars[class*=" s"] > span {
+    background-position: 50%;
+    background-repeat: no-repeat;
+    background-size: 20%;
+    /* display: block;
+     */
+    width: 15px;
+    height: 15px;
+    margin-right: 5.26px;
+    background-size: cover;
+}
+.profile-practitioner .person {
+    margin: 0;
+    padding: 0;
+}
+.profile-practitioner .person__info {
+    text-align: left;
+    display: inline-block;
+    margin-left: 36px;
+    margin-bottom: 52px;
+}
+.profile-practitioner .person__info-name {
+    margin-top: 36px;
+}
+.profile-practitioner .person__info-name .edit-pen {
+    padding-top: 4px;
+    float: right;
+}
+.profile-practitioner .person__info-skin {
+    margin-bottom: 0px;
+}
+.profile-practitioner .person__info-my {
+    margin: 15px 0;
+    font-weight: 500;
+    font-size: 16;
+    line-height: 19px;
+}
+.profile-practitioner .person__info-my p {
+    margin-bottom: 16px;
+}
+.profile-practitioner .person__info-my p:last-child {
+    margin-bottom: 0;
+}
+.profile-practitioner .profile__reviews {
+    background-color: #fff;
+    box-shadow: 0 0 10px #000 17;
+    border-radius: 10px;
+}
+.profile-practitioner .profile__reviews-title {
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 24px;
+    text-transform: uppercase;
+    padding: 25px 0px 22.47px 25px;
+    border-bottom: 1px dashed #8ba9ee;
+}
+.profile-practitioner .profile__reviews-border {
+    border: 1px dashed #8ba9ee;
+    opacity: 0.45;
+}
+.profile-practitioner .profile__reviews-person {
+    display: flex;
+    align-items: center;
+    padding: 36.58px 31px 36.18px 31px;
+}
+.profile-practitioner .profile__reviews-person img {
+    max-width: 100%;
+    height: auto;
+}
+.profile-practitioner .profile__reviews-person .person__info-rating {
+    display: inline-block;
+    padding: 0;
+}
+.profile-practitioner .profile__reviews-content {
+    flex: 0 0 78%;
+    margin-left: 20px;
+}
+.profile-practitioner .profile__reviews-content-clock {
+    display: inline-block;
+}
+.profile-practitioner .profile__reviews-content-clock .reviews-clock-data {
+    font-size: 10px;
+    line-height: 13px;
+    vertical-align: text-top;
+}
+.profile-practitioner .profile__reviews-content .reviews-cooment {
+    font-size: 16px;
+    line-height: 20px;
+    color: #565656;
+}
+.profile-practitioner__consultation-video {
+    display: inline-block;
+    width: 100%;
+    padding: 142px 0;
+    text-align: center;
+    background-color: #eff4fe;
+    border-radius: 10px;
+}
+.profile-practitioner__consultation-video input {
+    width: 0;
+}
+.profile-practitioner__consultation-video label {
+    cursor: pointer;
+}
+.profile-practitioner__consultation-time {
+    background: #fff;
+    box-shadow: 0px 0px 6px #000 1A;
+    border-radius: 10px;
+    margin: 47px 0;
+}
+.profile-practitioner__consultation-time-content {
+    font-size: 20px;
+    line-height: 24px;
+    font-weight: 600;
+    padding-left: 33px;
+    padding-top: 22px;
+    padding-bottom: 48px;
+}
+.profile-practitioner__consultation-time-content .time-content-title img {
+    padding-left: 21px;
+    vertical-align: middle;
+}
+.profile-practitioner__consultation-time-content button {
+    position: relative;
+    padding: 9px 38px;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 22px;
+    margin-top: 31px;
+    margin-right: 21px;
+}
+.profile-practitioner__consultation-time-content button .x {
+    position: absolute;
+    top: -1px;
+    right: 6px;
+    cursor: pointer;
+}
+.item {
+    padding: 40px 0;
+    min-height: 585px;
+    position: relative;
+}
+.item .italic-text span {
+    font: italic normal 400 15px/12px Montserrat;
+    color: #462847;
+    margin-bottom: 8px;
+}
+.item .price {
+    font: normal normal 300 39px/26px Montserrat;
+    color: #462847;
+}
+.item .price .sup {
+    font: normal normal 300 16px/24px Montserrat;
+    color: #462847;
+}
+.item .price small {
+    font: normal normal 500 12px/27px Montserrat;
+    color: #8ba9ee;
+}
+.item.light-green {
+    background: #f3faf6 0 0 no-repeat padding-box;
+    border-radius: 10px;
+}
+.item.light-yellow {
+    background: #fffae6 0 0 no-repeat padding-box;
+    border-radius: 10px;
+}
+.item ul li {
+    display: flex;
+    position: relative;
+    margin-bottom: 6px;
+}
+.item ul li .fas {
+    color: #8ba9ee;
+}
+.item .abs {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+}
+.service h4 {
+    font: normal normal 500 21px/28px Montserrat;
+    color: #462847;
+}
+.services__content {
+    background: #f5f9fe;
+    border-radius: 10px;
+    padding: 16px 4px 25px 23px;
+}
+.services__content-title {
+    position: relative;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 19px;
+    padding-bottom: 29px;
+}
+.services__content-title .x {
+    position: absolute;
+    top: -11px;
+    right: 7px;
+    font-size: 20px;
+    color: black;
+    cursor: pointer;
+}
+.services__content-text {
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 21px;
+    letter-spacing: 0px;
+    color: #585858;
+    width: 86%;
+}
+.services__content-aed {
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 19px;
+    padding-top: 5px;
+}
+.services__content-aed span {
+    color: #1e5cec;
+}
+.services__content-aed span:first-child {
+    padding-left: 19px;
+}
+.services__content-book {
+    padding-top: 35px;
+}
+.services__content-book a {
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 22px;
+    padding: 9px 35px;
+}
+.owl-theme .owl-dots .owl-dot span {
+    background: transparent !important;
+    border: 1px solid #707070;
+}
+.owl-theme .owl-dots .owl-dot.active span, .owl-theme .owl-dots .owl-dot:hover span {
+    background: #000 !important;
+    border: none !important;
+}
+.person-text {
+    display: flex;
+}
+.owl-theme .owl-dots .owl-dot.active span, .owl-theme .owl-dots .owl-dot:hover span {
+    background: #8ba9ee !important;
+    border: none !important;
+    width: 12px;
+    height: 12px;
+}
+.owl-theme .owl-dots .owl-dot span {
+    /* background: transparent !important;
+     */
+    border: none !important;
+    background: #d9eafd !important;
+    width: 12px;
+    height: 12px;
+}
+.img-space {
+    width: 119px;
+    height: 120px;
+    overflow: hidden;
+    border-radius: 15px;
+}
+#myProtocolsModal .alert.bg-light {
+    background: #f5f9fe 0 0 no-repeat padding-box;
+    border-radius: 32px;
+}
+#myProtocolsModal select.form-control {
+    background: #fff 0 0 no-repeat padding-box;
+    box-shadow: 0 0 6px #000029;
+    border-radius: 5px;
+    height: 50px;
+}
+#myProtocolsModal .m-header h2.modal-title {
+    font: normal normal 600 30px/37px Montserrat;
+    color: #462847;
+}
+#myProtocolsModal .m-header .color-blue {
+    font-size: 40px;
+}
+
+.flex-1 {
+    flex: 1;
+}
+.br-10 {
+    border-radius: 10px;
+}

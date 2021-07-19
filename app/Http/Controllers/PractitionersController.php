@@ -11,6 +11,9 @@ use App\Models\TegManagementsPractitionerModel;
 use App\Models\TypeFormModel;
 use DB;
 use Illuminate\Support\Facades\Auth;
+use App\Models\AuthPractitionersModel;
+use App\Models\ZoomModel;
+use Illuminate\Support\Carbon;
 
 class PractitionersController extends Controller
 {
@@ -29,7 +32,11 @@ class PractitionersController extends Controller
                             ->where('published',1)
                             ->get();
 
-        return view('profile-practitioner',compact('TagManagements','MyTagManagements'));
+        $PractitionerInfo= AuthPractitionersModel::where('id',session()->get('UserID'))->first();
+
+        $ThisWeekMeetingsList = ZoomModel::whereBetween('start_date_time', [Carbon::now()->startOfWeek(), Carbon::now()->endOfWeek()])->get();
+
+        return view('profile-practitioner',compact('TagManagements','MyTagManagements','PractitionerInfo','ThisWeekMeetingsList'));
     }
 
     public  function addTagMyListManagements(request $request)

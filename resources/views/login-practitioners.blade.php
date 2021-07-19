@@ -26,12 +26,13 @@
             <div class="lg-sg__img">
                 <img src="{{ asset('web_sayt/img/Group 1613.svg') }}" alt="">
             </div>
-            @if (session('status'))<a style="color: red">{{ session('status') }}</a>  @endif
+
             <div class="lg-sg__form">
                 <div class="lg-sg__form-text mb-4">Login For Practitioner</div>
+              @if (session('status'))
                 <div class="alert alert-primary alert-dismissible fade show" role="alert">
                    <div class="d-flex align-items-center">
-                       <img src="{{ asset('img/sand-clock.svg') }}" alt="" width="30" height="52">
+                       <img src="{{ asset('web_sayt/img/sand-clock.svg') }}" alt="" width="30" height="52">
                        <div class="ml-3">
                            Your request is being considered by the admin. <br>
                            Please check your email.
@@ -41,6 +42,7 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
+              @endif
                 <form method="POST" action="{{ route('login.custom',[app()->getLocale()]) }}">
                     @csrf
                     <p class="lg-sg-p">E-mail</p>

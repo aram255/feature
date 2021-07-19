@@ -38,7 +38,7 @@ class AuthPractitionersController extends Controller
 
     public  function city($lang,$Country_id=0)
     {
-        $city['data'] =  CityModel::orderby("title","asc")->where('country_id',$Country_id)->get();
+        $city['data'] =  CityModel::distinct()->where('country_id',$Country_id)->get(['title']);
           return response()->json($city);
     }
 
@@ -197,7 +197,7 @@ class AuthPractitionersController extends Controller
         ]);
 
         $userInfo = AuthPractitionersModel::where('email','=', $request->email)->first();
-
+//        dd($userInfo->status);
         if($userInfo and $userInfo->status == 'accept')
         {
 
@@ -217,15 +217,15 @@ class AuthPractitionersController extends Controller
             }
 
         }
-        elseif($userInfo->status == 'pending')
+        elseif(!empty($userInfo->status) and $userInfo->status == 'pending')
         {
             return redirect(app()->getLocale()."/login-practitioners")->with('status','Pending');
         }
-        elseif($userInfo->status == 'reject')
+        elseif(!empty($userInfo->status) and $userInfo->status == 'reject')
         {
             return redirect(app()->getLocale()."/login-practitioners")->with('status','Reject');
         }
-        elseif($userInfo->status == 'disable')
+        elseif(!empty($userInfo->status) and $userInfo->status == 'disable')
         {
             return redirect(app()->getLocale()."/login-practitioners")->with('status','Disable');
         }

@@ -26,9 +26,23 @@
             <div class="lg-sg__img">
                 <img src="<?php echo e(asset('web_sayt/img/Group 1613.svg')); ?>" alt="">
             </div>
-            <?php if(session('status')): ?><a style="color: red"><?php echo e(session('status')); ?></a>  <?php endif; ?>
+
             <div class="lg-sg__form">
-                <div class="lg-sg__form-text">Login For Practitioner</div>
+                <div class="lg-sg__form-text mb-4">Login For Practitioner</div>
+              <?php if(session('status')): ?>
+                <div class="alert alert-primary alert-dismissible fade show" role="alert">
+                   <div class="d-flex align-items-center">
+                       <img src="<?php echo e(asset('web_sayt/img/sand-clock.svg')); ?>" alt="" width="30" height="52">
+                       <div class="ml-3">
+                           Your request is being considered by the admin. <br>
+                           Please check your email.
+                       </div>
+                   </div>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+              <?php endif; ?>
                 <form method="POST" action="<?php echo e(route('login.custom',[app()->getLocale()])); ?>">
                     <?php echo csrf_field(); ?>
                     <p class="lg-sg-p">E-mail</p>
@@ -80,6 +94,13 @@
 </section>
 <script src="<?php echo e(asset('web_sayt/js/jquery.js')); ?>"></script>
 <script src="<?php echo e(asset('web_sayt/js/change-pass.js')); ?>"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        $('.alert').alert()
+    })
+</script>
 </body>
 </html>
 

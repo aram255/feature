@@ -110,7 +110,7 @@
                                 <div class="user-info">
                                     <p class="user-infop">Country</p>
                                     <select class="fadeIn" id="country" name="country_id">
-                                        <option value=""></option>
+                                        <option value="" selected hidden>Choose</option>
                                         @foreach($GetCountry as $Country)
                                             <option value="{{$Country->id}}" @if (old('country_id') == $Country->id) selected="selected" @endif >{{$Country->title}}</option>
                                         @endforeach
@@ -119,7 +119,7 @@
                                 </div>
                                 <div class="user-info">
                                     <p class="user-info-p">City</p>
-                                    <select class="fadeIn" id="city" name="city_id">
+                                    <select class="fadeIn" id="city" name="city_id" >
                                         <option  value=""></option>
                                     </select>
                                     <p style="color: red; font-size: 12px">@if ($errors->has('city_id')){{ $errors->first('city_id') }}@endif</p>
@@ -275,7 +275,7 @@
 
             // Department Change
             $('#country').change(function(){
-
+                // setTimeout(function(){ alert("Hello"); }, 3000);
                 // Department id
                 var id = $(this).val();
 
@@ -288,6 +288,7 @@
                     type: 'get',
                     dataType: 'json',
                     success: function(response){
+
                         // alert(id)
                         var len = 0;
                         if(response['data'] != null){

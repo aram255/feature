@@ -9,5 +9,5 @@ class CityModel extends Model
 {
     use HasFactory;
 
-    protected $table="states";
+    protected $table="cities";
 }

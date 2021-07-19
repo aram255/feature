@@ -59,8 +59,8 @@
                         <p>Mode of delivery</p>
 
                         <input  type="checkbox" name="vir" value="virtual" id="virtual1" class="lg-sg__checkin delivery" @if(!empty($Virtual)) @if($Virtual == 'virtual') checked="checked"  @endif @endif /><label
-                            for="virtual">Virtual</label>
-                        <input  type="checkbox" name="per" value="in_persion" id="person1" class="lg-sg__checkin delivery" @if(!empty($Person)) @if($Person == 'in_persion') checked="checked"  @endif @endif  /><label for="person">
+                            for="virtual1">Virtual</label>
+                        <input  type="checkbox" name="per" value="in_persion" id="person1" class="lg-sg__checkin delivery" @if(!empty($Person)) @if($Person == 'in_persion') checked="checked"  @endif @endif  /><label for="person1">
                             In Person</label>
 
                     </div>
@@ -170,6 +170,7 @@
                                     <input type="hidden" name="first_name" value="{{$Result->first_name}}">
                                     <input type="hidden" name="last_name" value="{{$Result->last_name}}">
                                     <input type="hidden" name="phone_number" value="{{$Result->phone_number}}">
+                                    <input type="hidden" name="practitioner_id" value="{{$Result->id}}">
 
                                     <input type="text" name="m_name" placeholder="Meeting Name">
                                     <input type="text" name="password" placeholder="Password"><br>
