@@ -60,12 +60,12 @@
     float: right;
 }
 .profile-practitioner .person__info-skin {
-    margin-bottom: 0px;
+    margin-bottom: 0;
 }
 .profile-practitioner .person__info-my {
     margin: 15px 0;
     font-weight: 500;
-    font-size: 16;
+    font-size: 16px;
     line-height: 19px;
 }
 .profile-practitioner .person__info-my p {
@@ -76,7 +76,7 @@
 }
 .profile-practitioner .profile__reviews {
     background-color: #fff;
-    box-shadow: 0 0 10px #000 17;
+    box-shadow: 0 0 10px #000017;
     border-radius: 10px;
 }
 .profile-practitioner .profile__reviews-title {
@@ -84,7 +84,7 @@
     font-size: 20px;
     line-height: 24px;
     text-transform: uppercase;
-    padding: 25px 0px 22.47px 25px;
+    padding: 25px 0 22.47px 25px;
     border-bottom: 1px dashed #8ba9ee;
 }
 .profile-practitioner .profile__reviews-border {
@@ -105,7 +105,7 @@
     padding: 0;
 }
 .profile-practitioner .profile__reviews-content {
-    flex: 0 0 78%;
+    flex: 0 0 70%;
     margin-left: 20px;
 }
 .profile-practitioner .profile__reviews-content-clock {
@@ -129,6 +129,9 @@
     background-color: #eff4fe;
     border-radius: 10px;
 }
+.profile-practitioner__consultation-carusel-block {
+    padding: 0 30px!important;
+}
 .profile-practitioner__consultation-video input {
     width: 0;
 }
@@ -137,7 +140,7 @@
 }
 .profile-practitioner__consultation-time {
     background: #fff;
-    box-shadow: 0px 0px 6px #000 1A;
+    box-shadow: 0 0 6px #000;
     border-radius: 10px;
     margin: 47px 0;
 }
@@ -198,6 +201,10 @@
     background: #fffae6 0 0 no-repeat padding-box;
     border-radius: 10px;
 }
+.item ul {
+    max-height: 270px;
+    margin-bottom: 0;
+}
 .item ul li {
     display: flex;
     position: relative;
@@ -210,6 +217,13 @@
     position: absolute;
     top: 20px;
     right: 20px;
+}
+.item .abs .fas{
+    cursor: pointer;
+}
+.service h2 {
+    font: normal normal 600 24px/28px Montserrat;
+    color: #462847;
 }
 .service h4 {
     font: normal normal 500 21px/28px Montserrat;

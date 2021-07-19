@@ -951,7 +951,7 @@
                                     <input type="number" class="form-control" id="Price">
                                 </div>
                                 <div class="form-group" id="Description">
-                                    <label for="Description">Description</label>
+                                    <label for="Description">Add Description</label>
                                     <input type="text" class="form-control" name="description[]">
                                 </div>
                                 <div class="form-group" >
@@ -977,7 +977,10 @@
                             <div class="profile-practitioner__consultation-carusel-block">
                                 <div id="customer-testimonals" class="owl-carousel owl-theme owl-loaded owl-drag">
                                     <div class="item light-green">
-                                        <div class="abs"><i class="fas fa-times"></i></div>
+                                        <div class="abs">
+                                            <i class="fas fa-pen mr-3"></i>
+                                            <i class="fas fa-times"></i>
+                                        </div>
                                         <div class="d-flex flex-column align-items-center">
                                             <h4 class="mb-3">Get Glow <br> Complete</h4>
                                             <div class="d-flex flex-column mx-auto align-items-center mb-3 italic-text">
@@ -992,7 +995,7 @@
                                 </span>
                                             <small>USD plus HST</small>
                                         </div>
-                                        <ul class="list-unstyled px-5">
+                                        <ul class="list-unstyled px-5 overflow-hidden">
                                             <li><i class="fas fa-angle-right mr-2"></i> <span> 1 hour intimate consult (in person or video)</span></li>
                                             <li><i class="fas fa-angle-right mr-2"></i> <span> One 30 minute follow-up to make any necessary adjustments and track progress</span></li>
                                             <li><i class="fas fa-angle-right mr-2"></i> <span> Unlimited email correspondence during working hours</span></li>
@@ -1006,7 +1009,36 @@
                                         </ul>
                                     </div>
                                     <div class="item light-yellow">
-                                        <div class="abs"><i class="fas fa-times"></i></div>
+                                        <div class="abs">
+                                            <i class="fas fa-pen mr-3"></i>
+                                            <i class="fas fa-times"></i>
+                                        </div>
+                                        <div class="d-flex flex-column align-items-center">
+                                            <h4 class="mb-3">Get Glow <br> Complete</h4>
+                                            <div class="d-flex flex-column mx-auto align-items-center mb-3 italic-text">
+                                                <span>60 minute consult +</span>
+                                                <span>30 minute follow up</span>
+                                                <span>Customized acne healing plan</span>
+                                            </div>
+                                        </div>
+                                        <div class="price d-flex flex-column align-items-center mb-3">
+                                            <span>
+                                               <sup>$</sup> 175
+                                            </span>
+                                            <small>USD plus HST</small>
+                                        </div>
+                                        <ul class="list-unstyled px-5 overflow-hidden">
+                                            <li><i class="fas fa-angle-right mr-2"></i> <span> 1 hour intimate consult (in person or video)</span></li>
+                                            <li><i class="fas fa-angle-right mr-2"></i> <span> One 30 minute follow-up to make any necessary adjustments and track progress</span></li>
+                                            <li><i class="fas fa-angle-right mr-2"></i> <span> Unlimited email correspondence during working hours</span></li>
+                                            <li><i class="fas fa-angle-right mr-2"></i> <span> Bi-weekly check-ins and progress pictures</span></li>
+                                        </ul>
+                                    </div>
+                                    <div class="item light-green">
+                                        <div class="abs">
+                                            <i class="fas fa-pen mr-3"></i>
+                                            <i class="fas fa-times"></i>
+                                        </div>
                                         <div class="d-flex flex-column align-items-center">
                                             <h4 class="mb-3">Get Glow <br> Complete</h4>
                                             <div class="d-flex flex-column mx-auto align-items-center mb-3 italic-text">
@@ -1017,11 +1049,43 @@
                                         </div>
                                         <div class="price d-flex flex-column align-items-center mb-3">
                                 <span>
-                                   <sup>$</sup> 175
+                                   <sup>$</sup> 2100
                                 </span>
                                             <small>USD plus HST</small>
                                         </div>
-                                        <ul class="list-unstyled px-5">
+                                        <ul class="list-unstyled px-5 overflow-hidden">
+                                            <li><i class="fas fa-angle-right mr-2"></i> <span> 1 hour intimate consult (in person or video)</span></li>
+                                            <li><i class="fas fa-angle-right mr-2"></i> <span> One 30 minute follow-up to make any necessary adjustments and track progress</span></li>
+                                            <li><i class="fas fa-angle-right mr-2"></i> <span> Unlimited email correspondence during working hours</span></li>
+                                            <li><i class="fas fa-angle-right mr-2"></i> <span> Bi-weekly check-ins and progress pictures</span></li>
+                                            <li><i class="fas fa-angle-right mr-2"></i> <span> Customized acne healing plan for your specific needs</span></li>
+                                            <li><i class="fas fa-angle-right mr-2"></i> <span> Tailored supplement and diet recommendations</span></li>
+                                            <li><i class="fas fa-angle-right mr-2"></i> <span> Customized skin care recommendations</span></li>
+                                            <li><i class="fas fa-angle-right mr-2"></i> <span> Holistic lifestyle recommendations</span></li>
+                                            <li><i class="fas fa-angle-right mr-2"></i> <span> 2 week acne-friendly meal plan</span></li>
+                                            <li><i class="fas fa-angle-right mr-2"></i> <span> Emotional support and trauma work</span></li>
+                                        </ul>
+                                    </div>
+                                    <div class="item light-yellow">
+                                        <div class="abs">
+                                            <i class="fas fa-pen mr-3"></i>
+                                            <i class="fas fa-times"></i>
+                                        </div>
+                                        <div class="d-flex flex-column align-items-center">
+                                            <h4 class="mb-3">Get Glow <br> Complete</h4>
+                                            <div class="d-flex flex-column mx-auto align-items-center mb-3 italic-text">
+                                                <span>60 minute consult +</span>
+                                                <span>30 minute follow up</span>
+                                                <span>Customized acne healing plan</span>
+                                            </div>
+                                        </div>
+                                        <div class="price d-flex flex-column align-items-center mb-3">
+                                            <span>
+                                               <sup>$</sup> 175
+                                            </span>
+                                            <small>USD plus HST</small>
+                                        </div>
+                                        <ul class="list-unstyled px-5 overflow-hidden">
                                             <li><i class="fas fa-angle-right mr-2"></i> <span> 1 hour intimate consult (in person or video)</span></li>
                                             <li><i class="fas fa-angle-right mr-2"></i> <span> One 30 minute follow-up to make any necessary adjustments and track progress</span></li>
                                             <li><i class="fas fa-angle-right mr-2"></i> <span> Unlimited email correspondence during working hours</span></li>
