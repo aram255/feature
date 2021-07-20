@@ -28,7 +28,7 @@
             </div>
 
             <div class="lg-sg__form">
-                <div class="lg-sg__form-text mb-4">Login For Practitioner</div>
+                <div class="lg-sg__form-text mb-4">Practitioner login</div>
               @if (session('status'))
                 <div class="alert alert-primary alert-dismissible fade show" role="alert">
                    <div class="d-flex align-items-center">
