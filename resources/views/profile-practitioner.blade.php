@@ -950,23 +950,25 @@
                                     <label for="Price">Price</label>
                                     <input type="number" class="form-control" id="Price">
                                 </div>
-                                <div class="form-group" id="Description">
+                                <div class="form-group" >
                                     <label for="Description">Add Description</label>
-                                    <input type="text" class="form-control" name="description[]">
+                                    <input type="text" class="form-control mb-3" name="description[]" id="Description">
                                 </div>
-                                <div class="form-group" >
-                                    <div class="" role="button">
-                                        <img src="{{ asset('web_sayt/img/add.svg') }}" alt="" width="28" height="28" class="mr-2" id="Bdescription">Add Description
+                                <div class="form-group"  id="Bdescription">
+                                    <div class="d-flex align-items-center" role="button">
+                                        <img src="{{ asset('web_sayt/img/add.svg') }}" alt="" width="28" height="28" class="mr-2">Add Description
                                     </div>
                                 </div>
+                                <div class="scrollable-space"></div>
                                 <div class="form-group" >
-                                    <div class="" role="button">
-                                        <img src="{{ asset('web_sayt/img/add.svg') }}" alt="" width="28" height="28" class="mr-2" id="Bsessions">Add Sessions
+                                    <div class="d-flex align-items-center" role="button"  id="Bsessions">
+                                        <img src="{{ asset('web_sayt/img/add.svg') }}" alt="" width="28" height="28" class="mr-2">Add Sessions
                                     </div>
                                 </div>
-                                <div class="form-group" id="SSession">
+                                <div class="scrollable-space1"></div>
+                                <div class="form-group" >
                                     <label for="SessionTitle">Session Title</label>
-                                    <input type="number" class="form-control" name="sessiont_title[]" id="SessionTitle">
+                                    <input type="number" class="form-control mb-3" name="sessiont_title[]"  id="SSession">
                                 </div>
                                 <button class="bg-yellow br-10 px-4 py-2 fs-16">Save Plan</button>
                             </form>
@@ -1207,15 +1209,19 @@
         $("#Bdescription").click(function() {
             var x = $("#Description"),
                 y = x.clone();
-            x.attr("id", "fileOld");
+            x.attr("class", "mb-3 form-control");
             y.insertAfter("#Bdescription");
+            var scrollableSpace = $ (".scrollable-space")
+            $( scrollableSpace ).append( y );
         });
 
         $("#Bsessions").click(function() {
             var a = $("#SSession"),
                 b = a.clone();
-            a.attr("id", "fileOld");
+            a.attr("class", "mb-3 form-control");
             b.insertAfter("#Bsessions");
+            var scrollableSpace1 = $ (".scrollable-space1")
+            $( scrollableSpace1 ).append( b );
         });
 
     </script>
