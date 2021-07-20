@@ -17,6 +17,8 @@
 
 
 @section('content')
+
+
     <section class="edit-profile-section">
         <div class="container">
             <div class="edit-profile">
@@ -219,46 +221,43 @@
 
                         <div class="profile-practitioner__consultation-carusel-block">
                             <div id="customer-testimonals" class="owl-carousel owl-theme owl-loaded owl-drag">
-
-
-
-
-
-
+                              @foreach($Service as $Value)
                                 <div class="item light-green">
                                     <div class="abs">
                                         <i class="fas fa-pen mr-3 edit_form1"></i>
                                         <i class="fas fa-times delete"></i>
                                     </div>
                                     <div class="d-flex flex-column align-items-center">
-                                        <h4 contenteditable="true"  class="mb-3">Get Glow 1<br > Complete</h4>
+                                        <h4  class="mb-3 edit_f">{{$Value->title}}</h4>
                                         <div class="d-flex flex-column mx-auto align-items-center mb-3 italic-text">
-                                            <span class="edit">60 minute consult +</span>
-                                            <span class="edit">30 minute follow up</span>
-                                            <span class="edit">Customized acne healing plan</span>
+                                            @foreach($ServiceSession as $valS)
+                                                @foreach($valS as $valSS)
+                                                    @if($valSS->services_id == $Value->id)
+                                                        <span class="edit edit_f{{$valSS->id}}">{{$valSS->sessions}}</span>
+                                                    @endif
+                                                @endforeach
+                                            @endforeach
                                         </div>
                                     </div>
                                     <div class="price d-flex flex-column align-items-center mb-3">
                                         <div class="d-flex">
-                                            <sup class="">$</sup> <span class="edit">2100</span>
+                                            <sup class="">$</sup> <span class="edit_price">{{$Value->price}}</span>
                                         </div>
                                         <small>USD plus HST</small>
                                     </div>
                                     <ul class="list-unstyled px-5 overflow-auto">
-                                        <li><i class="fas fa-angle-right mr-2" ></i> <span class="edit"> 1 hour intimate consult (in person or video)</span></li>
-                                        <li><i class="fas fa-angle-right mr-2" ></i> <span class="edit"> One 30 minute follow-up to make any necessary adjustments and track progress</span></li>
-                                        <li><i class="fas fa-angle-right mr-2" ></i> <span class="edit"> Unlimited email correspondence during working hours</span></li>
-                                        <li><i class="fas fa-angle-right mr-2" ></i> <span class="edit"> Bi-weekly check-ins and progress pictures</span></li>
-                                        <li><i class="fas fa-angle-right mr-2" ></i> <span class="edit"> Customized acne healing plan for your specific needs</span></li>
-                                        <li><i class="fas fa-angle-right mr-2" ></i> <span class="edit"> Tailored supplement and diet recommendations</span></li>
-                                        <li><i class="fas fa-angle-right mr-2" ></i> <span class="edit"> Customized skin care recommendations</span></li>
-                                        <li><i class="fas fa-angle-right mr-2" ></i> <span class="edit"> Holistic lifestyle recommendations</span></li>
-                                        <li><i class="fas fa-angle-right mr-2" ></i> <span class="edit"> 2 week acne-friendly meal plan</span></li>
-                                        <li><i class="fas fa-angle-right mr-2" ></i> <span class="edit"> Emotional support and trauma work</span></li>
+                                        @foreach($ServiceDescription as $valD)
+                                            @foreach($valD as $valDD)
+                                                @if($valDD->services_id == $Value->id)
+                                                    <li><i class="fas fa-angle-right mr-2" ></i> <span class="edit edit_description{{$valDD->id}}">{{$valDD->description}}</span></li>
+                                                @endif
+                                            @endforeach
+                                        @endforeach
+
                                     </ul><br>
                                     <button class="bg-yellow br-10 px-4 py-2 fs-16"  >Save</button>
                                 </div>
-
+                                @endforeach
 
                                 {{--                                    <div class="item light-yellow">--}}
                                 {{--                                        <div class="abs">--}}
@@ -409,25 +408,102 @@
                     // $('.edit_form1').click(function () {
                     //     $("#edit_form1").parent().css({"display": "block"});
                     // })
-
                     $(function() {
-                        $('.edit').on('click', function() {
 
-                            var div = $(this);
-                            var tb = div.find('input:text');//get textbox, if exist
-                            if (tb.length) {//text box already exist
-                                div.text(tb.val());//remove text box & put its current value as text to the div
-                            } else {
-                                tb = $('<input>').prop({
-                                    'type': 'text',
-                                    'class': 'form-control',
-                                    'value': div.text()//set text box value from div current text
-                                });
-                                div.empty().append(tb);//add new text box
-                                tb.focus();//put text box on focus
-                            }
+                    $('.edit_form1').on('click', function() {
+
+                        var div = $(this);
+                        var tb = div.find('input:text');//get textbox, if exist
+                          if (tb.length) {//text box already exist
+                        div.text(tb.val());//remove text box & put its current value as text to the div
+
+                         } else {
+                        tb1 = $('<input>').prop({
+                            'type': 'text',
+                            'class': 'form-control',
+                            'name': 'title',
+                            'value': div.parent().next().find('.edit_f').text()//set text box value from div current text
                         });
+                        div.parent(".abs").next().find('.edit_f').empty().append(tb1);//add new text box
+                        tb1.focus();//put text box on focus
+
+                       var price = $('<input>').prop({
+                            'type':  'text',
+                            'class': 'form-control',
+                            'name':  'price',
+                            'value':  div.parent().next().next().find('.edit_price').text()//set text box value from div current text
+                        });
+                        div.parent(".abs").next().next().find('.edit_price').empty().append(price);//add new text box
+                        price.focus();//put text box on focus
+
+
+
+                        // Session
+                            @foreach($Service as $Valu)
+                              @foreach($ServiceSession as $valSs)
+                                @foreach($valSs as $valSSS)
+                                   @if($valSSS->services_id == $Valu->id)
+
+                                       var tbs{{$valSSS->id}} = ".edit_f{{$valSSS->id}}";
+                                       var cl{{$valSSS->id}} = ".edit_f{{$valSSS->id}}";
+
+
+                                        tbs{{$valSSS->id}} = $('<input>').prop({
+                                            'type': 'text',
+                                            'class': 'form-control',
+                                            'name': 'session[]',
+                                            'value': div.parent().next().children().find(cl{{$valSSS->id}}).text()//set text box value from div current text
+                                        });
+
+                                        div.parent(".abs").next().find(cl{{$valSSS->id}}).empty().append(tbs{{$valSSS->id}});//add new text box
+                                        tbs{{$valSSS->id}}.focus();//put text box on focus
+                                   @endif
+                                 @endforeach
+                              @endforeach
+
+
+                        // Description
+                            @foreach($ServiceDescription as $valD)
+                               @foreach($valD as $valDD)
+                                 @if($valDD->services_id == $Valu->id)
+
+                                   var tbd{{$valDD->id}} = ".edit_description{{$valDD->id}}";
+                                   var clas{{$valDD->id}} = ".edit_description{{$valDD->id}}";
+
+
+                                    tbd{{$valDD->id}} = $('<input>').prop({
+                                        'type': 'text',
+                                        'class': 'form-control',
+                                        'name': 'description[]',
+                                        'value': div.parent(".abs").next().next().next().children().find(clas{{$valDD->id}}).text()//set text box value from div current text
+                                    });
+
+                                   // div.parent(".abs").next().next().next().children().children().children().find(clas{{$valDD->id}}).empty().append(tbd{{$valDD->id}});//add new text box
+                        div.parent(".abs").next().next().next().children().find(clas{{$valDD->id}}).empty().append(tbd{{$valDD->id}});
+                        tbd{{$valDD->id}}.focus();//put text box on focus
+                                 @endif
+                               @endforeach
+                             @endforeach
+                        @endforeach
+
+
+                         }
+                       //  var tb5;
+                       //  var k = ".edit_description"+2;
+                       // // alert(k);
+                       //  tb5 = $('<input>').prop({
+                       //      'type': 'text',
+                       //      'class': 'form-control',
+                       //      'value': div.parent().next().find(k).text()//set text box value from div current text
+                       //  });
+                       //
+                       //  div.parent(".abs").next().next().next().children().find(k).empty().append(tb5);//add new text box
+                       //  tb5.focus();//put text box on focus
                     });
+                });
+
+
+
 
 
 

@@ -13,6 +13,9 @@ use DB;
 use Illuminate\Support\Facades\Auth;
 use App\Models\AuthPractitionersModel;
 use App\Models\ZoomModel;
+use App\Models\ServiceDescriptionModel;
+use App\Models\ServiceSessionModel;
+use App\Models\ServicesModel;
 use Illuminate\Support\Carbon;
 
 class PractitionersController extends Controller
@@ -24,6 +27,33 @@ class PractitionersController extends Controller
 
     public function profilePractitioner()
     {
+        $Service  =  ServicesModel::where('practitioner_id',session()->get('UserID'))->get();
+
+        $title =[];
+        $price =[];
+        $ID =[];
+        foreach ($Service as $serviceV)
+        {
+            $title[] =  $serviceV->title;
+            $price[] =  $serviceV->price;
+            $ID[]    =  $serviceV->id;
+        }
+
+        $ServiceSession=[];
+
+        foreach ($ID as $PrId)
+        {
+            $ServiceSession[] = ServiceSessionModel::where('services_id',$PrId)->get();
+        }
+
+        $ServiceDescription=[];
+
+        foreach ($ID as $PrID)
+        {
+            $ServiceDescription[] = ServiceDescriptionModel::where('services_id',$PrID)->get();
+        }
+
+
         $TagManagements     = TegManagements::orderBy('published', 'DESC')->orderBy('id', 'DESC')->get();
 
         $MyTagManagements = DB::table('teg_managements')
@@ -36,7 +66,7 @@ class PractitionersController extends Controller
 
         $ThisWeekMeetingsList = ZoomModel::whereBetween('start_date_time', [Carbon::now()->startOfWeek(), Carbon::now()->endOfWeek()])->get();
 
-        return view('profile-practitioner',compact('TagManagements','MyTagManagements','PractitionerInfo','ThisWeekMeetingsList'));
+        return view('profile-practitioner',compact('TagManagements','MyTagManagements','PractitionerInfo','ThisWeekMeetingsList','Service','ServiceSession','ServiceDescription'));
     }
 
     public  function addTagMyListManagements(request $request)
@@ -99,7 +129,34 @@ class PractitionersController extends Controller
     public  function EditProfilePractitioner()
     {
         $cards = Card::where('user_id', Auth::id())->orderBy('created_at','desc')->get();
-        return view('edit-profile-practitioner', compact('cards'));
+
+        $Service  =  ServicesModel::where('practitioner_id',session()->get('UserID'))->get();
+
+        $title =[];
+        $price =[];
+        $ID =[];
+        foreach ($Service as $serviceV)
+        {
+            $title[] =  $serviceV->title;
+            $price[] =  $serviceV->price;
+            $ID[]    =  $serviceV->id;
+        }
+
+        $ServiceSession=[];
+
+        foreach ($ID as $PrId)
+        {
+            $ServiceSession[] = ServiceSessionModel::where('services_id',$PrId)->get();
+        }
+
+        $ServiceDescription=[];
+
+        foreach ($ID as $PrID)
+        {
+            $ServiceDescription[] = ServiceDescriptionModel::where('services_id',$PrID)->get();
+        }
+
+        return view('edit-profile-practitioner', compact('cards','Service','ServiceSession','ServiceDescription'));
     }
 
     public function myAppointmentsPractitioners()
@@ -166,5 +223,6 @@ class PractitionersController extends Controller
 
         return  back()->with('status','Delete Intake Forms');
     }
+
 
 }

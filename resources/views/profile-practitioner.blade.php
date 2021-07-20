@@ -19,7 +19,45 @@
     <script>var body = document.body; body.classList.add("body");</script>
 
 
+{{--        <h2>Added Teg List</h2><br>--}}
 
+{{--        <form method="post" action="{{route('add-tag-my-list-management',[app()->getLocale()])}}">--}}
+{{--            @csrf--}}
+
+{{--                @foreach($TagManagements as $index => $TagManagement)--}}
+
+{{--                        @if($TagManagement->published == 1)--}}
+{{--                            <input type="checkbox" name="teg_management[{{$index}}]" value="{{$TagManagement->id}}">--}}
+{{--                        @endif--}}
+{{--                    <span @if($TagManagement->published == 0)style="color: red;" @endif>{{$TagManagement->name}}</span><br>--}}
+
+{{--                @endforeach--}}
+{{--                <input type="submit" value="Add Teg To my list">--}}
+
+
+{{--        </form> <br>--}}
+{{--        <section>--}}
+
+
+{{--            <div class="form-group">--}}
+{{--                <form method="post" action="{{route('add-tag-management',[app()->getLocale()])}}">--}}
+{{--                    @csrf--}}
+{{--                <p>Add Tag</p>--}}
+{{--                <input style="border: 1px solid black" type="text" name="add_teg">--}}
+{{--                <button type="submit" class="btn btn-gradient-primary mr-2" style="background-color: #28a745; color: white;">Add</button>--}}
+{{--                </form><br>--}}
+
+{{--                <h1>Delete</h1>--}}
+{{--                <form method="post" action="{{route('delete-tag-management',[app()->getLocale()])}}">--}}
+{{--                    @csrf--}}
+{{--                                    <p>Add Tag</p>--}}
+
+{{--                    @foreach($MyTagManagements as $ind => $GetTagManagements)--}}
+{{--                        <input style="border: 1px solid black" type="checkbox" value="{{$GetTagManagements->teg_managements_id}}" name="teg_management[{{$ind}}]">{{$GetTagManagements->name}}<br>--}}
+{{--                    @endforeach<br>--}}
+{{--                    <button type="submit" class="btn btn-gradient-primary mr-2" style="background-color: #28a745; color: white;">Delete</button>--}}
+{{--                </form>--}}
+{{--            </div><br>--}}
     <!---  0000000  ---->
     <main>
         <div class="container">
@@ -378,37 +416,39 @@
 
                         <div class="profile-practitioner__consultation-carusel-block">
                             <div id="customer-testimonals1" class="owl-carousel owl-theme owl-loaded owl-drag">
+                                @foreach($Service as $Value)
                                 <div class="item light-green">
                                     <div class="d-flex flex-column align-items-center">
-                                        <h4 contenteditable="true"  class="mb-3">Get Glow 1<br > Complete</h4>
+                                        <h4  class="mb-3">{{$Value->title}}</h4>
                                         <div class="d-flex flex-column mx-auto align-items-center mb-3 italic-text">
-                                            <span>60 minute consult +</span>
-                                            <span>30 minute follow up</span>
-                                            <span>Customized acne healing plan</span>
+                                            @foreach($ServiceSession as $valS)
+                                               @foreach($valS as $valSS)
+                                                   @if($valSS->services_id == $Value->id)
+                                                        <span>{{$valSS->sessions}}</span>
+                                                    @endif
+                                               @endforeach
+                                            @endforeach
                                         </div>
                                     </div>
                                     <div class="price d-flex flex-column align-items-center mb-3">
                                         <div class="d-flex">
-                                            <sup class="">$</sup> <span>2100</span>
+                                            <sup class="">$</sup> <span >{{$Value->price}}</span>
                                         </div>
                                         <small>USD plus HST</small>
                                     </div>
                                     <ul class="list-unstyled px-5 overflow-auto">
-                                        <li><i class="fas fa-angle-right mr-2" ></i> <span> 1 hour intimate consult (in person or video)</span></li>
-                                        <li><i class="fas fa-angle-right mr-2" ></i> <span> One 30 minute follow-up to make any necessary adjustments and track progress</span></li>
-                                        <li><i class="fas fa-angle-right mr-2" ></i> <span> Unlimited email correspondence during working hours</span></li>
-                                        <li><i class="fas fa-angle-right mr-2" ></i> <span> Bi-weekly check-ins and progress pictures</span></li>
-                                        <li><i class="fas fa-angle-right mr-2" ></i> <span> Customized acne healing plan for your specific needs</span></li>
-                                        <li><i class="fas fa-angle-right mr-2" ></i> <span> Tailored supplement and diet recommendations</span></li>
-                                        <li><i class="fas fa-angle-right mr-2" ></i> <span> Customized skin care recommendations</span></li>
-                                        <li><i class="fas fa-angle-right mr-2" ></i> <span> Holistic lifestyle recommendations</span></li>
-                                        <li><i class="fas fa-angle-right mr-2" ></i> <span> 2 week acne-friendly meal plan</span></li>
-                                        <li><i class="fas fa-angle-right mr-2" ></i> <span> Emotional support and trauma work</span></li>
+                                        @foreach($ServiceDescription as $valD)
+                                            @foreach($valD as $valDD)
+                                                @if($valDD->services_id == $Value->id)
+                                                    <li><i class="fas fa-angle-right mr-2" ></i> <span>{{$valDD->description}}</span></li>
+                                                @endif
+                                            @endforeach
+                                        @endforeach
                                     </ul>
 
                                     <button class="bg-yellow br-10 px-4 py-2 mt-4 fs-16">View More >></button>
                                 </div>
-
+                                @endforeach
 
                                 {{--                                    <div class="item light-yellow">--}}
                                 {{--                                        <div class="abs">--}}

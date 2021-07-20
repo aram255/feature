@@ -76,7 +76,7 @@
 }
 .profile-practitioner .profile__reviews {
     background-color: #fff;
-    box-shadow: 0 0 10px #000017;
+
     border-radius: 10px;
 }
 .profile-practitioner .profile__reviews-title {
@@ -140,7 +140,7 @@
 }
 .profile-practitioner__consultation-time {
     background: #fff;
-    box-shadow: 0 0 6px #000;
+
     border-radius: 10px;
     margin: 47px 0;
 }
