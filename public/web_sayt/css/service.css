@@ -221,6 +221,10 @@
 .item .abs .fas{
     cursor: pointer;
 }
+.item button.bg-yellow {
+    margin: 0 auto;
+    display: block;
+}
 .service h2 {
     font: normal normal 600 24px/28px Montserrat;
     color: #462847;
@@ -338,4 +342,12 @@
     max-height: 150px;
     overflow: auto;
     padding: 10px;
+}
+.edit {
+    width: 100%;
+}
+sup {
+    margin-right: 10px;
+    font-size: 20px;
+    top: 0;
 }
