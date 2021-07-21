@@ -226,9 +226,41 @@ class PractitionersController extends Controller
 
     public function addService(request $request)
     {
-        echo '<pre>';
-        print_r($request->all());
-        echo '<pre>';
+        $request->validate([
+            'title'               => 'required',
+            'price'               => 'required',
+            'sessiont_title'      => 'required',
+            'description'         => 'required',
+        ]);
+
+       $AddService                  =  new ServicesModel;
+       $AddService->title           = $request->title;
+       $AddService->price           = $request->price;
+       $AddService->practitioner_id = session()->get('UserID');
+       $AddService->save();
+
+       if(!empty($AddService->id))
+       {
+           foreach ($request->sessiont_title as $val)
+           {
+               $AddServiceSession        =  new ServiceSessionModel;
+               $AddServiceSession->sessions     =  $val;
+               $AddServiceSession->services_id  =  $AddService->id;
+               $AddServiceSession->save();
+           }
+
+           foreach ($request->description as $value)
+           {
+               $AddServiceDescription               =  new ServiceDescriptionModel;
+               $AddServiceDescription->description  =  $value;
+               $AddServiceDescription->services_id  =  $AddService->id;
+               $AddServiceDescription->save();
+           }
+
+           return redirect(app()->getLocale()."/edit-profile-practitioner")->with('status','Add services');
+
+       }
+
     }
 
     public function editService(request $request)
@@ -239,16 +271,44 @@ class PractitionersController extends Controller
         $EditService->price = $request->price;
         $EditService->save();
 
-        //dd($request->sessions_id);
-        foreach ($request->sessions_id as $val)
+
+        foreach ($request->sessions_id as $key => $val)
         {
-            $EditServiceSession = ServiceSessionModel::where('id', $request->sessions_id)->get();
-            echo '<pre>';
-            print_r($request->sessions);
-            echo '<pre>';
+            $EditServiceSession = ServiceSessionModel::where('id', $val)->first();
+            $EditServiceSession->sessions = $request->session[$key];
+            $EditServiceSession->save();
         }
 
-        //dd($EditServiceSession);
+        foreach ($request->description_id as $key => $value)
+        {
+            $EditServiceDescription = ServiceDescriptionModel::where('id', $value)->first();
+            $EditServiceDescription->description = $request->description[$key];
+            $EditServiceDescription->save();
+        }
+
+        return redirect(app()->getLocale()."/edit-profile-practitioner")->with('status','Edit services');
+    }
+
+    public function deleteService($lang,$ServeiceID)
+    {
+        $DeleteService = ServicesModel::where('id', $ServeiceID)->first();
+        $DeleteService->delete();
+
+
+        foreach ($DeleteServiceSession = ServiceSessionModel::where('services_id', $ServeiceID)->get() as $val)
+        {
+            $DeleteServiceSession = ServiceSessionModel::where('services_id', $ServeiceID)->first();
+            $DeleteServiceSession->delete();
+        }
+
+
+        foreach ($DeleteServiceSession = ServiceDescriptionModel::where('services_id', $ServeiceID)->get() as $val)
+        {
+            $DeleteServiceDescription = ServiceDescriptionModel::where('services_id', $ServeiceID)->first();
+            $DeleteServiceDescription->delete();
+        }
+
+        return redirect(app()->getLocale()."/edit-profile-practitioner")->with('status','Delete service');
     }
 
 

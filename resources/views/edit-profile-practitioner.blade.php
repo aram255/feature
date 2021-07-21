@@ -181,18 +181,19 @@
                 <div class="col-lg-4 px-lg-5 mb-4">
                     <div class="bg-light p-5 br-10">
                         <h4 class="text-center mb-5">Add New Plan</h4>
-                        <form action="#" class="mb-5">
+                        <form action="{{route('add-service',[app()->getLocale()])}}" method="post" class="mb-5">
+                            @csrf
                             <div class="form-group">
                                 <label for="ConsultationName">Consultation Name</label>
-                                <input type="text" class="form-control" id="ConsultationName">
+                                <input type="text" class="form-control" id="ConsultationName" name="title" required>
                             </div>
                             <div class="form-group">
                                 <label for="Price">Price</label>
-                                <input type="number" class="form-control" id="Price">
+                                <input type="number" class="form-control" id="Price" name="price" required>
                             </div>
                             <div class="form-group" >
                                 <label for="Description">Add Description</label>
-                                <input type="text" class="form-control mb-3" name="description[]" id="Description">
+                                <input type="text" class="form-control mb-3" name="description[]" id="Description" required>
                             </div>
                             <div class="form-group"  id="Bdescription">
                                 <div class="d-flex align-items-center" role="button">
@@ -208,7 +209,7 @@
                             <div class="scrollable-space1"></div>
                             <div class="form-group" >
                                 <label for="SessionTitle">Session Title</label>
-                                <input type="number" class="form-control mb-3" name="sessiont_title[]"  id="SSession">
+                                <input type="text" class="form-control mb-3" name="sessiont_title[]"  id="SSession" required>
                             </div>
                             <button class="bg-yellow br-10 px-4 py-2 fs-16">Save Plan</button>
                         </form>
@@ -229,7 +230,9 @@
                                 <div class="item light-green">
                                     <div class="abs">
                                         <i class="fas fa-pen mr-3 edit_form1"></i>
-                                        <i class="fas fa-times delete"></i>
+
+                                        <a href="{{route('delete-service',[app()->getLocale(),'id'=>$Value->id])}}"><i class="fas fa-times delete"></i></a>
+
                                     </div>
                                     <div class="d-flex flex-column align-items-center">
                                         <h4  class="mb-3 edit_f">{{$Value->title}}</h4>
@@ -255,6 +258,7 @@
                                             @foreach($valD as $valDD)
                                                 @if($valDD->services_id == $Value->id)
                                                     <li><i class="fas fa-angle-right mr-2" ></i> <span class="edit edit_description{{$valDD->id}}">{{$valDD->description}}</span></li>
+                                                    <input type="hidden" name="description_id[]" value="{{$valDD->id}}">
                                                 @endif
                                             @endforeach
                                         @endforeach

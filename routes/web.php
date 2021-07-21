@@ -115,6 +115,7 @@ Route::group(['prefix' => '{locale?}','where' => ['locale' => '[a-zA-Z]{2}']], f
 
     Route::post('/add-service', [PractitionersController::class, 'addService'])->name('add-service');
     Route::post('/edit-service', [PractitionersController::class, 'editService'])->name('edit-service');
+    Route::get('/delete-service/{id}', [PractitionersController::class, 'deleteService'])->name('delete-service');
 
 
     // login
