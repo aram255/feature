@@ -372,3 +372,17 @@ sup {
     font-size: 20px;
     top: 0;
 }
+.user-info-p {
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 19px;
+    padding-bottom: 7px;
+}
+.add-card-edit-link {
+    font: normal normal normal 20px/24px Montserrat;
+    color: #00309E;
+    margin-left: 0;
+}
+.user-info-about {
+    padding-right: 12%;
+}
