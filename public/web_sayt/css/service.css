@@ -386,3 +386,6 @@ sup {
 .user-info-about {
     padding-right: 12%;
 }
+a .fa-times {
+    color: black;
+}
