@@ -51,8 +51,8 @@
 .tagger li:not(.tagger-new) > span,
 .tagger .tagger-new ul {
     padding: 4px 4px 4px 8px;
-    background: #B1C3D7;
-    border: 1px solid #4181ed;
+    background: #eff4fe;
+    border: 0;
     border-radius: 3px;
 }
 .tagger li a.close {
