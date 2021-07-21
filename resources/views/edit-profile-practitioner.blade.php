@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="{{ asset('web_sayt/css/star-rating.css') }}">
     <link rel="stylesheet" href="{{ asset('web_sayt/css/css/main.css') }}">
     <link rel="stylesheet" href="{{ asset('web_sayt/css/service.css') }}">
+    <link href="{{ asset('web_sayt/css/tagger.css')}}" rel="stylesheet">
 @endsection
 
 @section('title', __('site.Home') )
@@ -21,29 +22,28 @@
 
     <section class="edit-profile-section">
         <div class="container">
+            <div class="profile-edit-flex">
+                <div >
+                    <p> <img src="{{ asset('web_sayt/img/add.svg') }}">Add Photo</p>
+
+                    <div class="edit-profile__contact-img">
+                        <input type="file" id="img-file" name="img-file">
+                        <label for="img-file"><img class="upload" src="{{ asset('web_sayt/img/img-file.svg') }}" alt=""></label>
+                    </div>
+                </div>
+                <div class="add-photo-edit">
+                    <p><img src="{{ asset('web_sayt/img/add.svg') }}">Add Video</p>
+                    <div class="edit-profile__contact-img edit-profile__contact-video">
+                        <input type="file" id="img-file" name="img-file">
+                        <label for="img-file"><img class="upload" src="{{ asset('web_sayt/img/video-file.svg') }}" alt="" width="38px"></label>
+                    </div>
+                </div>
+            </div>
             <div class="edit-profile">
                 <div class="edit-profile__contact">
-                    <div class="edit-profile-info">
-                        <div class="profile-edit-flex">
-                            <div >
-                                <p> <img src="{{ asset('web_sayt/img/add.svg') }}">Add Photo</p>
-
-                                <div class="edit-profile__contact-img">
-                                    <input type="file" id="img-file" name="img-file">
-                                    <label for="img-file"><img class="upload" src="{{ asset('web_sayt/img/img-file.svg') }}" alt=""></label>
-                                </div>
-                            </div>
-
-                            <div class="add-photo-edit">
-                                <p><img src="{{ asset('web_sayt/img/add.svg') }}">Add Video</p>
-                                <div class="edit-profile__contact-img edit-profile__contact-video">
-                                    <input type="file" id="img-file" name="img-file">
-                                    <label for="img-file"><img class="upload" src="{{ asset('web_sayt/img/video-file.svg') }}" alt="" width="38px"></label>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="create__form ">
-                            <form id="auth" method="POST">
+                    <div class="edit-profile-info ml-0">
+                        <div class="create__form pt-0">
+                            <form action="#" id="auth" method="POST">
                                 <div class="form-info">
 
                                     <div class="user-info odd">
@@ -64,16 +64,14 @@
                                         <input type="tel" id="phone" class="fadeIn" name="phone">
                                     </div>
                                     <br>
-
-
                                     <div class="user-info create__checkbox">
                                         <p>Gender</p>
-                                        <input type="checkbox" name="male" value="Remember me" class="lg-sg__checkin"><label
-                                            for="remember">Male</label>
-                                        <input type="checkbox" name="female" value="Remember me" class="lg-sg__checkin"><label
-                                            for="remember">Female</label>
-                                        <input type="checkbox" name="other" value="Remember me" class="lg-sg__checkin"><label
-                                            for="remember">Other</label>
+                                        <input type="checkbox" name="male" id="Male" value="Remember me" class="lg-sg__checkin"><label
+                                            for="Male">Male</label>
+                                        <input type="checkbox" name="female" id="Female" value="Remember me" class="lg-sg__checkin"><label
+                                            for="Female">Female</label>
+                                        <input type="checkbox" name="other" id="Other"  value="Remember me" class="lg-sg__checkin"><label
+                                            for="Other">Other</label>
                                     </div>
                                     <br>
                                     <div class="user-info odd">
@@ -97,24 +95,7 @@
                                             <option value="English">English</option>
                                         </select>
                                     </div>
-
-                                    <div class="user-info odd">
-                                        <p class="user-info-p">Insurance coverage</p>
-                                        <input type="text" id="coverage" class="fadeIn" name="coverage">
-                                    </div>
-                                    <div class="user-info">
-                                        <p class="user-info-p">Cases and specializations</p>
-                                        <input type="text" id="tags" class="fadeIn" name="tags">
-                                    </div>
-                                    <br>
-                                    <div class="user-info user-info-about">
-                                        <p class="user-info-p">About me</p>
-                                        <label for="about-me"></label>
-                                        <textarea class="fadeIn" name="about-me" rows="6" cols="100"
-                                                  style="resize: none;"></textarea>
-                                    </div>
-
-                                    <div class="lg-sg__button mob_save">
+                                     <div class="lg-sg__button mob_save">
                                         <input type="submit" form="auth" class="btn bg-yellow" value="Save">
                                     </div>
                                 </div>
@@ -122,43 +103,56 @@
                         </div>
                     </div>
                 </div>
-                <div class="edit-profile__other">
-                    <h1 class="add_card-edit">Add Card</h1>
-
-
+                <div class="edit-profile__other mt-0">
                     <div class="user-info odd">
-                        <p class="user-info-p">Name on Card <span>*</span></p>
-                        <input type="text" class="fadeIn" name="coverage">
+                        <p class="user-info-p">Insurance coverage</p>
+                        <input type="text" id="coverage" class="fadeIn" name="coverage">
+                    </div>
+                    <div class="user-info">
+                        <p class="user-info-p">Cases and specializations</p>
+                        <input type="text" value="#enterTag" name="tags" />
                     </div>
                     <br>
+                    <div class="user-info-about mb-4">
+                        <p class="user-info-p">About me</p>
+                        <textarea class="fadeIn" name="about-me" rows="6" cols="100"
+                                  style="resize: none;"></textarea>
+                    </div>
+
+
+{{--                    <div class="user-info odd">--}}
+{{--                        <p class="user-info-p">Name on Card <span>*</span></p>--}}
+{{--                        <input type="text" class="fadeIn" name="coverage">--}}
+{{--                    </div>--}}
+{{--                    <br>--}}
                     <div class="user-info odd">
                         <p class="user-info-p">Card Number<span>*</span></p>
                         <input type="text"  class="fadeIn" name="coverage">
                     </div>
                     <br>
-                    <div class="add-card-edit">
-                        <div class="user-info odd">
-                            <p class="user-info-p">Expiration Date<span>*</span></p>
-                            <input type="text"  class="fadeIn" name="coverage" placeholder="Month">
-                        </div>
+{{--                    <div class="add-card-edit">--}}
+{{--                        <div class="user-info odd">--}}
+{{--                            <p class="user-info-p">Expiration Date<span>*</span></p>--}}
+{{--                            <input type="text"  class="fadeIn" name="coverage" placeholder="Month">--}}
+{{--                        </div>--}}
 
-                        <div class="user-info odd">
+{{--                        <div class="user-info odd">--}}
 
-                            <input type="text"  class="fadeIn edit-select" name="coverage" placeholder="Year">
-                        </div>
-                        <div class="user-info odd">
-                            <p class="user-info-p">CVC<span>*</span></p>
-                            <input type="text"  class="fadeIn" name="coverage">
-                        </div>
+{{--                            <input type="text"  class="fadeIn edit-select" name="coverage" placeholder="Year">--}}
+{{--                        </div>--}}
+{{--                        <div class="user-info odd">--}}
+{{--                            <p class="user-info-p">CVC<span>*</span></p>--}}
+{{--                            <input type="text"  class="fadeIn" name="coverage">--}}
+{{--                        </div>--}}
 
-                    </div>
-                    <div class="user-info create__checkbox flex-container check_addcard check-input edit-card">
-                        <input type="checkbox" name="male" value="Remember me" class="lg-sg__checkin" checked=""><label for="remember"></label>
-                        <p>Save Credit card information for the next time.</p>
+{{--                    </div>--}}
+{{--                    <div class="user-info create__checkbox flex-container check_addcard check-input edit-card">--}}
+{{--                        <input type="checkbox" name="male" value="Remember me" class="lg-sg__checkin" checked=""><label for="remember"></label>--}}
+{{--                        <p>Save Credit card information for the next time.</p>--}}
 
-                    </div>
+{{--                    </div>--}}
                     <div class="add-card-edit-link">
-                        <a href="#">Add New Card</a>
+                        <a href="#">Add New Card Number</a>
                     </div>
                 </div>
 
@@ -174,7 +168,7 @@
 {{--        </div>--}}
     </section>
     <section>
-        <div class="service mt-5 py-5">
+        <div class="service mt-5 py-5 container container-1640">
             <h2 class="text-center">My Services</h2>
             <h4 class="text-uppercase text-center">ONE ON ONE PROGRAMS</h4>
             <div class=" flex-column flex-lg-row mt-5 d-flex ">
@@ -226,43 +220,43 @@
                                     <form action="{{route('edit-service',[app()->getLocale()])}}" method="post">
                                         @csrf
                                         <input type="hidden" name="serveice_id" value="{{$Value->id}}">
-                                <div class="item light-green">
-                                    <div class="abs">
-                                        <i class="fas fa-pen mr-3 edit_form1"></i>
-                                        <i class="fas fa-times delete"></i>
-                                    </div>
-                                    <div class="d-flex flex-column align-items-center">
-                                        <h4  class="mb-3 edit_f">{{$Value->title}}</h4>
-                                        <div class="d-flex flex-column mx-auto align-items-center mb-3 italic-text">
-                                            @foreach($ServiceSession as $valS)
-                                                @foreach($valS as $valSS)
-                                                    @if($valSS->services_id == $Value->id)
-                                                        <span class="edit edit_f{{$valSS->id}}">{{$valSS->sessions}}</span>
-                                                        <input type="hidden" name="sessions_id[]" value="{{$valSS->id}}">
-                                                    @endif
+                                        <div class="item light-green">
+                                            <div class="abs">
+                                                <i class="fas fa-pen mr-3 edit_form1"></i>
+                                                <i class="fas fa-times delete"></i>
+                                            </div>
+                                            <div class="d-flex flex-column align-items-center">
+                                                <h4  class="mb-3 edit_f">{{$Value->title}}</h4>
+                                                <div class="d-flex flex-column mx-auto align-items-center mb-3 italic-text">
+                                                    @foreach($ServiceSession as $valS)
+                                                        @foreach($valS as $valSS)
+                                                            @if($valSS->services_id == $Value->id)
+                                                                <span class="edit edit_f{{$valSS->id}}">{{$valSS->sessions}}</span>
+                                                                <input type="hidden" name="sessions_id[]" value="{{$valSS->id}}">
+                                                            @endif
+                                                        @endforeach
+                                                    @endforeach
+                                                </div>
+                                            </div>
+                                            <div class="price d-flex flex-column align-items-center mb-3">
+                                                <div class="d-flex">
+                                                    <sup class="">$</sup> <span class="edit_price">{{$Value->price}}</span>
+                                                </div>
+                                                <small>USD plus HST</small>
+                                            </div>
+                                            <ul class="list-unstyled px-5 overflow-auto">
+                                                @foreach($ServiceDescription as $valD)
+                                                    @foreach($valD as $valDD)
+                                                        @if($valDD->services_id == $Value->id)
+                                                            <li><i class="fas fa-angle-right mr-2" ></i> <span class="edit edit_description{{$valDD->id}}">{{$valDD->description}}</span></li>
+                                                        @endif
+                                                    @endforeach
                                                 @endforeach
-                                            @endforeach
-                                        </div>
-                                    </div>
-                                    <div class="price d-flex flex-column align-items-center mb-3">
-                                        <div class="d-flex">
-                                            <sup class="">$</sup> <span class="edit_price">{{$Value->price}}</span>
-                                        </div>
-                                        <small>USD plus HST</small>
-                                    </div>
-                                    <ul class="list-unstyled px-5 overflow-auto">
-                                        @foreach($ServiceDescription as $valD)
-                                            @foreach($valD as $valDD)
-                                                @if($valDD->services_id == $Value->id)
-                                                    <li><i class="fas fa-angle-right mr-2" ></i> <span class="edit edit_description{{$valDD->id}}">{{$valDD->description}}</span></li>
-                                                @endif
-                                            @endforeach
-                                        @endforeach
 
-                                    </ul><br>
-                                    <button class="bg-yellow br-10 px-4 py-2 fs-16"  >Save</button>
+                                            </ul>
+                                            <button class="bg-yellow br-10 px-4 py-2 fs-16 mt-4"  >Save</button>
+                                        </div>
                                     </form>
-                                </div>
 
                                 @endforeach
 
@@ -390,10 +384,6 @@
         @endsection
 
         @section('style')
-{{--            <script type="text/javascript" src="{{ asset('web_sayt/js/jquery.js') }}"></script>--}}
-{{--            <script type="text/javascript" src="{{ asset('web_sayt/js/bootstrap/bootstrap.min.js') }}"></script>--}}
-{{--            <script type="text/javascript" src="{{ asset('web_sayt/js/bootstrap/bootstrap.bundle.min.js') }}"></script>--}}
-{{--            <script src="{{ asset('web_sayt/js/script.js') }}"></script>--}}
 
 
             <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
@@ -409,7 +399,6 @@
             <script type="text/javascript" src="{{ asset('web_sayt/js/slidebar.js') }}"></script>
             <script>
                 $(document).ready(function(){
-
                     // Edit Plan
                     //  $("#edit_form1").parent().css({"display": "none","color": "red"});
                     // $('.edit_form1').click(function () {
@@ -546,6 +535,16 @@
                     $( scrollableSpace1 ).append( b );
                 });
 
+
             </script>
-            </script>
+            <script src="{{ asset('web_sayt/js/tagger.js') }}"></script>
+            <script>
+                var t1 = tagger(document.querySelector('[name="tags"]'), {
+                    allow_duplicates: false,
+                    allow_spaces: true,
+                    add_on_blur: true,
+                    completion: {list: []}
+                });
+
+                </script>
 @endsection
