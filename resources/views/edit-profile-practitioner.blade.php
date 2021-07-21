@@ -221,7 +221,11 @@
 
                         <div class="profile-practitioner__consultation-carusel-block">
                             <div id="customer-testimonals" class="owl-carousel owl-theme owl-loaded owl-drag">
+
                               @foreach($Service as $Value)
+                                    <form action="{{route('edit-service',[app()->getLocale()])}}" method="post">
+                                        @csrf
+                                        <input type="hidden" name="serveice_id" value="{{$Value->id}}">
                                 <div class="item light-green">
                                     <div class="abs">
                                         <i class="fas fa-pen mr-3 edit_form1"></i>
@@ -234,6 +238,7 @@
                                                 @foreach($valS as $valSS)
                                                     @if($valSS->services_id == $Value->id)
                                                         <span class="edit edit_f{{$valSS->id}}">{{$valSS->sessions}}</span>
+                                                        <input type="hidden" name="sessions_id[]" value="{{$valSS->id}}">
                                                     @endif
                                                 @endforeach
                                             @endforeach
@@ -256,7 +261,9 @@
 
                                     </ul><br>
                                     <button class="bg-yellow br-10 px-4 py-2 fs-16"  >Save</button>
+                                    </form>
                                 </div>
+
                                 @endforeach
 
                                 {{--                                    <div class="item light-yellow">--}}

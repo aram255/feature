@@ -224,5 +224,32 @@ class PractitionersController extends Controller
         return  back()->with('status','Delete Intake Forms');
     }
 
+    public function addService(request $request)
+    {
+        echo '<pre>';
+        print_r($request->all());
+        echo '<pre>';
+    }
+
+    public function editService(request $request)
+    {
+        $EditService  =  ServicesModel::where('practitioner_id',session()->get('UserID'))->where('id',$request->serveice_id)->first();
+
+        $EditService->title = $request->title;
+        $EditService->price = $request->price;
+        $EditService->save();
+
+        //dd($request->sessions_id);
+        foreach ($request->sessions_id as $val)
+        {
+            $EditServiceSession = ServiceSessionModel::where('id', $request->sessions_id)->get();
+            echo '<pre>';
+            print_r($request->sessions);
+            echo '<pre>';
+        }
+
+        //dd($EditServiceSession);
+    }
+
 
 }

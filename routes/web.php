@@ -113,6 +113,9 @@ Route::group(['prefix' => '{locale?}','where' => ['locale' => '[a-zA-Z]{2}']], f
     Route::post('/password.update', [NewPasswordController::class, 'store'])->name('password.update');
 
 
+    Route::post('/add-service', [PractitionersController::class, 'addService'])->name('add-service');
+    Route::post('/edit-service', [PractitionersController::class, 'editService'])->name('edit-service');
+
 
     // login
 
