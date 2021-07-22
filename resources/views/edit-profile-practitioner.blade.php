@@ -45,7 +45,6 @@
                         <div class="create__form pt-0">
                             <form action="#" id="auth" method="POST">
                                 <div class="form-info">
-
                                     <div class="user-info odd">
                                         <p class="user-info-p">First Name</p>
                                         <input type="text" id="firsName" class="fadeIn" name="firsName">
@@ -115,31 +114,22 @@
                     <br>
                     <div class="user-info-about mb-4">
                         <p class="user-info-p">About me</p>
-                        <textarea class="fadeIn" name="about-me" rows="6" cols="100"
-                                  style="resize: none;"></textarea>
+                        <textarea class="fadeIn" name="about-me" rows="6" cols="100" style="resize: none;"></textarea>
                     </div>
-
-
-
                     <div class="user-info odd">
                         <p class="user-info-p">Card Number<span>*</span></p>
                         <input type="text"  class="fadeIn" name="coverage">
                     </div>
                     <br>
-
                     <div class="add-card-edit-link">
                         <a href="#">Add New Card Number</a>
                     </div>
                 </div>
-
             </div>
-
         </div>
-
         <div class="lg-sg__button but_web">
             <input type="submit" form="auth" class="btn bg-yellow" value="Save">
         </div>
-
     </section>
     <section>
         <div class="service mt-5 py-5 container container-1640">

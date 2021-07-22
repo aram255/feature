@@ -442,3 +442,44 @@
    bottom: 0;
    right: 20px;
 }
+.filter-area {
+    .filter__content {
+        transition: all 0.2s;
+        &.active {
+            width: 120px;
+            height: 100vh;
+            #filter-form {
+                display: none;
+                & + form {
+                    display: none;
+                }
+            }
+        }
+        @media (max-width: 768px) {
+            position: absolute;
+            z-index: 11;
+            width: 100%;
+            height: 100vh;
+            padding: 0;
+            transition: all 0.2s;
+            .filter__header {
+                margin-bottom: 4px;
+            }
+            .create__checkbox {
+                padding-bottom: 0;
+            }
+            &.active {
+                width: 100%;
+                height: 50px;
+                padding: 0 40px!important;
+                #filter-form {
+                    display: none;
+                    & + form {
+                        display: none;
+                    }
+                }
+            }
+        }
+
+    }
+}

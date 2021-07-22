@@ -3,7 +3,7 @@
         font-size: 23px;
         line-height: 30px;
         text-align: center;
-    } 
+    }
     .section1 .find{
         margin:0;
     }
@@ -31,7 +31,7 @@
     }
     .input-group-prepend img{
         width: 20px;
-    } 
+    }
     .section1 .find__button{
         margin-top: 24px;
       display: flex;
@@ -104,8 +104,8 @@
     .cd__content6{
         margin-top:28px;
     }
-  
-  
+
+
     .section3 .card__flex{
         margin-top: 46px;
         margin-bottom: 20px;
@@ -126,7 +126,7 @@
     .footer__content-link{
     flex-wrap: wrap;
     padding: 20px;
-   
+
     }
     .footer__content-link .footer-link{
         font-size: 14px;
@@ -151,7 +151,7 @@
         font-size: 35px;
         line-height: 45px;
         text-align: center;
-    } 
+    }
     .section1 .find{
         margin:0;
     }
@@ -179,7 +179,7 @@
     }
     .input-group-prepend img{
         width: 20px;
-    } 
+    }
     .section1 .find__button{
         margin-top: 24px;
       display: flex;
@@ -221,7 +221,7 @@
     .section2 .practit__border{
         max-width: 79px;
     }
-   
+
 
     .section2 .card__flex .cd {
         width: 230px;
@@ -250,8 +250,8 @@
     .cd__content6{
         margin-top:28px;
     }
-  
-  
+
+
     .section3 .card__flex{
         margin-top: 46px;
         margin-bottom: 20px;
@@ -272,7 +272,7 @@
     .footer__content-link{
     flex-wrap: wrap;
     padding: 20px;
-   
+
     }
     .footer__content-link .footer-link{
         font-size: 14px;
@@ -316,7 +316,7 @@ padding:35px  20px;
         padding: 0;
     }
     .section1 .find__input{
-      
+
         width: 80%;
     }
     .input-group-prepend  img{
@@ -367,7 +367,7 @@ padding:35px  20px;
     .section3 .card__flex .cd{
         height: auto;
     }
- 
+
 /* end home page */
 
     /* edit-profile-customer */
@@ -375,10 +375,10 @@ padding:35px  20px;
 
 
 
-  
+
     .flex-container{
         flex-direction: column;
-    
+
     }
 
 
@@ -391,7 +391,7 @@ padding:35px  20px;
     .expiration_date div select{
         width: 100%!important;
         margin-top: 20px;
-      
+
     }
 
     .cvc{
@@ -424,7 +424,7 @@ padding:35px  20px;
 
     .user-info p{
         margin-bottom: 20px;
-       
+
     }
 
 
@@ -497,7 +497,7 @@ padding:35px  20px;
 
 
 
-  
+
    .flex-container{
     flex-direction: column;
 
@@ -513,7 +513,7 @@ padding:35px  20px;
 .expiration_date div select{
     width: 100%!important;
     margin-top: 20px;
-  
+
 }
 
 .cvc{
@@ -546,7 +546,7 @@ align-items: center;
 
 .user-info p{
     margin-bottom: 20px;
-   
+
 }
 
 
@@ -601,7 +601,7 @@ align-items: center;
     .profile-customer__blok2 .profile-customer-reviews-cont{
         margin-bottom: 36px;
     }
-    
+
 
     .profile-customer__blok1{
         height: auto;
@@ -636,7 +636,6 @@ align-items: center;
 /* end home page */
 
 }
-
 @media(min-width:768px) and (max-width:1000px){
 
 
@@ -652,7 +651,7 @@ align-items: center;
 }
 
 .add-card input{
-   
+
     margin-bottom: 20px;
 }
 
@@ -714,7 +713,7 @@ width:70%!important;
     .profile-customer__blok2 .profile-customer-reviews-cont{
         margin-bottom: 36px;
     }
-    
+
 
     .profile-customer__blok1{
         height: auto;
@@ -739,9 +738,6 @@ width:70%!important;
 
 }
 
-
-
-
 @media(min-width:1000px) and (max-width:1360px){
 
 /* home page */
@@ -762,7 +758,7 @@ width:70%!important;
 }
 
 .add-card input{
-   
+
     margin-bottom: 20px;
 }
 
@@ -791,7 +787,7 @@ width: 70%!important;
     }
 
     .profile-customer__blok2 .profile-customer__my-appointments-button-edit{
-    margin-left: 0;      
+    margin-left: 0;
     width: 80%;
     margin-top: 126px;
     }
@@ -832,12 +828,12 @@ width: 70%!important;
     .form-customer{
      margin-left: 0px;
     }
-    
+
     .add-card input{
-       
+
         margin-bottom: 20px;
     }
-    
+
     .expiration_date div select:last-of-type{
         margin-left: 0;
         margin-top: 20px;
@@ -845,7 +841,7 @@ width: 70%!important;
     .add-card input{
     width: 70%!important;
     }
-    
+
       /*end edit-profile-customer */
 
 

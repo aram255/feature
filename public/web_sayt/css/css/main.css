@@ -143,22 +143,7 @@ header {
   .filter__content {
     background: #F6FAFE;
     display: block;
-    padding: 45px 62px 204px 140px;
-      width: 525px;
-      position: relative;
-      transition: all 0.3s;
-  }
-
-    .filter__content.active {
-        width: 25px;
-        overflow: hidden;
-    }
-    .filter__content.active form,
-    .filter__content.active .filter__title {
-       display: none;
-        transition: all 0.3s;
-    }
-
+    padding: 45px 62px 204px 140px; }
   .filter__title {
     font-weight: 600;
     font-size: 40px;
@@ -174,12 +159,9 @@ header {
   .filter__header {
     margin-bottom: 68px; }
   .filter .find__form-settings {
+    float: right;
     padding: 0;
-    padding-top: 3px;
-     position: absolute;
-      top: 50px;
-      right: 50px;
-  }
+    padding-top: 3px; }
     .filter .find__form-settings button i {
       font-size: 30px; }
   .filter .create__checkbox {
@@ -198,9 +180,8 @@ header {
   padding-bottom: 50px; }
   .container-filter .find-result {
     width: 1075px;
-    box-shadow: 0 0 6px #00000029;
-    border-radius: 32px;
-      margin-bottom: 20px;}
+    box-shadow: 0px 0px 6px #00000029;
+    border-radius: 32px; }
 
 .person {
   padding: 32px 50px 35px 32px; }
@@ -246,7 +227,7 @@ header {
       line-height: 15px;
       font-weight: 500;
       margin-bottom: 29px; }
-    .person__info-skin-tag {
+      .person__info-skin-tag {
         background: #D9EAFD9E 0% 0% no-repeat padding-box;
         border-radius: 5px;
         padding: 3px 7px; }
@@ -261,7 +242,7 @@ header {
       font-weight: 500;
       font-size: 20px;
       line-height: 24px; }
-    .person__info-aed-number {
+      .person__info-aed-number {
         color: #8BA9EE; }
     .person__info-heart {
       background: url(../../img/heart-cl.svg) no-repeat center top/cover;
@@ -270,16 +251,16 @@ header {
       cursor: pointer;
       margin-left: 26px;
       transition: 0.2s linear; }
-  .person__info-heart:hover {
-    background: url(../../img/heart-hv.svg) no-repeat center top/cover;
-    width: 25px;
-    height: 22px;
-    cursor: pointer; }
-  .person__info-heart.active {
-    background: url(../../img/heart-hv.svg) no-repeat center top/cover;
-    width: 25px;
-    height: 22px;
-    cursor: pointer; }
+      .person__info-heart:hover {
+        background: url(../../img/heart-hv.svg) no-repeat center top/cover;
+        width: 25px;
+        height: 22px;
+        cursor: pointer; }
+      .person__info-heart.active {
+        background: url(../../img/heart-hv.svg) no-repeat center top/cover;
+        width: 25px;
+        height: 22px;
+        cursor: pointer; }
   .person__content {
     margin-left: auto;
     flex: 0 0 24%; }
@@ -479,17 +460,47 @@ header {
   bottom: 0;
   right: 20px; }
 
+.filter-area .filter__content {
+  transition: all 0.2s; }
+  .filter-area .filter__content.active {
+    width: 120px;
+    height: 100vh; }
+    .filter-area .filter__content.active #filter-form {
+      display: none; }
+      .filter-area .filter__content.active #filter-form + form {
+        display: none; }
+  @media (max-width: 768px) {
+    .filter-area .filter__content {
+      position: absolute;
+      z-index: 11;
+      width: 100%;
+      height: 100vh;
+      padding: 0;
+      transition: all 0.2s; }
+      .filter-area .filter__content .filter__header {
+        margin-bottom: 4px; }
+      .filter-area .filter__content .create__checkbox {
+        padding-bottom: 0; }
+      .filter-area .filter__content.active {
+        width: 100%;
+        height: 50px;
+        padding: 0 40px !important; }
+        .filter-area .filter__content.active #filter-form {
+          display: none; }
+          .filter-area .filter__content.active #filter-form + form {
+            display: none; } }
+
 .lg-sg {
   display: flex;
   justify-content: space-around;
   align-items: center;
   flex-wrap: wrap;
-  padding-top: 80px; }
+  padding-top: 202px; }
   .lg-sg__form-text {
     font-size: 30px;
     font-weight: 600;
     color: #00309E;
-    margin-bottom: 73px;
+    margin-bottom: 30px;
     line-height: 37px; }
   .lg-sg__form .email {
     margin-bottom: 44.5px; }
@@ -650,10 +661,8 @@ label {
 
 .user-info {
   display: inline-block;
-  /*padding-left: 40px;*/
-  padding-bottom: 23px;
-    max-width: 342px;
-    width: 100%;}
+  padding-left: 40px;
+  padding-bottom: 23px; }
   .user-info p {
     font-weight: 500;
     font-size: 16px;
@@ -662,8 +671,8 @@ label {
   .user-info select {
     color: #8BA9EE; }
   .user-info.create__checkbox {
-    padding-left: 5px;
-    max-width: 323px;
+    padding-left: 45px;
+    max-width: 350px;
     width: 100%; }
     .user-info.create__checkbox ~ .user-info.create__checkbox {
       float: right;
@@ -675,9 +684,11 @@ label {
     padding: 12px; }
 
 .create__checkbox label {
-  font-size: 16px;
+  font-weight: 500;
+  font-size: 12px;
   line-height: 19px;
-  font-weight: 400; }
+  padding-bottom: 7px;
+  margin-top: 5px; }
 .create__checkbox input[type="checkbox"] + label::before {
   display: inline-block;
   vertical-align: middle; }
@@ -714,7 +725,7 @@ label {
   overflow: hidden;
   width: 0; }
 .box .upload {
-  margin-left: auto }
+  margin-left: 272px; }
 .box input[type="file"] + label {
   box-shadow: 0px 0px 6px #00000029;
   border-radius: 5px;
@@ -723,11 +734,7 @@ label {
   cursor: pointer;
   display: inline-block;
   transition: all 0.5s;
-  vertical-align: middle;
-   max-width: 323px;
-    width: 100%;
-    text-align: right;
-  }
+  vertical-align: middle; }
   .box input[type="file"] + label:hover {
     box-shadow: 0px 0px 6px #8BA9EE;
     border-radius: 5px; }
@@ -888,10 +895,12 @@ label {
     font-size: 20px;
     line-height: 24px;
     background: #FFFFFF;
-    box-shadow: 0px 0px 6px #0000001A;
+    box-shadow: 0 0 6px #0000001A;
     border-radius: 10px; }
     .profile-practitioner__consultation-carusel-block {
-      padding: 30px 31px 60px 31px; }
+      padding: 0 30px; }
+      .profile-practitioner__consultation-carusel-block .item ul {
+        max-height: 270px; }
       .profile-practitioner__consultation-carusel-block p {
         margin-bottom: 22px; }
 
@@ -1650,7 +1659,7 @@ label {
   .profile-customer__blok1 {
     position: relative;
     width: 100%;
-    flex: 0 0 25%;
+    flex: 0 0 33.333333%;
     height: 600px; }
     .profile-customer__blok1-info .person__info-cont1 .person {
       margin: 0;
@@ -1733,7 +1742,7 @@ label {
   .profile-customer__blok2 {
     position: relative;
     width: 100%;
-    flex: 0 0 75%; }
+    flex: 0 0 66.666667%; }
     .profile-customer__blok2 .profile-customer__my-appointments-button {
       width: 80%; }
       .profile-customer__blok2 .profile-customer__my-appointments-button-edit {
@@ -1972,7 +1981,7 @@ body {
       right: 0px; }
 
 .section1 .find {
-  margin: 170px; }
+  margin: 273px 170px; }
   .section1 .find__title {
     font-size: 60px;
     font-weight: bold;
@@ -2453,7 +2462,7 @@ body {
     width: 100%; }
 
   .box .upload {
-    margin-left: auto}
+    margin-left: 91%; }
 
   .create__button {
     padding-left: 0; }
@@ -2786,7 +2795,7 @@ body {
     width: 100%; }
 
   .box .upload {
-    margin-left: auto }
+    margin-left: 91%; }
 
   .create__button {
     padding-left: 0; }
