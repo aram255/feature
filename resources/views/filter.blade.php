@@ -27,26 +27,11 @@
 @section('content')
     <script>var body = document.body; body.classList.add("body");</script>
 
-    <!-- filter mob-->
-    <div class="mobile-filter">
-
-        <h1>Filter</h1>
-        <div class="find__form-settings">
-            <div id="filter-but">
-                <button class="settings-button ml-3" data-toggle="modal" data-target="#find__filter"><i
-                        class="fas fa-sliders-h"></i></button>
-            </div>
-
-        </div>
-
-    </div>
-
-    <!-- filter mob end -->
     <section>
 
-        <div class="filter" style="display: flex;justify-content: space-between; width: 100%;">
-            <div class="filter__content">
-                <div class="filter__header">
+        <div class="filter-area" style="display: flex;justify-content: space-between; width: 100%;">
+            <div class="filter__content p-5">
+                <div class="filter__header d-flex flex-row-reverse justify-content-between w-100">
                     <div class="find__form-settings">
                         <button class="settings-button ml-3" data-toggle="modal" data-target="#find__filter"><i
                                 class="fas fa-sliders-h"></i></button>
@@ -102,7 +87,7 @@
         </div>
 
 
-        <div class="container-filter" style="display: flex;flex-direction: column;justify-content: space-around;">
+        <div class="container-filter mt-5 mt-md-0 pt-5 pt-md-0" style="display: flex;flex-direction: column;justify-content: space-around;">
             <!-- content -->
 
 
