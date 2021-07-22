@@ -220,10 +220,17 @@
                             <div id="customer-testimonals" class="owl-carousel owl-theme owl-loaded owl-drag">
 
                               @foreach($Service as $Value)
+
+                                    @php
+                                        $array = array("item light-green","item light-yellow");
+                                        $k = array_rand($array);
+                                        $color = $array[$k];
+                                    @endphp
+
                                     <form action="{{route('edit-service',[app()->getLocale()])}}" method="post">
                                         @csrf
                                         <input type="hidden" name="serveice_id" value="{{$Value->id}}">
-                                <div class="item light-green">
+                                <div class="@php echo $color; @endphp">
                                     <div class="abs">
                                         <i class="fas fa-pen mr-3 edit_form1"></i>
 
