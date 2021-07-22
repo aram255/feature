@@ -120,37 +120,13 @@
                     </div>
 
 
-{{--                    <div class="user-info odd">--}}
-{{--                        <p class="user-info-p">Name on Card <span>*</span></p>--}}
-{{--                        <input type="text" class="fadeIn" name="coverage">--}}
-{{--                    </div>--}}
-{{--                    <br>--}}
+
                     <div class="user-info odd">
                         <p class="user-info-p">Card Number<span>*</span></p>
                         <input type="text"  class="fadeIn" name="coverage">
                     </div>
                     <br>
-{{--                    <div class="add-card-edit">--}}
-{{--                        <div class="user-info odd">--}}
-{{--                            <p class="user-info-p">Expiration Date<span>*</span></p>--}}
-{{--                            <input type="text"  class="fadeIn" name="coverage" placeholder="Month">--}}
-{{--                        </div>--}}
 
-{{--                        <div class="user-info odd">--}}
-
-{{--                            <input type="text"  class="fadeIn edit-select" name="coverage" placeholder="Year">--}}
-{{--                        </div>--}}
-{{--                        <div class="user-info odd">--}}
-{{--                            <p class="user-info-p">CVC<span>*</span></p>--}}
-{{--                            <input type="text"  class="fadeIn" name="coverage">--}}
-{{--                        </div>--}}
-
-{{--                    </div>--}}
-{{--                    <div class="user-info create__checkbox flex-container check_addcard check-input edit-card">--}}
-{{--                        <input type="checkbox" name="male" value="Remember me" class="lg-sg__checkin" checked=""><label for="remember"></label>--}}
-{{--                        <p>Save Credit card information for the next time.</p>--}}
-
-{{--                    </div>--}}
                     <div class="add-card-edit-link">
                         <a href="#">Add New Card Number</a>
                     </div>
@@ -159,13 +135,11 @@
             </div>
 
         </div>
-{{--        </div>--}}
+
         <div class="lg-sg__button but_web">
             <input type="submit" form="auth" class="btn bg-yellow" value="Save">
         </div>
-{{--        </div>--}}
-{{--        </div>--}}
-{{--        </div>--}}
+
     </section>
     <section>
         <div class="service mt-5 py-5 container container-1640">
@@ -220,7 +194,7 @@
                               @foreach($Service as $Value)
 
                                     @php
-                                        $array = array("item light-green","item light-yellow");
+                                        $array = array("item scrl light-green","item light-yellow");
                                         $k = array_rand($array);
                                         $color = $array[$k];
                                     @endphp
@@ -271,119 +245,6 @@
 
                                 @endforeach
 
-                                {{--                                    <div class="item light-yellow">--}}
-                                {{--                                        <div class="abs">--}}
-                                {{--                                            <i class="fas fa-pen mr-3"></i>--}}
-                                {{--                                            <i class="fas fa-times"></i>--}}
-                                {{--                                        </div>--}}
-                                {{--                                        <div class="d-flex flex-column align-items-center">--}}
-                                {{--                                            <h4 class="mb-3">Get Glow <br> Complete</h4>--}}
-                                {{--                                            <div class="d-flex flex-column mx-auto align-items-center mb-3 italic-text">--}}
-                                {{--                                                <span>60 minute consult +</span>--}}
-                                {{--                                                <span>30 minute follow up</span>--}}
-                                {{--                                                <span>Customized acne healing plan</span>--}}
-                                {{--                                            </div>--}}
-                                {{--                                        </div>--}}
-                                {{--                                        <div class="price d-flex flex-column align-items-center mb-3">--}}
-                                {{--                                            <span>--}}
-                                {{--                                               <sup>$</sup> 175--}}
-                                {{--                                            </span>--}}
-                                {{--                                            <small>USD plus HST</small>--}}
-                                {{--                                        </div>--}}
-                                {{--                                        <ul class="list-unstyled px-5 overflow-hidden">--}}
-                                {{--                                            <li><i class="fas fa-angle-right mr-2"></i> <span> 1 hour intimate consult (in person or video)</span></li>--}}
-                                {{--                                            <li><i class="fas fa-angle-right mr-2"></i> <span> One 30 minute follow-up to make any necessary adjustments and track progress</span></li>--}}
-                                {{--                                            <li><i class="fas fa-angle-right mr-2"></i> <span> Unlimited email correspondence during working hours</span></li>--}}
-                                {{--                                            <li><i class="fas fa-angle-right mr-2"></i> <span> Bi-weekly check-ins and progress pictures</span></li>--}}
-                                {{--                                        </ul>--}}
-                                {{--                                    </div>--}}
-
-
-                                {{--                                    <div class="item light-yellow">--}}
-                                {{--                                        <div class="abs">--}}
-                                {{--                                            <i class="fas fa-pen mr-3"></i>--}}
-                                {{--                                            <i class="fas fa-times"></i>--}}
-                                {{--                                        </div>--}}
-                                {{--                                        <div class="d-flex flex-column align-items-center">--}}
-                                {{--                                            <h4 class="mb-3">Get Glow  <br> Complete</h4>--}}
-                                {{--                                            <div class="d-flex flex-column mx-auto align-items-center mb-3 italic-text">--}}
-                                {{--                                                <span>60 minute consult +</span>--}}
-                                {{--                                                <span>30 minute follow up</span>--}}
-                                {{--                                                <span>Customized acne healing plan</span>--}}
-                                {{--                                            </div>--}}
-                                {{--                                        </div>--}}
-                                {{--                                        <div class="price d-flex flex-column align-items-center mb-3">--}}
-                                {{--                                            <span>--}}
-                                {{--                                               <sup>$</sup> 175--}}
-                                {{--                                            </span>--}}
-                                {{--                                            <small>USD plus HST</small>--}}
-                                {{--                                        </div>--}}
-                                {{--                                        <ul class="list-unstyled px-5 overflow-hidden">--}}
-                                {{--                                            <li><i class="fas fa-angle-right mr-2"></i> <span> 1 hour intimate consult (in person or video)</span></li>--}}
-                                {{--                                            <li><i class="fas fa-angle-right mr-2"></i> <span> One 30 minute follow-up to make any necessary adjustments and track progress</span></li>--}}
-                                {{--                                            <li><i class="fas fa-angle-right mr-2"></i> <span> Unlimited email correspondence during working hours</span></li>--}}
-                                {{--                                            <li><i class="fas fa-angle-right mr-2"></i> <span> Bi-weekly check-ins and progress pictures</span></li>--}}
-                                {{--                                        </ul>--}}
-                                {{--                                    </div>--}}
-
-                                {{--                                    <div class="item light-green">--}}
-                                {{--                                        <div class="abs">--}}
-                                {{--                                            <i class="fas fa-pen mr-3"></i>--}}
-                                {{--                                            <i class="fas fa-times"></i>--}}
-                                {{--                                        </div>--}}
-                                {{--                                        <div class="d-flex flex-column align-items-center">--}}
-                                {{--                                            <h4 class="mb-3">Get Glow <br> Complete</h4>--}}
-                                {{--                                            <div class="d-flex flex-column mx-auto align-items-center mb-3 italic-text">--}}
-                                {{--                                                <span>60 minute consult +</span>--}}
-                                {{--                                                <span>30 minute follow up</span>--}}
-                                {{--                                                <span>Customized acne healing plan</span>--}}
-                                {{--                                            </div>--}}
-                                {{--                                        </div>--}}
-                                {{--                                        <div class="price d-flex flex-column align-items-center mb-3">--}}
-                                {{--                                <span>--}}
-                                {{--                                   <sup>$</sup> 2100--}}
-                                {{--                                </span>--}}
-                                {{--                                            <small>USD plus HST</small>--}}
-                                {{--                                        </div>--}}
-                                {{--                                        <ul class="list-unstyled px-5 overflow-hidden">--}}
-                                {{--                                            <li><i class="fas fa-angle-right mr-2"></i> <span> 1 hour intimate consult (in person or video)</span></li>--}}
-                                {{--                                            <li><i class="fas fa-angle-right mr-2"></i> <span> One 30 minute follow-up to make any necessary adjustments and track progress</span></li>--}}
-                                {{--                                            <li><i class="fas fa-angle-right mr-2"></i> <span> Unlimited email correspondence during working hours</span></li>--}}
-                                {{--                                            <li><i class="fas fa-angle-right mr-2"></i> <span> Bi-weekly check-ins and progress pictures</span></li>--}}
-                                {{--                                            <li><i class="fas fa-angle-right mr-2"></i> <span> Customized acne healing plan for your specific needs</span></li>--}}
-                                {{--                                            <li><i class="fas fa-angle-right mr-2"></i> <span> Tailored supplement and diet recommendations</span></li>--}}
-                                {{--                                            <li><i class="fas fa-angle-right mr-2"></i> <span> Customized skin care recommendations</span></li>--}}
-                                {{--                                            <li><i class="fas fa-angle-right mr-2"></i> <span> Holistic lifestyle recommendations</span></li>--}}
-                                {{--                                            <li><i class="fas fa-angle-right mr-2"></i> <span> 2 week acne-friendly meal plan</span></li>--}}
-                                {{--                                            <li><i class="fas fa-angle-right mr-2"></i> <span> Emotional support and trauma work</span></li>--}}
-                                {{--                                        </ul>--}}
-                                {{--                                    </div>--}}
-                                {{--                                    <div class="item light-yellow">--}}
-                                {{--                                        <div class="abs">--}}
-                                {{--                                            <i class="fas fa-pen mr-3"></i>--}}
-                                {{--                                            <i class="fas fa-times"></i>--}}
-                                {{--                                        </div>--}}
-                                {{--                                        <div class="d-flex flex-column align-items-center">--}}
-                                {{--                                            <h4 class="mb-3">Get Glow <br> Complete</h4>--}}
-                                {{--                                            <div class="d-flex flex-column mx-auto align-items-center mb-3 italic-text">--}}
-                                {{--                                                <span>60 minute consult +</span>--}}
-                                {{--                                                <span>30 minute follow up</span>--}}
-                                {{--                                                <span>Customized acne healing plan</span>--}}
-                                {{--                                            </div>--}}
-                                {{--                                        </div>--}}
-                                {{--                                        <div class="price d-flex flex-column align-items-center mb-3">--}}
-                                {{--                                            <span>--}}
-                                {{--                                               <sup>$</sup> 175--}}
-                                {{--                                            </span>--}}
-                                {{--                                            <small>USD plus HST</small>--}}
-                                {{--                                        </div>--}}
-                                {{--                                        <ul class="list-unstyled px-5 overflow-hidden">--}}
-                                {{--                                            <li><i class="fas fa-angle-right mr-2"></i> <span> 1 hour intimate consult (in person or video)</span></li>--}}
-                                {{--                                            <li><i class="fas fa-angle-right mr-2"></i> <span> One 30 minute follow-up to make any necessary adjustments and track progress</span></li>--}}
-                                {{--                                            <li><i class="fas fa-angle-right mr-2"></i> <span> Unlimited email correspondence during working hours</span></li>--}}
-                                {{--                                            <li><i class="fas fa-angle-right mr-2"></i> <span> Bi-weekly check-ins and progress pictures</span></li>--}}
-                                {{--                                        </ul>--}}
-                                {{--                                    </div>--}}
                             </div>
                         </div>
 
@@ -410,11 +271,7 @@
             <script type="text/javascript" src="{{ asset('web_sayt/js/slidebar.js') }}"></script>
             <script>
                 $(document).ready(function(){
-                    // Edit Plan
-                    //  $("#edit_form1").parent().css({"display": "none","color": "red"});
-                    // $('.edit_form1').click(function () {
-                    //     $("#edit_form1").parent().css({"display": "block"});
-                    // })
+
                     $(function() {
 
                     $('.edit_form1').on('click', function() {
@@ -485,7 +342,7 @@
                                         'value': div.parent(".abs").next().next().next().children().find(clas{{$valDD->id}}).text()//set text box value from div current text
                                     });
 
-                                   // div.parent(".abs").next().next().next().children().children().children().find(clas{{$valDD->id}}).empty().append(tbd{{$valDD->id}});//add new text box
+
                         div.parent(".abs").next().next().next().children().find(clas{{$valDD->id}}).empty().append(tbd{{$valDD->id}});
                         tbd{{$valDD->id}}.focus();//put text box on focus
                                  @endif
@@ -495,23 +352,9 @@
 
 
                          }
-                       //  var tb5;
-                       //  var k = ".edit_description"+2;
-                       // // alert(k);
-                       //  tb5 = $('<input>').prop({
-                       //      'type': 'text',
-                       //      'class': 'form-control',
-                       //      'value': div.parent().next().find(k).text()//set text box value from div current text
-                       //  });
-                       //
-                       //  div.parent(".abs").next().next().next().children().find(k).empty().append(tb5);//add new text box
-                       //  tb5.focus();//put text box on focus
+
                     });
                 });
-
-
-
-
 
 
                     $("#rightMenu").click(function(){

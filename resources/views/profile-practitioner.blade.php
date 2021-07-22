@@ -484,12 +484,6 @@
     <script>
         $(document).ready(function(){
 
-            // Edit Plan
-            //  $("#edit_form1").parent().css({"display": "none","color": "red"});
-            // $('.edit_form1').click(function () {
-            //     $("#edit_form1").parent().css({"display": "block"});
-            // })
-
             $(function() {
                 $('.edit').on('click', function() {
 

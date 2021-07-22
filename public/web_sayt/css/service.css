@@ -205,6 +205,12 @@
     /*max-height: 270px; */
     margin-bottom: 0;
 }
+
+.scrl ul {
+    max-height: 270px;
+    margin-bottom: 0;
+}
+
 .item ul li {
     display: flex;
     position: relative;
