@@ -64,8 +64,6 @@
                                         <input type="tel" id="phone" class="fadeIn" name="phone">
                                     </div>
                                     <br>
-
-
                                     <div class="user-info create__checkbox">
                                         <p>Gender</p>
                                         <input type="checkbox" name="male" id="Male" value="Remember me" class="lg-sg__checkin"><label
@@ -245,7 +243,7 @@
                                     </div>
                                     <div class="price d-flex flex-column align-items-center mb-3">
                                         <div class="d-flex">
-                                            <sup class="">$</sup> <span class="edit_price">{{$Value->price}}</span>
+                                            <span class="">$</span> <span class="edit_price">{{$Value->price}}</span>
                                         </div>
                                         <small>USD plus HST</small>
                                     </div>
