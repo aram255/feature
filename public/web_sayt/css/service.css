@@ -202,7 +202,7 @@
     border-radius: 10px;
 }
 .item ul {
-    max-height: 270px;
+    /*max-height: 270px; */
     margin-bottom: 0;
 }
 .item ul li {
