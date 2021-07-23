@@ -9,4 +9,5 @@ class LanguagesModel extends Model
 {
     use HasFactory;
     protected $table = 'languages';
+    public $timestamps = false;
 }

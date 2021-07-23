@@ -9,4 +9,5 @@ class PractitionerLanguageModel extends Model
 {
     use HasFactory;
     protected $table = "practitioner_lang_rel";
+    public $timestamps = false;
 }

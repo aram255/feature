@@ -9,4 +9,5 @@ class CountryModel extends Model
 {
     use HasFactory;
     protected $table="countrie";
+    public $timestamps = false;
 }

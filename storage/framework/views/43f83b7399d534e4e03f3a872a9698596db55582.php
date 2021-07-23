@@ -19,7 +19,7 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ml-auto nav-content">
                     <li class="nav-items border-blue">
-                        <a class="nav-link" href="#all-services">All Services</a>
+                        <a class="nav-link" href="<?php if(!empty(Request::segment(1))): ?> http://feature.loc/en#all-services <?php else: ?> #all-services <?php endif; ?>">All Services</a>
                     </li>
                     <li class="nav-items border-blue">
                         <a class="nav-link" href="">Blog</a>

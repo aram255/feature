@@ -9,4 +9,5 @@ class PracticeModel extends Model
 {
     use HasFactory;
     protected $table="practice";
+    public $timestamps = false;
 }

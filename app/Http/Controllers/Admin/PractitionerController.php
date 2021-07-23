@@ -8,6 +8,9 @@ use Illuminate\Http\Request;
 use App\Models\Admin\Practitioner;
 use App\Models\Admin\AdditionalModel;
 use App\Models\Admin\CertificationsModel;
+use App\Models\Admin\ServiceDescriptionModel;
+use App\Models\Admin\ServiceSessionModel;
+use App\Models\Admin\ServicesModel;
 use DB;
 use Carbon\Carbon;
 use Mail;
@@ -58,8 +61,13 @@ class PractitionerController extends Controller
         $CheckStatus = $request->status;
 
 
+        $Service            = ServicesModel::all();
+        $ServiceSession     = ServiceSessionModel::all();
+        $ServiceDescription = ServiceDescriptionModel::all();
 
-        return view('admin.practitioner.index',compact('Practitioners','Lang','Reviews','CheckStatus','PractitionersNewCount','Additional','Certifications','PractitionerSpecialities','PractitionerPractice'));
+
+
+        return view('admin.practitioner.index',compact('Practitioners','Lang','Reviews','CheckStatus','PractitionersNewCount','Additional','Certifications','PractitionerSpecialities','PractitionerPractice','Service','ServiceSession','ServiceDescription'));
     }
 
     public function data(Request $request){

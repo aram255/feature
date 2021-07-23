@@ -38,7 +38,7 @@ class AuthPractitionersController extends Controller
 
     public  function city($lang,$Country_id=0)
     {
-        $city['data'] =  CityModel::distinct()->where('country_id',$Country_id)->get(['title']);
+        $city['data'] =  CityModel::distinct()->where('country_id',$Country_id)->get(['title','id','country_id']);
           return response()->json($city);
     }
 
@@ -86,7 +86,7 @@ class AuthPractitionersController extends Controller
             'certifications_licensing' => 'required',
             'practice_id'              => 'required',
             'speciality_id'            => 'required',
-            'email'                    => 'required|email|unique:users',
+            'email'                    => 'required|string|email|max:255|unique:practitioner',
             'password'                 => 'required|min:6',
         ]);
 
@@ -130,6 +130,7 @@ class AuthPractitionersController extends Controller
 
     public function create(array $form_data,$Certifications,$data,$id_or_passport,$practiceID,$specialitiesID)
     {
+//        dd($data['city_id']);
 
         $practitioner = new AuthPractitionersModel;
 

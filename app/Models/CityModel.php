@@ -10,4 +10,5 @@ class CityModel extends Model
     use HasFactory;
 
     protected $table="cities";
+    public $timestamps = false;
 }

@@ -10,4 +10,5 @@ class Balance extends Model
     use HasFactory;
 
     protected $guarded = [];
+
 }

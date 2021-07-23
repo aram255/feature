@@ -244,29 +244,29 @@
                                                 <div class="card-body fixed-height">
                                                     @isset($profile->services)
                                                         <div class="row">
-                                                                                     @php echo '<pre>'; print_r($profile->services); echo '<pre>'; @endphp
-{{--                                                                                    @foreach($profile->services as $ok)--}}
-{{--                                                                                        <div class="service_container col-lg-4">--}}
-{{--                                                                                            <span class="service_title">{{dd($service['title'])}}</span>--}}
-{{--                                                                                            @isset($profile->services)--}}
-{{--                                                                                                <div class="service_sessions">--}}
-{{--                                                                                                    @foreach($service['session'] as $session)--}}
-{{--                                                                                                        <span>{{$session}}</span>--}}
-{{--                                                                                                    @endforeach--}}
-{{--                                                                                                </div>--}}
+                                                                                    @foreach($Service->where('practitioner_id',$profile->id) as $ServiceValue)
+                                                                                        <div class="service_container col-lg-4">
+                                                                                            <span class="service_title">{{$ServiceValue['title']}}</span>
+                                                                                                <div class="service_sessions">
+                                                                                                    <span>Sessions</span>
+                                                                                                    @foreach($ServiceSession->where('services_id',$ServiceValue->id) as $session)
+                                                                                                        <span>{{$session->sessions}}</span>
+                                                                                                    @endforeach
+                                                                                                </div>
 {{--                                                                                            @endisset--}}
-{{--                                                                                            <div class="service_price">--}}
-{{--                                                                                                {{$service['price']}}--}}
-{{--                                                                                            </div>--}}
-{{--                                                                                            @isset($profile->services)--}}
-{{--                                                                                                <ul class="service_points">--}}
-{{--                                                                                                    @foreach($service['points'] as $point)--}}
-{{--                                                                                                        <li>{{$point}}</li>--}}
-{{--                                                                                                    @endforeach--}}
-{{--                                                                                                </ul>--}}
+                                                                                            <div class="service_price">
+                                                                                                $ {{$ServiceValue['price']}}
+                                                                                            </div>
+{{--                                                                                          @isset($profile->services)--}}
+                                                                                                <ul class="service_points">
+                                                                                                    <span>Description</span>
+                                                                                                    @foreach($ServiceDescription->where('services_id',$ServiceValue->id) as $description)
+                                                                                                        <span>{{$description->description}}</span>
+                                                                                                    @endforeach
+                                                                                                </ul>
 {{--                                                                                            @endisset--}}
-{{--                                                                                        </div>--}}
-{{--                                                                                    @endforeach--}}
+                                                                                        </div>
+                                                                                    @endforeach
                                                         </div>
                                                     @endisset
                                                 </div>
