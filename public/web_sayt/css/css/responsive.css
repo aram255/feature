@@ -1,363 +1,4 @@
-/* @media(min-width:320px) and (max-width:600px){
-    .section1 .find__title{
-        font-size: 23px;
-        line-height: 30px;
-        text-align: center;
-    }
-    .section1 .find{
-        margin:0;
-    }
-    .section1 .find__text{
-        padding-top:18px;
-        font-size: 20px;
-        text-align: center;
-    }
-    .section1 .find__input{
-        padding: 10px;
-        width: 60%;
-        font-size: 12px;
-    }
-    .find__form-settings .settings-button i{
-        font-size: 35px;
-    }
-    .find__form{
-        padding:0 20px;
-        align-items: center;
-        justify-content: center;
-        align-content: center;
-    }
-    .input-group{
-        margin: 0 !important;
-    }
-    .input-group-prepend img{
-        width: 20px;
-    }
-    .section1 .find__button{
-        margin-top: 24px;
-      display: flex;
-      justify-content: center;
-    }
-    .section1 .find__button a{
-        width: 80%;
-        padding: 11px 0px;
-    font-size: 20px;
-    text-align: center;
-    }
-
-    .lang{
-        display:none
-    }
-
-    .nav-content{
-        display: block!important;
-        text-align: center;
-    }
-    header .nav-top .nav-items{
-        padding: 0 30px;
-    }
-    header {
-        padding: 0 20px;
-    }
-    .border-blue{
-        border-bottom:1px solid #8BA9EE;
-    }
-    .section1 .find__button{
-        margin-bottom: 50px;
-    }
-    .section2 .practit__title{
-        font-size: 20px;
-        line-height: 24px;
-        width: 80%;
-        padding-bottom: 55px;
-    }
-    .section2 .practit__border{
-        max-width: 79px;
-    }
-    .live__chat{
-        display: none;
-    }
-
-    .section2 .card__flex .cd {
-        width: 161px;
-        height: 140px;
-        margin-bottom: 32px;
-    }
-    .section2 .card__flex .cd__content{
-        padding: 0;
-    }
-    .cd__content img{
-        width: 30%;
-    }
-    .section2 .card__flex .cd__content p{
-        font-size: 13px;
-        padding: 0;
-    }
-    .section2 .card__flex .cd:last-child p{
-        padding-top: 0;
-    }
-    .cd__content1,.cd__content3,.cd__content4,.cd__content5{
-        margin-top:25px;
-    }
-    .cd__content2{
-        margin-top:10px;
-    }
-    .cd__content6{
-        margin-top:28px;
-    }
-
-
-    .section3 .card__flex{
-        margin-top: 46px;
-        margin-bottom: 20px;
-    }
-    .section3 .card__flex .cd{
-        width: 338px;
-        height: 227px;
-        margin-bottom: 50px;
-    }
-    .section3 .card__flex .cd__content p{
-        font-size: 24px;
-        padding: 7px 0;
-    }
-    .section3 .card__flex .cd__content {
-        padding: 17px 0 73px 0;
-    }
-
-    .footer__content-link{
-    flex-wrap: wrap;
-    padding: 20px;
-
-    }
-    .footer__content-link .footer-link{
-        font-size: 14px;
-    }
-    .footer__content-logo a{
-        font-size: 25px;
-    }
-    .footer__content{
-        padding:30px 20px;
-    }
-    .follow{
-        color: #FED638;
-    }
-}
-
-
-
-
-
-@media(min-width:600px) and (max-width:768px){
-    .section1 .find__title{
-        font-size: 35px;
-        line-height: 45px;
-        text-align: center;
-    }
-    .section1 .find{
-        margin:0;
-    }
-    .section1 .find__text{
-        padding-top:18px;
-        font-size: 16px;
-        text-align: center;
-    }
-    .section1 .find__input{
-        padding: 10px;
-        width: 60%;
-        font-size: 12px;
-    }
-    .find__form-settings .settings-button i{
-        font-size: 35px;
-    }
-    .find__form{
-        padding:0 20px;
-        align-items: center;
-        justify-content: center;
-        align-content: center;
-    }
-    .input-group{
-        margin: 0 !important;
-    }
-    .input-group-prepend img{
-        width: 20px;
-    }
-    .section1 .find__button{
-        margin-top: 24px;
-      display: flex;
-      justify-content: center;
-    }
-    .section1 .find__button a{
-        width: 50%;
-        padding: 11px 0px;
-    font-size: 20px;
-    text-align: center;
-    }
-
-    .lang{
-        display:none
-    }
-
-    .nav-content{
-        display: block!important;
-        text-align: center;
-    }
-    header .nav-top .nav-items{
-        padding: 0 30px;
-    }
-    header {
-        padding: 0 20px;
-    }
-    .border-blue{
-        border-bottom:1px solid #8BA9EE;
-    }
-    .section1 .find__button{
-        margin-bottom: 50px;
-    }
-    .section2 .practit__title{
-        font-size: 20px;
-        line-height: 24px;
-        width: 80%;
-        padding-bottom: 55px;
-    }
-    .section2 .practit__border{
-        max-width: 79px;
-    }
-
-
-    .section2 .card__flex .cd {
-        width: 230px;
-        height: 174px;
-        margin-bottom: 32px;
-    }
-    .section2 .card__flex .cd__content{
-        padding: 0;
-    }
-    .cd__content img{
-        width: 30%;
-    }
-    .section2 .card__flex .cd__content p{
-        font-size: 13px;
-        padding: 0;
-    }
-    .section2 .card__flex .cd:last-child p{
-        padding-top: 0;
-    }
-    .cd__content1,.cd__content3,.cd__content4,.cd__content5{
-        margin-top:25px;
-    }
-    .cd__content2{
-        margin-top:10px;
-    }
-    .cd__content6{
-        margin-top:28px;
-    }
-
-
-    .section3 .card__flex{
-        margin-top: 46px;
-        margin-bottom: 20px;
-    }
-    .section3 .card__flex .cd{
-        width: 338px;
-        height: 227px;
-        margin-bottom: 50px;
-    }
-    .section3 .card__flex .cd__content p{
-        font-size: 24px;
-        padding: 7px 0;
-    }
-    .section3 .card__flex .cd__content {
-        padding: 17px 0 73px 0;
-    }
-
-    .footer__content-link{
-    flex-wrap: wrap;
-    padding: 20px;
-
-    }
-    .footer__content-link .footer-link{
-        font-size: 14px;
-    }
-    .footer__content-logo a{
-        font-size: 25px;
-    }
-    .footer__content{
-        padding:30px 20px;
-    }
-    .follow{
-        color: #FED638;
-    }
-}
-
-
-@media(min-width:768px) and (max-width:1000px){
-
-    header .nav-top{
-padding:35px  20px;
-    }
-    .section1 .find{
-        margin: 53px 170px;
-    }
-    .section1 .find__title {
-        font-size: 45px;
-        font-weight: bold;
-        line-height: 56px;
-        color: #462847;
-    }
-    .section1 .find__text {
-        padding-top: 33px;
-    }
-    .section1 .find__input{
-        padding: 20px;
-    }
-    .input-group {
-            margin:0!important;
-    }
-    .section1 .find__form .input-group-prepend{
-        padding: 0;
-    }
-    .section1 .find__input{
-
-        width: 80%;
-    }
-    .input-group-prepend  img{
-        margin-left: 20px;
-    }
-    .border-blue {
-        border-bottom: 1px solid #8BA9EE;
-    }
-    header .nav-top .nav-items {
-        padding: 0 30px;
-    }
-    .nav-content {
-        display: block!important;
-        text-align: center;
-    }
-    .lang{
-        display: none;
-    }
-    .section2 .card__flex .cd {
-        width: 340px;
-}
-}
-
-@media(min-width:1000px) and (max-width:1360px){
-    .section1 .find__input {
-        width: 80%;
-    }
-    .section3 .card__flex .cd {
-        width: 500px;
-    }
-}
-
-@media(min-width:1000px) and (max-width:2000px){
-    .lang-mob{
-        display: none;
-    }
-} */
-
-
-
-@media(min-width:320px) and (max-width:600px){
+@media(min-width: 320px) and (max-width: 600px){
     /* home page */
 
     .section3 .card__flex .cd__content {
@@ -486,9 +127,7 @@ padding:35px  20px;
 
 
 }
-
-
-@media(min-width:600px) and (max-width:768px){
+@media(min-width: 600px) and (max-width: 768px){
 
 
 
@@ -619,7 +258,7 @@ align-items: center;
     /* end profile customer */
 
 }
-@media(min-width:599px) and (max-width:770px){
+@media(min-width: 599px) and (max-width: 770px){
 /* home page */
 .section2 .card__flex .cd {
     width: 197px;
@@ -636,7 +275,7 @@ align-items: center;
 /* end home page */
 
 }
-@media(min-width:768px) and (max-width:1000px){
+@media(min-width: 768px) and (max-width: 1000px){
 
 
 
@@ -737,8 +376,7 @@ width:70%!important;
 /* end home page */
 
 }
-
-@media(min-width:1000px) and (max-width:1360px){
+@media(min-width: 1000px) and (max-width: 1360px){
 
 /* home page */
 
@@ -815,9 +453,7 @@ width: 70%!important;
      margin-left: 30px;
  }
 }
-
-
-@media(min-width:1360px) and (max-width:1500px){
+@media(min-width: 1360px) and (max-width: 1500px){
 
      /* edit-profile-customer */
 
@@ -854,19 +490,9 @@ width: 70%!important;
 
       /* end home page */
 }
-
-
-
-@media(min-width:1270px) and (max-width:1760px){
+@media(min-width: 1270px) and (max-width: 1760px){
 
     /* home page */
-
-    .section2 .card__flex .cd{
-        width: 277px;
-    }
-
-
-
     .section2 .card__flex .cd__content {
         padding: 25px 0 30px 0;
     }
@@ -876,19 +502,16 @@ width: 70%!important;
         font-size: 25px;
     }
 
-    .cd__content img{
-        width: 100px;
-        height: 100px;
-    }
+    /*.cd__content img{*/
+    /*    width: 100px;*/
+    /*    height: 100px;*/
+    /*}*/
 
 
     .card-container{
         max-width: 1100px;
         width:100%;
       margin:0 auto;
-    }
-    .section2 .card__flex .cd:last-child p {
-        padding-top: 25px;
     }
 
     .section3 .card__flex .cd{

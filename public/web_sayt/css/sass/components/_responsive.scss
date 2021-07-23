@@ -1,4 +1,4 @@
-@media(min-width:320px) and (max-width:600px) {
+@media(min-width:320px) and (max-width:768px) {
 
   /* edite profile user*/
   .add-card{
@@ -139,19 +139,27 @@
 
    .section1 .find__text {
       padding-top: 18px;
-      font-size: 20px;
+      font: normal normal 400 10px/13px Montserrat;
       text-align: center;
+       padding-bottom: 11px;
    }
 
    .section1 .find__input {
       padding: 10px;
-      width: 60%;
-      font-size: 12px;
+      width: 80%;
+       font-size: 10px;
+       border-radius: 20px;
    }
+    .input-group-prepend {
+        display: none;
+    }
 
-   .find__form-settings .settings-button i {
+    .find__form-settings .settings-button i {
       font-size: 35px;
    }
+    .find__form-settings {
+        padding-left: 10px;
+    }
 
    .find__form {
       padding: 0 20px;
@@ -162,6 +170,7 @@
 
    .input-group {
       margin: 0 !important;
+       max-width: 270px;
    }
 
    .input-group-prepend img {
@@ -176,9 +185,10 @@
 
    .section1 .find__button a {
       width: 80%;
-      padding: 11px 0px;
+      padding: 11px 0;
       font-size: 20px;
       text-align: center;
+       max-width: 325px;
    }
 
    .lang {
@@ -467,7 +477,6 @@
    /* end intake form */
 
 }
-
 @media(min-width:600px) and (max-width:768px) {
 
    /* edite profile user*/
@@ -899,7 +908,6 @@
 
    /*end protocol view */
 }
-
 @media(min-width:768px) and (max-width:1000px) {
 
 
@@ -1002,9 +1010,9 @@
       padding: 35px 20px;
    }
 
-   .section1 .find {
-      margin: 53px 170px;
-   }
+   //.section1 .find {
+   //   margin: 53px 170px;
+   //}
 
    .section1 .find__title {
       font-size: 45px;
@@ -1055,9 +1063,9 @@
       display: none;
    }
 
-   .section2 .card__flex .cd {
-      width: 340px;
-   }
+   //.section2 .card__flex .cd {
+   //   width: 340px;
+   //}
 
    /* end home */
 
@@ -1115,9 +1123,7 @@
 
    /*end protocol view */
 }
-
 @media(min-width:1000px) and (max-width:1360px) {
-
    .edite-card-check{
       padding:10px!important;
       margin:0;
@@ -1176,7 +1182,6 @@
 
    /* end filter */
 }
-
 @media(min-width:1360px) and (max-width:1511px) {
 
    /* signup practitioner */
@@ -1201,7 +1206,6 @@
 
    /*end signup practitioner */
 }
-
 @media(min-width:1000px) and (max-width:1650px) {
 
    /* intake form view */
@@ -1237,7 +1241,6 @@
 
 
 }
-
 @media(min-width:1000px) and (max-width:2000px) {
 
    /* home */
@@ -1256,13 +1259,11 @@
 
    /*end  filter */
 }
-
 @media(min-width:320px) and (max-width:600px) {
-
 
    /* index */
    .cd__content {
-      margin-top: 25px;
+      margin-top: 5px;
    }
 
 
@@ -1552,7 +1553,6 @@
    /*end intake form */
 
 }
-
 @media(min-width:600px) and (max-width:768px) {
 
    /* intake form */
@@ -1835,7 +1835,6 @@
    /* end protocol */
 
 }
-
 @media(min-width:768px) and (max-width:1000px) {
 
 
@@ -1995,7 +1994,6 @@
 
    /* end protocol */
 }
-
 @media(min-width:1000px) and (max-width:1360px) {
 
    /* intake form */
@@ -2132,7 +2130,6 @@
 
    /* end protocol */
 }
-
 @media(min-width:1360px) and (max-width:1600px) {
    /* intake form */
 
@@ -2243,7 +2240,6 @@
 
    /* end edit profil */
 }
-
 @media(min-width:768px) and (max-width:5000px) {
    .mob_save {
       display: block;
@@ -2255,6 +2251,9 @@
    }
 
 }
+
+
+
 
 .footer__content {
    padding: 90px 60px;

@@ -138,12 +138,13 @@ body {
       font-size: 30px;
       line-height: 37px;
       color: #00309E;
-      font-weight: 600;
+      font-weight: 400;
 
     }
     &__input {
-      padding: 32px 0px 32px 14px;
+      padding: 32px 0 32px 14px;
       font-size: 20px;
+      font-weight: 400;
       width: 95%;
       line-height: 24px;
       color: #AEAEAE;
@@ -162,15 +163,15 @@ body {
             align-items: center;
           }
         }
-        
+
     }
-    
+
     &__button {
       margin-top: 45px;
-      margin-bottom: 273px;
+      //margin-bottom: 273px;
       color: $purple;
       & a {
-        width: 37%;
+        width: 430px;
         padding: 28px 0px;
         font-size: 26px;
         line-height: 32px;
@@ -225,29 +226,30 @@ body {
   }
     .card__flex {
       .cd {
-        width: 430px;
-        background-color: $white;
-        box-shadow: 0px 0px 6px #00000029;
-        border-radius: 32px;
-        margin-bottom: 111px;
+          width: 380px;
+          background-color: #FFFFFF;
+          box-shadow: 0 0 6px #00000029;
+          border-radius: 32px;
+          margin-bottom: 111px;
+          height: 332px;
         &__content {
            padding: 55px 0 49px 0;
           & p {
-            font-size: 39px;
-            line-height: 48px;
+            font-size: 25px;
+            line-height: 30px;
             font-weight: 600;
-            padding-top: 34px;
+
             color: $purple;
           }
         }
         &:last-child{
           & p {
-            padding-top: 70px;
+            padding-top: 40px;
           }
         }
       }
     }
-  
+
 }
 .section3{
 
@@ -285,7 +287,7 @@ body {
   }
 }
 
-// Find Setting Window 
+// Find Setting Window
 .modal {
   &-content {
     border: 1px solid #707070;
@@ -341,14 +343,14 @@ body {
   }
 
 }
-    
+
 
  // Login Windows
 .modal {
   &__form.lg-header-form{
     margin: 87px 101px 109px 127px;
     padding: 0;
-    
+
     & .lg-sg__button input {
       width: 57%;
     }
@@ -372,7 +374,7 @@ body {
       text-align: center;
     }
     & .lg-sg__form .email {
-       margin-bottom: 29px; 
+       margin-bottom: 29px;
     }
     & .lg-sg__button {
       margin-top: 27px;
@@ -406,7 +408,13 @@ body {
     }
 
 }
-
+.cd__content img{
+    width: 100%;
+    height: 160px;
+    @media (max-width: 770px) {
+        height: 100px;
+    }
+}
 
 
 
