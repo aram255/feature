@@ -143,11 +143,8 @@
                               </div>
                           </div>
                           <div class="d-flex justify-content-lg-around">
-                              <div class="user-info">
+                              <div class="user-info" style="max-width: 323px; width: 100%; padding: 0">
                                   <p class="create-p">Practice type</p>
-
-
-
                                   <div class="">
                                       <select id="choices-multiple-remove-button" class="form-control" name="practice_id[]" multiple>
 {{--                                          <option value="Author" onclick="filterSelection('Author')">Author</option>--}}
@@ -166,7 +163,7 @@
 {{--                                  </select>--}}
                                   <p style="color: red; font-size: 12px">@if ($errors->has('practice_id')){{ $errors->first('practice_id') }}@endif</p>
                               </div>
-                              <div class="user-info">
+                              <div class="user-info" style="max-width: 323px; width: 100%">
                                   <p class="create-p">Speciality</p>
 
                                   <div class="">

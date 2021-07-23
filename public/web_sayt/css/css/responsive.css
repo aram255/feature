@@ -861,10 +861,6 @@ width: 70%!important;
 
     /* home page */
 
-    .section2 .card__flex .cd{
-        width: 277px;
-    }
-
 
 
     .section2 .card__flex .cd__content {
@@ -876,19 +872,16 @@ width: 70%!important;
         font-size: 25px;
     }
 
-    .cd__content img{
-        width: 100px;
-        height: 100px;
-    }
+    /*.cd__content img{*/
+    /*    width: 100px;*/
+    /*    height: 100px;*/
+    /*}*/
 
 
     .card-container{
         max-width: 1100px;
         width:100%;
       margin:0 auto;
-    }
-    .section2 .card__flex .cd:last-child p {
-        padding-top: 25px;
     }
 
     .section3 .card__flex .cd{

@@ -17,10 +17,10 @@
 
 
     <section class="section1">
-        <div class="container">
-            <div class="find">
+        <div class="container d-flex align-items-center justify-content-center" style="min-height: 88vh">
+            <div class="w-75">
                 <div class="find__title">
-                    <p>Get <span>Balancd</span> for a<br> healthier more fulfilling life</p>
+                    <p>Get some <span>Balancd</span> for a<br> healthier more fulfilling life</p>
                 </div>
                 <div class="find__text">
                     <p>Find health and wellness tools</p>
@@ -201,12 +201,14 @@
                 </div>
                 <div class="card__flex">
                     @foreach($Category as $category)
-                    <div class="cd">
-                        <div class="cd__content">
-                            <img src="{{ asset('web_sayt/img_category/'.$category->img) }}" alt="">
-                            <p>{{ $category->title }}</p>
+                        <div class="col-lg-4 col-6 d-flex justify-content-center">
+                            <div class="cd">
+                                <div class="cd__content">
+                                    <img src="{{ asset('web_sayt/img_category/'.$category->img) }}" alt="">
+                                    <p>{{ $category->title }}</p>
+                                </div>
+                            </div>
                         </div>
-                    </div>
                     @endforeach
                 </div>
             </div>
