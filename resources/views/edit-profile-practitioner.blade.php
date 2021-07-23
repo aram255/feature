@@ -229,7 +229,7 @@
                                         @endforeach
 
                                             </ul>
-                                            <button class="bg-yellow br-10 px-4 py-2 fs-16 mt-4"  >Save</button>
+                                            <button class="bg-yellow br-10 px-4 py-2 fs-16 mt-4 save">Save</button>
                                         </div>
                                     </form>
 
@@ -262,86 +262,97 @@
             <script>
                 $(document).ready(function(){
 
+
                     $(function() {
 
-                    $('.edit_form1').on('click', function() {
+                    $('.edit_form1').on('click', function(i) {
 
-                        var div = $(this);
-                        var tb = div.find('input:text');//get textbox, if exist
-                          if (tb.length) {//text box already exist
-                        div.text(tb.val());//remove text box & put its current value as text to the div
+                        // Disable too click
+                        var $btn = $(this);
+                        var count = ($btn.data("click_count") || 0) + 1;
+                        $btn.data("click_count", count);
+                        if ( count == 1 ){
+
+                         var div = $(this);
+                         // Show Save button
+                         div.parent().next().next().next().next('.save').css("display", "block");
+
+                         var tb = div.find('input:text');//get textbox, if exist
+                         if (tb.length) {//text box already exist
+                             div.text(tb.val());//remove text box & put its current value as text to the div
 
                          } else {
-                        tb1 = $('<input>').prop({
-                            'type': 'text',
-                            'class': 'form-control',
-                            'name': 'title',
-                            'value': div.parent().next().find('.edit_f').text()//set text box value from div current text
-                        });
-                        div.parent(".abs").next().find('.edit_f').empty().append(tb1);//add new text box
-                        tb1.focus();//put text box on focus
+                             tb1 = $('<input>').prop({
+                                 'type': 'text',
+                                 'class': 'form-control',
+                                 'name': 'title',
+                                 'value': div.parent().next().find('.edit_f').text()//set text box value from div current text
+                             });
+                             div.parent(".abs").next().find('.edit_f').empty().append(tb1);//add new text box
+                             tb1.focus();//put text box on focus
 
-                       var price = $('<input>').prop({
-                            'type':  'text',
-                            'class': 'form-control',
-                            'name':  'price',
-                            'value':  div.parent().next().next().find('.edit_price').text()//set text box value from div current text
-                        });
-                        div.parent(".abs").next().next().find('.edit_price').empty().append(price);//add new text box
-                        price.focus();//put text box on focus
-
-
-
-                        // Session
-                            @foreach($Service as $Valu)
-                              @foreach($ServiceSession as $valSs)
-                                @foreach($valSs as $valSSS)
-                                   @if($valSSS->services_id == $Valu->id)
-
-                                       var tbs{{$valSSS->id}} = ".edit_f{{$valSSS->id}}";
-                                       var cl{{$valSSS->id}} = ".edit_f{{$valSSS->id}}";
+                             var price = $('<input>').prop({
+                                 'type': 'text',
+                                 'class': 'form-control',
+                                 'name': 'price',
+                                 'value': div.parent().next().next().find('.edit_price').text()//set text box value from div current text
+                             });
+                             div.parent(".abs").next().next().find('.edit_price').empty().append(price);//add new text box
+                             price.focus();//put text box on focus
 
 
-                                        tbs{{$valSSS->id}} = $('<input>').prop({
-                                            'type': 'text',
-                                            'class': 'form-control',
-                                            'name': 'session[]',
-                                            'value': div.parent().next().children().find(cl{{$valSSS->id}}).text()//set text box value from div current text
-                                        });
+                             // Session
+                                 @foreach($Service as $Valu)
+                                 @foreach($ServiceSession as $valSs)
+                                 @foreach($valSs as $valSSS)
+                                 @if($valSSS->services_id == $Valu->id)
 
-                                        div.parent(".abs").next().find(cl{{$valSSS->id}}).empty().append(tbs{{$valSSS->id}});//add new text box
-                                        tbs{{$valSSS->id}}.focus();//put text box on focus
-                                   @endif
-                                 @endforeach
-                              @endforeach
+                             var tbs{{$valSSS->id}} = ".edit_f{{$valSSS->id}}";
+                             var cl{{$valSSS->id}} = ".edit_f{{$valSSS->id}}";
 
 
-                        // Description
-                            @foreach($ServiceDescription as $valD)
-                               @foreach($valD as $valDD)
+                             tbs{{$valSSS->id}} = $('<input>').prop({
+                                 'type': 'text',
+                                 'class': 'form-control',
+                                 'name': 'session[]',
+                                 'value': div.parent().next().children().find(cl{{$valSSS->id}}).text()//set text box value from div current text
+                             });
+
+                             div.parent(".abs").next().find(cl{{$valSSS->id}}).empty().append(tbs{{$valSSS->id}});//add new text box
+                             tbs{{$valSSS->id}}.focus();//put text box on focus
+                             @endif
+                             @endforeach
+                             @endforeach
+
+
+                             // Description
+                                 @foreach($ServiceDescription as $valD)
+                                 @foreach($valD as $valDD)
                                  @if($valDD->services_id == $Valu->id)
 
-                                   var tbd{{$valDD->id}} = ".edit_description{{$valDD->id}}";
-                                   var clas{{$valDD->id}} = ".edit_description{{$valDD->id}}";
+                             var tbd{{$valDD->id}} = ".edit_description{{$valDD->id}}";
+                             var clas{{$valDD->id}} = ".edit_description{{$valDD->id}}";
 
 
-                                    tbd{{$valDD->id}} = $('<input>').prop({
-                                        'type': 'text',
-                                        'class': 'form-control',
-                                        'name': 'description[]',
-                                        'value': div.parent(".abs").next().next().next().children().find(clas{{$valDD->id}}).text()//set text box value from div current text
-                                    });
+                             tbd{{$valDD->id}} = $('<input>').prop({
+                                 'type': 'text',
+                                 'class': 'form-control',
+                                 'name': 'description[]',
+                                 'value': div.parent(".abs").next().next().next().children().find(clas{{$valDD->id}}).text()//set text box value from div current text
+                             });
 
 
-                        div.parent(".abs").next().next().next().children().find(clas{{$valDD->id}}).empty().append(tbd{{$valDD->id}});
-                        tbd{{$valDD->id}}.focus();//put text box on focus
-                                 @endif
-                               @endforeach
+                             div.parent(".abs").next().next().next().children().find(clas{{$valDD->id}}).empty().append(tbd{{$valDD->id}});
+                             tbd{{$valDD->id}}.focus();//put text box on focus
+                             @endif
                              @endforeach
-                        @endforeach
+                             @endforeach
+                             @endforeach
 
 
                          }
+                        }
+
 
                     });
                 });
