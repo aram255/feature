@@ -139,23 +139,23 @@ class ZoomController extends Controller
 
     public function deleteZoomMeeting(request $request)
     {
-//        $this->jwt();
-//
-//        $client = new \GuzzleHttp\Client(['base_uri' => 'https://api.zoom.us']);
-//
-//        $response = $client->request("DELETE", "/v2/meetings/".$request->delete_meeting_id, [
-//            "headers" => [
-//                "Authorization" => "Bearer " . $this->jwt
-//            ]
-//        ]);
-//
-//        if (204 == $response->getStatusCode())
-//        {
-//            $Delete = ZoomModel::where("id",$request->delete_id);
-//
-//            $Delete->delete();
-//            return  back()->with('status','Delete Zoom Meeting');
-//        }
+        $this->jwt();
+
+        $client = new \GuzzleHttp\Client(['base_uri' => 'https://api.zoom.us']);
+
+        $response = $client->request("DELETE", "/v2/meetings/".$request->delete_meeting_id, [
+            "headers" => [
+                "Authorization" => "Bearer " . $this->jwt
+            ]
+        ]);
+
+        if (204 == $response->getStatusCode())
+        {
+            $Delete = ZoomModel::where("id",$request->delete_id);
+
+            $Delete->delete();
+            return  back()->with('status','Delete Zoom Meeting');
+        }
 
     }
 

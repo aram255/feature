@@ -69,6 +69,29 @@ class IndexController extends Controller
             $tags = implode(', ', $request->teg_management);
         }
 
+//        $leagues = DB::table('practitioner')
+//
+//            ->select('practitioner.id','practitioner.first_name')
+//            ->leftJoin('practitioner_lang_rel', 'practitioner_lang_rel.practitioner_id', '=', 'practitioner.id')
+//            ->leftJoin('languages', 'practitioner_lang_rel.lang_id', '=', 'practitioner.id')
+//            ->whereRaw('languages.id='.$request->state)
+//            ->orderBy('practitioner.first_name')
+//            ->groupBy('practitioner.id')
+//            ->where(function ($query,$request) {
+//                $query->where('languages.id', !empty($request->state))
+//                    ->orWhere('practitioner.virtuall', !empty($request->vir))
+//                    ->orWhere('practitioner.in_persion', !empty($request->per))
+//                    ->orWhere('practitioner.gender', !empty($request->gender));
+//            })
+
+//            ->orWhere('languages.id', !empty($request->state))
+//            ->orWhere('practitioner.virtuall', !empty($request->vir))
+//            ->orWhere('practitioner.in_persion', !empty($request->per))
+//            ->orWhere('practitioner.gender', !empty($request->gender))
+//               ->whereRaw('languages.id='.$request->state)
+   //         ->get();
+//        dd($leagues);
+
 
         $Practitioner = DB::select(
             "select p.id, p.first_name, p.last_name, p.email, p.phone_number, group_concat(tm.id) as tag_ids, group_concat(tm.name)as tag_names from practitioner as p
@@ -86,7 +109,7 @@ class IndexController extends Controller
             .(!empty($tags)?" having count(p.id)=".count($request->teg_management):"")
         );
 
-        //dd($Practitioner);
+      //  dd($Practitioner);
 
         foreach($Practitioner as $val)
         {

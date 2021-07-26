@@ -387,7 +387,6 @@
                                  </span>
                               </span>
                                         </div>
-
                                         <div class="profile__reviews-content-clock">
                                             <img src="{{ asset('web_sayt/img/clock.svg') }}" alt="" srcset="">
                                             <span class="reviews-clock-data">January 02</span>
@@ -406,6 +405,9 @@
                     </div>
                 </div>
             </div>
+
+           @if(@isset($Service) and  @count($Service) > 0 )
+
             <div class="service mt-5 py-5">
                 <h2 class="text-center">My Services</h2>
                 <h4 class="text-uppercase text-center">ONE ON ONE PROGRAMS</h4>
@@ -456,10 +458,10 @@
                                 @endforeach
                             </div>
                         </div>
-
                     </div>
                 </div>
             </div>
+            @endif
         </div>
     </main>
     <!---  0000000 ----->
