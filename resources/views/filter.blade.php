@@ -415,7 +415,7 @@
         <!-- content -->
             @if(!empty($Result))
 
-                <div class="pagination-filter" >
+                <div class="pagination-filter mt-5" >
                     <nav aria-label="Page navigation example">
                         <ul class="pagination">
                             <li class="page-item">
