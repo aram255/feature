@@ -81,8 +81,21 @@ a.loading:before, span.loading:before, button.loading:before, a.loading:hover:be
     transition: all .2s ease-in-out;
 }
 
+.service_title{
+    color: red;
+    font-weight:bold;
+    font-size: 24px;
+}
+
+.sp_a{
+    color: red;
+    text-align: center;
+    font-weight:bold;
+}
+
 .service_container{
     padding: 5px;
+    border: 1px solid black;
 }
 .service_sessions span, .service_title, .service_points span{
     display: block;

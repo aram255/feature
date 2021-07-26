@@ -19,7 +19,7 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ml-auto nav-content">
                     <li class="nav-items border-blue">
-                        <a class="nav-link" href="@if(!empty(Request::segment(1))) http://feature.loc/en#all-services @else #all-services @endif">All Services</a>
+                        <a class="nav-link" href="@if(!empty(Request::segment(1))) {{route('index',[app()->getLocale()])}}/#all-services @else #all-services @endif">All Services</a>
                     </li>
                     <li class="nav-items border-blue">
                         <a class="nav-link" href="{{--route('blog',[app()->getLocale()])--}}">Blog</a>
