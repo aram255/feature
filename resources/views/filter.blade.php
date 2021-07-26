@@ -93,7 +93,7 @@
 
             @foreach($Practitioners as $Result)
 
-                <div class="find-result">
+                <div class="find-result mt-4">
 
                     <div class="person">
                         <div class="person__info">
