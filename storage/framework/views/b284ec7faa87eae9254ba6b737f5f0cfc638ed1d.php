@@ -22,9 +22,9 @@
                     <div class="profile-customer__blok1-info">
                         <div class="person__info-cont1">
                             <div class="edit-profile__contact-img">
-                                <input type="file" id="img-file" name="img-file">
 
-                                <label for="img-file"><img class="upload" src="<?php if(auth()->user()->img): ?><?php echo e(asset('web_sayt/img/'.auth()->user()->img)); ?> <?php else: ?> <?php echo e(asset('web_sayt/img/img-file.svg')); ?><?php endif; ?>" alt=""></label>
+
+                                <label for="img-file"><img class="upload" src="<?php if(auth()->user()->img): ?><?php echo e(asset('web_sayt/img_customer/'.auth()->user()->img)); ?> <?php else: ?> <?php echo e(asset('web_sayt/img/img-file.svg')); ?><?php endif; ?>" alt=""></label>
                             </div>
                             <div class="person__info-name">
                                 <span class="person-customer-name"><?php echo e(auth()->user()->first_name); ?> <?php echo e(auth()->user()->last_name); ?></span>

@@ -21,58 +21,79 @@
 @section('content')
     <script>var body = document.body; body.classList.add("body");</script>
 
+    <form id="auth" method="post" action="{{route('edit-profile-customer-post',[app()->getLocale()])}}" enctype="multipart/form-data">
+
     <section>
         <div class="container">
             <div class="flex-container">
+
+                    @csrf
                 <div class="upload_img_customer">
-                    <img src="{{ asset('web_sayt/img/Group 1947.svg') }}" alt="">
+                    <input style="display:none; " type="file" id="img-file" name="img">
+                    <label  for="img-file"><img class="upload" src="@if(auth()->user()->img){{ asset('web_sayt/img_customer/'.auth()->user()->img) }} @else {{ asset('web_sayt/img/img-file.svg') }}@endif"  alt=""></label>
                 </div>
+
+{{--                <div class="edit-profile__contact-img ">--}}
+{{--                    <input type="file" id="img-file" name="img-file">--}}
+
+{{--                    <label for="img-file"><img class="upload" src="http://feature.loc/web_sayt/img/img-file.svg" alt=""></label>--}}
+{{--                </div>--}}
                 <div class="form-customer">
                     <div class="create__form ">
                         <div class="form-info">
-                            <form id="auth" method="POST">
+
+
                                 <div class="user-info odd">
                                     <p class="user-info-p">First Name</p>
-                                    <input type="text" id="firsName" class="fadeIn" name="firsName">
+                                    <input type="text" id="firsName" value="{{auth()->user()->first_name }}" class="fadeIn" name="first_name">
                                 </div>
                                 <div class="user-info">
                                     <p class="user-info-p">Last Name</p>
-                                    <input type="text" class="fadeIn" name="lastName">
+                                    <input type="text" class="fadeIn" value="{{auth()->user()->last_name }}" name="last_name">
                                 </div>
                                 <br>
                                 <div class="user-info odd">
                                     <p class="user-info-p">E-mail</p>
-                                    <input type="email" id="email" class="fadeIn" name="emali">
+                                    <input type="email" id="email" value="{{auth()->user()->email }}" class="fadeIn" name="email">
                                 </div>
                                 <div class="user-info">
                                     <p class="user-info-p">Phone Number</p>
-                                    <input type="tel" id="phone" class="fadeIn" name="phone">
+                                    <input type="tel" id="phone" class="fadeIn" value="{{auth()->user()->phone_number }}" name="phone_number">
                                 </div>
                                 <br>
                                 <div class="user-info odd">
                                     <p class="user-info-p">Password</p>
-                                    <input type="password" id="password" class="fadeIn" name="password">
+                                    <input type="password" id="password" class="fadeIn @error('password') is-invalid @enderror" name="password">
                                 </div>
                                 <div class="user-info">
                                     <p class="user-info-p">Confirm Password</p>
-                                    <input type="text" id="Confirm-Password" class="fadeIn" name="Confirm">
+                                    <input type="password" id="Confirm-Password" class="fadeIn @error('password') is-invalid @enderror" name="password_confirmation">
+
+                                    @error('password')
+                                        <span role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+
                                 </div>
+
 
                                 <div class="user-info create__checkbox user-info-editprofile">
                                     <p>Gender</p>
-                                    <input type="checkbox" name="male" value="Remember me" class="lg-sg__checkin"><label
-                                        for="remember">Male</label>
-                                    <input type="checkbox" name="female" value="Remember me" class="lg-sg__checkin"><label
-                                        for="remember">Female</label>
-                                    <input type="checkbox" name="other" value="Remember me" class="lg-sg__checkin"><label
-                                        for="remember">Other</label>
+
+                                    <input id="Male" type="radio" name="gender" value="Male" {{ (auth()->user()->gender=="Male")? "checked" : "" }} class="lg-sg__checkin"><label
+                                        for="Male">Male</label>
+                                    <input id="Female" type="radio" name="gender" value="Famale" {{ (auth()->user()->gender=="Famale")? "checked" : "" }} class="lg-sg__checkin"><label
+                                        for="Female">Female</label>
+                                    <input id="Other"  type="radio" name="gender" value="Other" {{ (auth()->user()->gender=="Other")? "checked" : "" }} class="lg-sg__checkin"><label
+                                        for="Other">Other</label>
                                 </div>
                                 <div class="lg-sg__button  edit-prof-cust edit-profile-save">
                                     <input type="submit" form="auth" class="btn bg-yellow" value="Save">
                                 </div>
                                 <br>
 
-                            </form>
+
 
                             <form role="form" action="{{ route('add-card') }}" method="post" class="stripe-payment"
                                   data-cc-on-file="false" data-stripe-publishable-key="{{ env('STRIPE_KEY') }}"
@@ -177,9 +198,11 @@
                         </div>
                     </div>
                 </div>
+
             </div>
         </div>
     </section>
+    </form>
 @endsection
 
 @section('style')

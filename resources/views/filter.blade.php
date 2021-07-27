@@ -2,12 +2,15 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"
           integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA=="
           crossorigin="anonymous" />
+    <link rel="stylesheet" href="{{ asset('web_sayt/css/owl-carousel-min.css') }}">
+    <link rel="stylesheet" href="{{ asset('web_sayt/css/owl.theme.default.min.css') }}">
     <link rel="stylesheet" href="{{ asset('web_sayt/css/bootstrap/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('web_sayt/css/star-rating.css') }}">
     <link rel="stylesheet" href="{{ asset('web_sayt/css/css/main.css') }}">
-    <link rel="stylesheet" href="{{ asset('web_sayt/css/css/responsive.css') }}">
     <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
     <link rel="stylesheet" type="text/css" href="{{ asset('web_sayt/maps/style.css') }}" />
+    <link rel="stylesheet" href="{{ asset('web_sayt/css/service.css') }}">
+    <link rel="stylesheet" href="{{ asset('web_sayt/css/css/responsive.css') }}">
     <style>
         .create__checkbox input.lg-sg__checkin + label::before {
             border: solid 1px #8BA9EE;
@@ -118,7 +121,7 @@
                         </span>
                                 </div>
                                 <p class="perion__info-session">256<span> Sessions</span></p>
-                                <a href="" class="btn bg-yellow">Book</a>
+                                <a href="" class="btn bg-yellow" data-toggle="modal" data-target="#service-modal{{$Result->id}}">View Services</a>
                             </div>
                             <div class="person__info-cont2">
                                 <div class="person__info-name"><a href="{{route('profile-view-customer',[app()->getLocale()])}}">{{$Result->first_name}} {{$Result->last_name}}</a></div>
@@ -411,6 +414,8 @@
                         </div>
                     </div>
                 </div>
+
+
             @endforeach
         <!-- content -->
             @if(!empty($Result))
@@ -445,7 +450,78 @@
         </div>
     </section>
 
+    // Service Modal
+    @foreach($Practitioners as $Result)
+    <!-- The Modal service -->
+    <div class="modal fade" id="service-modal{{$Result->id}}">
+        <div class="modal-dialog mx-auto " style="max-width: 1640px; width: 100%">
+            <div class="modal-content">
 
+                <button type="button" class="close ml-auto pt-4 pr-4" data-dismiss="modal">&times;</button>
+
+                <!-- Modal body -->
+                <div class="modal-body">
+                    <div class="service mt-5 py-5">
+                        <h2 class="text-center">My Services</h2>
+                        <h4 class="text-uppercase text-center">ONE ON ONE PROGRAMS</h4>
+                        <div class="col-lg-12">
+                            <div class="">
+
+                                <!-- 1 -->
+
+                                <div class="profile-practitioner__consultation-carusel-block">
+                                    <div id="customer-testimonals1" class="owl-carousel owl-theme owl-loaded owl-drag ">
+                                        @foreach($Service->where('practitioner_id',$Result->id) as $Value)
+                                            @php
+                                                $array = array("item light-green","item light-yellow");
+                                                $k = array_rand($array);
+                                                $color = $array[$k];
+                                            @endphp
+                                            <div class="@php echo $color; @endphp flex-1 mx-1" >
+                                                <div class="d-flex flex-column align-items-center">
+                                                    <h4  class="mb-3">{{ $Value->title }}</h4>
+
+                                                    <div class="d-flex flex-column mx-auto align-items-center mb-3 italic-text">
+                                                        @foreach($ServiceSession as $valS)
+                                                            @foreach($valS->where('services_id',$Value->id) as $valSS)
+                                                                @if($valSS->services_id == $Value->id)
+                                                                    <span>{{$valSS->sessions}}</span>
+                                                                @endif
+                                                            @endforeach
+                                                        @endforeach
+                                                    </div>
+                                                </div>
+                                                <div class="price d-flex flex-column align-items-center mb-3">
+                                                    <div class="d-flex">
+                                                        <span class="">$</span> <span >{{$Value->price}}</span>
+                                                    </div>
+                                                    <small>USD plus HST</small>
+                                                </div>
+                                                <ul class="list-unstyled px-5 overflow-auto">
+                                                    @foreach($ServiceDescription as $valD)
+                                                        @foreach($valD->where('services_id',$Value->id) as $valDD)
+                                                            @if($valDD->services_id == $Value->id)
+                                                                <li><i class="fas fa-angle-right mr-2" ></i> <span>{{$valDD->description}}</span></li>
+                                                            @endif
+                                                        @endforeach
+                                                    @endforeach
+                                                </ul>
+
+                                                                                    <button class="bg-yellow br-10 px-4 py-2 mt-4 fs-16 view-more">Book</button>
+                                            </div>
+
+                                        @endforeach
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    @endforeach
 
 @endsection
 
@@ -486,7 +562,10 @@
     <script src="{{ asset('web_sayt/js/star-rating.js') }}"></script>
     <script src="{{ asset('web_sayt/js/star-run.js') }}"></script>
     <script src="{{ asset('web_sayt/js/filter.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('web_sayt/js/owl.carousel.min.js') }}"></script>
+    <script src="{{ asset('web_sayt/js/carusel.js') }}"></script>
     <script type="text/javascript" src="{{ asset('web_sayt/js/script.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('web_sayt/js/readMoreJS.min.js') }}"></script>
     <!-- Async script executes immediately and must be after any DOM elements used in callback. -->
     <script
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDtOVd66AerMgd0A-mwKEFqdBQTrKGfngc&callback=initMap&libraries=places&v=weekly"

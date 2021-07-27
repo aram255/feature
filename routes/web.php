@@ -78,6 +78,7 @@ Route::group(['prefix' => '{locale?}','where' => ['locale' => '[a-zA-Z]{2}']], f
     // Customers
     Route::get('/profile-customer', [CustomerController::class, 'profileCustomer'])->name('profile-customer');
     Route::get('/edit-profile-customer', [CustomerController::class, 'editProfileCustomer'])->name('edit-profile-customer');
+    Route::post('/edit-profile-customer-post', [CustomerController::class, 'editProfileCustmerPost'])->name('edit-profile-customer-post');
     Route::get('/profile-view-customer', [CustomerController::class, 'profileViewCustomer'])->name('profile-view-customer');
 
     // ZOOM
@@ -113,6 +114,7 @@ Route::group(['prefix' => '{locale?}','where' => ['locale' => '[a-zA-Z]{2}']], f
     Route::post('/password.update', [NewPasswordController::class, 'store'])->name('password.update');
 
 
+    // Service Practitioners
     Route::post('/add-service', [PractitionersController::class, 'addService'])->name('add-service');
     Route::post('/edit-service', [PractitionersController::class, 'editService'])->name('edit-service');
     Route::get('/delete-service/{id}', [PractitionersController::class, 'deleteService'])->name('delete-service');

@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Balance;
 use App\Models\Card;
+use App\Models\ServiceDescriptionModel;
+use App\Models\ServiceSessionModel;
+use App\Models\ServicesModel;
 use Illuminate\Http\Request;
 use App\Models\LanguagesModel;
 use App\Models\TegManagements;
@@ -109,7 +112,38 @@ class IndexController extends Controller
             .(!empty($tags)?" having count(p.id)=".count($request->teg_management):"")
         );
 
-      //  dd($Practitioner);
+
+
+        $Service  =  ServicesModel::all();
+        $ServiceSession = ServiceSessionModel::all();
+        $ServiceDescription = ServiceDescriptionModel::all();
+
+        $title =[];
+        $price =[];
+        $ID =[];
+        foreach ($Service as $serviceV)
+        {
+            $title[] =  $serviceV->title;
+            $price[] =  $serviceV->price;
+            $ID[]    =  $serviceV->id;
+        }
+
+        $ServiceSession=[];
+
+        foreach ($ID as $PrId)
+        {
+            $ServiceSession[] = ServiceSessionModel::where('services_id',$PrId)->get();
+        }
+
+        $ServiceDescription=[];
+
+        foreach ($ID as $PrID)
+        {
+            $ServiceDescription[] = ServiceDescriptionModel::where('services_id',$PrID)->get();
+        }
+
+
+//        dd($Practitioner);
 
         foreach($Practitioner as $val)
         {
@@ -142,7 +176,7 @@ class IndexController extends Controller
 
 
 
-        return view('filter',compact('Practitioners','Languages','TegManagements','Tag','Virtual','Person','Gender','Lang'));
+        return view('filter',compact('Practitioners','Languages','TegManagements','Tag','Virtual','Person','Gender','Lang','Service','ServiceSession','ServiceDescription'));
 
     }
 

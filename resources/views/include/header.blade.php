@@ -45,10 +45,10 @@
 {{--                    {{dd(session()->get('UserID'))}}--}}
                     @if(Session::has('UserID') and  !empty(session()->get('UserID')))
                     <li class="nav-items">
-                        <a class="nav-link" href="{{route("logout.custom",[app()->getLocale()])}}" ml-3="" >Log Out</a>
-                     </li>
-                    <li class="nav-items">
                         <a class="nav-link" href="{{route('profile-practitioner',[app()->getLocale()])}}" ml-3=""  >{{session()->get('UserLastName')}}</a>
+                    </li>
+                    <li class="nav-items">
+                        <a class="nav-link" href="{{route("logout.custom",[app()->getLocale()])}}" ml-3="" >Log Out</a>
                     </li>
                     @endif
                     @if (!empty(Auth::user()->first_name))

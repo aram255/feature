@@ -15,6 +15,8 @@
     box-shadow: 0 0 6px #00000029;
     border-radius: 5px;
     min-height: 45px;
+    min-width: 340px;
+    margin-left: 20px;
 }
 .tagger input[type="hidden"] {
   /* fix for bootsrap */
@@ -28,6 +30,7 @@
     padding: 4px 0;
     box-sizing: border-box;
     height: auto;
+    max-width: 320px;
 }
 .tagger ul {
     margin: 0;
