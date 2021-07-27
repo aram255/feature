@@ -28,7 +28,7 @@
                     <div class="my-appointments__complete-process-content">
                         <div class="my-appointments__complete-process-content-flex">
                             <div class="my-appointments-person__info">
-                                <div class="my-appointments-person__info-cont1">
+                                <div class="my-appointments-person__info-cont1 mr-3">
                                     <img class="my-appointments-person__info-img" src="{{ asset('web_sayt/img/person-foto.png') }}" alt="">
                                 </div>
                                 <div class="my-appointments-person__info-cont2">
@@ -50,7 +50,7 @@
                     <div class="my-appointments__complete-process-content">
                         <div class="my-appointments__complete-process-content-flex">
                             <div class="my-appointments-person__info">
-                                <div class="my-appointments-person__info-cont1">
+                                <div class="my-appointments-person__info-cont1 mr-3">
                                     <img class="my-appointments-person__info-img" src="{{ asset('web_sayt/img/person-foto.png') }}" alt="">
                                 </div>
                                 <div class="my-appointments-person__info-cont2">
@@ -69,11 +69,10 @@
 
                         </div>
                     </div>
-
                     <div class="my-appointments__complete-process-content">
                         <div class="my-appointments__complete-process-content-flex">
                             <div class="my-appointments-person__info">
-                                <div class="my-appointments-person__info-cont1">
+                                <div class="my-appointments-person__info-cont1 mr-3">
                                     <img class="my-appointments-person__info-img" src="{{ asset('web_sayt/img/person-foto.png') }}" alt="">
                                 </div>
                                 <div class="my-appointments-person__info-cont2">
@@ -101,7 +100,7 @@
                     <div class="my-appointments__complete-process-content">
                         <div class="my-appointments__complete-process-content-flex">
                             <div class="my-appointments-person__info">
-                                <div class="my-appointments-person__info-cont1">
+                                <div class="my-appointments-person__info-cont1 mr-3">
                                     <img class="my-appointments-person__info-img" src="{{ asset('web_sayt/img/person-foto.png') }}" alt="">
                                 </div>
                                 <div class="my-appointments-person__info-cont2">
@@ -125,7 +124,7 @@
                     <div class="my-appointments__complete-process-content">
                         <div class="my-appointments__complete-process-content-flex">
                             <div class="my-appointments-person__info">
-                                <div class="my-appointments-person__info-cont1">
+                                <div class="my-appointments-person__info-cont1 mr-3">
                                     <img class="my-appointments-person__info-img" src="{{ asset('web_sayt/img/person-foto.png') }}" alt="">
                                 </div>
                                 <div class="my-appointments-person__info-cont2">
@@ -149,7 +148,7 @@
                     <div class="my-appointments__complete-process-content">
                         <div class="my-appointments__complete-process-content-flex">
                             <div class="my-appointments-person__info">
-                                <div class="my-appointments-person__info-cont1">
+                                <div class="my-appointments-person__info-cont1 mr-3">
                                     <img class="my-appointments-person__info-img" src="{{ asset('web_sayt/img/person-foto.png') }}" alt="">
                                 </div>
                                 <div class="my-appointments-person__info-cont2">
