@@ -23,6 +23,9 @@ use App\Http\Controllers\CalendarController;
 
 use Illuminate\Support\Facades\Route;
 
+
+use App\Http\Controllers\FullCalenderController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -131,6 +134,12 @@ Route::group(['prefix' => '{locale?}','where' => ['locale' => '[a-zA-Z]{2}']], f
 
     // Calendar
     Route::get('calendar', [CalendarController::class, 'index']);
+
+
+    //calendar full
+    Route::get('full-calender', [FullCalenderController::class, 'index']);
+
+    Route::post('full-calender/action', [FullCalenderController::class, 'action'])->name('kk');
 
 });
 Route::get('/transaction-page', [PaymentController::class, 'index']);
