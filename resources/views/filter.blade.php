@@ -444,7 +444,6 @@
                             </li>
                         </ul>
                     </nav>
-
                 </div>
             @endif
         </div>
@@ -461,7 +460,7 @@
 
                 <!-- Modal body -->
                 <div class="modal-body">
-                    <div class="service mt-5 py-5">
+                    <div class="service mt-5 py-5 container">
                         <h2 class="text-center">My Services</h2>
                         <h4 class="text-uppercase text-center">ONE ON ONE PROGRAMS</h4>
                         <div class="col-lg-12">
@@ -506,12 +505,9 @@
                                                         @endforeach
                                                     @endforeach
                                                 </ul>
-
-                                                                                    <button class="bg-yellow br-10 px-4 py-2 mt-4 fs-16 view-more">Book</button>
+                                                <button class="bg-yellow br-10 px-4 py-2 mt-4 fs-16 view-more">Book</button>
                                             </div>
-
                                         @endforeach
-
                                     </div>
                                 </div>
                             </div>

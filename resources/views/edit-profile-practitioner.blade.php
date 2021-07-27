@@ -28,7 +28,9 @@
 
                     <div class="edit-profile__contact-img">
                         <input type="file" id="img-file" name="img-file">
-                        <label for="img-file"><img class="upload" src="{{ asset('web_sayt/img/img-file.svg') }}" alt=""></label>
+                        <label for="img-file">
+                            <img class="upload" src="{{ asset('web_sayt/img/img-file.svg') }}" alt="">
+                        </label>
                     </div>
                 </div>
                 <div class="add-photo-edit">
@@ -108,7 +110,7 @@
                         <input type="text" id="coverage" class="fadeIn" name="coverage">
                     </div>
                     <div class="user-info">
-                        <p class="user-info-p">Cases and specializations</p>
+                        <p class="user-info-p ml-3">Cases and specializations</p>
                         <input type="text" value="#enterTag" name="tags" />
                     </div>
                     <br>

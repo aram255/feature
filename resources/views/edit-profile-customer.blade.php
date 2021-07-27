@@ -42,57 +42,61 @@
                     <div class="create__form ">
                         <div class="form-info">
 
-
-                                <div class="user-info odd">
+                            <div class="d-flex flex-column flex-lg-row ">
+                                <div class="user-info odd p-3">
                                     <p class="user-info-p">First Name</p>
                                     <input type="text" id="firsName" value="{{auth()->user()->first_name }}" class="fadeIn" name="first_name">
                                 </div>
-                                <div class="user-info">
+                                <div class="user-info p-3">
                                     <p class="user-info-p">Last Name</p>
                                     <input type="text" class="fadeIn" value="{{auth()->user()->last_name }}" name="last_name">
                                 </div>
-                                <br>
-                                <div class="user-info odd">
+                            </div>
+                            <div class="d-flex flex-column flex-lg-row">
+                                <div class="user-info odd p-3">
                                     <p class="user-info-p">E-mail</p>
                                     <input type="email" id="email" value="{{auth()->user()->email }}" class="fadeIn" name="email">
                                 </div>
-                                <div class="user-info">
+                                <div class="user-info p-3">
                                     <p class="user-info-p">Phone Number</p>
                                     <input type="tel" id="phone" class="fadeIn" value="{{auth()->user()->phone_number }}" name="phone_number">
                                 </div>
-                                <br>
-                                <div class="user-info odd">
+                            </div>
+                            <div class="d-flex flex-column flex-lg-row">
+                                <div class="user-info odd p-3">
                                     <p class="user-info-p">Password</p>
                                     <input type="password" id="password" class="fadeIn @error('password') is-invalid @enderror" name="password">
                                 </div>
-                                <div class="user-info">
+                                <div class="user-info p-3">
                                     <p class="user-info-p">Confirm Password</p>
                                     <input type="password" id="Confirm-Password" class="fadeIn @error('password') is-invalid @enderror" name="password_confirmation">
 
                                     @error('password')
-                                        <span role="alert">
+                                    <span role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
                                     @enderror
 
                                 </div>
+                            </div>
 
 
-                                <div class="user-info create__checkbox user-info-editprofile">
+                                <div class="user-info create__checkbox user-info-editprofile p-1">
                                     <p>Gender</p>
 
-                                    <input id="Male" type="radio" name="gender" value="Male" {{ (auth()->user()->gender=="Male")? "checked" : "" }} class="lg-sg__checkin"><label
+                                    <input id="Male" type="radio" name="gender" value="Male" {{ (auth()->user()->gender=="Male")? "checked" : "" }} class="lg-sg__checkin mr-1">
+                                    <label
                                         for="Male">Male</label>
-                                    <input id="Female" type="radio" name="gender" value="Famale" {{ (auth()->user()->gender=="Famale")? "checked" : "" }} class="lg-sg__checkin"><label
+                                    <input id="Female" type="radio" name="gender" value="Famale" {{ (auth()->user()->gender=="Famale")? "checked" : "" }} class="lg-sg__checkin mr-1">
+                                    <label
                                         for="Female">Female</label>
-                                    <input id="Other"  type="radio" name="gender" value="Other" {{ (auth()->user()->gender=="Other")? "checked" : "" }} class="lg-sg__checkin"><label
+                                    <input id="Other"  type="radio" name="gender" value="Other" {{ (auth()->user()->gender=="Other")? "checked" : "" }} class="lg-sg__checkin mr-1">
+                                    <label
                                         for="Other">Other</label>
                                 </div>
-                                <div class="lg-sg__button  edit-prof-cust edit-profile-save">
+                                <div class="lg-sg__button  edit-prof-cust edit-profile-save ml-0 p-1">
                                     <input type="submit" form="auth" class="btn bg-yellow" value="Save">
                                 </div>
-                                <br>
-
 
 
                             <form role="form" action="{{ route('add-card') }}" method="post" class="stripe-payment"

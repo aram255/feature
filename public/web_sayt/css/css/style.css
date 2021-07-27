@@ -70,6 +70,10 @@ margin-bottom: 50px;
 .edit-profile-save{
     margin-left: 33px;
 }
+img.upload {
+    width: 260px;
+    height: auto;
+}
 
 
 /* end-editprofile-user */
