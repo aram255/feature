@@ -461,8 +461,19 @@
                 <!-- Modal body -->
                 <div class="modal-body">
                     <div class="service mt-5 py-5 container">
-                        <h2 class="text-center">My Services</h2>
-                        <h4 class="text-uppercase text-center">ONE ON ONE PROGRAMS</h4>
+
+                        <?php
+                         $count =  count($Service->where('practitioner_id',$Result->id));
+
+                        if(!empty(count($Service->where('practitioner_id',$Result->id))))
+                        {
+                            echo   '<h2 class="text-center" >My Services</h2>
+                            <h4 class="text-uppercase text-center" >ONE ON ONE PROGRAMS</h4>';
+                        }else{
+                            echo '<h2 class="text-center" >No services yet</h2>';
+                        }
+                        ?>
+
                         <div class="col-lg-12">
                             <div class="">
 
