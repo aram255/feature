@@ -110,8 +110,9 @@
                         <input type="text" id="coverage" class="fadeIn" name="coverage">
                     </div>
                     <div class="user-info">
-                        <p class="user-info-p ml-3">Cases and specializations</p>
+                        <p class="user-info-p ml-4">Cases and specializations</p>
                         <input type="text" value="#enterTag" name="tags" />
+{{--                        <input type="text"  id="tag1" name="tags" />--}}
                     </div>
                     <br>
                     <div class="user-info-about mb-4">
@@ -248,7 +249,6 @@
         @endsection
 
         @section('style')
-
 
             <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
             <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
@@ -395,6 +395,7 @@
 
             </script>
             <script src="{{ asset('web_sayt/js/tagger.js') }}"></script>
+
             <script>
                 var t1 = tagger(document.querySelector('[name="tags"]'), {
                     allow_duplicates: false,
@@ -402,6 +403,36 @@
                     add_on_blur: true,
                     completion: {list: []}
                 });
+
+
+              //   var data ='[{ "value": 1, "text": "Task 1", "continent": "Task" }, { "value": 2, "text": "Task 2", "continent": "Task" }, { "value": 3, "text": "Task 3", "continent": "Task" }, { "value": 4, "text": "Task 4", "continent": "Task" }, { "value": 5, "text": "Task 5", "continent": "Task" }, { "value": 6, "text": "Task 6", "continent": "Task" } ]';
+              //
+              // //  get data pass to json
+              //   var task = new Bloodhound({
+              //       datumTokenizer: Bloodhound.tokenizers.obj.whitespace("text"),
+              //       queryTokenizer: Bloodhound.tokenizers.whitespace,
+              //       local: jQuery.parseJSON(data) //your can use json type
+              //   });
+              //
+              //   task.initialize();
+              //
+              //   var elt = $("#tag1");
+              //   elt.tagsinput({
+              //       itemValue: "value",
+              //       itemText: "text",
+              //       typeaheadjs: {
+              //           name: "task",
+              //           displayKey: "text",
+              //           source: task.ttAdapter()
+              //       }
+              //   });
+              //
+              //   //insert data to input in load page
+              //   elt.tagsinput("add", {
+              //       value: 1,
+              //       text: "task 1",
+              //       continent: "task"
+              //   });
 
                 </script>
 @endsection

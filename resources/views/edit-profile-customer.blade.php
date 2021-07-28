@@ -81,7 +81,7 @@
                             </div>
 
 
-                                <div class="user-info create__checkbox user-info-editprofile p-1">
+                                <div class="user-info create__checkbox user-info-editprofile p-3">
                                     <p>Gender</p>
 
                                     <input id="Male" type="radio" name="gender" value="Male" {{ (auth()->user()->gender=="Male")? "checked" : "" }} class="lg-sg__checkin mr-1">
@@ -94,7 +94,7 @@
                                     <label
                                         for="Other">Other</label>
                                 </div>
-                                <div class="lg-sg__button  edit-prof-cust edit-profile-save ml-0 p-1">
+                                <div class="lg-sg__button  edit-prof-cust edit-profile-save ml-0 p-3">
                                     <input type="submit" form="auth" class="btn bg-yellow" value="Save">
                                 </div>
 
