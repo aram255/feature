@@ -4,16 +4,22 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\EventModel;
+use Auth;
 
 class FullCalenderController extends Controller
 {
+    public function __construct()
+    {
+
+        $this->middleware('auth');
+    }
     public function index(Request $request)
     {
         if($request->ajax())
         {
             $data = EventModel::whereDate('start', '>=', $request->start)
                 ->whereDate('end',   '<=', $request->end)
-                ->get(['id', 'title', 'start', 'end']);
+                ->get(['id', 'title', 'start', 'end','user_id']);
             return response()->json($data);
         }
         return view('calendar.full-calender');
