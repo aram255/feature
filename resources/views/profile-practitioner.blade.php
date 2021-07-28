@@ -95,7 +95,7 @@
                               <option value="1">1.0</option>
                            </select>
                            <span class="gl-star-rating--stars s50" role="tooltip" aria-label="5.0">
-                              <span data-index="0" data-value="1" class="" style="font-size: -28px;"></span>
+                              <span data-index="0" data-value="1" class="" style="font-size: 28px;"></span>
                               <span data-index="1" data-value="2" class=""></span>
                               <span data-index="2" data-value="3" class=""></span>
                               <span data-index="3" data-value="4" class=""></span>
@@ -341,7 +341,7 @@
                                  </select>
                                  <span class="gl-star-rating--stars s50" role="tooltip" aria-label="">
                                     <span data-index="0" data-value="1" class="gl-active"
-                                          style="font-size: -28px;"></span>
+                                          style="font-size: 28px;"></span>
                                     <span data-index="1" data-value="2" class="gl-active"></span>
                                     <span data-index="2" data-value="3" class="gl-active"></span>
                                     <span data-index="3" data-value="4" class="gl-active"></span>
