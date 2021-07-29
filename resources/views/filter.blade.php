@@ -449,7 +449,7 @@
         </div>
     </section>
 
-    // Service Modal
+    <!-- Service Modal -->
     @foreach($Practitioners as $Result)
     <!-- The Modal service -->
     <div class="modal fade" id="service-modal{{$Result->id}}">
