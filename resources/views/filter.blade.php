@@ -453,7 +453,7 @@
     @foreach($Practitioners as $Result)
     <!-- The Modal service -->
     <div class="modal fade" id="service-modal{{$Result->id}}">
-        <div class="modal-dialog mx-auto " style="max-width: 1640px; width: 100%">
+        <div class="modal-dialog mx-auto " style="max-width: max-content; width: 100%">
             <div class="modal-content">
 
                 <button type="button" class="close ml-auto pt-4 pr-4" data-dismiss="modal">&times;</button>
