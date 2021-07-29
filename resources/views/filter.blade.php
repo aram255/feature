@@ -458,7 +458,9 @@
         </div>
     </section>
 
+
 {{--    Service Modal--}}
+
     @foreach($Practitioners as $Result)
     <!-- The Modal service -->
     <div class="modal fade" id="service-modal{{$Result->id}}">
@@ -469,7 +471,7 @@
 
                 <!-- Modal body -->
                 <div class="modal-body">
-                    <div class="service py-5 container">
+                    <div class="service pb-5 container">
 
                         <?php
                          $count =  count($Service->where('practitioner_id',$Result->id));

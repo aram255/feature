@@ -236,12 +236,10 @@
     right: 0;
     min-width: 100px;
 }
-
 .item button.save {
     margin: 0 auto;
     display: none;
 }
-
 .service h2 {
     font: normal normal 600 24px/28px Montserrat;
     color: #462847;
