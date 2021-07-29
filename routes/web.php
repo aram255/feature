@@ -141,6 +141,9 @@ Route::group(['prefix' => '{locale?}','where' => ['locale' => '[a-zA-Z]{2}']], f
 
     Route::post('full-calender/action', [FullCalenderController::class, 'action'])->name('kk');
 
+
+    Route::get('product_detail/{id}', [IndexController::class, 'product_detail']);
+
 });
 Route::get('/transaction-page', [PaymentController::class, 'index']);
 Route::post('/transaction', [PaymentController::class, 'makePayment'])->name('make-payment');

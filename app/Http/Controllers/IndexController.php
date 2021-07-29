@@ -23,6 +23,7 @@ use Session;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Collection;
+use App\Models\EventModel;
 
 
 class IndexController extends Controller
@@ -200,5 +201,10 @@ class IndexController extends Controller
         $cards = Card::where('user_id', Auth::id())->orderBy('created_at','desc')->get();
         $balance = Balance::where('user_id', Auth::id())->first();
         return view('balance', compact('cards','balance'));
+    }
+
+    public function product_detail($id)
+    {
+        return EventModel::findOrFail($id);
     }
 }

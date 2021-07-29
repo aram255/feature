@@ -516,7 +516,7 @@
                                                         @endforeach
                                                     @endforeach
                                                 </ul>
-                                                <button class="bg-yellow br-10 px-4 py-2 mt-4 fs-16 view-more">Book</button>
+                                                <button class="bg-yellow br-10 px-4 py-2 mt-4 fs-16 view-more" data-toggle="modal" data-target="#myModal" data-id="{{ $Value->id }}" >Book</button>
                                             </div>
                                         @endforeach
                                     </div>
@@ -528,6 +528,26 @@
             </div>
         </div>
     </div>
+
+{{--    <div class="modal" tabindex="-1" id="myModal">--}}
+{{--        <div class="modal-dialog">--}}
+{{--            <div class="modal-content">--}}
+{{--                <div class="modal-header">--}}
+{{--                    <h5 id="product-title"></h5>--}}
+{{--                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">--}}
+{{--                        <span aria-hidden="true">&times;</span>--}}
+{{--                    </button>--}}
+{{--                </div>--}}
+{{--                <div class="modal-body">--}}
+{{--                    <p id="product-desc"></p>--}}
+{{--                </div>--}}
+{{--                <div class="modal-footer">--}}
+{{--                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>--}}
+{{--                    <button type="button" class="btn btn-primary">Save changes</button>--}}
+{{--                </div>--}}
+{{--            </div>--}}
+{{--        </div>--}}
+{{--    </div>--}}
     @endforeach
 
 @endsection
@@ -578,4 +598,25 @@
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDtOVd66AerMgd0A-mwKEFqdBQTrKGfngc&callback=initMap&libraries=places&v=weekly"
         async
     ></script>
+
+{{--    <script>--}}
+{{--        $('#myModal').modal('hide');--}}
+{{--        $(document).ready(function() {--}}
+{{--            $('.detail-btn').click(function() {--}}
+{{--                const id = $(this).attr('data-id');--}}
+{{--                $.ajax({--}}
+{{--                    url: 'product_detail/'+id,--}}
+{{--                    type: 'GET',--}}
+{{--                    data: {--}}
+{{--                        "id": id--}}
+{{--                    },--}}
+{{--                    success:function(data) {--}}
+{{--                        console.log(data);--}}
+{{--                        $('#product-title').html(data.title);--}}
+{{--                        $('#product-desc').html(data.description);--}}
+{{--                    }--}}
+{{--                })--}}
+{{--            });--}}
+{{--        });--}}
+{{--    </script>--}}
 @endsection
