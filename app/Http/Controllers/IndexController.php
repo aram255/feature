@@ -64,8 +64,9 @@ class IndexController extends Controller
         return $request->teg_management;
     }
 
-    public function search(Request $request)
+    public function search(Request $request,$lang, $protocolId = null)
     {
+//        var_dump($protocolId);
         $tags=null;
 
         if(!empty($request->teg_management))
@@ -176,6 +177,38 @@ class IndexController extends Controller
 
 
 
+//        $PID = [];
+//        if($request->ajax())
+//        {
+//        foreach ($Practitioner as $prID)
+//        {
+//            $data = EventModel::where('protocol_id',$prID->id)
+//                ->get(['id', 'title', 'start', 'end', 'user_id', 'protocol_id']);
+//
+//            return response()->json($data);
+//        }
+//        }
+
+//        var_dump($PID);
+
+//        dd($_GET);
+//        if($request->ajax())
+//        {
+//
+//
+//
+//
+                if($request->ajax())
+        {
+                $data = EventModel::where('protocol_id',$protocolId)
+                    ->get(['id', 'title', 'start', 'end', 'user_id', 'protocol_id']);
+
+                return response()->json($data);
+//
+        }
+
+
+
 
         return view('filter',compact('Practitioners','Languages','TegManagements','Tag','Virtual','Person','Gender','Lang','Service','ServiceSession','ServiceDescription'));
 
@@ -203,8 +236,59 @@ class IndexController extends Controller
         return view('balance', compact('cards','balance'));
     }
 
-    public function product_detail($id)
+//    public function product_detail($lang,$id,Request $request)
+//    {
+//
+//       // return EventModel::findOrFail($id);
+//       // return EventModel::where('user_id',$id)->first();
+//
+//        if($request->ajax())
+//        {
+//            $data = EventModel::whereDate('start', '>=', $request->start)
+//                ->whereDate('end',   '<=', $request->end)
+//                ->get(['id', 'title', 'start', 'end','user_id']);
+//            return response()->json($data);
+//        }
+//        return view('calendar.full-calender');
+//    }
+
+
+    // Calendar
+    public function action(Request $request)
     {
-        return EventModel::findOrFail($id);
+
+
+        if($request->ajax())
+        {
+
+            if($request->type == 'add')
+            {
+                $event = EventModel::create([
+                    'title'		=>	$request->title,
+                    'start'		=>	$request->start,
+                    'end'		=>	$request->end
+                ]);
+
+                return response()->json($event);
+            }
+
+            if($request->type == 'update')
+            {
+                $event = EventModel::find($request->id)->update([
+                    'title'		=>	$request->title,
+                    'start'		=>	$request->start,
+                    'end'		=>	$request->end
+                ]);
+
+                return response()->json($event);
+            }
+
+            if($request->type == 'delete')
+            {
+                $event = EventModel::find($request->id)->delete();
+
+                return response()->json($event);
+            }
+        }
     }
 }

@@ -11,10 +11,11 @@ class FullCalenderController extends Controller
     public function __construct()
     {
 
-        $this->middleware('auth');
+       // $this->middleware('auth');
     }
     public function index(Request $request)
     {
+
         if($request->ajax())
         {
             $data = EventModel::whereDate('start', '>=', $request->start)

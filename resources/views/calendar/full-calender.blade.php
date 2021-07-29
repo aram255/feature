@@ -19,14 +19,6 @@
     <br />
     <h1 class="text-center text-primary"><u>
 
-{{--            @php--}}
-{{--                $a = array(1,2,3,4);--}}
-{{--                    foreach ($a as $v)--}}
-{{--                    {--}}
-{{--                        echo  '<h2 class="mm" id="'.$v.'">'.$v.'</h2>';--}}
-{{--                    }--}}
-
-{{--            @endphp--}}
         </u></h1>
     <br />
 

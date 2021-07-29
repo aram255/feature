@@ -57,7 +57,7 @@ Route::group(['prefix' => '{locale?}','where' => ['locale' => '[a-zA-Z]{2}']], f
 
 
     Route::get('/', [IndexController::class, 'index'])->name('index');
-    Route::match(['get', 'post'],'Search', [IndexController::class, 'search'])->name('search');
+    Route::match(['get', 'post'],'Search/{protocolId?}', [IndexController::class, 'search'])->name('search');
     Route::match(['get', 'post'],'reset-field', [IndexController::class, 'resetField'])->name('reset-field');
     Route::get('/blog', [IndexController::class, 'blog'])->name('blog');
     Route::get('/balance', [IndexController::class, 'balance'])->name('balance');
