@@ -318,7 +318,7 @@
                         <div class="profile-practitioner__consultation-time-content">
                             <p class="time-content-title">VIDEO CONSULTATION <img src="{{ asset('web_sayt/img/zoom-icon-logo.png') }}" alt=""></p>
                             @foreach($ThisWeekMeetingsList as $Value)
-                            <button class="btn bg-yellow">{{date('H:i:s', strtotime($Value->start_date_time)) }}</button>
+                            <button class="btn bg-yellow">{{date('H:i:s', strtotime($Value->start)) }}</button>
                             @endforeach
                         </div>
                     </div>

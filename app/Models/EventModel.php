@@ -11,6 +11,6 @@ class EventModel extends Model
     protected $table = "event";
     public $timestamps = false;
     protected $fillable = [
-        'title', 'start', 'end'
+        'title', 'start', 'end','protocol_id','user_id'
     ];
 }

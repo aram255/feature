@@ -24,6 +24,7 @@ use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Collection;
 use App\Models\EventModel;
+use App\Models\ZoomModel;
 
 
 class IndexController extends Controller
@@ -66,7 +67,7 @@ class IndexController extends Controller
 
     public function search(Request $request,$lang, $protocolId = null)
     {
-//        var_dump($protocolId);
+
         $tags=null;
 
         if(!empty($request->teg_management))
@@ -176,35 +177,21 @@ class IndexController extends Controller
         $TegManagements = $this->tegManagements();
 
 
-
-//        $PID = [];
-//        if($request->ajax())
-//        {
-//        foreach ($Practitioner as $prID)
-//        {
-//            $data = EventModel::where('protocol_id',$prID->id)
-//                ->get(['id', 'title', 'start', 'end', 'user_id', 'protocol_id']);
-//
-//            return response()->json($data);
-//        }
-//        }
-
-//        var_dump($PID);
-
-//        dd($_GET);
-//        if($request->ajax())
-//        {
-//
-//
-//
-//
-                if($request->ajax())
+        if($request->ajax())
         {
-                $data = EventModel::where('protocol_id',$protocolId)
-                    ->get(['id', 'title', 'start', 'end', 'user_id', 'protocol_id']);
+
+            $start = (!empty($_GET["start"])) ? ($_GET["start"]) : ('');
+            $end = (!empty($_GET["end"])) ? ($_GET["end"]) : ('');
+
+
+
+                    $data = ZoomModel::whereDate('start', '>=', $start)
+                                        ->whereDate('end',   '<=', $end)
+                                        ->where('practitioner_id',$protocolId)
+                                        ->get();
 
                 return response()->json($data);
-//
+
         }
 
 
@@ -236,59 +223,48 @@ class IndexController extends Controller
         return view('balance', compact('cards','balance'));
     }
 
-//    public function product_detail($lang,$id,Request $request)
-//    {
-//
-//       // return EventModel::findOrFail($id);
-//       // return EventModel::where('user_id',$id)->first();
-//
-//        if($request->ajax())
-//        {
-//            $data = EventModel::whereDate('start', '>=', $request->start)
-//                ->whereDate('end',   '<=', $request->end)
-//                ->get(['id', 'title', 'start', 'end','user_id']);
-//            return response()->json($data);
-//        }
-//        return view('calendar.full-calender');
-//    }
+
 
 
     // Calendar
-    public function action(Request $request)
-    {
-
-
-        if($request->ajax())
-        {
-
-            if($request->type == 'add')
-            {
-                $event = EventModel::create([
-                    'title'		=>	$request->title,
-                    'start'		=>	$request->start,
-                    'end'		=>	$request->end
-                ]);
-
-                return response()->json($event);
-            }
-
-            if($request->type == 'update')
-            {
-                $event = EventModel::find($request->id)->update([
-                    'title'		=>	$request->title,
-                    'start'		=>	$request->start,
-                    'end'		=>	$request->end
-                ]);
-
-                return response()->json($event);
-            }
-
-            if($request->type == 'delete')
-            {
-                $event = EventModel::find($request->id)->delete();
-
-                return response()->json($event);
-            }
-        }
-    }
+//    public function action(Request $request)
+//    {
+//
+//
+//        if($request->ajax())
+//        {
+//
+//            if($request->type == 'add')
+//            {
+//
+//                $event = EventModel::create([
+//                    'title'		  =>	$request->title,
+//                    'start'		  =>	$request->start,
+//                    'end'		  =>	$request->end,
+//                    'protocol_id' =>	$request->practitionerId,
+//                    'user_id'     =>	$request->add_user_id
+//                ]);
+//
+//                return response()->json($event);
+//            }
+//
+////            if($request->type == 'update')
+////            {
+////                $event = EventModel::find($request->id)->update([
+////                    'title'		=>	$request->title,
+////                    'start'		=>	$request->start,
+////                    'end'		=>	$request->end
+////                ]);
+////
+////                return response()->json($event);
+////            }
+//
+//            if($request->type == 'delete')
+//            {
+//                $event = EventModel::find($request->id)->delete();
+//
+//                return response()->json($event);
+//            }
+//        }
+//    }
 }

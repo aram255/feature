@@ -480,9 +480,11 @@
                         {
                             echo   '<h2 class="text-center" >My Services</h2>
                             <h4 class="text-uppercase text-center" >ONE ON ONE PROGRAMS</h4>';
-                        }else{
+                        }
+                        else{
                             echo '<h2 class="text-center" >No services yet</h2>';
                         }
+
                         ?>
 
                         <div class="col-lg-12">
@@ -527,7 +529,12 @@
                                                         @endforeach
                                                     @endforeach
                                                 </ul>
-                                                <button class="bg-yellow br-10 px-4 py-2 mt-4 fs-16 view-more detail-btn" data-toggle="modal" data-target="#myModal" data-id="{{ $Value->id }}" >Book</button>
+                                                <input type="hidden" name="email" value="{{$Result->email}}">
+                                                <input type="hidden" name="first_name" value="{{$Result->first_name}}">
+                                                <input type="hidden" name="last_name" value="{{$Result->last_name}}">
+                                                <input type="hidden" name="phone_number" value="{{$Result->phone_number}}">
+                                                <input type="hidden" name="practitioner_id" value="{{$Result->id}}">
+                                                <button class="bg-yellow br-10 px-4 py-2 mt-4 fs-16 view-more detail-btn" data-toggle="modal" @if(isset(Auth::user()->id))data-target="#myModal" @else data-target="#service-modal-login" @endif" data-id="{{ $Result->id }}" >Book</button>
                                             </div>
 
 
@@ -542,29 +549,57 @@
         </div>
     </div>
 
+
+    @endforeach
     <div class="modal" tabindex="-1" id="myModal">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-{{--                    <h5 id="product-title"></h5>--}}
+                    {{--                    <h5 id="product-title"></h5>--}}
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
 
-{{--                    <p id="product-desc"></p>--}}
+                    {{--                    <p id="product-desc"></p>--}}
                     <div id="calendar"></div>
                 </div>
-{{--                <div class="modal-footer">--}}
-{{--                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>--}}
-{{--                    <button type="button" class="btn btn-primary">Save changes</button>--}}
-{{--                </div>--}}
+                {{--                <div class="modal-footer">--}}
+                {{--                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>--}}
+                {{--                    <button type="button" class="btn btn-primary">Save changes</button>--}}
+                {{--                </div>--}}
             </div>
         </div>
     </div>
-    @endforeach
 
+    {{--  check login --}}
+
+    <div class="modal fade" id="service-modal-login">
+        <div class="modal-dialog mx-auto " style="max-width: max-content; width: 100%">
+            <div class="modal-content">
+
+                <button type="button" class="close ml-auto pt-4 pr-4" data-dismiss="modal">&times;</button>
+
+                <!-- Modal body -->
+                <div class="modal-body">
+                    <div class="service pb-5 container">
+
+                        <div class="col-lg-12">
+                            <div class="">
+
+                                @if(!isset(Auth::user()->id))
+                                    <h2 class="text-center">Login</h2>
+                                @endif
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection
 
 @section('style')
@@ -575,162 +610,7 @@
 
     <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
     {{--     Calendar--}}
-    <script>
 
-        $(document).ready(function () {
-
-            $.ajaxSetup({
-                headers:{
-                    'X-CSRF-TOKEN' : $('meta[name="csrf-token"]').attr('content')
-                }
-            });
-
-
-            var calendar = $('#calendar').fullCalendar({
-                editable:true,
-                header:{
-                    left:'prev,next today',
-                    center:'title',
-                    right:'month,agendaWeek,agendaDay'
-                },
-                events:'/en/Search',
-                selectable:true,
-                selectHelper: true,
-                select:function(start, end, allDay)
-                {
-
-                    var start = $.fullCalendar.formatDate(start, 'Y-MM-DD HH:mm:ss');
-
-                    var end = $.fullCalendar.formatDate(end, 'Y-MM-DD HH:mm:ss');
-
-
-                    // Check live DateTime
-                    var today = new Date();
-                    var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
-                    var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
-                    var LiveDateTime = date + ' ' + time;
-
-                    // compare
-
-                    var d1 = new Date(start);
-                    var d2 = new Date(LiveDateTime);
-
-                    if (d1 > d2) {
-
-                        var title    = prompt('Event Title:');
-                        var pasword  = prompt('Event password:');
-                        var duration = prompt('Event Duration:');
-
-                        if(title !== "" && pasword !== "" && duration !== ""){
-
-                            $.ajax({
-                                url: "{{ route('kk',app()->getLocale()) }}",
-                                type: "POST",
-                                data: {
-                                    title: title,
-                                    start: start,
-                                    end: end,
-                                    type: 'add'
-                                },
-                                success: function (data) {
-                                    calendar.fullCalendar('refetchEvents');
-                                    alert("Event Created Successfully");
-                                }
-                            });
-
-                        }else{
-                            alert('datarka');
-                        }
-                    }else{
-                        alert('You can not make appointments with հետ back date.');
-                    }
-
-                },
-                editable:true,
-                eventResize: function(event, delta)
-                {
-                    var start = $.fullCalendar.formatDate(event.start, 'Y-MM-DD HH:mm:ss');
-                    var end = $.fullCalendar.formatDate(event.end, 'Y-MM-DD HH:mm:ss');
-                    var title = event.title;
-                    var id = event.id;
-                    $.ajax({
-                        url:"/en/full-calender/action",
-                        type:"POST",
-                        data:{
-                            title: title,
-                            start: start,
-                            end: end,
-                            id: id,
-                            type: 'update'
-                        },
-                        success:function(response)
-                        {
-                            calendar.fullCalendar('refetchEvents');
-                            alert("Event Updated Successfully");
-                        }
-                    })
-                },
-                eventDrop: function(event, delta)
-                {
-                    var start = $.fullCalendar.formatDate(event.start, 'Y-MM-DD HH:mm:ss');
-                    var end = $.fullCalendar.formatDate(event.end, 'Y-MM-DD HH:mm:ss');
-                    var title = event.title;
-                    var id = event.id;
-                    $.ajax({
-                        url:"/en/full-calender/action",
-                        type:"POST",
-                        data:{
-                            title: title,
-                            start: start,
-                            end: end,
-                            id: id,
-                            type: 'update'
-                        },
-                        success:function(response)
-                        {
-                            calendar.fullCalendar('refetchEvents');
-                            alert("Event Updated Successfully");
-                        }
-                    })
-                },
-
-                eventClick:function(event)
-                {
-                    var id = event.id;
-                    var user_id = event.user_id;
-
-
-                        @if(!empty(Auth::user()->id))
-
-                    var AuthID = {{Auth::user()->id}}
-
-                        alert(user_id)
-                    if(AuthID === user_id) {
-
-
-                        if (confirm("Are you sure you want to remove it?")) {
-
-                            $.ajax({
-                                url: "/en/full-calender/action",
-                                type: "POST",
-                                data: {
-                                    id: id,
-                                    type: "delete"
-                                },
-                                success: function (response) {
-                                    calendar.fullCalendar('refetchEvents');
-                                    alert("Event Deleted Successfully");
-                                }
-                            })
-                        }
-                    }
-                    @endif
-                }
-            });
-
-        });
-
-    </script>
 
     <script>
         $(document).ready(function() {
@@ -745,149 +625,317 @@
 
     </script>
 
-    <script>
-        // $('.modal').modal('hide');
-        $(document).ready(function() {
-            $('.detail-btn').click(function() {
-                const protocolId = $(this).attr('data-id');
-                // alert(protocolId)
-                $.ajax({
-                    url: 'Search/'+protocolId,
-                    type: 'GET',
-                    success: function (data){
+        <script>
+
+            $(document).on('click','.detail-btn', function()  {
+                var practitionerId = $(this).attr('data-id');
+                var calendar = null;
 
 
-                {{--            var start = $.fullCalendar.formatDate(start, 'Y-MM-DD HH:mm:ss');--}}
+                $('#calendar').fullCalendar('destroy');
 
-                {{--            var end = $.fullCalendar.formatDate(end, 'Y-MM-DD HH:mm:ss');--}}
+                $.ajaxSetup({
+                    headers:{
+                        'X-CSRF-TOKEN' : $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
+                $('#calendar').fullCalendar('destroy');
 
+                var calendar = $('#calendar').fullCalendar({
+                    editable:true,
+                    header:{
+                        left:'prev,next today',
+                        center:'title',
+                        right:'month,agendaWeek,agendaDay'
+                    },
+                    events:'/en/Search/'+ practitionerId,
+                    selectable:true,
+                    selectHelper: true,
+                    select:function(start, end, allDay)
+                    {
 
-                {{--            // Check live DateTime--}}
-                {{--            var today = new Date();--}}
-                {{--            var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();--}}
-                {{--            var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();--}}
-                {{--            var LiveDateTime = date + ' ' + time;--}}
+                        var start = $.fullCalendar.formatDate(start, 'Y-MM-DD HH:mm:ss');
 
-                {{--            // compare--}}
-
-                {{--            var d1 = new Date(start);--}}
-                {{--            var d2 = new Date(LiveDateTime);--}}
-
-                {{--            if (d1 > d2) {--}}
-
-                {{--                var title    = prompt('Event Title:');--}}
-                {{--                var pasword  = prompt('Event password:');--}}
-                {{--                var duration = prompt('Event Duration:');--}}
-
-                {{--                if(title !== "" && pasword !== "" && duration !== ""){--}}
-
-                {{--                    $.ajax({--}}
-                {{--                        url: "{{ route('kk',app()->getLocale()) }}",--}}
-                {{--                        type: "POST",--}}
-                {{--                        data: {--}}
-                {{--                            title: title,--}}
-                {{--                            start: start,--}}
-                {{--                            end: end,--}}
-                {{--                            type: 'add'--}}
-                {{--                        },--}}
-                {{--                        success: function (data) {--}}
-                {{--                            calendar.fullCalendar('refetchEvents');--}}
-                {{--                            alert("Event Created Successfully");--}}
-                {{--                        }--}}
-                {{--                    });--}}
-
-                {{--                }else{--}}
-                {{--                    alert('datarka');--}}
-                {{--                }--}}
-                {{--            }else{--}}
-                {{--                alert('You can not make appointments with հետ back date.');--}}
-                {{--            }--}}
+                        var end = $.fullCalendar.formatDate(end, 'Y-MM-DD HH:mm:ss');
 
 
+                        // Check live DateTime
+                        var today = new Date();
+                        var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
+                        var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+                        var LiveDateTime = date + ' ' + time;
 
-                {{--            var start = $.fullCalendar.formatDate(event.start, 'Y-MM-DD HH:mm:ss');--}}
-                {{--            var end = $.fullCalendar.formatDate(event.end, 'Y-MM-DD HH:mm:ss');--}}
-                {{--            var title = event.title;--}}
-                {{--            var id = event.id;--}}
-                {{--            $.ajax({--}}
-                {{--                url:"/en/full-calender/action",--}}
-                {{--                type:"POST",--}}
-                {{--                data:{--}}
-                {{--                    title: title,--}}
-                {{--                    start: start,--}}
-                {{--                    end: end,--}}
-                {{--                    id: id,--}}
-                {{--                    type: 'update'--}}
-                {{--                },--}}
-                {{--                success:function(response)--}}
-                {{--                {--}}
-                {{--                    calendar.fullCalendar('refetchEvents');--}}
-                {{--                    alert("Event Updated Successfully");--}}
-                {{--                }--}}
-                {{--            })--}}
 
-                {{--            var start = $.fullCalendar.formatDate(event.start, 'Y-MM-DD HH:mm:ss');--}}
-                {{--            var end = $.fullCalendar.formatDate(event.end, 'Y-MM-DD HH:mm:ss');--}}
-                {{--            var title = event.title;--}}
-                {{--            var id = event.id;--}}
-                {{--            $.ajax({--}}
-                {{--                url:"/en/full-calender/action",--}}
-                {{--                type:"POST",--}}
-                {{--                data:{--}}
-                {{--                    title: title,--}}
-                {{--                    start: start,--}}
-                {{--                    end: end,--}}
-                {{--                    id: id,--}}
-                {{--                    type: 'update'--}}
-                {{--                },--}}
-                {{--                success:function(response)--}}
-                {{--                {--}}
-                {{--                    calendar.fullCalendar('refetchEvents');--}}
-                {{--                    alert("Event Updated Successfully");--}}
-                {{--                }--}}
-                {{--            })--}}
+                        // compare
+
+                        var d1 = new Date(start);
+                        var d2 = new Date(LiveDateTime);
+
+                        if (d1 >= d2) {
+
+                            var title       = prompt('Event Title:');
+                            var pasword     = prompt('Event password:');
+                            var duration    = prompt('Event Duration:');
+                            @if(isset(Auth::user()->id))
+                            var add_user_id = "{{Auth::user()->id}}";
+                            @endif
+
+                            var practitionerID = $('.detail-btn').prev().val();
+                            var phone_number   = $('.detail-btn').prev().prev().val();
+                            var last_name      = $('.detail-btn').prev().prev().prev().val();
+                            var first_name     = $('.detail-btn').prev().prev().prev().prev().val();
+                            var email          = $('.detail-btn').prev().prev().prev().prev().prev().val();
 
 
 
-                {{--            var id = event.id;--}}
-                {{--            var user_id = event.user_id;--}}
+                            if(title !== "" && pasword !== "" && duration !== ""){
+
+                                $.ajax({
+                                    url: "{{ route('add-zoom-meeting',app()->getLocale()) }}",
+                                    type: "POST",
+                                    data: {
+                                        title: title,
+                                        start: start,
+                                        end: end,
+                                        practitionerId: practitionerId,
+                                        add_user_id: add_user_id,
+                                        phone_number: phone_number,
+                                        last_name: last_name,
+                                        first_name: first_name,
+                                        email: email,
+                                        duration: duration,
+                                        password: pasword,
+                                        practitionerID: practitionerID,
+                                        type: 'add'
+                                    },
+                                    success: function (data) {
+                                        calendar.fullCalendar('refetchEvents');
+                                         alert("Event Created Successfully");
+                                    },
+                                    error: function(returnval) {
+                                        alert('Your appointment has not been created');
+                                    }
+                                });
+
+                            }else{
+                                alert('Empty');
+                            }
+                        }else{
+                            alert('You can not make appointments with back date.');
+                        }
+
+                    },
+                    editable:true,
+                    // eventResize: function(event, delta)
+                    // {
+                    //
+                    //     $.ajax({
+                    //         url:"/en/full-calender/action",
+                    //         type:"POST",
+                    //         data:{
+                    //             title: title,
+                    //             start: start,
+                    //             end: end,
+                    //             id: id,
+                    //             type: 'update'
+                    //         },
+                    //         success:function(response)
+                    //         {
+                    //             calendar.fullCalendar('refetchEvents');
+                    //
+                    //             alert("Event Updated Successfully");
+                    //         }
+                    //     })
+                    // },
+                    // eventDrop: function(event, delta)
+                    // {
+                    //     var start = $.fullCalendar.formatDate(event.start, 'Y-MM-DD HH:mm:ss');
+                    //     var end = $.fullCalendar.formatDate(event.end, 'Y-MM-DD HH:mm:ss');
+                    //     var title = event.title;
+                    //     var id = event.id;
+                    //
+                    //
+                    //
+                    //
+                    //     $.ajax({
+                    //         url:"/en/full-calender/action",
+                    //         type:"POST",
+                    //         data:{
+                    //             title: title,
+                    //             start: start,
+                    //             end: end,
+                    //             id: id,
+                    //             type: 'update'
+                    //         },
+                    //         success:function(response)
+                    //         {
+                    //             calendar.fullCalendar('refetchEvents');
+                    //             alert("Event Updated Successfully");
+                    //         }
+                    //     })
+                    // },
+
+                    eventClick:function(event)
+                    {
+                        var id         = event.id;
+                        var user_id    = event.user_id;
+                        var meeting_id = event.meeting_id;
 
 
-                {{--                @if(!empty(Auth::user()->id))--}}
+                            @if(!empty(Auth::user()->id))
 
-                {{--            var AuthID = {{Auth::user()->id}}--}}
-
-                {{--                alert(user_id)--}}
-                {{--            if(AuthID === user_id) {--}}
+                        var AuthID = {{Auth::user()->id}}
 
 
-                {{--                if (confirm("Are you sure you want to remove it?")) {--}}
+                        if(AuthID === user_id) {
 
-                {{--                    $.ajax({--}}
-                {{--                        url: "/en/full-calender/action",--}}
-                {{--                        type: "POST",--}}
-                {{--                        data: {--}}
-                {{--                            id: id,--}}
-                {{--                            type: "delete"--}}
-                {{--                        },--}}
-                {{--                        success: function (response) {--}}
-                {{--                            calendar.fullCalendar('refetchEvents');--}}
-                {{--                            alert("Event Deleted Successfully");--}}
-                {{--                        }--}}
-                {{--                    })--}}
-                {{--                }--}}
-                {{--            }--}}
-                {{--            @endif--}}
+                            if (confirm("Are you sure you want to remove it?")) {
 
+                                $.ajax({
+                                    url: "{{ route('zoom-delete',app()->getLocale()) }}",
+                                    type: "POST",
+                                    data: {
+                                        delete_id: id,
+                                        delete_meeting_id:meeting_id,
+                                        type: "delete"
+                                    },
+                                    success: function (response) {
+                                        calendar.fullCalendar('refetchEvents');
+                                        alert("Event Deleted Successfully");
+                                    },
+                                    error: function(returnval) {
+                                        alert('Your appointment has not been deleted');
+                                    }
+                                })
+                            }
+                        }else{
+                            alert('You can not delete this meeting because you did not add it.')
+                        }
+                        @endif
+                    }
+                });
 
-                {{--    }--}}
-
-                {{--})--}}
             });
-        });
-    </script>
 
 
+            function displayMessage(message) {
+                toastr.success(message, 'Event');
+            }
+
+            $('.')
+        </script>
+
+
+{{--        <script>--}}
+
+{{--            // $('.detail-btn').click(function () {--}}
+{{--                $(document).on('click','.detail-btn', function()  {--}}
+{{--                    var protocolId = $(this).attr('data-id');--}}
+{{--                    var calendar = null;--}}
+
+
+{{--                    $('#calendar').fullCalendar('destroy');--}}
+
+{{--                var SITEURL = "{{ url('/') }}";--}}
+
+{{--                $.ajaxSetup({--}}
+{{--                    headers: {--}}
+{{--                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')--}}
+{{--                    }--}}
+{{--                });--}}
+
+
+{{--                 calendar = $('#calendar').fullCalendar({--}}
+
+{{--                    events: '/en/Search/'+ protocolId,--}}
+{{--                    displayEventTime: false,--}}
+{{--                    editable: true,--}}
+{{--                    eventRender: function (event, element, view) {--}}
+{{--                        if (event.allDay === 'true') {--}}
+{{--                            event.allDay = true;--}}
+{{--                        } else {--}}
+{{--                            event.allDay = false;--}}
+{{--                        }--}}
+{{--                    },--}}
+{{--                    selectable: true,--}}
+{{--                    selectHelper: true,--}}
+{{--                    select: function (start, end, allDay) {--}}
+{{--                        var title = prompt('Event Title:');--}}
+{{--                        if (title) {--}}
+{{--                            var start = $.fullCalendar.formatDate(start, "Y-MM-DD");--}}
+{{--                            var end = $.fullCalendar.formatDate(end, "Y-MM-DD");--}}
+{{--                            $.ajax({--}}
+{{--                                url: SITEURL + "/fullcalenderAjax",--}}
+{{--                                data: {--}}
+{{--                                    title: title,--}}
+{{--                                    start: start,--}}
+{{--                                    end: end,--}}
+{{--                                    type: 'add'--}}
+{{--                                },--}}
+{{--                                type: "POST",--}}
+{{--                                success: function (data) {--}}
+{{--                                    displayMessage("Event Created Successfully");--}}
+
+{{--                                    calendar.fullCalendar('renderEvent',--}}
+{{--                                        {--}}
+{{--                                            id: data.id,--}}
+{{--                                            title: title,--}}
+{{--                                            start: start,--}}
+{{--                                            end: end,--}}
+{{--                                            allDay: allDay--}}
+{{--                                        },true);--}}
+
+{{--                                    calendar.fullCalendar('unselect');--}}
+{{--                                }--}}
+{{--                            });--}}
+{{--                        }--}}
+{{--                    },--}}
+{{--                    eventDrop: function (event, delta) {--}}
+{{--                        var start = $.fullCalendar.formatDate(event.start, "Y-MM-DD");--}}
+{{--                        var end = $.fullCalendar.formatDate(event.end, "Y-MM-DD");--}}
+
+{{--                        $.ajax({--}}
+{{--                            url: SITEURL + '/fullcalenderAjax',--}}
+{{--                            data: {--}}
+{{--                                title: event.title,--}}
+{{--                                start: start,--}}
+{{--                                end: end,--}}
+{{--                                id: event.id,--}}
+{{--                                type: 'update'--}}
+{{--                            },--}}
+{{--                            type: "POST",--}}
+{{--                            success: function (response) {--}}
+{{--                                displayMessage("Event Updated Successfully");--}}
+{{--                            }--}}
+{{--                        });--}}
+{{--                    },--}}
+{{--                    eventClick: function (event) {--}}
+{{--                        var deleteMsg = confirm("Do you really want to delete?");--}}
+{{--                        if (deleteMsg) {--}}
+{{--                            $.ajax({--}}
+{{--                                type: "POST",--}}
+{{--                                url: SITEURL + '/fullcalenderAjax',--}}
+{{--                                data: {--}}
+{{--                                    id: event.id,--}}
+{{--                                    type: 'delete'--}}
+{{--                                },--}}
+{{--                                success: function (response) {--}}
+{{--                                    calendar.fullCalendar('removeEvents', event.id);--}}
+{{--                                    displayMessage("Event Deleted Successfully");--}}
+{{--                                }--}}
+{{--                            });--}}
+{{--                        }--}}
+{{--                    }--}}
+
+{{--                });--}}
+
+{{--            });--}}
+
+{{--            function displayMessage(message) {--}}
+{{--                toastr.success(message, 'Event');--}}
+{{--            }--}}
+
+{{--        </script>--}}
 
 
     <script type="text/javascript" src="{{ asset('web_sayt/js/bootstrap/bootstrap.min.js') }}"></script>

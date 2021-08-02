@@ -85,7 +85,7 @@
         <div class="container">
             <div class="card mb-3">
                 <h2 style="text-align: center;">My Meetings Zoom  </h2>
-                <form action="{{route('zoom-delete',[app()->getLocale()])}}" method="post" >
+                <form action="{{route('zoom-delete-table',[app()->getLocale()])}}" method="post" >
                     {{csrf_field()}}
 
                     {{--  Edit category title--}}
@@ -104,7 +104,7 @@
                                 @foreach($data as $val)
                                     <tr>
                                         <td><a href="{{$val->join_url}}" target="_blank">{{$val->title}}</a></td>
-                                        <td>{{date('d-m-Y-H:i:s', strtotime($val->start_date_time)) }}</td>
+                                        <td>{{date('d-m-Y-H:i:s', strtotime($val->start)) }}</td>
                                         <td>{{$val->duration}}</td>
                                         <td>
                                             <input type="hidden" name="delete_id" value="{{$val->id}}">

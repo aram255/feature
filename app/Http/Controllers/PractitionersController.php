@@ -64,7 +64,7 @@ class PractitionersController extends Controller
 
         $PractitionerInfo= AuthPractitionersModel::where('id',session()->get('UserID'))->first();
 
-        $ThisWeekMeetingsList = ZoomModel::whereBetween('start_date_time', [Carbon::now()->startOfWeek(), Carbon::now()->endOfWeek()])->get();
+        $ThisWeekMeetingsList = ZoomModel::whereBetween('start', [Carbon::now()->startOfWeek(), Carbon::now()->endOfWeek()])->get();
 
         return view('profile-practitioner',compact('TagManagements','MyTagManagements','PractitionerInfo','ThisWeekMeetingsList','Service','ServiceSession','ServiceDescription'));
     }

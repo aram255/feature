@@ -88,6 +88,7 @@ Route::group(['prefix' => '{locale?}','where' => ['locale' => '[a-zA-Z]{2}']], f
     Route::match(['get', 'post'],'/zoom', [ZoomController::class, 'index'])->name('meetings-list-zoom');
     Route::post('/add-zoom-meeting', [ZoomController::class, 'addZoomMeeting'])->name('add-zoom-meeting');
     Route::post('/delete-zoom-meeting', [ZoomController::class, 'deleteZoomMeeting'])->name('zoom-delete');
+    Route::post('/delete-zoom-meeting-table', [ZoomController::class, 'deleteZoomMeetingTable'])->name('zoom-delete-table');
 
     // Practitioners
     Route::post('/custom-registration', [AuthPractitionersController::class, 'customRegistration'])->name('register.custom');
@@ -121,6 +122,12 @@ Route::group(['prefix' => '{locale?}','where' => ['locale' => '[a-zA-Z]{2}']], f
     Route::post('/add-service', [PractitionersController::class, 'addService'])->name('add-service');
     Route::post('/edit-service', [PractitionersController::class, 'editService'])->name('edit-service');
     Route::get('/delete-service/{id}', [PractitionersController::class, 'deleteService'])->name('delete-service');
+
+
+
+
+    // Full Calendar
+    Route::post('event-calendar', [IndexController::class, 'action'])->name('event-calendar');
 
 
     // login

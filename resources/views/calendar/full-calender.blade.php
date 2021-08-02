@@ -53,9 +53,6 @@
             select:function(start, end, allDay)
             {
 
-
-
-
                  // if(title) {
 
                     var start = $.fullCalendar.formatDate(start, 'Y-MM-DD HH:mm:ss');
@@ -68,6 +65,7 @@
                     var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
                     var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
                     var LiveDateTime = date + ' ' + time;
+
 
                     // compare
 
