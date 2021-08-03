@@ -111,7 +111,10 @@
                     </div>
                     <div class="user-info">
                         <p class="user-info-p ml-4">Cases and specializations</p>
-                        <input type="text" value="#enterTag" name="tags" />
+                        <input type="text" value="#enterTag"  id="country_name" class="form-control input-lg" />
+{{--                        <input type="text"   placeholder="Enter Country Name" />--}}
+{{--                        <div id="countryList">--}}
+                            {{ csrf_field() }}
 {{--                        <input type="text"  id="tag1" name="tags" />--}}
                     </div>
                     <br>
@@ -435,4 +438,33 @@
               //   });
 
                 </script>
+
+            <script>
+                $(document).ready(function(){
+
+                    $('#country_name').keyup(function(){
+                        alert('asd');
+                        var query = $(this).val();
+                        if(query != '')
+                        {
+                            var _token = $('input[name="_token"]').val();
+                            $.ajax({
+                                url:"{{ route('autocomplete',[app()->getLocale()]) }}",
+                                method:"POST",
+                                data:{query:query, _token:_token},
+                                success:function(data){
+                                    $('#countryList').fadeIn();
+                                    $('#countryList').html(data);
+                                }
+                            });
+                        }
+                    });
+
+                    $(document).on('click', 'li', function(){
+                        $('#country_name').val($(this).text());
+                        $('#countryList').fadeOut();
+                    });
+
+                });
+            </script>
 @endsection

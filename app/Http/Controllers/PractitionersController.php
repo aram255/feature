@@ -311,5 +311,27 @@ class PractitionersController extends Controller
         return redirect(app()->getLocale()."/edit-profile-practitioner")->with('status','Delete service');
     }
 
+    public function getAutocomplete(Request $request)
+    {
+
+
+        if($request->get('query'))
+        {
+            $query = $request->get('query');
+            $data = DB::table('teg_managements')
+                ->where('name', 'LIKE', "%{$query}%")
+                ->get();
+            $output = '<ul class="dropdown-menu" style="display:block; position:relative">';
+            foreach($data as $row)
+            {
+                $output .= '
+       <li><a href="#">'.$row->name.'</a></li>
+       ';
+            }
+            $output .= '</ul>';
+            echo $output;
+        }
+    }
+
 
 }

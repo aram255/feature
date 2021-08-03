@@ -14,6 +14,7 @@ use Mail;
 use Illuminate\Support\Facades\Session;
 use Auth;
 use App\Models\ZoomModel;
+use Illuminate\Support\Str;
 
 class ZoomController extends Controller
 {
@@ -52,6 +53,7 @@ class ZoomController extends Controller
 
          // $data = json_decode($response->getBody());
           $data = ZoomModel::where('user_id',Auth::user()->id)->get();
+
 
 
 
@@ -176,26 +178,37 @@ class ZoomController extends Controller
         $JoinUrl  = end($GetData->meetings);
 
 
+        $code = Str::random(50);
+        $Accept  = 'Accept';
+        $Reject  = 'Reject';
+        $Pending = 'Pending';
+
+        $URLAccept = request()->getHttpHost().'/'.app()->getLocale().'/confirm-meeting/'.$code.'/'.$Accept;
+        $URLReject = request()->getHttpHost().'/'.app()->getLocale().'/confirm-meeting/'.$code.'/'.$Reject;
+
         if($response->getStatusCode() == 201)
         {
+            //$code = Str::random(50);
 
-//             Mail::send('email.zoom-from-customer',
-//                 [
-//                    'title' => $request->m_name,
-//                    'start_time' => new Carbon($request->birthdaytime),
-//                    'duration' => $request->time,
-//                    'password' => $request->password,
-//                    'JoinUrl' => $JoinUrl->join_url,
-//                    'email' => Auth::user()->email,
-//                    'first_name' => $request->first_name,
-//                    'last_name' => $request->last_name,
-//                    'phone_number' => $request->phone_number
-//
-//                 ], function($message) use ($request) {
-//                 $message->from($request->email);
-//                 $message->to($request->email);
-//                 $message->subject('Generate Zoom Meeting');
-//             });
+             Mail::send('email.zoom-from-customer',
+                 [
+                    'title'        => $request->m_name,
+                    'start_time'   => new Carbon($request->birthdaytime),
+                    'duration'     => $request->time,
+                    'password'     => $request->password,
+                    'JoinUrl'      => $JoinUrl->join_url,
+                    'email'        => Auth::user()->email,
+                    'first_name'   => $request->first_name,
+                    'last_name'    => $request->last_name,
+                    'phone_number' => $request->phone_number,
+                    'URLAccept'    => $URLAccept,
+                    'URLReject'    => $URLReject
+
+                 ], function($message) use ($request) {
+                 $message->from($request->email);
+                 $message->to($request->email);
+                 $message->subject('Generate Zoom Meeting');
+             });
 
             $Add = new ZoomModel;
             $Add->title            = $request->title;
@@ -207,6 +220,8 @@ class ZoomController extends Controller
             $Add->meeting_id       = $JoinUrl->id;
             $Add->user_id          = Auth::user()->id;
             $Add->practitioner_id  = $request->practitionerID;
+            $Add->check_code       = $code;
+            $Add->status           = $Pending;
             $Add->save();
 
             return response()->json($Add);
@@ -218,25 +233,69 @@ class ZoomController extends Controller
 
     public function deleteZoomMeeting(request $request)
     {
+
         $this->jwt();
 
-        $client = new \GuzzleHttp\Client(['base_uri' => 'https://api.zoom.us']);
 
-        $response = $client->request("DELETE", "/v2/meetings/".$request->delete_meeting_id, [
+            $client = new \GuzzleHttp\Client(['base_uri' => 'https://api.zoom.us']);
+
+//            $response = $client->request("DELETE", "/v2/meetings/".$request->delete_meeting_id, [
+//                "headers" => [
+//                    "Authorization" => "Bearer " . $this->jwt
+//                ]
+//            ]);
+//
+//
+//        if (204 == $response->getStatusCode())
+//        {
+//            $Delete = ZoomModel::where("id",$request->delete_id);
+//
+//            $Delete->delete();
+//
+//            return response()->json($Delete);
+//
+//        }
+
+        // Get  Data  zoom meeting
+        $GetData = $client->request('GET', '/v2/users/me/meetings', [
             "headers" => [
-                "Authorization" => "Bearer " . $this->jwt
+                "Authorization" => "Bearer ". $this->jwt
             ]
         ]);
+        $data = json_decode($GetData->getBody());
 
-        if (204 == $response->getStatusCode())
+
+        // Check Meeting ID zomm Api
+        $ZID = [];
+        foreach ($data->meetings as $ZoomID)
+        {
+            if($ZoomID->id == $request->delete_meeting_id)
+            {
+                $ZID[] = $ZoomID->id;
+            }
+        }
+
+
+        // Delete meeting zoom Api
+        if(!empty($ZID[0]))
+        {
+            $response = $client->request("DELETE", "/v2/meetings/".$ZID[0], [
+                "headers" => [
+                    "Authorization" => "Bearer " . $this->jwt
+                ]
+            ]);
+        }
+
+        // Delete meeting zoom sql
+        // 204 == $response->getStatusCode()
+        if (!empty($request->delete_id))
         {
             $Delete = ZoomModel::where("id",$request->delete_id);
 
             $Delete->delete();
-
-            return response()->json($Delete);
-           // return  back()->with('status','Delete Zoom Meeting');
+            return  back()->with('status','Delete Zoom Meeting');
         }
+
         return response()->json($response);
     }
 
@@ -246,13 +305,44 @@ class ZoomController extends Controller
 
         $client = new \GuzzleHttp\Client(['base_uri' => 'https://api.zoom.us']);
 
-        $response = $client->request("DELETE", "/v2/meetings/".$request->delete_meeting_id, [
+
+        // Get  Data  zoom meeting
+        $GetData = $client->request('GET', '/v2/users/me/meetings', [
             "headers" => [
-                "Authorization" => "Bearer " . $this->jwt
+                "Authorization" => "Bearer ". $this->jwt
             ]
         ]);
+        $data = json_decode($GetData->getBody());
 
-        if (204 == $response->getStatusCode())
+
+        // Check Meeting ID zomm Api
+        $ZID = [];
+        foreach ($data->meetings as $ZoomID)
+        {
+            if($ZoomID->id == $request->delete_meeting_id)
+            {
+                $ZID[] = $ZoomID->id;
+            }
+        }
+
+
+        // Delete meeting zoom Api
+        if(!empty($ZID[0]))
+        {
+            $response = $client->request("DELETE", "/v2/meetings/".$ZID[0], [
+                "headers" => [
+                    "Authorization" => "Bearer " . $this->jwt
+                ]
+            ]);
+        }
+
+
+
+
+
+        // Delete meeting zoom sql
+       // 204 == $response->getStatusCode()
+        if (!empty($request->delete_id))
         {
             $Delete = ZoomModel::where("id",$request->delete_id);
 
@@ -265,6 +355,29 @@ class ZoomController extends Controller
     public function getData()
     {
        $GetData = ZoomModel::where('user_id',Auth::user()->id)->get();
+    }
+
+    public function confirmMeeting($lang,$Code,$Status)
+    {
+
+        $ChangeStatus =  ZoomModel::where('check_code',$Code)->first();
+        if($ChangeStatus != null)
+        {
+            $ChangeStatus->check_code = '?'.$Code;
+            $ChangeStatus->status     = $Status;
+            $ChangeStatus->save();
+            if(isset($ChangeStatus->status) && $ChangeStatus->status == 'Accept')
+            {
+                return redirect()->route('index',[app()->getLocale()])->with('status', 'Your meeting approved.');
+
+            }elseif(isset($ChangeStatus->status) && $ChangeStatus->status == 'Reject'){
+
+                return redirect()->route('index',[app()->getLocale()])->with('status', 'Your meeting rejected.');
+            }
+
+        }else{
+            return redirect()->route('index',[app()->getLocale()])->with('status', 'You can not change the status again.');
+        }
 
 
     }

@@ -24,8 +24,6 @@ use App\Http\Controllers\CalendarController;
 use Illuminate\Support\Facades\Route;
 
 
-use App\Http\Controllers\FullCalenderController;
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -89,6 +87,7 @@ Route::group(['prefix' => '{locale?}','where' => ['locale' => '[a-zA-Z]{2}']], f
     Route::post('/add-zoom-meeting', [ZoomController::class, 'addZoomMeeting'])->name('add-zoom-meeting');
     Route::post('/delete-zoom-meeting', [ZoomController::class, 'deleteZoomMeeting'])->name('zoom-delete');
     Route::post('/delete-zoom-meeting-table', [ZoomController::class, 'deleteZoomMeetingTable'])->name('zoom-delete-table');
+    Route::get('/confirm-meeting/{Code}/{Status}', [ZoomController::class, 'confirmMeeting'])->name('confirm-meeting');
 
     // Practitioners
     Route::post('/custom-registration', [AuthPractitionersController::class, 'customRegistration'])->name('register.custom');
@@ -125,31 +124,28 @@ Route::group(['prefix' => '{locale?}','where' => ['locale' => '[a-zA-Z]{2}']], f
 
 
 
-
-    // Full Calendar
-    Route::post('event-calendar', [IndexController::class, 'action'])->name('event-calendar');
+    Route::post('autocomplete', [PractitionersController::class, 'getAutocomplete'])->name('autocomplete');
 
 
     // login
 
-//     Route::get('/redirect', 'SocialController@redirect');
-//     Route::get('/callback/google', 'SocialController@callback');
-     Route::get('/index', 'SocialController@index');
+    // Testing
 
-    Route::get('redirect', [SocialController::class, 'redirect']);
-    Route::get('callback/google', [SocialController::class, 'callback']);
+     // Route::get('/redirect', 'SocialController@redirect');
+     // Route::get('/callback/google', 'SocialController@callback');
+//     Route::get('/index', 'SocialController@index');
+//
+//    Route::get('redirect', [SocialController::class, 'redirect']);
+//    Route::get('callback/google', [SocialController::class, 'callback']);
 
     // Calendar
-    Route::get('calendar', [CalendarController::class, 'index']);
+//    Route::get('calendar', [CalendarController::class, 'index']);
 
 
-    //calendar full
-    Route::get('full-calender', [FullCalenderController::class, 'index']);
-
-    Route::post('full-calender/action', [FullCalenderController::class, 'action'])->name('kk');
 
 
-    Route::get('product_detail/{id}', [IndexController::class, 'product_detail']);
+
+
 
 });
 Route::get('/transaction-page', [PaymentController::class, 'index']);

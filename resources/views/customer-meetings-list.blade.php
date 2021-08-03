@@ -97,6 +97,7 @@
                                     <th>Title</th>
                                     <th>Start Time</th>
                                     <th>Duration</th>
+                                    <th>Status</th>
                                     <th>Remove</th>
                                 </tr>
                                 </thead>
@@ -106,6 +107,7 @@
                                         <td><a href="{{$val->join_url}}" target="_blank">{{$val->title}}</a></td>
                                         <td>{{date('d-m-Y-H:i:s', strtotime($val->start)) }}</td>
                                         <td>{{$val->duration}}</td>
+                                        <td style="font-weight:bold;color: @if($val->status == 'Pending') red; @elseif($val->status == 'Accept') #1c7430; @endif">{{$val->status}}</td>
                                         <td>
                                             <input type="hidden" name="delete_id" value="{{$val->id}}">
                                             <input type="hidden" name="delete_meeting_id" value="{{$val->meeting_id}}">

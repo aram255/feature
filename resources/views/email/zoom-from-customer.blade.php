@@ -20,6 +20,8 @@
                     <p>Duration: <span style="red">{{$duration}}</span></p>
                     <p>Password: <span style="red">{{$password}}</span></p>
                     <p>Join Url: <span style="red">{{$JoinUrl}}</span></p>
+                    <h1><p><span style="color: red">Confirm Meeting</span></p></h1>
+                    <p><a style="color: #1c7430;font-size: larger;text-decoration: none;font-weight:bold;" target="_blank" href="https://{{$URLAccept}}">Confirm</a>  <a target="_blank" style="color: red;font-size: larger;text-decoration: none;font-weight:bold;" href="https://{{$URLReject}}">Reject</a> </p>
                 </div>
             </div>
         </div>
