@@ -28,7 +28,7 @@
                         <a class="nav-link" href="<?php if(!empty(Request::segment(1))): ?> <?php echo e(route('index',[app()->getLocale()])); ?>/#all-services <?php else: ?> #all-services <?php endif; ?>">All Services</a>
                     </li>
                     <li class="nav-items border-blue">
-                        <a class="nav-link" href="">Blog</a>
+                        <a class="nav-link" href="<?php echo e(route('blog',[app()->getLocale()])); ?>">Blog</a>
                     </li>
                     <?php if(!isset(auth()->user()->id) and !Session::has('UserID')): ?>
                     <li class="nav-items border-blue">

@@ -28,7 +28,7 @@
                         <a class="nav-link" href="@if(!empty(Request::segment(1))) {{route('index',[app()->getLocale()])}}/#all-services @else #all-services @endif">All Services</a>
                     </li>
                     <li class="nav-items border-blue">
-                        <a class="nav-link" href="{{--route('blog',[app()->getLocale()])--}}">Blog</a>
+                        <a class="nav-link" href="{{ route('blog',[app()->getLocale()]) }}">Blog</a>
                     </li>
                     @if (!isset(auth()->user()->id) and !Session::has('UserID'))
                     <li class="nav-items border-blue">

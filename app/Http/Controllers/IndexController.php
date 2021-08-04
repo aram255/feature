@@ -208,11 +208,9 @@ class IndexController extends Controller
         return new LengthAwarePaginator($items->forPage($page, $perPage), $items->count(), $perPage, $page, $options);
     }
 
-
     public function blog()
     {
-        $cards = Card::where('user_id', Auth::id())->orderBy('created_at','desc')->get();
-        return view('blog', compact('cards'));
+        return view('blog');
     }
 
 

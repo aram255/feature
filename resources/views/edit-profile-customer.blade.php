@@ -98,7 +98,7 @@
                                     <input type="submit" form="auth" class="btn bg-yellow" value="Save">
                                 </div>
 
-
+    </form>
                             <form role="form" action="{{ route('add-card') }}" method="post" class="stripe-payment"
                                   data-cc-on-file="false" data-stripe-publishable-key="{{ env('STRIPE_KEY') }}"
                                   id="stripe-payment">
@@ -206,7 +206,7 @@
             </div>
         </div>
     </section>
-    </form>
+
 @endsection
 
 @section('style')

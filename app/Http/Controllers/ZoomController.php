@@ -51,11 +51,11 @@ class ZoomController extends Controller
            ]);
 
 
-      //   $data = json_decode($response->getBody());
-
-
-       // $JoinUrl  = $data->meetings;
-
+//         $data = json_decode($response->getBody());
+//
+//
+//        $JoinUrl  = $data->meetings;
+//
 //        dd($JoinUrl);
 
           $data = ZoomModel::where('user_id',Auth::user()->id)->get();
