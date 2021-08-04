@@ -51,7 +51,13 @@ class ZoomController extends Controller
            ]);
 
 
-         // $data = json_decode($response->getBody());
+      //   $data = json_decode($response->getBody());
+
+
+       // $JoinUrl  = $data->meetings;
+
+//        dd($JoinUrl);
+
           $data = ZoomModel::where('user_id',Auth::user()->id)->get();
 
 
@@ -176,6 +182,7 @@ class ZoomController extends Controller
 
         $GetData = json_decode($get->getBody());
         $JoinUrl  = end($GetData->meetings);
+
 
 
         $code = Str::random(50);

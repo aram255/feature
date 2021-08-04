@@ -523,7 +523,7 @@
                                                     @foreach($ServiceDescription as $valD)
                                                         @foreach($valD->where('services_id',$Value->id) as $valDD)
                                                             @if($valDD->services_id == $Value->id)
-                                                                <li><i class="fas fa-angle-right mr-2" ></i> <span>{{$valDD->description}}</span></li>
+                                                                <li style="margin-bottom: 4px !important;"><i class="fas fa-angle-right mr-2"  ></i> <span>{{$valDD->description}}</span></li>
                                                             @endif
                                                         @endforeach
                                                     @endforeach
