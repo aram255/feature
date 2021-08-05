@@ -543,8 +543,8 @@
             target: '.overflow-auto',
             numOfWords: 70,
             toggle: true,
-            moreLink: '<button class="bg-yellow br-10 px-4 py-2 mt-4 fs-16 view-more">View More >></button>',
-            lessLink: '<button class="bg-yellow br-10 px-4 py-2 mt-4 fs-16 view-more">View less >></button>'
+            moreLink: '<button class="bg-yellow br-10 px-4 py-2 mt-4 fs-16 view-more position-relative" style="bottom: 0">View More >></button>',
+            lessLink: '<button class="bg-yellow br-10 px-4 py-2 mt-4 fs-16 view-more position-relative" style="bottom: 0">View less >></button>'
         });
 
         $('.view-more').click(function () {
