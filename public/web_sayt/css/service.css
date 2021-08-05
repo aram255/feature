@@ -404,3 +404,9 @@ sup {
 a .fa-times {
     color: black;
 }
+
+@media (max-width: 768px) {
+    .profile-practitioner__consultation {
+        padding-left: 0;
+    }
+}
