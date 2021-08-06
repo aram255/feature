@@ -23,7 +23,7 @@ $("#customer-testimonals").owlCarousel({
         }
     },
 });
-$("#customer-testimonals1").owlCarousel({
+$(".service_carousel").owlCarousel({
     loop: true,
     items: 3,
     dots: true,

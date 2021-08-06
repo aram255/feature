@@ -404,9 +404,14 @@ sup {
 a .fa-times {
     color: black;
 }
+.person__info .btn {
+    white-space: nowrap;
+}
+
 
 @media (max-width: 768px) {
     .profile-practitioner__consultation {
         padding-left: 0;
     }
 }
+

@@ -28,7 +28,7 @@
                             <!-- 1 -->
 
                             <div class="profile-practitioner__consultation-carusel-block">
-                                <div id="customer-testimonals1" class="owl-carousel owl-theme owl-loaded owl-drag ">
+                                <div id="customer-testimonals1" class="service_carousel owl-carousel owl-theme owl-loaded owl-drag ">
                                     @foreach($Service->where('practitioner_id',$Result->id) as $Value)
                                         @php
                                             $array = array("item light-green","item light-yellow");
