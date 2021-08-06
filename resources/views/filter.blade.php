@@ -194,25 +194,22 @@
 
 
         <script type="text/javascript" src="{{ asset('web_sayt/js/jquery.js') }}"></script>
-    <script src="{{ asset('web_sayt/maps/index.js') }}"></script>
+        <script src="{{ asset('web_sayt/maps/index.js') }}"></script>
 
-    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
-    {{--     Calendar--}}
-
-
-    <script>
-        $(document).ready(function() {
-            $('input[type="radio"],input[type="checkbox"],#state').on('change', function () {
-                $(this).closest("form").submit();
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+        {{--     Calendar--}}
+        <script>
+            $(document).ready(function() {
+                $('input[type="radio"],input[type="checkbox"],#state').on('change', function () {
+                    $(this).closest("form").submit();
+                });
+                $('.find__form-settings').click(function () {
+                    $(".filter__content").toggleClass("active")
+                })
             });
-            $('.find__form-settings').click(function () {
-                $(".filter__content").toggleClass("active")
-            })
-        });
 
 
-    </script>
-
+        </script>
         <script>
 
             $(document).on('click','.detail-btn', function()  {
@@ -365,12 +362,10 @@
             }
 
         </script>
-
-
-    <script type="text/javascript" src="{{ asset('web_sayt/js/bootstrap/bootstrap.min.js') }}"></script>
-    <script src="{{ asset('web_sayt/js/star-rating.js') }}"></script>
-    <script src="{{ asset('web_sayt/js/star-run.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('web_sayt/js/owl.carousel.min.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('web_sayt/js/bootstrap/bootstrap.min.js') }}"></script>
+        <script src="{{ asset('web_sayt/js/star-rating.js') }}"></script>
+        <script src="{{ asset('web_sayt/js/star-run.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('web_sayt/js/owl.carousel.min.js') }}"></script>
         <script src="{{ asset('web_sayt/js/carusel.js') }}"></script>
         <script type="text/javascript" src="{{ asset('web_sayt/js/script.js') }}"></script>
         <script type="text/javascript" src="{{ asset('web_sayt/js/readMoreJS.min.js') }}"></script>

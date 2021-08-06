@@ -105,19 +105,29 @@
                     </div>
                 </div>
                 <div class="edit-profile__other mt-0">
-                    <div class="user-info odd">
-                        <p class="user-info-p">Insurance coverage</p>
-                        <input type="text" id="coverage" class="fadeIn" name="coverage">
-                    </div>
-                    <div class="user-info">
-                        <p class="user-info-p ml-4">Cases and specializations</p>
-                        <input type="text" value="#enterTag"  id="country_name" class="form-control input-lg" />
-{{--                        <input type="text"   placeholder="Enter Country Name" />--}}
-{{--                        <div id="countryList">--}}
+                    <div class="d-flex">
+                        <div class="user-info odd">
+                            <p class="user-info-p">Insurance coverage</p>
+                            <input type="text" id="coverage" class="fadeIn" name="coverage">
+                        </div>
+                        <div class="user-info">
+                            <p class="user-info-p ml-4">Cases and specializations</p>
+                            {{--                        <input type="text" value="#enterTag"  id="country_name" class="form-control input-lg" />--}}
+                            {{--                        <input type="text"   placeholder="Enter Country Name" />--}}
+                            {{--                        <div id="countryList">--}}
                             {{ csrf_field() }}
-{{--                        <input type="text"  id="tag1" name="tags" />--}}
+
+
+                            <div class="input-group ml-auto mb-3" style="max-width: 340px">
+                                <input type="text" class="fadeIn" style="width: 85%" placeholder="Select" aria-label="Select" aria-describedby="basic-addon2">
+                                <div class="input-group-append ml-auto">
+                                    <button class="btn px-3 text-white fs-18" style="border-radius: 5px; background-color: #8ba9ee" type="button">+</button>
+                                </div>
+                            </div>
+                            <input type="text" value="#enterTag"  id="tag1" name="tags" />
+                        </div>
                     </div>
-                    <br>
+
                     <div class="user-info-about mb-4">
                         <p class="user-info-p">About me</p>
                         <textarea class="fadeIn" name="about-me" rows="6" cols="100" style="resize: none;"></textarea>
