@@ -42,7 +42,7 @@
                 <li class="borderbg"><a class="person__content-nav-category active">Video</a></li>
                 <li class="borderbg"><a class="person__content-nav-category">Intro</a></li>
                 <li class="borderbg"><a class="person__content-nav-category">Map</a></li>
-{{--                                                <li class="borderbg"><a class="person__content-nav-category">Calendar</a></li>--}}
+                {{--                                                <li class="borderbg"><a class="person__content-nav-category">Calendar</a></li>--}}
             </ul>
 
             <div class="person__content-video">

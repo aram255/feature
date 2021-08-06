@@ -66,11 +66,11 @@
                         return DataTypes.Checkbox.format(row);
                     }},
                     { "data": "title", "name":'blog.title', "orderable": true },
-                    { "data": "id", "name":'edit', "orderable": false, "sClass": "content-middel", 
+                    { "data": "id", "name":'edit', "orderable": false, "sClass": "content-middel",
 	            	    render: function ( data, type, row, meta) {
 	            	    return '<a href="javascript:;" edit_item_id="'+row.id+'" class="btn btn-success item_edit btn-sm btn-circle"><i class="fas fa-edit"></i></a>';
 	                }},
-                    { "data": "published", "name":'blog.published', "orderable": true, "sClass": "content-middel", 
+                    { "data": "published", "name":'blog.published', "orderable": true, "sClass": "content-middel",
                         render: function ( data, type, row, meta) {
                         return DataTypes.Published.format(data,row);
                     }}
@@ -105,7 +105,7 @@
                     this.open();
                 });
             });
-            
+
             $('#add_item').click(function() {
                 itemPopup.setTitle('Add blog');
                 itemPopup.load("{{route('adminBlogGet')}}", function () {
@@ -130,7 +130,7 @@
                     dataType: 'JSON',
                     data:{_token: "<?php echo csrf_token(); ?>", pubItemId:pubItemId},
                     success: function(response){
-                        if(response.status == 1){    
+                        if(response.status == 1){
                             if(response.published == 1){
                                 $item.removeClass('btn-dark').addClass('btn-success');
                                 $item.find('.fa').removeClass('fa-exclamation-triangle').addClass('fa-check');
@@ -145,7 +145,7 @@
 
             // remove
             $('#remove_item').click(function() {
-                
+
                 var rows = [];
                 $('.sb-checkbox:checked', $('#dataTable')).each(function () {
                     rows.push($(this).val());
@@ -163,7 +163,7 @@
                             dataType: 'JSON',
                             data:{_token: "<?php echo csrf_token(); ?>", ids:ids},
                                 success: function(response){
-                                    if(response.status == 1){    
+                                    if(response.status == 1){
                                         if(response.status == 1){
                                             dataTable.ajax.reload(null, false);
                                         }else{
@@ -171,13 +171,13 @@
                                         }
                                     }
                                 }
-                            });	
+                            });
                         }
-                    }); 
+                    });
                 }
             });
             ///
-            
+
         });
     </script>
 @endpush

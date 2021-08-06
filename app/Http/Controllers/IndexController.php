@@ -25,6 +25,7 @@ use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Collection;
 use App\Models\EventModel;
 use App\Models\ZoomModel;
+use App\Models\BlogModel;
 use Illuminate\Support\Carbon;
 
 
@@ -263,7 +264,32 @@ class IndexController extends Controller
 
     public function blog()
     {
-        return view('blog');
+          $Blog = BlogModel::join('images','images.id', '=', 'blog.image_id')->where('blog.published',1)->get(
+              [
+                  'blog.id',
+                  'blog.title',
+                  'blog.description',
+                  'blog.text',
+                  'blog.published',
+                  'images.filename',
+                  'images.ext'
+              ]
+          );
+
+        $BlogFirst = BlogModel::join('images','images.id', '=', 'blog.image_id')->where('blog.published',1)->orderBy('id', 'desc')
+            ->first(
+            [
+                'blog.id',
+                'blog.title',
+                'blog.description',
+                'blog.text',
+                'blog.published',
+                'images.filename',
+                'images.ext'
+            ]
+        );
+
+      return view('blog',compact('Blog','BlogFirst'));
     }
 
 

@@ -143,186 +143,28 @@
         <p class="blog-text px-4">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
         <div class="card-carousel container container-1640 mt-5">
             <div class="owl-carousel owl-theme">
+
+         @foreach($Blog as $BlogInfo)
+
+                @php
+                    $array = array("owl-carousel-item item-blue-bg","owl-carousel-item","owl-carousel-item item-yellow-bg");
+                    $k = array_rand($array);
+                    $color = $array[$k];
+                @endphp
                 <div class="item">
-                    <div class="owl-carousel-item item-blue-bg ">
+                    <div class="@php echo $color; @endphp">
                         <div class="card owl-carousel-card">
-                            <img src="{{ asset('web_sayt/img/blog/img1.png') }}" class="card-img-top owl-carousel-img" alt="...">
+                            <img src="{{ asset('images/original/'.$BlogInfo->filename.'.'.$BlogInfo->ext) }}" class="card-img-top owl-carousel-img" alt="...">
                             <div class="card-body owl-carousel-body">
-                                <p class="owl-carousel-title">Lorem Ipsum</p>
+                                <p class="owl-carousel-title">{{$BlogInfo->title}}</p>
                                 <p class="card-text owl-carousel-text">
-                                    Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-                                    Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, unchanged.
-                                    It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with deskt
+                                    @php echo $BlogInfo->text; @endphp
                                 </p>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="item">
-                    <div class="owl-carousel-item">
-                        <div class="card owl-carousel-card">
-                            <img src="{{ asset('web_sayt/img/blog/img2.png') }}" class="card-img-top owl-carousel-img" alt="...">
-                            <div class="card-body owl-carousel-body">
-                                <p class="owl-carousel-title">Lorem Ipsum</p>
-                                <p class="card-text owl-carousel-text">
-                                    Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-                                    Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, unchanged.
-                                    It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with deskt
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="item">
-                    <div class="owl-carousel-item">
-                        <div class="card owl-carousel-card">
-                            <img src="{{ asset('web_sayt/img/blog/img3.png') }}" class="card-img-top owl-carousel-img" alt="...">
-                            <div class="card-body owl-carousel-body">
-                                <p class="owl-carousel-title">Lorem Ipsum</p>
-                                <p class="card-text owl-carousel-text">
-                                    Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-                                    Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, unchanged.
-                                    It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with deskt
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="item">
-                    <div class="owl-carousel-item item-yellow-bg ">
-                        <div class="card owl-carousel-card">
-                            <img src="{{ asset('web_sayt/img/blog/img4.png') }}" class="card-img-top owl-carousel-img" alt="...">
-                            <div class="card-body owl-carousel-body">
-                                <p class="owl-carousel-title">Lorem Ipsum</p>
-                                <p class="card-text owl-carousel-text">
-                                    Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-                                    Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, unchanged.
-                                    It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with deskt
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="item">
-                    <div class="owl-carousel-item item-blue-bg ">
-                        <div class="card owl-carousel-card">
-                            <img src="{{ asset('web_sayt/img/blog/img1.png') }}" class="card-img-top owl-carousel-img" alt="...">
-                            <div class="card-body owl-carousel-body">
-                                <p class="owl-carousel-title">Lorem Ipsum</p>
-                                <p class="card-text owl-carousel-text">
-                                    Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-                                    Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, unchanged.
-                                    It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with deskt
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="item">
-                    <div class="owl-carousel-item">
-                        <div class="card owl-carousel-card">
-                            <img src="{{ asset('web_sayt/img/blog/img2.png') }}" class="card-img-top owl-carousel-img" alt="...">
-                            <div class="card-body owl-carousel-body">
-                                <p class="owl-carousel-title">Lorem Ipsum</p>
-                                <p class="card-text owl-carousel-text">
-                                    Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-                                    Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, unchanged.
-                                    It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with deskt
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="item">
-                    <div class="owl-carousel-item">
-                        <div class="card owl-carousel-card">
-                            <img src="{{ asset('web_sayt/img/blog/img3.png') }}" class="card-img-top owl-carousel-img" alt="...">
-                            <div class="card-body owl-carousel-body">
-                                <p class="owl-carousel-title">Lorem Ipsum</p>
-                                <p class="card-text owl-carousel-text">
-                                    Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-                                    Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, unchanged.
-                                    It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with deskt
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="item">
-                    <div class="owl-carousel-item item-yellow-bg">
-                        <div class="card owl-carousel-card">
-                            <img src="{{ asset('web_sayt/img/blog/img4.png') }}" class="card-img-top owl-carousel-img" alt="...">
-                            <div class="card-body owl-carousel-body">
-                                <p class="owl-carousel-title">Lorem Ipsum</p>
-                                <p class="card-text owl-carousel-text">
-                                    Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-                                    Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, unchanged.
-                                    It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with deskt
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="item">
-                    <div class="owl-carousel-item item-blue-bg ">
-                        <div class="card owl-carousel-card">
-                            <img src="{{ asset('web_sayt/img/blog/img1.png') }}" class="card-img-top owl-carousel-img" alt="...">
-                            <div class="card-body owl-carousel-body">
-                                <p class="owl-carousel-title">Lorem Ipsum</p>
-                                <p class="card-text owl-carousel-text">
-                                    Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-                                    Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, unchanged.
-                                    It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with deskt
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="item">
-                    <div class="owl-carousel-item">
-                        <div class="card owl-carousel-card">
-                            <img src="{{ asset('web_sayt/img/blog/img2.png') }}" class="card-img-top owl-carousel-img" alt="...">
-                            <div class="card-body owl-carousel-body">
-                                <p class="owl-carousel-title">Lorem Ipsum</p>
-                                <p class="card-text owl-carousel-text">
-                                    Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-                                    Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, unchanged.
-                                    It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with deskt
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="item">
-                    <div class="owl-carousel-item">
-                        <div class="card owl-carousel-card">
-                            <img src="{{ asset('web_sayt/img/blog/img3.png') }}" class="card-img-top owl-carousel-img" alt="...">
-                            <div class="card-body owl-carousel-body">
-                                <p class="owl-carousel-title">Lorem Ipsum</p>
-                                <p class="card-text owl-carousel-text">
-                                    Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-                                    Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, unchanged.
-                                    It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with deskt
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="item">
-                    <div class="owl-carousel-item item-yellow-bg">
-                        <div class="card owl-carousel-card">
-                            <img src="{{ asset('web_sayt/img/blog/img4.png') }}" class="card-img-top owl-carousel-img" alt="...">
-                            <div class="card-body owl-carousel-body">
-                                <p class="owl-carousel-title">Lorem Ipsum</p>
-                                <p class="card-text owl-carousel-text">
-                                    Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-                                    Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, unchanged.
-                                    It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with deskt
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+           @endforeach
             </div>
         </div>
         <div class="bottom-side  container container-1640  d-flex flex-column flex-lg-row justify-content-start mt-5 p-5">
@@ -330,13 +172,10 @@
                 <img src="{{ asset('web_sayt/img/blog/img5.png') }}" alt="">
             </div>
             <div class="blog-bottom-rightside px-4 col-lg-6">
-                <p class="blog-title ">Title Text</p>
-                <p class="blog-text">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+                <p class="blog-title ">{{$BlogFirst->title}}</p>
+                <p class="blog-text">@php echo $BlogFirst->description; @endphp</p>
                 <p class="card-text owl-carousel-text mt-5">
-                    Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-                    Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, unchanged.
-                    It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with deskt Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-                    Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with deskt
+                    @php echo $BlogFirst->text; @endphp
                 </p>
             </div>
 
