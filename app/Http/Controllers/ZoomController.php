@@ -229,6 +229,7 @@ class ZoomController extends Controller
             $Add->practitioner_id  = $request->practitionerID;
             $Add->check_code       = $code;
             $Add->status           = $Pending;
+            $Add->service_id       = $request->service_id;
             $Add->save();
 
             return response()->json($Add);

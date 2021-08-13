@@ -139,8 +139,8 @@
 
 <section>
     <main class="main">
-        <p class="blog-title mt-5">Title Text</p>
-        <p class="blog-text px-4">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+        <p class="blog-title mt-5">{{$BlogText->title}}</p>
+        <p class="blog-text px-4">{{$BlogText->text}}</p>
         <div class="card-carousel container container-1640 mt-5">
             <div class="owl-carousel owl-theme">
 
@@ -154,7 +154,7 @@
                 <div class="item">
                     <div class="@php echo $color; @endphp">
                         <div class="card owl-carousel-card">
-                            <img src="{{ asset('images/original/'.$BlogInfo->filename.'.'.$BlogInfo->ext) }}" class="card-img-top owl-carousel-img" alt="...">
+                            <img src="{{ asset('content/'.$BlogInfo->filename.'.'.$BlogInfo->ext) }}" class="card-img-top owl-carousel-img" alt="...">
                             <div class="card-body owl-carousel-body">
                                 <p class="owl-carousel-title">{{$BlogInfo->title}}</p>
                                 <p class="card-text owl-carousel-text">
@@ -169,7 +169,7 @@
         </div>
         <div class="bottom-side  container container-1640  d-flex flex-column flex-lg-row justify-content-start mt-5 p-5">
             <div class="blog-bottom-image mr-5 col-lg-6">
-                <img src="{{ asset('web_sayt/img/blog/img5.png') }}" alt="">
+                <img src="{{ asset('content/'.$BlogInfo->filename.'.'.$BlogInfo->ext) }}" alt="">
             </div>
             <div class="blog-bottom-rightside px-4 col-lg-6">
                 <p class="blog-title ">{{$BlogFirst->title}}</p>

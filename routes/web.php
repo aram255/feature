@@ -59,10 +59,16 @@ Route::group(['prefix' => '{locale?}','where' => ['locale' => '[a-zA-Z]{2}']], f
     Route::match(['get', 'post'],'reset-field', [IndexController::class, 'resetField'])->name('reset-field');
     Route::get('/blog', [IndexController::class, 'blog'])->name('blog');
     Route::get('/balance', [IndexController::class, 'balance'])->name('balance');
+
     // Practitioner
     Route::get('/profile-practitioner', [PractitionersController::class, 'profilePractitioner'])->name('profile-practitioner');
     Route::get('/edit-profile-practitioner', [PractitionersController::class, 'EditProfilePractitioner'])->name('edit-profile-practitioner');
     Route::get('/my-appointments-practitioners', [PractitionersController::class, 'myAppointmentsPractitioners'])->name('my-appointments-practitioners');
+    Route::post('/edit-profile-practitioner-post', [PractitionersController::class, 'EditProfilePractitionerPost'])->name('edit-profile-practitioner-post');
+    Route::post('/add-lang-practitioner', [PractitionersController::class, 'addLang'])->name('add-lang-practitioner');
+    Route::post('/delete-lang-practitioner', [PractitionersController::class, 'deleteLang'])->name('delete-lang-practitioner');
+    Route::get('/delete-photo-video/{id}', [PractitionersController::class, 'deletePhotoVideo'])->name('delete-photo-video');
+
 
     // Type Form
     Route::get('/type-form-practitioner', [PractitionersController::class, 'typeFormPractitioner'])->name('type-form-practitioner');

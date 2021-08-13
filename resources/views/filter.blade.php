@@ -221,6 +221,7 @@
             var last_name      = $(this).prev().prev().prev().val();
             var first_name     = $(this).prev().prev().prev().prev().val();
             var email          = $(this).prev().prev().prev().prev().prev().val();
+            var service_id     = $(this).prev().prev().prev().prev().prev().prev().val();
 
 
             $('#calendar').fullCalendar('destroy');
@@ -293,6 +294,7 @@
                                     duration: duration,
                                     password: pasword,
                                     practitionerID: practitionerID,
+                                    service_id: service_id,
                                     type: 'add'
                                 },
                                 success: function (data) {

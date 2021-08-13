@@ -13,7 +13,7 @@
                             <label style="font-weight:normal;">Image</label>
                             <div class="image-upload-container" id="cover">
                                 <div class="image-part">
-                                    <img class="thumbnail" src="@if($item->image) {{$item->image->path}} @else {!! asset('backend/img/no_image.png') !!} @endif" alt=""/>
+                                    <img style="width: 116px;" class="thumbnail" src="@if($item->image) {{$item->image->path}} @else {!! asset('backend/img/no_image.png') !!} @endif" alt=""/>
                                 </div>
                                 <div class="image-action @if($item->image) fileExist @else fileNotExist @endif">
                                     <div class="img-not-exist">
@@ -31,11 +31,11 @@
                         </span>
                     </div>
                     <div class="my-2"></div>
-                    <div class="form-group">
-                        <span class="el_item">Slug (url):
-                            <input type="text" name="system_name" value="{{$item->system_name}}" class="form-control" />
-                        </span>
-                    </div>
+{{--                    <div class="form-group">--}}
+{{--                        <span class="el_item">Slug (url):--}}
+{{--                            <input type="text" name="system_name" value="{{$item->system_name}}" class="form-control" />--}}
+{{--                        </span>--}}
+{{--                    </div>--}}
                     <div class="my-2"></div>
                     <div class="form-group">
                         <span class="el_item">Title:

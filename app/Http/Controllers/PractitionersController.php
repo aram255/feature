@@ -5,24 +5,41 @@ namespace App\Http\Controllers;
 use App\Models\Admin\CategoryModel;
 use App\Models\Card;
 use Illuminate\Http\Request;
-//use App\Models\PractitionersModel;
+use App\Models\PractitionersModel;
 use App\Models\TegManagements;
 use App\Models\TegManagementsPractitionerModel;
 use App\Models\TypeFormModel;
 use DB;
 use Illuminate\Support\Facades\Auth;
 use App\Models\AuthPractitionersModel;
+use App\Models\PractitionerLanguageModel;
 use App\Models\ZoomModel;
 use App\Models\ServiceDescriptionModel;
 use App\Models\ServiceSessionModel;
 use App\Models\ServicesModel;
 use Illuminate\Support\Carbon;
 
+use Hash;
+use File;
+
 class PractitionersController extends Controller
 {
     public function __construct()
     {
         return $this->middleware('CheckLoginPractitioner');
+    }
+
+    public function getLanguage()
+    {
+        $PractitonerID = session()->get('UserID');
+       return DB::select("select l.*, case when pl.lang_id is null then 0 else 1 end as selected
+                                       from languages as l left join practitioner_lang_rel as pl on l.id=pl.lang_id and pl.practitioner_id=$PractitonerID
+                                       ");
+    }
+
+    public function getPractitioners()
+    {
+        return PractitionersModel::where('id',session()->get('UserID'))->first();
     }
 
     public function profilePractitioner()
@@ -54,7 +71,7 @@ class PractitionersController extends Controller
         }
 
 
-        $TagManagements     = TegManagements::orderBy('published', 'DESC')->orderBy('id', 'DESC')->get();
+        $TagManagements = TegManagements::orderBy('published', 'DESC')->orderBy('id', 'DESC')->get();
 
         $MyTagManagements = DB::table('teg_managements')
                             ->join('practitioner_teg_managements', 'practitioner_teg_managements.teg_managements_id', 'teg_managements.id')
@@ -62,12 +79,15 @@ class PractitionersController extends Controller
                             ->where('published',1)
                             ->get();
 
+
+
+
         $PractitionerInfo= AuthPractitionersModel::where('id',session()->get('UserID'))->first();
 
         $ThisWeekMeetingsList = ZoomModel::whereBetween('start', [Carbon::now()->startOfWeek(), Carbon::now()->endOfWeek()])->get();
 
-//        $a = DB::table('zoom_meetings_list')->whereBetween('start',[Carbon::now()->startOfWeek(), Carbon::now()->endOfWeek()] )->c;
-//        dd($a);
+
+
 
         return view('profile-practitioner',compact('TagManagements','MyTagManagements','PractitionerInfo','ThisWeekMeetingsList','Service','ServiceSession','ServiceDescription'));
     }
@@ -75,42 +95,23 @@ class PractitionersController extends Controller
     public  function addTagMyListManagements(request $request)
     {
 
-        foreach ($request->teg_management as  $AddTegManagementsID)
-        {
-            $CheckProtocol = TegManagementsPractitionerModel::where('practitioner_id',session()->get('UserID'))
-                             ->where('teg_managements_id',$AddTegManagementsID)
-                             ->first();
 
-             if(!empty($CheckProtocol->teg_managements_id) && !empty($AddTegManagementsID) && $CheckProtocol->teg_managements_id == $AddTegManagementsID)
-             {
-                 echo 'Teg  Adding';
-             }else{
-                    // Add teg management
-                $AddProtocol = new TegManagementsPractitionerModel;
-                $AddProtocol->practitioner_id = session()->get('UserID');
-                $AddProtocol->teg_managements_id    = $AddTegManagementsID;
-                $AddProtocol->save();
+        $AddProtocol = new TegManagementsPractitionerModel;
+        $AddProtocol->practitioner_id = session()->get('UserID');
+        $AddProtocol->teg_managements_id    = $request->teg_managements_id;
+        $AddProtocol->save();
 
-             }
-
-        }
-
-        return back()->with('status','Adding tag My List');
-
-
+           return response()->json($AddProtocol);
     }
 
     public function deleteTeg(request $request)
     {
 
-        foreach ($request->teg_management as  $DeleteTagId)
-        {
-                        TegManagementsPractitionerModel::where('practitioner_id',session()->get('UserID'))
-                                                        ->where('teg_managements_id',$DeleteTagId)
-                                                        ->delete();
-        }
+        $Delete = TegManagementsPractitionerModel::where('practitioner_id',session()->get('UserID'))
+                                        ->where('teg_managements_id',$request->teg_managements_id)
+                                        ->delete();
 
-            return back()->with('status','Deleted tag');
+          return response()->json($Delete);
     }
 
 
@@ -122,11 +123,12 @@ class PractitionersController extends Controller
         ]);
 
         $Add = new TegManagements;
-        $Add->published = 0;
-        $Add->name      = $request->add_teg;
+        $Add->published  = 0;
+        $Add->name       = $request->add_teg;
         $Add->save();
 
-        return back()->withInput();
+       // return back()->withInput();
+        return response()->json($Add);
     }
 
     public  function EditProfilePractitioner()
@@ -159,7 +161,17 @@ class PractitionersController extends Controller
             $ServiceDescription[] = ServiceDescriptionModel::where('services_id',$PrID)->get();
         }
 
-        return view('edit-profile-practitioner', compact('cards','Service','ServiceSession','ServiceDescription'));
+        $PractitonerID = session()->get('UserID');
+
+        $MyTagManagements =  DB::select("select t.*, case when pt.teg_managements_id is null then 0 else 1 end as selected
+                                       from teg_managements as t left join practitioner_teg_managements as pt on t.id=pt.teg_managements_id and pt.practitioner_id=$PractitonerID
+                                       where published=1");
+
+        $Lang          = $this->getLanguage();
+        $Practitioners = $this->getPractitioners();
+
+
+        return view('edit-profile-practitioner', compact('Practitioners','cards','Service','ServiceSession','ServiceDescription','MyTagManagements','Lang'));
     }
 
     public function myAppointmentsPractitioners()
@@ -314,27 +326,197 @@ class PractitionersController extends Controller
         return redirect(app()->getLocale()."/edit-profile-practitioner")->with('status','Delete service');
     }
 
-    public function getAutocomplete(Request $request)
+    public function EditProfilePractitionerPost(request $request)
     {
 
-
-        if($request->get('query'))
+//        dd($request->file('img'));
+        $EditPractitioner = PractitionersModel::where('id', session()->get('UserID'))->first();
+        if(empty($request->file('img')) and empty($request->file('video')))
         {
-            $query = $request->get('query');
-            $data = DB::table('teg_managements')
-                ->where('name', 'LIKE', "%{$query}%")
-                ->get();
-            $output = '<ul class="dropdown-menu" style="display:block; position:relative">';
-            foreach($data as $row)
-            {
-                $output .= '
-       <li><a href="#">'.$row->name.'</a></li>
-       ';
+
+            $EditPractitioner->first_name   = $request->first_name;
+            $EditPractitioner->last_name    = $request->last_name;
+            $EditPractitioner->phone_number = $request->phone_number;
+            $EditPractitioner->email        = $request->email;
+            $EditPractitioner->insurance    = $request->insurance;
+            $EditPractitioner->description  = $request->description;
+            if ($EditPractitioner && in_array($request->gender, array('Male', 'Famale', 'Other'))) {
+                $EditPractitioner->gender = $request->gender;
             }
-            $output .= '</ul>';
-            echo $output;
+
         }
+        elseif($request->file('video')==null)
+        {
+
+            $ImgName = rand() . '.' . $request->file('img')->getClientOriginalExtension();
+            $request->file('img')->move(public_path('web_sayt/img_practitioners/'), $ImgName);
+
+//            if (File::exists(public_path('web_sayt/img_practitioners/' . $EditPractitioner->img))) {
+//                File::delete(public_path('web_sayt/img_practitioners/' . $EditPractitioner->img));
+//            }
+
+            $EditPractitioner->img = $ImgName;
+            $EditPractitioner->first_name   = $request->first_name;
+            $EditPractitioner->last_name    = $request->last_name;
+            $EditPractitioner->phone_number = $request->phone_number;
+            $EditPractitioner->email        = $request->email;
+            $EditPractitioner->insurance    = $request->insurance;
+            $EditPractitioner->description  = $request->description;
+            if ($EditPractitioner && in_array($request->gender, array('Male', 'Famale', 'Other'))) {
+                $EditPractitioner->gender = $request->gender;
+            }
+        }
+        elseif($request->file('img')==null )
+        {
+
+            $VideoName = rand() . '.' . $request->file('video')->getClientOriginalExtension();
+            $request->file('video')->move(public_path('web_sayt/video_practitioners/'), $VideoName);
+
+//            if (File::exists(public_path('web_sayt/video_practitioners/' . $EditPractitioner->video))) {
+//                File::delete(public_path('web_sayt/video_practitioners/' . $EditPractitioner->video));
+//            }
+
+            $EditPractitioner->video = $VideoName;
+            $EditPractitioner->first_name   = $request->first_name;
+            $EditPractitioner->last_name    = $request->last_name;
+            $EditPractitioner->phone_number = $request->phone_number;
+            $EditPractitioner->email        = $request->email;
+            $EditPractitioner->insurance    = $request->insurance;
+            $EditPractitioner->description  = $request->description;
+            if ($EditPractitioner && in_array($request->gender, array('Male', 'Famale', 'Other'))) {
+                $EditPractitioner->gender = $request->gender;
+            }
+        }
+        else{
+
+            $ImgName = rand() . '.' . $request->file('img')->getClientOriginalExtension();
+            $request->file('img')->move(public_path('web_sayt/img_practitioners/'), $ImgName);
+
+//            if (File::exists(public_path('web_sayt/img_practitioners/' . $EditPractitioner->img))) {
+//                File::delete(public_path('web_sayt/img_practitioners/' . $EditPractitioner->img));
+//            }
+
+            $VideoName = rand() . '.' . $request->file('video')->getClientOriginalExtension();
+            $request->file('video')->move(public_path('web_sayt/video_practitioners/'), $VideoName);
+//
+//            if (File::exists(public_path('web_sayt/video_practitioners/' . $EditPractitioner->video))) {
+//                File::delete(public_path('web_sayt/video_practitioners/' . $EditPractitioner->video));
+//            }
+
+            $EditPractitioner->video = $VideoName;
+            $EditPractitioner->img = $ImgName;
+            $EditPractitioner->first_name = $request->first_name;
+            $EditPractitioner->last_name = $request->last_name;
+            $EditPractitioner->phone_number = $request->phone_number;
+            $EditPractitioner->email = $request->email;
+            $EditPractitioner->insurance = $request->insurance;
+            $EditPractitioner->description = $request->description;
+            if ($EditPractitioner && in_array($request->gender, array('Male', 'Famale', 'Other'))) {
+                $EditPractitioner->gender = $request->gender;
+            }
+        }
+        $EditPractitioner->save();
+
+        if($request->password != null)
+        {
+            //check password
+            $EditPractitionerpassword = PractitionersModel::where('id', session()->get('UserID'))->first();
+
+            if (Hash::check($request->password, $EditPractitionerpassword->password))
+            {
+
+                if (Hash::check($request->new_password, Hash::make($request->conf_password)))
+                {
+                    $request->validate([
+                        "new_password" => 'required|'
+                    ]);
+                    $EditPractitionerpassword->password = Hash::make($request->new_password);
+                    $EditPractitionerpassword->save();
+                    if(!empty($EditPractitionerpassword))
+                    {
+                        return back()->with('status','Your request has been completed.');
+                    }
+
+
+                }else{
+                    return back()->with('status','Please fill in both fields correctly.');
+                }
+
+            }else{
+                return back()->with('status','The password you entered is incorrect');
+            }
+        }
+
+
+        if($request->password == null || $request->new_password == null || $request->conf_password || ($request->new_password != $request->conf_password))
+        {
+                return back()->with('status','Your request has been completed.');
+        }
+
     }
+
+
+
+    public function addLang(request $request)
+    {
+        $AddLang                  = new PractitionerLanguageModel;
+        $AddLang->practitioner_id = session()->get('UserID');
+        $AddLang->lang_id = $request->lang_id;
+        $AddLang->save();
+
+             return response()->json($AddLang);
+    }
+
+    public function deleteLang(request $request)
+    {
+        $DeleteLang = PractitionerLanguageModel::where('practitioner_id',session()->get('UserID'))->where('lang_id',$request->lang_id)->first();
+        $DeleteLang->delete();
+
+          return response()->json($DeleteLang);
+    }
+
+    public function deletePhotoVideo($lang,$id)
+    {
+
+        $EditVideoPhoto = PractitionersModel::where('id', session()->get('UserID'))->first();
+
+        if($id == 1)
+        {
+            $EditVideoPhoto->img = '';
+        }
+
+        if($id == 2)
+        {
+            $EditVideoPhoto->video = '';
+        }
+
+        $EditVideoPhoto->save();
+
+        return back()->with('status','Your request has been completed.');
+    }
+
+
+//    public function getAutocomplete(Request $request)
+//    {
+//
+//
+//        if($request->get('query'))
+//        {
+//            $query = $request->get('query');
+//            $data = DB::table('teg_managements')
+//                ->where('name', 'LIKE', "%{$query}%")
+//                ->get();
+//            $output = '<ul class="dropdown-menu" style="display:block; position:relative">';
+//            foreach($data as $row)
+//            {
+//                $output .= '
+//       <li><a href="#">'.$row->name.'</a></li>
+//       ';
+//            }
+//            $output .= '</ul>';
+//            echo $output;
+//        }
+//    }
 
 
 }

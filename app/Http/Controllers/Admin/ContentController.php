@@ -12,8 +12,10 @@ use App\Models\Admin\TegManagements;
 use App\Models\Admin\TegManagementsPractitionerModel;
 use App\Models\Admin\CategoryModel;
 use App\Models\Admin\CategoryTitleModel;
+use App\Models\Admin\BlogText;
 use Session;
 use File;
+use Redirect;
 
 class ContentController extends Controller
 {
@@ -205,8 +207,23 @@ class ContentController extends Controller
 
     //blog
     public function indexBlog(){
+
+        $BlogText = BlogText::first();
+
         view()->share('menu', 'blog');
-        return view('admin.content.blog_index');
+        return view('admin.content.blog_index',compact('BlogText'));
+    }
+
+    public  function EditBlogText(request $request)
+    {
+        $EditBlogText = BlogText::first();
+
+        $EditBlogText->title = $request->title;
+        $EditBlogText->text  = $request->text;
+        $EditBlogText->save();
+
+        return Redirect::back()->with('message','Operation Successful !');
+
     }
 
     public function dataBlog(Request $request){

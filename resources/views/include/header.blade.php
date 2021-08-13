@@ -189,40 +189,40 @@
     </div>
 </div>
 <!-- Reset Password -->
-<div class="modal fade show" id="reset-user-pass" tabindex="-1" role="dialog"
-     aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-            <div class="modal__form sg-header-form">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span class="x" aria-hidden="true">×</span>
-                </button>
-                <div class="change-pass lg-sg__form">
-                    <div class="lg-sg__form-text">Change Password</div>
-                    <form method="POST">
+{{--<div class="modal fade show" id="reset-user-pass" tabindex="-1" role="dialog"--}}
+{{--     aria-labelledby="exampleModalCenterTitle" aria-hidden="true">--}}
+{{--    <div class="modal-dialog modal-dialog-centered" role="document">--}}
+{{--        <div class="modal-content">--}}
+{{--            <div class="modal__form sg-header-form">--}}
+{{--                <button type="button" class="close" data-dismiss="modal" aria-label="Close">--}}
+{{--                    <span class="x" aria-hidden="true">×</span>--}}
+{{--                </button>--}}
+{{--                <div class="change-pass lg-sg__form">--}}
+{{--                    <div class="lg-sg__form-text">Change Password</div>--}}
+{{--                    <form method="POST">--}}
 
-                        <p class="lg-sg-p">New Password</p>
-                        <input class="change-control fadeIn" id="password_1" name="password" type="password">
-                        <img src="{{ asset('web_sayt/img/eye.svg') }}" alt="" toggle="#password_1"
-                             class="fa fa-fw fa-eye field-icon toggle-password">
+{{--                        <p class="lg-sg-p">New Password</p>--}}
+{{--                        <input class="change-control fadeIn" id="password_1" name="password" type="password">--}}
+{{--                        <img src="{{ asset('web_sayt/img/eye.svg') }}" alt="" toggle="#password_1"--}}
+{{--                             class="fa fa-fw fa-eye field-icon toggle-password">--}}
 
-                        <p class="lg-sg-p">Confirm New Password</p>
-                        <input class="change-control fadeIn" id="password_2" name="password_2" type="password">
-                        <img src="{{ asset('web_sayt/img/eye.svg') }}" alt="" toggle="#password_2"
-                             class="fa fa-fw fa-eye field-icon toggle-password">
+{{--                        <p class="lg-sg-p">Confirm New Password</p>--}}
+{{--                        <input class="change-control fadeIn" id="password_2" name="password_2" type="password">--}}
+{{--                        <img src="{{ asset('web_sayt/img/eye.svg') }}" alt="" toggle="#password_2"--}}
+{{--                             class="fa fa-fw fa-eye field-icon toggle-password">--}}
 
 
 
-                        <div class="lg-sg__button">
-                            <a href="./index.html"><input type="submit" form="auth" class="btn bg-yellow"
-                                                          value="Save Password"></a>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+{{--                        <div class="lg-sg__button">--}}
+{{--                            <a href="./index.html"><input type="submit" form="auth" class="btn bg-yellow"--}}
+{{--                                                          value="Save Password"></a>--}}
+{{--                        </div>--}}
+{{--                    </form>--}}
+{{--                </div>--}}
+{{--            </div>--}}
+{{--        </div>--}}
+{{--    </div>--}}
+{{--</div>--}}
 
 <div class="modal fade show" id="login" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
      aria-hidden="true">

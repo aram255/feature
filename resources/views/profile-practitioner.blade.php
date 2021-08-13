@@ -18,46 +18,6 @@
 @section('content')
     <script>var body = document.body; body.classList.add("body");</script>
 
-
-{{--        <h2>Added Teg List</h2><br>--}}
-
-{{--        <form method="post" action="{{route('add-tag-my-list-management',[app()->getLocale()])}}">--}}
-{{--            @csrf--}}
-
-{{--                @foreach($TagManagements as $index => $TagManagement)--}}
-
-{{--                        @if($TagManagement->published == 1)--}}
-{{--                            <input type="checkbox" name="teg_management[{{$index}}]" value="{{$TagManagement->id}}">--}}
-{{--                        @endif--}}
-{{--                    <span @if($TagManagement->published == 0)style="color: red;" @endif>{{$TagManagement->name}}</span><br>--}}
-
-{{--                @endforeach--}}
-{{--                <input type="submit" value="Add Teg To my list">--}}
-
-
-{{--        </form> <br>--}}
-{{--        <section>--}}
-
-
-{{--            <div class="form-group">--}}
-{{--                <form method="post" action="{{route('add-tag-management',[app()->getLocale()])}}">--}}
-{{--                    @csrf--}}
-{{--                <p>Add Tag</p>--}}
-{{--                <input style="border: 1px solid black" type="text" name="add_teg">--}}
-{{--                <button type="submit" class="btn btn-gradient-primary mr-2" style="background-color: #28a745; color: white;">Add</button>--}}
-{{--                </form><br>--}}
-
-{{--                <h1>Delete</h1>--}}
-{{--                <form method="post" action="{{route('delete-tag-management',[app()->getLocale()])}}">--}}
-{{--                    @csrf--}}
-{{--                                    <p>Add Tag</p>--}}
-
-{{--                    @foreach($MyTagManagements as $ind => $GetTagManagements)--}}
-{{--                        <input style="border: 1px solid black" type="checkbox" value="{{$GetTagManagements->teg_managements_id}}" name="teg_management[{{$ind}}]">{{$GetTagManagements->name}}<br>--}}
-{{--                    @endforeach<br>--}}
-{{--                    <button type="submit" class="btn btn-gradient-primary mr-2" style="background-color: #28a745; color: white;">Delete</button>--}}
-{{--                </form>--}}
-{{--            </div><br>--}}
     <!---  0000000  ---->
     <main>
         <div class="container">
@@ -558,4 +518,6 @@
 
     </script>
     </script>
+
+
 @endsection

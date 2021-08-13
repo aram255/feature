@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\BlogTextModel;
 use App\Models\Balance;
 use App\Models\Card;
 use App\Models\ServiceDescriptionModel;
@@ -96,7 +97,7 @@ class IndexController extends Controller
                 {
                     $query->addSelect([
                         'count_meting' => ZoomModel::selectRaw('COUNT(start)')
-                            //->whereBetween('start',[Carbon::now()->startOfWeek(), Carbon::now()->endOfWeek()] )
+                            ->whereBetween('start',[Carbon::now()->startOfWeek(), Carbon::now()->endOfWeek()] )
                             ->whereColumn('practitioner_id', '=', 'practitioner.id')
                     ]);
                 }
@@ -289,7 +290,9 @@ class IndexController extends Controller
             ]
         );
 
-      return view('blog',compact('Blog','BlogFirst'));
+        $BlogText = BlogTextModel::first();
+
+      return view('blog',compact('Blog','BlogFirst','BlogText'));
     }
 
 

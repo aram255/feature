@@ -2,7 +2,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"
           integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA=="
           crossorigin="anonymous" />
-
     <link rel="stylesheet" href="{{ asset('web_sayt/css/bootstrap/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('web_sayt/css/owl-carousel-min.css') }}">
     <link rel="stylesheet" href="{{ asset('web_sayt/css/owl.theme.default.min.css') }}">
@@ -10,6 +9,9 @@
     <link rel="stylesheet" href="{{ asset('web_sayt/css/css/main.css') }}">
     <link rel="stylesheet" href="{{ asset('web_sayt/css/service.css') }}">
     <link href="{{ asset('web_sayt/css/tagger.css')}}" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/bbbootstrap/libraries@main/choices.min.css">
+    <link rel="stylesheet" href="{{ asset('web_sayt/css/multiSelect.css') }}">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 @endsection
 
 @section('title', __('site.Home') )
@@ -21,116 +23,158 @@
 
 
     <section class="edit-profile-section">
+        <form method="post" action="{{route('edit-profile-practitioner-post',[app()->getLocale()])}}" enctype="multipart/form-data">
+            @csrf
         <div class="container">
             <div class="profile-edit-flex">
                 <div >
-                    <p> <img src="{{ asset('web_sayt/img/add.svg') }}">Add Photo</p>
+                    <p> <img src="@if(empty($Practitioners->img)){{ asset('web_sayt/img/add.svg') }}@else{{ asset('web_sayt/img/remove.svg') }}@endif">@if(empty($Practitioners->img)) Add Photo @else
+
+                        <a href="{{route('delete-photo-video',[app()->getLocale(),1])}}">Remove Photo</a>
+
+                        @endif</p>
 
                     <div class="edit-profile__contact-img">
-                        <input type="file" id="img-file" name="img-file">
+                        <input type="file" id="img-file" name="img">
                         <label for="img-file">
-                            <img class="upload" src="{{ asset('web_sayt/img/img-file.svg') }}" alt="">
+                            <img class="upload" src="@if(empty($Practitioners->img)){{asset('web_sayt/img/img-file.svg')}}@else{{ asset('web_sayt/img_practitioners/'.$Practitioners->img)}} @endif" alt="">
                         </label>
                     </div>
                 </div>
                 <div class="add-photo-edit">
-                    <p><img src="{{ asset('web_sayt/img/add.svg') }}">Add Video</p>
+{{--                    <input  type="file" id="img-file" name="video">--}}
+
+                    <p><img src="@if(empty($Practitioners->video)){{ asset('web_sayt/img/add.svg') }}@else{{ asset('web_sayt/img/remove.svg') }}@endif">@if(empty($Practitioners->img)) Add Video @else
+
+{{--                            style="background:white;font-weight:unset;color: #00309e;"--}}
+                            <a href="{{route('delete-photo-video',[app()->getLocale(),2])}}">Remove Video</a>
+                        @endif</p>
+
                     <div class="edit-profile__contact-img edit-profile__contact-video">
-                        <input type="file" id="img-file" name="img-file">
-                        <label for="img-file"><img class="upload" src="{{ asset('web_sayt/img/video-file.svg') }}" alt="" width="38px"></label>
+                        <input  type="file" id="video-file" name="video">
+                        <label for="video-file"><img class="upload" src="{{ asset('web_sayt/img/video-file.svg') }}" alt="" width="38px"></label>
                     </div>
+
                 </div>
             </div>
             <div class="edit-profile">
                 <div class="edit-profile__contact">
                     <div class="edit-profile-info ml-0">
                         <div class="create__form pt-0">
-                            <form action="#" id="auth" method="POST">
+{{--                            <form action="#" id="auth" method="POST">--}}
                                 <div class="form-info">
                                     <div class="user-info odd">
                                         <p class="user-info-p">First Name</p>
-                                        <input type="text" id="firsName" class="fadeIn" name="firsName">
+                                        <input type="text" id="firsName" class="fadeIn" value="{{$Practitioners->first_name}}" name="first_name">
                                     </div>
                                     <div class="user-info">
                                         <p class="user-info-p">Last Name</p>
-                                        <input type="text" class="fadeIn" name="lastName">
+                                        <input type="text" class="fadeIn" value="{{$Practitioners->last_name}}" name="last_name">
                                     </div>
                                     <br>
                                     <div class="user-info odd">
                                         <p class="user-info-p">E-mail</p>
-                                        <input type="email" id="email" class="fadeIn" name="emali">
+                                        <input type="email" id="email" class="fadeIn" value="{{$Practitioners->email}}" name="email">
                                     </div>
                                     <div class="user-info">
                                         <p class="user-info-p">Phone Number</p>
-                                        <input type="tel" id="phone" class="fadeIn" name="phone">
+                                        <input type="tel" id="phone" class="fadeIn" value="{{$Practitioners->phone_number}}" name="phone_number" >
                                     </div>
                                     <br>
                                     <div class="user-info create__checkbox">
                                         <p>Gender</p>
-                                        <input type="checkbox" name="male" id="Male" value="Remember me" class="lg-sg__checkin"><label
-                                            for="Male">Male</label>
-                                        <input type="checkbox" name="female" id="Female" value="Remember me" class="lg-sg__checkin"><label
-                                            for="Female">Female</label>
-                                        <input type="checkbox" name="other" id="Other"  value="Remember me" class="lg-sg__checkin"><label
-                                            for="Other">Other</label>
+                                        <input type="radio"  {{ ($Practitioners->gender=="Male")? "checked" : "" }} name="gender" id="Male" value="Male" class="lg-sg__checkin"><label
+                                            for="Male" style="margin-left:10px;font-size:15px;">Male</label>
+                                        <input type="radio" {{ ($Practitioners->gender=="Famale")? "checked" : "" }} name="gender" id="Female" value="Famale" class="lg-sg__checkin"><label
+                                            for="Female" style="margin-left:10px;font-size:15px;">Female</label>
+                                        <input type="radio" {{ ($Practitioners->gender=="Other")? "checked" : "" }} name="gender" id="Other"  value="Other" class="lg-sg__checkin"><label
+                                            for="Other" style="margin-left:10px;font-size:15px;">Other</label>
                                     </div>
                                     <br>
                                     <div class="user-info odd">
                                         <p class="user-info-p">Current Password</p>
-                                        <input type="password" id="password" class="fadeIn" name="password">
+                                        <input type="password" class="fadeIn" name="password">
                                     </div>
                                     <div class="user-info odd">
                                         <p class="user-info-p">New Password</p>
-                                        <input type="password" id="password" class="fadeIn" name="password">
+                                        <input type="password"  class="fadeIn" name="new_password">
                                     </div>
                                     <br>
 
                                     <div class="user-info odd">
                                         <p class="user-info-p">Confirm New Password</p>
-                                        <input type="password" id="password" class="fadeIn" name="password">
+                                        <input type="password" id="password" class="fadeIn" name="conf_password" >
                                     </div>
                                     <div class="user-info odd">
                                         <p class="create-p">Language</p>
-                                        <select class="fadeIn" name="language" id="state">
-                                            <option value="select-sanguage">Select Language</option>
-                                            <option value="English">English</option>
-                                        </select>
+{{--                                        <select class="fadeIn" name="language" id="state">--}}
+{{--                                            <option value="select-sanguage">Select Language</option>--}}
+{{--                                            <option value="English">English</option>--}}
+{{--                                        </select>--}}
+
+
+                                                <select id="choices-multiple-remove-button2" class="fadeIn form-control choices__input is-hidden" name="lang[]" multiple="" tabindex="-1" aria-hidden="true" data-choice="active">
+                                                    {{--  List of added Tags--}}
+                                                    @foreach($Lang as  $GetLang)
+                                                        <option class="delete_teg" value="{{$GetLang->id}}" @if($GetLang->selected == 1) selected="" @endif>{{$GetLang->title}}</option>
+                                                    @endforeach
+
+                                                </select>
+
+
                                     </div>
                                      <div class="lg-sg__button mob_save">
-                                        <input type="submit" form="auth" class="btn bg-yellow" value="Save">
+                                        <input type="submit"  class="btn bg-yellow" value="Save">
                                     </div>
                                 </div>
-                            </form>
+{{--                            </form>--}}
                         </div>
                     </div>
                 </div>
+
                 <div class="edit-profile__other mt-0">
                     <div class="d-flex">
                         <div class="user-info odd">
-                            <p class="user-info-p">Insurance coverage</p>
-                            <input type="text" id="coverage" class="fadeIn" name="coverage">
+                            <p class="user-info-p" style="margin-bottom:15px">Insurance coverage</p>
+{{--                            <input type="text" id="coverage" class="fadeIn" name="coverage">--}}
+                            <input type="radio" {{ ($Practitioners->insurance=="Yes")? "checked" : "" }}  name="insurance" id="yes" value="Yes" class="lg-sg__checkin"><label
+                                for="yes" style="margin-left:6px;">Yes</label>
+                            <input type="radio" {{ ($Practitioners->insurance=="No")? "checked" : "" }} name="insurance" id="No" value="No" class="lg-sg__checkin" style="margin-left:33px;"><label style="margin-left:6px;"
+                                for="No">No</label>
                         </div>
                         <div class="user-info">
                             <p class="user-info-p ml-4">Cases and specializations</p>
-                            {{--                        <input type="text" value="#enterTag"  id="country_name" class="form-control input-lg" />--}}
-                            {{--                        <input type="text"   placeholder="Enter Country Name" />--}}
-                            {{--                        <div id="countryList">--}}
-                            {{ csrf_field() }}
 
-
-                            <div class="input-group ml-auto mb-3" style="max-width: 340px">
-                                <input type="text" class="fadeIn" style="width: 85%" placeholder="Select" aria-label="Select" aria-describedby="basic-addon2">
+                            <div class="input-group ml-auto mb-3" style="max-width: 340px;margin-left:21px !important;">
+                                <input id="add_new_tag" type="text" class="fadeIn" style="width: 85%" placeholder="Select" aria-label="Select" aria-describedby="basic-addon2">
                                 <div class="input-group-append ml-auto">
-                                    <button class="btn px-3 text-white fs-18" style="border-radius: 5px; background-color: #8ba9ee" type="button">+</button>
+                                    <button class="btn px-3 text-white fs-18" style="border-radius: 5px; background-color: #8ba9ee" type="button" id="add_new_tag_submit">+</button>
                                 </div>
                             </div>
-                            <input type="text" value="#enterTag"  id="tag1" name="tags" />
+
+                            <div class="">
+
+                                <div class="" style="margin-left:21px;">
+                                    <div class="choices" data-type="select-multiple" role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" dir="ltr">
+                                            <select id="choices-multiple-remove-button" class="form-control choices__input is-hidden" multiple="" tabindex="-1" aria-hidden="true" data-choice="active">
+                                                {{--  List of added Tags--}}
+                                                @foreach($MyTagManagements as $ind => $GetTagManagements)
+                                                    <option class="delete_teg" value="{{$GetTagManagements->id}}" @if($GetTagManagements->selected == 1) selected="" @endif>{{$GetTagManagements->name}}</option>
+                                                @endforeach
+
+                                            </select>
+                                     </div>
+                                </div>
+
+                            </div>
                         </div>
                     </div>
 
+
+
                     <div class="user-info-about mb-4">
                         <p class="user-info-p">About me</p>
-                        <textarea class="fadeIn" name="about-me" rows="6" cols="100" style="resize: none;"></textarea>
+                        <textarea class="fadeIn" name="description" rows="6" cols="100" style="resize: none;">{{$Practitioners->description}}</textarea>
                     </div>
                     <div class="user-info odd">
                         <p class="user-info-p">Card Number<span>*</span></p>
@@ -144,9 +188,12 @@
             </div>
         </div>
         <div class="lg-sg__button but_web">
-            <input type="submit" form="auth" class="btn bg-yellow" value="Save">
+            <input type="submit"  class="btn bg-yellow" value="Save">
         </div>
+
+     </form>
     </section>
+
     <section>
         <div class="service mt-5 py-5 container container-1640">
             <h2 class="text-center">My Services</h2>
@@ -271,9 +318,9 @@
             <script type="text/javascript" src="{{ asset('web_sayt/js/bootstrap/bootstrap.bundle.min.js') }}"></script>
             <script type="text/javascript" src="{{ asset('web_sayt/js/owl.carousel.min.js') }}"></script>
             <script type="text/javascript" src="{{ asset('web_sayt/js/carusel.js') }}"></script>
-            <script src="{{ asset('web_sayt/js/filter.js') }}"></script>
+{{--            <script src="{{ asset('web_sayt/js/filter.js') }}"></script>--}}
             <script type="text/javascript" src="{{ asset('web_sayt/js/script.js') }}"></script>
-            <script type="text/javascript" src="{{ asset('web_sayt/js/slidebar.js') }}"></script>
+{{--            <script type="text/javascript" src="{{ asset('web_sayt/js/slidebar.js') }}"></script>--}}
             <script>
                 $(document).ready(function(){
 
@@ -410,7 +457,7 @@
             <script src="{{ asset('web_sayt/js/tagger.js') }}"></script>
 
             <script>
-                var t1 = tagger(document.querySelector('[name="tags"]'), {
+                var t1 = tagger(document.querySelector('#country_name'), {
                     allow_duplicates: false,
                     allow_spaces: true,
                     add_on_blur: true,
@@ -418,63 +465,183 @@
                 });
 
 
-              //   var data ='[{ "value": 1, "text": "Task 1", "continent": "Task" }, { "value": 2, "text": "Task 2", "continent": "Task" }, { "value": 3, "text": "Task 3", "continent": "Task" }, { "value": 4, "text": "Task 4", "continent": "Task" }, { "value": 5, "text": "Task 5", "continent": "Task" }, { "value": 6, "text": "Task 6", "continent": "Task" } ]';
-              //
-              // //  get data pass to json
-              //   var task = new Bloodhound({
-              //       datumTokenizer: Bloodhound.tokenizers.obj.whitespace("text"),
-              //       queryTokenizer: Bloodhound.tokenizers.whitespace,
-              //       local: jQuery.parseJSON(data) //your can use json type
-              //   });
-              //
-              //   task.initialize();
-              //
-              //   var elt = $("#tag1");
-              //   elt.tagsinput({
-              //       itemValue: "value",
-              //       itemText: "text",
-              //       typeaheadjs: {
-              //           name: "task",
-              //           displayKey: "text",
-              //           source: task.ttAdapter()
-              //       }
-              //   });
-              //
-              //   //insert data to input in load page
-              //   elt.tagsinput("add", {
-              //       value: 1,
-              //       text: "task 1",
-              //       continent: "task"
-              //   });
 
                 </script>
 
             <script>
                 $(document).ready(function(){
-
-                    $('#country_name').keyup(function(){
+                    $(document).on('#country_name', 'click', function () {
                         alert('asd');
-                        var query = $(this).val();
-                        if(query != '')
-                        {
-                            var _token = $('input[name="_token"]').val();
-                            $.ajax({
-                                url:"{{ route('autocomplete',[app()->getLocale()]) }}",
-                                method:"POST",
-                                data:{query:query, _token:_token},
-                                success:function(data){
-                                    $('#countryList').fadeIn();
-                                    $('#countryList').html(data);
-                                }
-                            });
-                        }
-                    });
-
-                    $(document).on('click', 'li', function(){
-                        $('#country_name').val($(this).text());
-                        $('#countryList').fadeOut();
-                    });
+                    })
 
                 });
             </script>
+
+            {{--   Multiselect  option--}}
+            <script src="https://cdn.jsdelivr.net/gh/bbbootstrap/libraries@main/choices.min.js"></script>
+            <script>
+                $(document).ready(function(){
+
+                    var multipleCancelButton = new Choices('#choices-multiple-remove-button', {
+                        removeItemButton: true,
+                        searchResultLimit:5,
+                        renderChoiceLimit:5,
+
+                    });
+
+                    var multipleCancelButton1 = new Choices('#choices-multiple-remove-button1', {
+                        removeItemButton: true,
+                        searchResultLimit:5,
+                        renderChoiceLimit:5,
+                    });
+
+                    var multipleCancelButton2 = new Choices('#choices-multiple-remove-button2', {
+                        removeItemButton: true,
+                        searchResultLimit:5,
+                        renderChoiceLimit:5,
+                    });
+
+
+                    // lang Add
+                    multipleCancelButton2.passedElement.element.addEventListener(
+                        'addItem',
+                        function(event) {
+
+                            var _token = $('input[name="_token"]').val();
+
+                            $.ajax({
+                                url: "{{route('add-lang-practitioner',[app()->getLocale()])}}",
+                                type: "POST",
+                                data: {
+                                    lang_id: event.detail.value,
+                                    _token:_token
+                                },
+                                success: function (data) {
+                                    console.log(data)
+                                    alert("The language you selected has been added.");
+                                },
+                                error: function(returnval) {
+                                    alert('The language you selected has not been added.');
+                                }
+                            });
+                        },
+                        false,
+                    );
+
+                    // lang remove
+                    multipleCancelButton2.passedElement.element.addEventListener(
+                        'removeItem',
+                        function(event) {
+
+                            var _token = $('input[name="_token"]').val();
+                            $.ajax({
+                                url: "{{route('delete-lang-practitioner',[app()->getLocale()])}}",
+                                type: "POST",
+                                data: {
+                                    lang_id: event.detail.value,
+                                    _token:_token
+                                },
+                                success: function (data) {
+                                    console.log(data)
+                                    alert("Your specified language removed.");
+                                },
+                                error: function(returnval) {
+                                    alert('The language you specified was not removed.');
+                                }
+                            });
+
+                        },
+                        false,
+                    );
+
+
+
+                    // Teg
+                    multipleCancelButton.passedElement.element.addEventListener(
+                        'removeItem',
+                        function(event) {
+                            // console.log('removeItem');
+                            // do something creative here...
+                            //console.log(event.detail.id);
+                             console.log(event.detail.value);
+                            // console.log(event.detail.label);
+                            // console.log(event.detail.customProperties);
+                            // console.log(event.detail.groupValue);
+                            var _token = $('input[name="_token"]').val();
+                            $.ajax({
+                                url: "{{route('delete-tag-management',[app()->getLocale()])}}",
+                                type: "POST",
+                                data: {
+                                    teg_managements_id: event.detail.value,
+                                    _token:_token
+                                },
+                                success: function (data) {
+                                    console.log(data)
+                                    alert("Your tag has been removed.");
+                                },
+                                error: function(returnval) {
+                                    alert('Your tag has not been removed.');
+                                }
+                            });
+                        },
+                        false,
+                    );
+
+                    multipleCancelButton.passedElement.element.addEventListener(
+                        'addItem',
+                        function(event) {
+                          //  console.log('add');
+                            // do something creative here...
+                           // console.log(event.detail.id);
+                            console.log(event.detail.value);
+                            // console.log(event.detail.label);
+                            // console.log(event.detail.customProperties);
+                            // console.log(event.detail.groupValue);
+                            var _token = $('input[name="_token"]').val();
+                            $.ajax({
+                                url: "{{route('add-tag-my-list-management',[app()->getLocale()])}}",
+                                type: "POST",
+                                data: {
+                                    teg_managements_id: event.detail.value,
+                                    _token:_token
+                                },
+                                success: function (data) {
+                                    console.log(data)
+                                    alert("The tag you selected has been added to your list.");
+                                },
+                                error: function(returnval) {
+                                    alert('The tag you selected has not been added to your list, or it has already been added.');
+                                }
+                            });
+                        },
+                        false,
+                    );
+
+
+                    // add new tag
+                    $('#add_new_tag_submit').on('click',function () {
+
+                        var add_teg = $("#add_new_tag").val();
+
+                                var _token = $('input[name="_token"]').val();
+                                $.ajax({
+                                    url:"{{route('add-tag-management',[app()->getLocale()])}}",
+                                    method:"POST",
+                                    data:{add_teg:add_teg, _token:_token},
+                                    success:function(data){
+                                            alert('The tag you entered has been added.')
+                                    },error: function (error) {
+                                        if(error.status == 500)
+                                        {
+                                            alert('The tag you entered was not entered, or it currently exists.')
+                                        }
+                                    }
+                                });
+
+                    })
+                });
+
+            </script>
+
+
 @endsection

@@ -7,6 +7,7 @@ use App\Models\CustomerModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use File;
+use Hash;
 
 
 class CustomerController extends Controller
@@ -29,12 +30,13 @@ class CustomerController extends Controller
 
     public function editProfileCustmerPost(request $request)
     {
-        $request->validate([
-            "password" => 'required|confirmed|min:6'
-        ]);
+//        $request->validate([
+//            "password" => 'required|confirmed|min:6'
+//        ]);
 
        //dd($request->gender);
         $EditCustomer = CustomerModel::where('id',Auth::id())->first();
+
         if(!empty($request->file('img')))
         {
             $ImgName     = rand() . '.' . $request->file('img')->getClientOriginalExtension();
@@ -64,7 +66,36 @@ class CustomerController extends Controller
 
         $EditCustomer->save();
 
-        return back()->with('status','Editing my info');
+        if($request->password != null) {
+            $EditCustomerPassword = CustomerModel::where('id', Auth::id())->first();
+
+//            if (Hash::check($request->password, $EditCustomerPassword->password))
+//            {
+
+                if (Hash::check($request->password, Hash::make($request->password_confirmation)))
+                {
+
+                    $request->validate([
+                        "password"              => 'required',
+                        "password_confirmation" => 'required'
+                    ]);
+
+                    $EditCustomerPassword->password = Hash::make($request->password);
+                    $EditCustomerPassword->save();
+
+                    if(!empty($EditCustomerPassword))
+                    {
+                        return back()->with('status','Your request has been completed.');
+                    }
+                }
+
+            }
+      //  }
+        if(!empty($EditCustomer))
+        {
+            return back()->with('status','Your request has been completed');
+        }
+
     }
 
     public function profileViewCustomer()

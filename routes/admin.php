@@ -70,6 +70,8 @@ Route::group(['middleware' => 'adminauth'], function () {
     Route::get('blog-get',[ContentController::class, 'getBlog'])->name('adminBlogGet');
     Route::post('blog-save',[ContentController::class, 'saveBlog'])->name('adminBlogSave');
     Route::post('blog-remove',[ContentController::class, 'removeBlog'])->name('adminBlogRemove');
+    Route::post('EditBlogText',[ContentController::class, 'EditBlogText'])->name('adminEditBlogText');
+
 
     // Admin profile
     Route::get('profile',[AdminController::class, 'profile'])->name('adminProfile');

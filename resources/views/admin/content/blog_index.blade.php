@@ -1,5 +1,87 @@
 @extends('admin.layouts.app')
 @section('content')
+
+
+    <div class="card mb-3">
+        <h2 style="text-align: center;">Blog Text Title</h2>
+
+        <form method="post" action="{{route('adminDeletePracticesTegManagement')}}">
+            {{csrf_field()}}
+
+
+            {{--  Add--}}
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered"  width="100%" cellspacing="0">
+                        <thead>
+                        <tr>
+                            <th style="width: 73%;">Title</th>
+                            <th>Text</th>
+                            <th>Edit</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>{{$BlogText->title}}</td>
+                                <td>{{$BlogText->text}}</td>
+                                <td><a data-toggle="modal" data-target="#edit" href="javascript:;"  class="btn btn-success item_edit btn-sm btn-circle"><i class="fas fa-edit"></i></a></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </form>
+    </div>
+
+
+
+    {{-- Edit--}}
+
+        <div class="modal" id="edit">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+
+                    <!-- Modal Header -->
+                    <div class="modal-header">
+                        <h4 class="modal-title">Edit Blog Text</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+
+                    <!-- Modal body -->
+                    <div class="modal-body">
+
+                        <div class="col-12 grid-margin stretch-card">
+                            <div class="card">
+                                <div class="card-body">
+
+                                    <form class="forms-sample" method="post"  action="{{route('adminEditBlogText')}}"  >
+                                        {{csrf_field()}}
+
+                                        <div class="form-group">
+                                            <span class="el_item">Title:</span>
+                                            <input type="text" class="form-control"   name="title" value="{{$BlogText->title}}" >
+                                        </div>
+
+                                        <div class="form-group">
+                                            <span class="el_item">Text:</span>
+                                            <input type="text" class="form-control"   name="text" value="{{$BlogText->text}}" >
+                                        </div>
+
+                                        <button type="submit" class="btn btn-gradient-primary mr-2" style="background-color: #28a745; color: white;">Edit</button>
+                                    </form>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
 <div class="container-fluid">
 
     <!-- Page Heading -->

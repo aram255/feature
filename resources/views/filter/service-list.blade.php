@@ -64,6 +64,7 @@
                                                     @endforeach
                                                 @endforeach
                                             </ul>
+                                            <input type="hidden" name="service_id" value="{{$Value->id}}">
                                             <input type="hidden" name="email" value="{{$Result->email}}">
                                             <input type="hidden" name="first_name" value="{{$Result->first_name}}">
                                             <input type="hidden" name="last_name" value="{{$Result->last_name}}">
