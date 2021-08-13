@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Balance;
 use App\Models\Card;
 use App\Models\Credential;
+use App\Models\PractitionersModel;
 use Illuminate\Http\Request;
+use LVR\CreditCard\CardNumber;
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
@@ -67,6 +69,21 @@ class PaymentController extends Controller
          }
 
         return back();
+    }
+    public function addCardPractitioner(Request $request){
+
+        $request->validate([
+            'card_number' => ['required', new CardNumber],
+        ]);
+
+        $user_id = session()->get('UserID');
+        PractitionersModel::find($user_id)->update([
+            'card_number' => $request->card_number
+        ]);
+
+        Session::flash('success', 'Card is added');
+
+        return redirect()->back();
     }
 
     public function addCard(Request $request)

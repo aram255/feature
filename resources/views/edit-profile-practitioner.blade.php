@@ -169,20 +169,9 @@
                             </div>
                         </div>
                     </div>
-
-
-
                     <div class="user-info-about mb-4">
                         <p class="user-info-p">About me</p>
                         <textarea class="fadeIn" name="description" rows="6" cols="100" style="resize: none;">{{$Practitioners->description}}</textarea>
-                    </div>
-                    <div class="user-info odd">
-                        <p class="user-info-p">Card Number<span>*</span></p>
-                        <input type="text"  class="fadeIn" name="coverage">
-                    </div>
-                    <br>
-                    <div class="add-card-edit-link">
-                        <a href="#">Add New Card Number</a>
                     </div>
                 </div>
             </div>
@@ -192,6 +181,35 @@
         </div>
 
      </form>
+        <div class="container">
+            <div>
+                <form role="form" action="{{ route('add-card-practitioner') }}" method="post" class="stripe-payment"
+                      data-cc-on-file="false" data-stripe-publishable-key="{{ env('STRIPE_KEY') }}"
+                      id="stripe-payment">
+                    @csrf
+
+                    <div class="user-info odd">
+                        <p class="user-info-p">Card Number<span>*</span></p>
+                        <input type="text"  class="fadeIn card-num" name="card_number" value="{{$Practitioners->card_number ?? ''}}">
+                        @if($errors->has('card_number'))
+                            <span class="text-danger d-block" role="alert">
+                               <strong>{{ $errors->first('card_number') }}</strong>
+                        </span>
+                            @enderror
+                            @if($message = Session::get('success'))
+                                <span class="text-success d-block" role="alert">
+                               <strong>{{ $message }}</strong>
+                        </span>
+                            @endif
+                    </div>
+                    <br>
+                    <div class="add-card-edit-link">
+                        <button type="submit" class="bg-yellow br-10 px-4 py-2 fs-16">Add </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
     </section>
 
     <section>
@@ -321,6 +339,7 @@
 {{--            <script src="{{ asset('web_sayt/js/filter.js') }}"></script>--}}
             <script type="text/javascript" src="{{ asset('web_sayt/js/script.js') }}"></script>
 {{--            <script type="text/javascript" src="{{ asset('web_sayt/js/slidebar.js') }}"></script>--}}
+
             <script>
                 $(document).ready(function(){
 
