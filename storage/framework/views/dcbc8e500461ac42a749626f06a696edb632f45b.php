@@ -46,10 +46,18 @@
                 <form method="POST" action="<?php echo e(route('login.custom',[app()->getLocale()])); ?>">
                     <?php echo csrf_field(); ?>
                     <p class="lg-sg-p">E-mail</p>
-                    <input type="email" class="fadeIn email" name="email" value="<?php echo e(old('email')); ?>">
+                    <input type="email" class="fadeIn email input_t" name="email" value="<?php echo e(old('email')); ?>">
+
+                    <?php if(Session::has('fail')): ?>
+                        <style>
+                            .input_t{
+                                border: 1px solid red;
+                            }
+                        </style>
+                    <?php endif; ?>
                     <a style="color: red;"><?php if($errors->has('email')): ?><?php echo e($errors->first('email')); ?><?php endif; ?></a>
                     <p class="lg-sg-p">Password</p>
-                    <input type="password" class="fadeIn" name="password">
+                    <input type="password" class="fadeIn input_t" name="password">
                     <a style="color: red;"><?php if($errors->has('password')): ?><?php echo e($errors->first('password')); ?><?php endif; ?></a>
                     <div class="lg-sg__check">
                         <input type="checkbox" name="remember" value="Remember me" id="remember" class="lg-sg__check-lg" />
