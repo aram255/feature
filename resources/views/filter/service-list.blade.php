@@ -1,3 +1,4 @@
+
 <div class="modal fade" id="service-modal{{$Result->id}}">
     <div class="modal-dialog mx-auto " style="max-width: max-content; width: 100%">
         <div class="modal-content">
@@ -64,6 +65,12 @@
                                                     @endforeach
                                                 @endforeach
                                             </ul>
+
+
+{{--                                            <input type="hidden" name="join_url" value="{{$Result->join_url}}">--}}
+{{--                                            <input type="hidden" name="password" value="{{$Result->password}}">--}}
+{{--                                            <input type="hidden" name="duration" value="{{$Result->duration}}">--}}
+                                            <input type="hidden" name="service_id" value="{{$Value->id}}">
                                             <input type="hidden" name="email" value="{{$Result->email}}">
                                             <input type="hidden" name="first_name" value="{{$Result->first_name}}">
                                             <input type="hidden" name="last_name" value="{{$Result->last_name}}">

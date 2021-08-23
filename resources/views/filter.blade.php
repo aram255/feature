@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="{{ asset('web_sayt/css/service.css') }}">
     <link rel="stylesheet" href="{{ asset('web_sayt/css/css/responsive.css') }}">
 
-            {{--    calendar script--}}
+    {{--    calendar script--}}
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/fullcalendar.css" />
 
@@ -81,10 +81,10 @@
                         <input type="radio" name="yesNo" value="No"  id="no" @if(!empty($Week)) @if($Week == 'No') checked="checked"  @endif @endif class="lg-sg__checkin">
                         <label for="no" class="ml-2">No</label>
 
-{{--                    @foreach($TegManagements as $key=>$TegManagement)--}}
-{{--                            <input  type="checkbox" name="teg_management[{{$TegManagement->id}}]" @if(!empty($Tag)) @if(in_array($TegManagement->id, $Tag)) checked="checked"  @endif @endif value="{{$TegManagement->id}}" class="lg-sg__checkin">--}}
-{{--                            <label for="remember">{{$TegManagement->name}}</label>--}}
-{{--                    @endforeach--}}
+                    {{--                    @foreach($TegManagements as $key=>$TegManagement)--}}
+                    {{--                            <input  type="checkbox" name="teg_management[{{$TegManagement->id}}]" @if(!empty($Tag)) @if(in_array($TegManagement->id, $Tag)) checked="checked"  @endif @endif value="{{$TegManagement->id}}" class="lg-sg__checkin">--}}
+                    {{--                            <label for="remember">{{$TegManagement->name}}</label>--}}
+                    {{--                    @endforeach--}}
                 </form>
             </div>
             {{-- Reset fild--}}
@@ -100,27 +100,27 @@
 
             <!-- filetr data -->
 
-            @foreach($Practitioners as $Result)
+        @foreach($Practitioners as $Result)
 
-                @if(!empty($Result->count_meting)  and $Result->count_meting <= 7 and $Result->count_meting >= 1 and  $Week=='Yes' )
-                       @include('filter.practitioners-list')
-                @elseif(isset($Result->count_meting)  and $Result->count_meting===0  and $Week=='No' )
-                       @include('filter.practitioners-list')
-                @elseif(!empty($Result->count_meting)  and $Result->count_meting <= 7 and $Result->count_meting >= 1 and $Week=='Yes' and  isset($Result->email))
-                       @include('filter.practitioners-list')
-                @elseif(isset($Result->count_meting)  and $Result->count_meting===0  and $Week=='No' and  isset($Result->email))
-                       @include('filter.practitioners-list')
-                @elseif(empty($Result->count_meting) and isset($Result->email))
-                       @include('filter.practitioners-list')
-                @endif
+            @if(!empty($Result->count_meting)  and $Result->count_meting <= 7 and $Result->count_meting >= 1 and  $Week=='Yes' )
+                @include('filter.practitioners-list')
+            @elseif(isset($Result->count_meting)  and $Result->count_meting===0  and $Week=='No' )
+                @include('filter.practitioners-list')
+            @elseif(!empty($Result->count_meting)  and $Result->count_meting <= 7 and $Result->count_meting >= 1 and $Week=='Yes' and  isset($Result->email))
+                @include('filter.practitioners-list')
+            @elseif(isset($Result->count_meting)  and $Result->count_meting===0  and $Week=='No' and  isset($Result->email))
+                @include('filter.practitioners-list')
+            @elseif(empty($Result->count_meting) and isset($Result->email))
+                @include('filter.practitioners-list')
+            @endif
 
-            @endforeach
+        @endforeach
 
         <!-- filetr data -->
 
 
 
-        <!-- content -->
+            <!-- content -->
             @if(!empty($Result))
 
                 <div class="pagination-filter mt-5" >
@@ -153,22 +153,22 @@
     </section>
 
 
-{{--    Service Modal--}}
+    {{--    Service Modal--}}
 
     @foreach($Practitioners as $Result)
 
-    <!-- The Modal service -->
-    @if(!empty($Result->count_meting)  and $Result->count_meting <= 7 and $Result->count_meting >= 1 and  $Week=='Yes' )
-        @include('filter.service-list')
-    @elseif(isset($Result->count_meting)  and $Result->count_meting===0  and $Week=='No' )
-        @include('filter.service-list')
-    @elseif(!empty($Result->count_meting)  and $Result->count_meting <= 7 and $Result->count_meting >= 1 ||  isset($Result->email))
-        @include('filter.service-list')
-    @elseif(isset($Result->count_meting)  and $Result->count_meting===0  and $Week=='No' ||  isset($Result->email))
-        @include('filter.service-list')
-    @elseif(empty($Result->count_meting) and isset($Result->email))
-        @include('filter.service-list')
-    @endif
+        <!-- The Modal service -->
+        @if(!empty($Result->count_meting)  and $Result->count_meting <= 7 and $Result->count_meting >= 1 and  $Week=='Yes' )
+            @include('filter.service-list')
+        @elseif(isset($Result->count_meting)  and $Result->count_meting===0  and $Week=='No' )
+            @include('filter.service-list')
+        @elseif(!empty($Result->count_meting)  and $Result->count_meting <= 7 and $Result->count_meting >= 1 ||  isset($Result->email))
+            @include('filter.service-list')
+        @elseif(isset($Result->count_meting)  and $Result->count_meting===0  and $Week=='No' ||  isset($Result->email))
+            @include('filter.service-list')
+        @elseif(empty($Result->count_meting) and isset($Result->email))
+            @include('filter.service-list')
+        @endif
 
 
     @endforeach
@@ -212,154 +212,237 @@
         </script>
         <script>
 
-            $(document).on('click','.detail-btn', function()  {
-                var practitionerId = $(this).attr('data-id');
-                var calendar = null;
+        $(document).on('click','.detail-btn', function()  {
 
 
-                $('#calendar').fullCalendar('destroy');
+            var practitionerId = $(this).attr('data-id');
+            var calendar = null;
 
-                $.ajaxSetup({
-                    headers:{
-                        'X-CSRF-TOKEN' : $('meta[name="csrf-token"]').attr('content')
-                    }
-                });
-                $('#calendar').fullCalendar('destroy');
+            var practitionerID = $(this).prev().val();
+            var phone_number   = $(this).prev().prev().val();
+            var last_name      = $(this).prev().prev().prev().val();
+            var first_name     = $(this).prev().prev().prev().prev().val();
+            var email          = $(this).prev().prev().prev().prev().prev().val();
+            var service_id     = $(this).prev().prev().prev().prev().prev().prev().val();
+            var durationn      = $(this).prev().prev().prev().prev().prev().prev().prev().val();
+            var password       = $(this).prev().prev().prev().prev().prev().prev().prev().prev().val();
+            var join_url       = $(this).prev().prev().prev().prev().prev().prev().prev().prev().prev().val();
 
-                var calendar = $('#calendar').fullCalendar({
-                    editable:true,
-                    header:{
-                        left:'prev,next today',
-                        center:'title',
-                        right:'month,agendaWeek,agendaDay'
-                    },
-                    events:'/en/Search/'+ practitionerId,
-                    selectable:true,
-                    selectHelper: true,
-                    select:function(start, end, allDay)
-                    {
+            if(service_id == null)
 
-                        var start = $.fullCalendar.formatDate(start, 'Y-MM-DD HH:mm:ss');
-
-                        var end = $.fullCalendar.formatDate(end, 'Y-MM-DD HH:mm:ss');
+                service_id = '';
 
 
-                        // Check live DateTime
-                        var today = new Date();
-                        var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
-                        var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
-                        var LiveDateTime = date + ' ' + time;
+
+            $('#calendar').fullCalendar('destroy');
+
+            $.ajaxSetup({
+                headers:{
+                    'X-CSRF-TOKEN' : $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            $('#calendar').fullCalendar('destroy');
+
+            var calendar = $('#calendar').fullCalendar({
+                editable:true,
+                header:{
+                    left:'prev,next today',
+                    center:'title',
+                    right:'month,agendaWeek,agendaDay'
+                },
+                events:'/en/Search/'+ practitionerId+'/'+service_id,
+                selectable:true,
+                selectHelper: true,
+                select:function(start, end, allDay)
+                {
+
+                    var start = $.fullCalendar.formatDate(start, 'Y-MM-DD HH:mm:ss');
+
+                    var end = $.fullCalendar.formatDate(end, 'Y-MM-DD HH:mm:ss');
 
 
-                        // compare
+                    // Check live DateTime
+                    var today = new Date();
+                    var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
+                    var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+                    var LiveDateTime = date + ' ' + time;
 
-                        var d1 = new Date(start);
-                        var d2 = new Date(LiveDateTime);
 
-                        if (d1 >= d2) {
+                    // compare
 
-                            var title       = prompt('Event Title:');
-                            var pasword     = prompt('Event password:');
-                            var duration    = prompt('Event Duration:');
+                    var d1 = new Date(start);
+                    var d2 = new Date(LiveDateTime);
+
+                    if (d1 >= d2) {
+
+                        var title       = prompt('Event Title:');
+                        var pasword     = prompt('Event password:');
+                        var duration    = prompt('Event Duration:');
                             @if(isset(Auth::user()->id))
-                            var add_user_id = "{{Auth::user()->id}}";
+                        var add_user_id = "{{Auth::user()->id}}";
                             @endif
 
-                            var practitionerID = $('.detail-btn').prev().val();
-                            var phone_number   = $('.detail-btn').prev().prev().val();
-                            var last_name      = $('.detail-btn').prev().prev().prev().val();
-                            var first_name     = $('.detail-btn').prev().prev().prev().prev().val();
-                            var email          = $('.detail-btn').prev().prev().prev().prev().prev().val();
 
 
 
-                            if(title !== "" && pasword !== "" && duration !== ""){
 
-                                $.ajax({
-                                    url: "{{ route('add-zoom-meeting',app()->getLocale()) }}",
-                                    type: "POST",
-                                    data: {
-                                        title: title,
-                                        start: start,
-                                        end: end,
-                                        practitionerId: practitionerId,
-                                        add_user_id: add_user_id,
-                                        phone_number: phone_number,
-                                        last_name: last_name,
-                                        first_name: first_name,
-                                        email: email,
-                                        duration: duration,
-                                        password: pasword,
-                                        practitionerID: practitionerID,
-                                        type: 'add'
-                                    },
-                                    success: function (data) {
-                                        calendar.fullCalendar('refetchEvents');
-                                         alert("Event Created Successfully");
-                                         console.log(data)
-                                    },
-                                    error: function(returnval) {
-                                        alert('Your appointment has not been created');
-                                    }
-                                });
+                        if(title !== "" && pasword !== "" && duration !== ""){
 
-                            }else{
-                                alert('Empty');
-                            }
+                            $.ajax({
+                                url: "{{ route('add-zoom-meeting',app()->getLocale()) }}",
+                                type: "POST",
+                                data: {
+                                    title: title,
+                                    start: start,
+                                    end: end,
+                                    practitionerId: practitionerId,
+                                    add_user_id: add_user_id,
+                                    phone_number: phone_number,
+                                    last_name: last_name,
+                                    first_name: first_name,
+                                    email: email,
+                                    duration: duration,
+                                    password: pasword,
+                                    practitionerID: practitionerID,
+                                    service_id: service_id,
+                                    LiveDateTime:LiveDateTime,
+                                    type: 'add'
+                                },
+                                success: function (data) {
+                                    calendar.fullCalendar('refetchEvents');
+                                    alert("Event Created Successfully");
+                                    console.log(data)
+                                },
+                                error: function(returnval) {
+                                    alert('Your appointment has not been created');
+                                }
+                            });
+
                         }else{
-                            alert('You can not make appointments with back date.');
+                            alert('Empty');
                         }
-
-                    },
-                    editable:true,
-
-
-                    eventClick:function(event)
-                    {
-                        var id         = event.id;
-                        var user_id    = event.user_id;
-                        var meeting_id = event.meeting_id;
-
-
-                            @if(!empty(Auth::user()->id))
-
-                        var AuthID = {{Auth::user()->id}}
-
-
-                        if(AuthID === user_id) {
-
-                            if (confirm("Are you sure you want to remove it?")) {
-
-                                $.ajax({
-                                    url: "{{ route('zoom-delete',app()->getLocale()) }}",
-                                    type: "POST",
-                                    data: {
-                                        delete_id: id,
-                                        delete_meeting_id:meeting_id,
-                                        type: "delete"
-                                    },
-                                    success: function (response) {
-                                        calendar.fullCalendar('refetchEvents');
-                                        alert("Event Deleted Successfully");
-                                    },
-                                    error: function(returnval) {
-                                        alert('Your appointment has not been deleted');
-                                    }
-                                })
-                            }
-                        }else{
-                            alert('You can not delete this meeting because you did not add it.')
-                        }
-                        @endif
+                    }else{
+                        alert('You can not make appointments with back date.');
                     }
-                });
 
+                },
+                editable:true,
+                // eventDrop: function(event) {
+                //
+                //     var start = $.fullCalendar.formatDate(event.start, 'Y-MM-DD HH:mm:ss');
+                //     var end = $.fullCalendar.formatDate(event.end, 'Y-MM-DD HH:mm:ss');
+                //
+                //     // Check live DateTime
+                //     var today = new Date();
+                //     var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
+                //     var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+                //     var LiveDateTime = date + ' ' + time;
+                //
+                //
+                //     // compare
+                //
+                //     var d1 = new Date(start);
+                //     var d2 = new Date(LiveDateTime);
+                //
+                //     if (d1 >= d2) {
+                //
+                //         var id = event.id;
+                //         var user_id = event.user_id;
+                //         var meeting_id = event.meeting_id;
+                //         var duration = event.duration;
+                //         var password = event.password;
+                //         var title = event.title;
+                //
+                //
+                //
+                //         if (confirm("Do you want to change your meeting details?")) {
+                //
+                //             var title = prompt('Edit Title:', title);
+                //             var password = prompt('Edit Password:', password);
+                //             var duration = prompt('Edit Title:', duration);
+                //
+                //             // submitTimeChanges(event.id);
+                //             $.ajax({
+                //                 url: "/en/update-zoom-meeting",
+                //                 type: "POST",
+                //                 data: {
+                //                     title: title,
+                //                     start: start,
+                //                     end: end,
+                //                     meeting_id: meeting_id,
+                //                     password: password,
+                //                     duration: duration,
+                //                     phone_number: phone_number,
+                //                     last_name: last_name,
+                //                     first_name: first_name,
+                //                     email:email,
+                //                     join_url:join_url,
+                //                     type: 'update'
+                //                 },
+                //                 success: function (response) {
+                //                     calendar.fullCalendar('refetchEvents');
+                //                     alert("Event Updated Successfully");
+                //                 }
+                //             })
+                //         }
+                //     }else{
+                //         alert('You can not make appointments with back date.');
+                //     }
+                //
+                // },
+
+                eventClick:function(event)
+                {
+                    var id         = event.id;
+                    var user_id    = event.user_id;
+                    var meeting_id = event.meeting_id;
+
+
+                        @if(!empty(Auth::user()->id))
+
+                    var AuthID = {{Auth::user()->id}}
+
+
+                if(AuthID === user_id) {
+
+                    if (confirm("Are you sure you want to remove it?")) {
+
+                        $.ajax({
+                            url: "{{ route('zoom-delete',app()->getLocale()) }}",
+                            type: "POST",
+                            data: {
+                                delete_id: id,
+                                delete_meeting_id:meeting_id,
+                                type: "delete"
+                            },
+                            success: function (response) {
+                                calendar.fullCalendar('refetchEvents');
+                                alert("Event Deleted Successfully");
+                            },
+                            error: function(returnval) {
+                                alert('Your appointment has not been deleted');
+                            }
+                        })
+                    }
+                }else{
+                    alert('You can not delete this meeting because you did not add it.')
+                }
+                    @endif
+                }
             });
 
+        });
 
-            function displayMessage(message) {
-                toastr.success(message, 'Event');
-            }
+
+        function displayMessage(message) {
+            toastr.success(message, 'Event');
+        }
+
+        $('.person__info-heartt').click(function () {
+                @if(!isset(Auth::user()->id))
+                    window.location.href = "login-practitioners";
+            @endif
+        });
 
         </script>
         <script type="text/javascript" src="{{ asset('web_sayt/js/bootstrap/bootstrap.min.js') }}"></script>
@@ -373,10 +456,10 @@
         <script
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDtOVd66AerMgd0A-mwKEFqdBQTrKGfngc&callback=initMap&libraries=places&v=weekly"
         async
-        ></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/fullcalendar.js"></script>
-        <script src="{{ asset('web_sayt/js/filter.js') }}"></script>
+    ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/fullcalendar.js"></script>
+    <script src="{{ asset('web_sayt/js/filter.js') }}"></script>
 
 
 @endsection

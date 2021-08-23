@@ -104,7 +104,7 @@
 
                     <!-- Modal Header -->
                     <div class="modal-header">
-                        <h4 class="modal-title">Edit Tag</h4>
+                        <h4 class="modal-title">View Practitioners</h4>
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
                     </div>
 
@@ -180,7 +180,7 @@
                                                                 class="capitalize">
 {{--                                                                {{$profile->virtual == 'virtual' ? 'Virtual' : 'In Person'}}--}}
                                                                 <span class="mx-1 d-inline-block">
-                                                                    @if($profile->virtuall == "virtuall")
+                                                                    @if($profile->virtuall == "virtual")
                                                                         Virtual /
                                                                     @endif
                                                                 </span>
@@ -191,8 +191,8 @@
                                                                     @endif
                                                                 </span>
                                                             </label></span>
-                                                        <span
-                                                            class="el_item">Illnesses and symtoms: <label> --- </label></span>
+{{--                                                        <span--}}
+{{--                                                            class="el_item">Illnesses and symtoms: <label> --- </label></span>--}}
                                                     </div>
                                                     <div class="my-2"></div>
                                                 </div>
@@ -242,7 +242,7 @@
                                                     <h6 class="m-0 font-weight-bold text-primary">Services</h6>
                                                 </div>
                                                 <div class="card-body fixed-height">
-                                                    @isset($profile->services)
+{{--                                                    @isset($profile->services)--}}
                                                         <div class="row">
                                                                                     @foreach($Service->where('practitioner_id',$profile->id) as $ServiceValue)
                                                                                         <div class="service_container col-lg-4">
@@ -265,7 +265,7 @@
                                                                                         </div>
                                                                                     @endforeach
                                                         </div>
-                                                    @endisset
+{{--                                                    @endisset--}}
                                                 </div>
                                             </div>
                                         </div>
@@ -299,7 +299,7 @@
                                                     @if(count($Reviews->where('practitoner_id',$profile->id)))
                                                         @foreach ($Reviews->where('practitoner_id',$profile->id)  as $review)
                                                             <span class="el_item">
-
+                                                    <label>{{$review->first_name}} {{$review->last_name}}</label> /
                                                                 <label>{{$review->created_at}}</label> /
                                                                 <label>
                                                                     @for ($i = 0; $i < $review->rate; $i++)

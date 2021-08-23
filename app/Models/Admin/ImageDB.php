@@ -25,7 +25,7 @@ class ImageDB extends Model
                 ->where('id', $id)
                 ->first();
       if($image){
-        $image->path = asset('images/backendSmall/'.$image->filename.'.'.$image->ext);
+        $image->path = asset('content/'.$image->filename.'.'.$image->ext);
         $image->path_original = asset('images/original/'.$image->filename.'.'.$image->ext);
         $image->path_small = asset('images/selfSmall/'.$image->filename.'.'.$image->ext);
         $image->path_medium = asset('images/selfMedium/'.$image->filename.'.'.$image->ext);
@@ -48,10 +48,10 @@ class ImageDB extends Model
               $tempStoreUntil = time() + (3 * 24 * 60 * 60);
               $data['temp'] = $tempStoreUntil;
           }
-           $data['size'] = $size; 
-           $data['filename'] = $filename; 
-           $data['ext'] = $ext;  
-           $data['created_at'] = \Carbon\Carbon::now()->toDateTimeString();  
+           $data['size'] = $size;
+           $data['filename'] = $filename;
+           $data['ext'] = $ext;
+           $data['created_at'] = \Carbon\Carbon::now()->toDateTimeString();
            $data['updated_at'] = \Carbon\Carbon::now()->toDateTimeString();
 
            $id = DB::table('images')->insertGetId($data);
@@ -69,7 +69,7 @@ class ImageDB extends Model
         File::delete($path);
 
         $image->delete();
-	     } 
+	     }
     }
 }
 

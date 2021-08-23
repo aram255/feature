@@ -18,46 +18,6 @@
 @section('content')
     <script>var body = document.body; body.classList.add("body");</script>
 
-
-{{--        <h2>Added Teg List</h2><br>--}}
-
-{{--        <form method="post" action="{{route('add-tag-my-list-management',[app()->getLocale()])}}">--}}
-{{--            @csrf--}}
-
-{{--                @foreach($TagManagements as $index => $TagManagement)--}}
-
-{{--                        @if($TagManagement->published == 1)--}}
-{{--                            <input type="checkbox" name="teg_management[{{$index}}]" value="{{$TagManagement->id}}">--}}
-{{--                        @endif--}}
-{{--                    <span @if($TagManagement->published == 0)style="color: red;" @endif>{{$TagManagement->name}}</span><br>--}}
-
-{{--                @endforeach--}}
-{{--                <input type="submit" value="Add Teg To my list">--}}
-
-
-{{--        </form> <br>--}}
-{{--        <section>--}}
-
-
-{{--            <div class="form-group">--}}
-{{--                <form method="post" action="{{route('add-tag-management',[app()->getLocale()])}}">--}}
-{{--                    @csrf--}}
-{{--                <p>Add Tag</p>--}}
-{{--                <input style="border: 1px solid black" type="text" name="add_teg">--}}
-{{--                <button type="submit" class="btn btn-gradient-primary mr-2" style="background-color: #28a745; color: white;">Add</button>--}}
-{{--                </form><br>--}}
-
-{{--                <h1>Delete</h1>--}}
-{{--                <form method="post" action="{{route('delete-tag-management',[app()->getLocale()])}}">--}}
-{{--                    @csrf--}}
-{{--                                    <p>Add Tag</p>--}}
-
-{{--                    @foreach($MyTagManagements as $ind => $GetTagManagements)--}}
-{{--                        <input style="border: 1px solid black" type="checkbox" value="{{$GetTagManagements->teg_managements_id}}" name="teg_management[{{$ind}}]">{{$GetTagManagements->name}}<br>--}}
-{{--                    @endforeach<br>--}}
-{{--                    <button type="submit" class="btn btn-gradient-primary mr-2" style="background-color: #28a745; color: white;">Delete</button>--}}
-{{--                </form>--}}
-{{--            </div><br>--}}
     <!---  0000000  ---->
     <main>
         <div class="container">
@@ -65,7 +25,7 @@
                 <div class="profile-practitioner__user nl">
                     <div class="person__info">
                         <div class="person__info-cont1">
-                            <img class="person__info-img" src="@if($PractitionerInfo->img){{asset('web_sayt/img/'.$PractitionerInfo->img)}}@else{{asset('web_sayt/img/person-foto.png')}}@endif" alt="">
+                            <img class="person__info-img" src="@if($PractitionerInfo->img){{asset('web_sayt/img_practitioners/'.$PractitionerInfo->img)}}@else{{asset('web_sayt/img/person-foto.png')}}@endif" alt="">
                             <div class="person__info-name">
                                 <span class="profile-practitioner-name">{{$PractitionerInfo->first_name}} {{$PractitionerInfo->last_name}}</span>
                                 <span class="edit-pen"><a href="{{route('edit-profile-practitioner',[app()->getLocale()])}}"><img src="{{ asset('web_sayt/img/edit-pen.svg') }}" alt=""></a></span>
@@ -79,7 +39,7 @@
                                 @endforeach
                             </div>
                             <div class="person__info-my">
-                                <a href="{{route('my-appointments-practitioners',[app()->getLocale()])}}" class="mb-4 text-black d-block">My Appointments</a>
+                                <a href="{{route('my-appointments-practitioners',[app()->getLocale(),1])}}" class="mb-4 text-black d-block">My Appointments</a>
                                 <a href="{{route('type-form-practitioner',[app()->getLocale()])}}" class="mb-4 text-black d-block">My Intake Forms</a>
                                 <a target="_blank" href="https://typeform.com/" class="mb-4 text-black d-block">Create Intake Forms</a>
                                 <div role="button" class="mb-3 cursor-pointer bg-yellow px-3 py-2 br-5 text-center" data-toggle="modal" data-target="#myProtocolsModal">My Protocols</div>
@@ -325,48 +285,11 @@
                     <div class="profile__reviews">
                         <p class="profile__reviews-title">REVIEWS</p>
                         <div class="d-flex flex-lg-row flex-column">
+                            @if(count($Review)>0)
+                                @foreach($Review as $valR)
                             <div class="profile__reviews-block">
                                 <div class="profile__reviews-person flex-xl-row flex-column">
-                                    <img src="{{ asset('web_sayt/img/reviews-person.png') }}" alt="" srcset="">
-                                    <div class="profile__reviews-content">
-                                        <div class="person__info-rating">
-                              <span class="gl-star-rating gl-star-rating--ltr " data-star-rating="">
-                                 <select class="star-rating">
-
-                                    <option value="5"></option>
-                                    <option value="4"></option>
-                                    <option value="3"></option>
-                                    <option value="2"></option>
-                                    <option value="1"></option>
-                                 </select>
-                                 <span class="gl-star-rating--stars s50" role="tooltip" aria-label="">
-                                    <span data-index="0" data-value="1" class="gl-active"
-                                          style="font-size: 28px;"></span>
-                                    <span data-index="1" data-value="2" class="gl-active"></span>
-                                    <span data-index="2" data-value="3" class="gl-active"></span>
-                                    <span data-index="3" data-value="4" class="gl-active"></span>
-                                    <span data-index="4" data-value="5" class="gl-selected gl-active"></span>
-                                 </span>
-                              </span>
-                                        </div>
-
-                                        <div class="profile__reviews-content-clock">
-                                            <img src="{{ asset('web_sayt/img/clock.svg') }}" alt="" srcset="">
-                                            <span class="reviews-clock-data">January 02</span>
-                                        </div>
-                                        <div class="reviews-cooment">
-                                            Morbi commodo sagittis euismod. Donec non facilisis dolor, sed facilisis risus. Praesent
-                                            vitae posuere ante.
-                                            Donec
-                                            risus
-                                            dui, feugiat pretium
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="profile__reviews-block">
-                                <div class="profile__reviews-person flex-xl-row flex-column">
-                                    <img src="{{ asset('web_sayt/img/reviews-person-second.png') }}" alt="" srcset="">
+                                    <img src="{{ asset('web_sayt/img_customer/'.$valR->img) }}" alt="" srcset="">
                                     <div class="profile__reviews-content">
                                         <div class="person__info-rating">
                               <span class="gl-star-rating gl-star-rating--ltr " data-star-rating="">
@@ -378,29 +301,25 @@
                                     <option value="1"></option>
                                  </select>
                                  <span class="gl-star-rating--stars s50" role="tooltip" aria-label="">
-                                    <span data-index="0" data-value="1" class="gl-active"
-                                          style="font-size: 28px;"></span>
-                                    <span data-index="1" data-value="2" class="gl-active"></span>
-                                    <span data-index="2" data-value="3" class="gl-active"></span>
-                                    <span data-index="3" data-value="4" class="gl-active"></span>
-                                    <span data-index="4" data-value="5" class="gl-selected gl-active"></span>
-                                 </span>
-                              </span>
+                                  @for ($i = 0; $i < $valR->rate; $i++)
+                                        <span data-index="{{$i}}" data-value="{{$i}}" class="gl-active"
+                                              style="font-size: 28px;"></span>
+                                  @endfor
+                                </span>
                                         </div>
                                         <div class="profile__reviews-content-clock">
                                             <img src="{{ asset('web_sayt/img/clock.svg') }}" alt="" srcset="">
-                                            <span class="reviews-clock-data">January 02</span>
+                                            <span class="reviews-clock-data">{{ date('M-d',strtotime($valR->created_at)) }}</span>
+
                                         </div>
                                         <div class="reviews-cooment">
-                                            Morbi commodo sagittis euismod. Donec non facilisis dolor, sed facilisis risus. Praesent
-                                            vitae posuere ante.
-                                            Donec
-                                            risus
-                                            dui, feugiat pretium
+                                            {{$valR->description}}
                                         </div>
                                     </div>
                                 </div>
                             </div>
+                                @endforeach
+                            @endif
                         </div>
                     </div>
                 </div>
@@ -558,4 +477,6 @@
 
     </script>
     </script>
+
+
 @endsection

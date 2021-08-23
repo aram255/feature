@@ -13,7 +13,7 @@
                             <label style="font-weight:normal;">Image</label>
                             <div class="image-upload-container" id="cover">
                                 <div class="image-part">
-                                    <img class="thumbnail" src="@if($item->image) {{$item->image->path}} @else {!! asset('backend/img/no_image.png') !!} @endif" alt=""/>
+                                    <img style="width: 116px;" class="thumbnail" src="@if($item->image) {{$item->image->path}} @else {!! asset('backend/img/no_image.png') !!} @endif" alt=""/>
                                 </div>
                                 <div class="image-action @if($item->image) fileExist @else fileNotExist @endif">
                                     <div class="img-not-exist">
@@ -25,24 +25,24 @@
                                     </div>
                                 </div>
                             </div>
-                            
+
                             <div id="progress"></div>
                             <div id="progressBar"></div>
                         </span>
                     </div>
-                    <div class="my-2"></div> 
-                    <div class="form-group">
-                        <span class="el_item">Slug (url):
-                            <input type="text" name="system_name" value="{{$item->system_name}}" class="form-control" />
-                        </span>
-                    </div>
-                    <div class="my-2"></div>  
+                    <div class="my-2"></div>
+{{--                    <div class="form-group">--}}
+{{--                        <span class="el_item">Slug (url):--}}
+{{--                            <input type="text" name="system_name" value="{{$item->system_name}}" class="form-control" />--}}
+{{--                        </span>--}}
+{{--                    </div>--}}
+                    <div class="my-2"></div>
                     <div class="form-group">
                         <span class="el_item">Title:
                             <input type="text" name="title" value="{{$item->title}}" class="form-control" />
                         </span>
                     </div>
-                    <div class="my-2"></div>   
+                    <div class="my-2"></div>
                     <div class="form-group">
                         <span class="el_item">Published:
                             <select class="form-select form-control" name="published" aria-label="Default select example">
@@ -54,13 +54,13 @@
                     <div class="my-2"></div>
                     <div class="form-group">
                         <span >Description:
-                            <textarea id="" name="description" class="form-control mytextarea" rows="4" cols="50">{{$item->description}}</textarea>
+                            <textarea id="" name="description" class="form-control" rows="4" cols="50">{{$item->description}}</textarea>
                         </span>
                     </div>
                     <div class="my-2"></div>
                     <div class="form-group">
                         <span >Text:
-                            <textarea id="" name="text" class="form-control mytextarea" rows="4" cols="50">{{$item->text}}</textarea>
+                            <textarea id="" name="text" class="form-control " rows="4" cols="50">{{$item->text}}</textarea>
                         </span>
                     </div>
                 </div>
@@ -79,7 +79,7 @@ function save(){
     tinymce.remove('.mytextarea');
 
     var data = $('#save-item-form').serializeFormJSON();
-    
+
     $.ajax({
         type: "POST",
         url: "{{route('adminBlogSave')}}",
@@ -97,7 +97,7 @@ function save(){
             }
             Loading.remove($('#saveItemBtn'));
         }
-    });  
+    });
 }
 $(document).ready(function(){
 
@@ -137,7 +137,7 @@ $(document).ready(function(){
             }
         });
     });
-    
+
     $('.remove-image').click(function() {
         uploadImageContainer = $('.image-upload-container');
         removeImageId = $('.uploaded_file_id').val();
@@ -153,9 +153,9 @@ $(document).ready(function(){
             success: function(response){
                 uploadImageContainer.find('.image-part img').attr('src','/backend/img/no_image.png');
                 uploadImageContainer.find('.uploaded_file_id').val('');
-                uploadImageContainer.find('.image-action').removeClass('fileExist').addClass('fileNotExist');    
+                uploadImageContainer.find('.image-action').removeClass('fileExist').addClass('fileNotExist');
             }
-        });      
+        });
     });
 });
 </script>

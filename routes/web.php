@@ -55,21 +55,33 @@ Route::group(['prefix' => '{locale?}','where' => ['locale' => '[a-zA-Z]{2}']], f
 
 
     Route::get('/', [IndexController::class, 'index'])->name('index');
-    Route::match(['get', 'post'],'Search/{protocolId?}', [IndexController::class, 'search'])->name('search');
+    Route::match(['get', 'post'],'Search/{protocolId?}/{service_id?}', [IndexController::class, 'search'])->name('search');
     Route::match(['get', 'post'],'reset-field', [IndexController::class, 'resetField'])->name('reset-field');
     Route::get('/blog', [IndexController::class, 'blog'])->name('blog');
     Route::get('/balance', [IndexController::class, 'balance'])->name('balance');
+    Route::get('/profile-view-customer/{practitionerID}', [IndexController::class, 'profileViewCustomer'])->name('profile-view-customer');
+    Route::get('/view-type-form-practitioner/{practitionerID}', [IndexController::class, 'typeFormPractitioner'])->name('view-type-form-practitioner');
+    Route::get('/view-type-form-practitioner-view/{id}', [IndexController::class, 'typeFormPractitionerView'])->name('view-type-form-practitioner-view');
+
+
     // Practitioner
     Route::get('/profile-practitioner', [PractitionersController::class, 'profilePractitioner'])->name('profile-practitioner');
     Route::get('/edit-profile-practitioner', [PractitionersController::class, 'EditProfilePractitioner'])->name('edit-profile-practitioner');
-    Route::get('/my-appointments-practitioners', [PractitionersController::class, 'myAppointmentsPractitioners'])->name('my-appointments-practitioners');
+    Route::get('/my-appointments-practitioners/{id}', [PractitionersController::class, 'myAppointmentsPractitioners'])->name('my-appointments-practitioners');
+    Route::post('/edit-profile-practitioner-post', [PractitionersController::class, 'EditProfilePractitionerPost'])->name('edit-profile-practitioner-post');
+    Route::post('/add-lang-practitioner', [PractitionersController::class, 'addLang'])->name('add-lang-practitioner');
+    Route::post('/delete-lang-practitioner', [PractitionersController::class, 'deleteLang'])->name('delete-lang-practitioner');
+    Route::get('/delete-photo-video/{id}', [PractitionersController::class, 'deletePhotoVideo'])->name('delete-photo-video');
+
 
     // Type Form
     Route::get('/type-form-practitioner', [PractitionersController::class, 'typeFormPractitioner'])->name('type-form-practitioner');
     Route::get('/type-form-practitioner-view/{id}', [PractitionersController::class, 'typeFormPractitionerView'])->name('type-form-practitioner-view');
+    Route::match(['get', 'post'],'/default-type-form-practitioner-view/{id}', [PractitionersController::class, 'DefaultTypeFormPractitioner'])->name('default-type-form-practitioner-view');
     Route::post('/add-type-form-practitioner', [PractitionersController::class, 'addTypeFormPractitioner'])->name('add-type-form-practitioner');
     Route::post('/edit-type-form-practitioner', [PractitionersController::class, 'editTypeFormPractitioner'])->name('edit-type-form-practitioner');
     Route::post('/delete-type-form-practitioner', [PractitionersController::class, 'deleteTypeFormPractitioner'])->name('delete-type-form-practitioner');
+    Route::get('/customer-type-form-practitioner-view/{id}', [CustomerController::class, 'typeFormPractitionerView'])->name('customer-type-form-practitioner-view');
 
     // Tag
     Route::post('/add-tag-my-list-management', [PractitionersController::class, 'addTagMyListManagements'])->name('add-tag-my-list-management');
@@ -80,7 +92,8 @@ Route::group(['prefix' => '{locale?}','where' => ['locale' => '[a-zA-Z]{2}']], f
     Route::get('/profile-customer', [CustomerController::class, 'profileCustomer'])->name('profile-customer');
     Route::get('/edit-profile-customer', [CustomerController::class, 'editProfileCustomer'])->name('edit-profile-customer');
     Route::post('/edit-profile-customer-post', [CustomerController::class, 'editProfileCustmerPost'])->name('edit-profile-customer-post');
-    Route::get('/profile-view-customer', [CustomerController::class, 'profileViewCustomer'])->name('profile-view-customer');
+    Route::post('/add-favorite', [CustomerController::class, 'addFavorite'])->name('add-favorite');
+
 
     // ZOOM
     Route::match(['get', 'post'],'/zoom', [ZoomController::class, 'index'])->name('meetings-list-zoom');
@@ -88,6 +101,8 @@ Route::group(['prefix' => '{locale?}','where' => ['locale' => '[a-zA-Z]{2}']], f
     Route::post('/delete-zoom-meeting', [ZoomController::class, 'deleteZoomMeeting'])->name('zoom-delete');
     Route::post('/delete-zoom-meeting-table', [ZoomController::class, 'deleteZoomMeetingTable'])->name('zoom-delete-table');
     Route::get('/confirm-meeting/{Code}/{Status}', [ZoomController::class, 'confirmMeeting'])->name('confirm-meeting');
+
+    Route::post('/update-zoom-meeting', [ZoomController::class, 'update'])->name('update-zoom-meeting');
 
     // Practitioners
     Route::post('/custom-registration', [AuthPractitionersController::class, 'customRegistration'])->name('register.custom');
@@ -120,7 +135,7 @@ Route::group(['prefix' => '{locale?}','where' => ['locale' => '[a-zA-Z]{2}']], f
     // Service Practitioners
     Route::post('/add-service', [PractitionersController::class, 'addService'])->name('add-service');
     Route::post('/edit-service', [PractitionersController::class, 'editService'])->name('edit-service');
-    Route::get('/delete-service/{id}', [PractitionersController::class, 'deleteService'])->name('delete-service');
+    Route::post('/delete-service', [PractitionersController::class, 'deleteService'])->name('delete-service');
 
 
 
@@ -146,12 +161,14 @@ Route::group(['prefix' => '{locale?}','where' => ['locale' => '[a-zA-Z]{2}']], f
 
 
 
-
 });
 Route::get('/transaction-page', [PaymentController::class, 'index']);
 Route::post('/transaction', [PaymentController::class, 'makePayment'])->name('make-payment');
 Route::post('/add-card', [PaymentController::class, 'addCard'])->name('add-card');
+Route::post('/add-card-practitioner', [PaymentController::class, 'addCardPractitioner'])->name('add-card-practitioner');
 Route::post('/remove-card/{id}', [PaymentController::class, 'removeCard'])->name('remove-card');
+Route::get('/remove-card-practitioner', [PractitionersController::class, 'removeCardPractitioner'])->name('remove-card-practitioner');
+
 Route::get('/clear', function() {
     Artisan::call('cache:clear');
     Artisan::call('route:clear');

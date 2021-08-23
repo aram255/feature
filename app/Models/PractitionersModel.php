@@ -15,6 +15,7 @@ class PractitionersModel extends Model
         'first_name',
         'email',
         'password',
+        'card_number'
     ];
 
     /**

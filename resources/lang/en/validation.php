@@ -13,6 +13,11 @@ return [
     |
     */
 
+    'credit_card.card_invalid' => 'Invalid card',
+    'credit_card.card_pattern_invalid' => 'Invalid card pattern',
+    'credit_card.card_length_invalid' => 'Invalid card length',
+    'credit_card.card_checksum_invalid' => 'Invalid card checksum',
+
     'accepted' => 'The :attribute must be accepted.',
     'active_url' => 'The :attribute is not a valid URL.',
     'after' => 'The :attribute must be a date after :date.',
