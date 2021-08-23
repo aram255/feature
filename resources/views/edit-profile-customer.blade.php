@@ -116,7 +116,7 @@
 
                                     <p>Name on Card <span>*</span></p>
 
-                                    <input type="text"  class="fadeIn" name="sender_name" placeholder="As show on the card">
+                                    <input type="text" autocomplete="off"  class="fadeIn" name="sender_name" placeholder="As show on the card">
 
                                     <p>Card Number <span>*</span></p>
 
@@ -149,7 +149,7 @@
 
                                     <div class="cvc display-block">
                                         <p>CVC <span>*</span></p>
-                                        <input type="text" style="width: 150px;margin-right: 5px"   class="fadeIn card-cvc" name="cvc" size='4'>
+                                        <input autocomplete="off" type="text" style="width: 150px;margin-right: 5px"   class="fadeIn card-cvc" name="cvc" size='4'>
                                     </div>
 
                                 </div>

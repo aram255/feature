@@ -26,7 +26,7 @@
                 <a href="" class="btn bg-yellow" data-toggle="modal" data-target="#service-modal{{$Result->id}}">View Services</a>
             </div>
             <div class="person__info-cont2">
-                <div class="person__info-name"><a href="{{route('profile-view-customer',[app()->getLocale()])}}">{{$Result->first_name}} {{$Result->last_name}}</a></div>
+                <div class="person__info-name"><a href="{{route('profile-view-customer',[app()->getLocale(),$Result->id])}}">{{$Result->first_name}} {{$Result->last_name}}</a></div>
                 <div class="person__info-specialist">Acne Specialist &amp; Holistic nutritionist (CNP)</div>
                 {{--                                <div class="person__info-skin">--}}
                 {{--                                    @foreach($Result->tags as $Tag)--}}
@@ -35,7 +35,11 @@
                 {{--                                </div>--}}
 
             </div>
-            <div class="person__info-heart"></div>
+            @if(count($Favorite->where('practitioner_id',$Result->id))>0)
+                <div class="person__info-heart favorit active" id="{{$Result->id}}"></div>
+            @else
+                <div class="person__info-heart favorit" id="{{$Result->id}}"></div>
+            @endif
         </div>
         <div class="person__content">
             <ul class="person__content-nav">

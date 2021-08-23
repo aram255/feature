@@ -30,7 +30,7 @@
 
                         <div class='form-row row'>
                             <div class='col-xs-12 form-group required'>
-                                <label class='control-label'>Name on Card</label> <input class='form-control'
+                                <label class='control-label'>Name on Card</label> <input autocomplete="off" class='form-control'
                                                                                          size='4' type='text'>
                             </div>
                         </div>

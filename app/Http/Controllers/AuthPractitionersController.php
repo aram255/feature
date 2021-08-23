@@ -211,9 +211,10 @@ class AuthPractitionersController extends Controller
                 $request->session()->put('UserImg', $userInfo->img);
 
               // Auth::login($userInfo);
-                return redirect(app()->getLocale()."/profile-practitioner");
+                return redirect(app()->getLocale()."/");
 
             }else{
+//                dd('sddd');
                 return redirect(app()->getLocale()."/login-practitioners")->with('fail','Incorrect password');
             }
 

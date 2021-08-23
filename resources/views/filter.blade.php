@@ -213,6 +213,8 @@
         <script>
 
         $(document).on('click','.detail-btn', function()  {
+
+
             var practitionerId = $(this).attr('data-id');
             var calendar = null;
 
@@ -222,6 +224,14 @@
             var first_name     = $(this).prev().prev().prev().prev().val();
             var email          = $(this).prev().prev().prev().prev().prev().val();
             var service_id     = $(this).prev().prev().prev().prev().prev().prev().val();
+            var durationn      = $(this).prev().prev().prev().prev().prev().prev().prev().val();
+            var password       = $(this).prev().prev().prev().prev().prev().prev().prev().prev().val();
+            var join_url       = $(this).prev().prev().prev().prev().prev().prev().prev().prev().prev().val();
+
+            if(service_id == null)
+
+                service_id = '';
+
 
 
             $('#calendar').fullCalendar('destroy');
@@ -240,7 +250,7 @@
                     center:'title',
                     right:'month,agendaWeek,agendaDay'
                 },
-                events:'/en/Search/'+ practitionerId,
+                events:'/en/Search/'+ practitionerId+'/'+service_id,
                 selectable:true,
                 selectHelper: true,
                 select:function(start, end, allDay)
@@ -295,6 +305,7 @@
                                     password: pasword,
                                     practitionerID: practitionerID,
                                     service_id: service_id,
+                                    LiveDateTime:LiveDateTime,
                                     type: 'add'
                                 },
                                 success: function (data) {
@@ -316,7 +327,69 @@
 
                 },
                 editable:true,
-
+                // eventDrop: function(event) {
+                //
+                //     var start = $.fullCalendar.formatDate(event.start, 'Y-MM-DD HH:mm:ss');
+                //     var end = $.fullCalendar.formatDate(event.end, 'Y-MM-DD HH:mm:ss');
+                //
+                //     // Check live DateTime
+                //     var today = new Date();
+                //     var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
+                //     var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+                //     var LiveDateTime = date + ' ' + time;
+                //
+                //
+                //     // compare
+                //
+                //     var d1 = new Date(start);
+                //     var d2 = new Date(LiveDateTime);
+                //
+                //     if (d1 >= d2) {
+                //
+                //         var id = event.id;
+                //         var user_id = event.user_id;
+                //         var meeting_id = event.meeting_id;
+                //         var duration = event.duration;
+                //         var password = event.password;
+                //         var title = event.title;
+                //
+                //
+                //
+                //         if (confirm("Do you want to change your meeting details?")) {
+                //
+                //             var title = prompt('Edit Title:', title);
+                //             var password = prompt('Edit Password:', password);
+                //             var duration = prompt('Edit Title:', duration);
+                //
+                //             // submitTimeChanges(event.id);
+                //             $.ajax({
+                //                 url: "/en/update-zoom-meeting",
+                //                 type: "POST",
+                //                 data: {
+                //                     title: title,
+                //                     start: start,
+                //                     end: end,
+                //                     meeting_id: meeting_id,
+                //                     password: password,
+                //                     duration: duration,
+                //                     phone_number: phone_number,
+                //                     last_name: last_name,
+                //                     first_name: first_name,
+                //                     email:email,
+                //                     join_url:join_url,
+                //                     type: 'update'
+                //                 },
+                //                 success: function (response) {
+                //                     calendar.fullCalendar('refetchEvents');
+                //                     alert("Event Updated Successfully");
+                //                 }
+                //             })
+                //         }
+                //     }else{
+                //         alert('You can not make appointments with back date.');
+                //     }
+                //
+                // },
 
                 eventClick:function(event)
                 {
@@ -364,6 +437,12 @@
         function displayMessage(message) {
             toastr.success(message, 'Event');
         }
+
+        $('.person__info-heartt').click(function () {
+                @if(!isset(Auth::user()->id))
+                    window.location.href = "login-practitioners";
+            @endif
+        });
 
         </script>
         <script type="text/javascript" src="{{ asset('web_sayt/js/bootstrap/bootstrap.min.js') }}"></script>

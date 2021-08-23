@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Admin\CategoryModel;
 use App\Models\Card;
+use App\Models\ReviewModel;
 use Illuminate\Http\Request;
 use App\Models\PractitionersModel;
 use App\Models\TegManagements;
@@ -18,7 +19,8 @@ use App\Models\ServiceDescriptionModel;
 use App\Models\ServiceSessionModel;
 use App\Models\ServicesModel;
 use Illuminate\Support\Carbon;
-
+//use Illuminate\Pagination\Paginator;
+//use Illuminate\Pagination\LengthAwarePaginator;
 use Hash;
 use File;
 
@@ -84,12 +86,17 @@ class PractitionersController extends Controller
 
         $PractitionerInfo= AuthPractitionersModel::where('id',session()->get('UserID'))->first();
 
-        $ThisWeekMeetingsList = ZoomModel::whereBetween('start', [Carbon::now()->startOfWeek(), Carbon::now()->endOfWeek()])->get();
+        $ThisWeekMeetingsList = ZoomModel::whereBetween('start', [Carbon::now()->startOfWeek(), Carbon::now()->endOfWeek()])->where('practitioner_id',session()->get('UserID'))->get();
 
 
+        $Review = DB::table('reviews')
+            ->select('reviews.rate','reviews.description','users.last_name','users.first_name','users.img','reviews.created_at')
+            ->join('users', 'users.id', 'reviews.user_id')
+            ->where('reviews.practitoner_id',session()->get('UserID'))
+            ->get();
 
 
-        return view('profile-practitioner',compact('TagManagements','MyTagManagements','PractitionerInfo','ThisWeekMeetingsList','Service','ServiceSession','ServiceDescription'));
+        return view('profile-practitioner',compact('Review','TagManagements','MyTagManagements','PractitionerInfo','ThisWeekMeetingsList','Service','ServiceSession','ServiceDescription'));
     }
 
     public  function addTagMyListManagements(request $request)
@@ -174,9 +181,46 @@ class PractitionersController extends Controller
         return view('edit-profile-practitioner', compact('Practitioners','cards','Service','ServiceSession','ServiceDescription','MyTagManagements','Lang'));
     }
 
-    public function myAppointmentsPractitioners()
+    public function removeCardPractitioner()
     {
-        return view('my-appointments-practitioners');
+        $DeleteCard = PractitionersModel::where('id',session()->get('UserID'))->first();
+
+        $DeleteCard->card_number = '';
+        $DeleteCard->save();
+             if(!empty($DeleteCard))
+             {
+                 return back()->with('status','Your card information has been deleted.');
+             }
+
+    }
+
+    public function myAppointmentsPractitioners(request $request,$lang,$id)
+    {
+
+     //  dd(date('Y-m-d H:i:s'));
+
+        $InProcess = DB::table('users')
+                     ->join('zoom_meetings_list', 'users.id', 'zoom_meetings_list.user_id')
+                     ->where('zoom_meetings_list.practitioner_id',$request->session()->get('UserID'))
+                     ->whereDate("zoom_meetings_list.start", ">=",date('Y-m-d'))
+                     ->orderBy('zoom_meetings_list.id','DESC')
+                     ->paginate(5);
+
+//        dd($InProcess);
+
+
+        $Complete  = DB::table('users')
+                     ->join('zoom_meetings_list', 'users.id', 'zoom_meetings_list.user_id')
+                     ->where('zoom_meetings_list.practitioner_id',$request->session()->get('UserID'))
+                     ->whereDate("zoom_meetings_list.start", "<=",date('Y-m-d'))
+                     ->orderBy('zoom_meetings_list.id','DESC')
+                     ->paginate(5);
+
+        //$result = new Paginator($InProcess,1,1,[]);
+
+
+
+        return view('my-appointments-practitioners',compact('InProcess','Complete','id'));
     }
 
     public function typeFormPractitioner(request $request)
@@ -184,6 +228,31 @@ class PractitionersController extends Controller
          $TypeForm = TypeFormModel::where('practitioner_id',$request->session()->get('UserID'))->get();
 
         return view('type-form',compact('TypeForm'));
+    }
+
+    public function DefaultTypeFormPractitioner(request $request,$lang,$id)
+    {
+
+        $TypeForm = TypeFormModel::where('practitioner_id',$request->session()->get('UserID'))->get();
+
+        foreach ($TypeForm as $value)
+        {
+            $NullDefaultTypeForm = TypeFormModel::where('practitioner_id',$request->session()->get('UserID'))
+                ->where('id', $value->id)->first();
+
+                $NullDefaultTypeForm->defaultt = null;
+                $NullDefaultTypeForm->save();
+        }
+
+        $DefaultTypeForm = TypeFormModel::where('practitioner_id',$request->session()->get('UserID'))
+            ->where('id',$id)
+            ->first();
+
+        $DefaultTypeForm->defaultt = 1;
+        $DefaultTypeForm->save();
+
+
+        return  back()->with('status','Was selected by default');
     }
 
     public function typeFormPractitionerView($lang,$id)
@@ -304,26 +373,27 @@ class PractitionersController extends Controller
         return redirect(app()->getLocale()."/edit-profile-practitioner")->with('status','Edit services');
     }
 
-    public function deleteService($lang,$ServeiceID)
+    public function deleteService(request $request)
     {
-        $DeleteService = ServicesModel::where('id', $ServeiceID)->first();
+        $DeleteService = ServicesModel::where('id', $request->DeleteIDS)->first();
         $DeleteService->delete();
 
 
-        foreach ($DeleteServiceSession = ServiceSessionModel::where('services_id', $ServeiceID)->get() as $val)
+        foreach ($DeleteServiceSession = ServiceSessionModel::where('services_id', $request->DeleteIDS)->get() as $val)
         {
-            $DeleteServiceSession = ServiceSessionModel::where('services_id', $ServeiceID)->first();
+            $DeleteServiceSession = ServiceSessionModel::where('services_id', $request->DeleteIDS)->first();
             $DeleteServiceSession->delete();
         }
 
 
-        foreach ($DeleteServiceSession = ServiceDescriptionModel::where('services_id', $ServeiceID)->get() as $val)
+        foreach ($DeleteServiceSession = ServiceDescriptionModel::where('services_id', $request->DeleteIDS)->get() as $val)
         {
-            $DeleteServiceDescription = ServiceDescriptionModel::where('services_id', $ServeiceID)->first();
+            $DeleteServiceDescription = ServiceDescriptionModel::where('services_id', $request->DeleteIDS)->first();
             $DeleteServiceDescription->delete();
         }
 
-        return redirect(app()->getLocale()."/edit-profile-practitioner")->with('status','Delete service');
+        //return redirect(app()->getLocale()."/edit-profile-practitioner")->with('status','Delete service');
+        return response()->json(['deleteservice' => 'Delete Service']);
     }
 
     public function EditProfilePractitionerPost(request $request)

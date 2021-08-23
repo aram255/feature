@@ -37,29 +37,44 @@
                         <div class="card mb-3">
                             <h2 style="text-align: center;">My Intake Forms  </h2>
                             <form action="{{route('delete-type-form-practitioner',[app()->getLocale()])}}" method="post">
+                                @if(session()->get('UserID'))
                                 {{csrf_field()}}
                                 <div class="card-header py-3">
                                     <button class="btn btn-primary"  data-toggle="modal" data-target="#add" type="button">Add</button>
                                     <button class="btn btn-danger"  type="submit">Remove</button>
                                 </div>
-
+                                @endif
                             {{--  Edit category title--}}
                             <div class="card-body">
                                 <div class="table-responsive">
                                     <table class="table table-bordered"  width="100%" cellspacing="0">
                                         <thead>
                                         <tr>
+
+                                            @if(session()->get('UserID'))
                                             <th style="width: 3%;"><input id="checkAll" class="group-checkable sb-checkbox" type="checkbox" ></th>
+                                            @endif
                                             <th>Title</th>
+                                            @if(session()->get('UserID'))
                                             <th>Edit</th>
+                                            <th>Default</th>
+                                            @endif
                                         </tr>
                                         </thead>
                                         <tbody>
                                         @foreach($TypeForm as $val)
                                         <tr>
+                                            @if(session()->get('UserID'))
                                             <td><input class="group-checkable sb-checkbox" type="checkbox" name="form_id[]" value="{{$val->id}}"></td>
                                             <td><a href="{{route('type-form-practitioner-view',[app()->getLocale(),'id'=>$val->id])}}">{{$val->title}}</a></td>
                                             <td><a data-toggle="modal" data-target="#edit{{$val->id}}" href="javascript:;"  class="btn btn-success item_edit btn-sm btn-circle">Edit</a></td>
+                                            @endif
+                                            @if(!session()->get('UserID'))
+                                            <td><a href="{{route('view-type-form-practitioner-view',[app()->getLocale(),'id'=>$val->id])}}">{{$val->title}}</a></td>
+                                            @endif
+                                            @if(session()->get('UserID'))
+                                            <td><a href="{{route('default-type-form-practitioner-view',[app()->getLocale(),'id'=>$val->id])}}"><button type="button" class="btn @if($val->defaultt == 1) btn-danger @else btn-primary @endif">Default</button></a></td>
+                                            @endif
                                         </tr>
                                          @endforeach
                                         </tbody>
@@ -69,7 +84,7 @@
                             </form>
                         </div>
 
-
+                 @if(session()->get('UserID'))
 
                         {{--     Edit --}}
                  @foreach($TypeForm as $v)
@@ -155,7 +170,7 @@
                      </div>
                  </div>
 
-
+@endif
              </div>
                     </section>
 @endsection

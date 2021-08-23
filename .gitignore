@@ -4,6 +4,12 @@
 /storage/*.key
 /public/content
 /vendor
+/public/web_sayt/video_practitioners
+/public/web_sayt/upload_document
+/public/web_sayt/img_practitioners
+/public/web_sayt/img_customer
+/public/web_sayt/img_category
+/storage
 .env
 .env.backup
 .phpunit.result.cache

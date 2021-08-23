@@ -39,7 +39,12 @@ class PractitionerController extends Controller
                 ->join('languages','practitioner_lang_rel.lang_id','languages.id')
                 ->get();
 
-        $Reviews = DB::table('reviews')->get();
+        $Reviews =  DB::table('reviews')
+                    ->select( 'reviews.*', 'users.*')
+                    ->join('users','reviews.user_id','users.id')
+                    ->get();
+
+
 
         $PractitionersNewCount = Practitioner::where('status','pending')->count();
 
@@ -112,6 +117,7 @@ class PractitionerController extends Controller
 
     public function changeStatus(Request $request){
         $id = (int)$request['p_id'];
+
         $status = $request['status'];
 
 
@@ -119,13 +125,14 @@ class PractitionerController extends Controller
         $practitioner = Practitioner::find($id);
 
 
-        Mail::send('email.status-practitioners',['status' => $practitioner->status], function($message) use ($practitioner) {
+        Mail::send('email.status-practitioners',['status' => $status], function($message) use ($practitioner) {
             $message->from($practitioner->email);
             $message->to($practitioner->email);
             $message->subject('Your status');
         });
 
         if($practitioner && in_array($status,array('pending','accept','reject','disable'))){
+
             $practitioner->status = $status;
             $practitioner->save();
 

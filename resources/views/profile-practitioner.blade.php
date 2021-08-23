@@ -25,7 +25,7 @@
                 <div class="profile-practitioner__user nl">
                     <div class="person__info">
                         <div class="person__info-cont1">
-                            <img class="person__info-img" src="@if($PractitionerInfo->img){{asset('web_sayt/img/'.$PractitionerInfo->img)}}@else{{asset('web_sayt/img/person-foto.png')}}@endif" alt="">
+                            <img class="person__info-img" src="@if($PractitionerInfo->img){{asset('web_sayt/img_practitioners/'.$PractitionerInfo->img)}}@else{{asset('web_sayt/img/person-foto.png')}}@endif" alt="">
                             <div class="person__info-name">
                                 <span class="profile-practitioner-name">{{$PractitionerInfo->first_name}} {{$PractitionerInfo->last_name}}</span>
                                 <span class="edit-pen"><a href="{{route('edit-profile-practitioner',[app()->getLocale()])}}"><img src="{{ asset('web_sayt/img/edit-pen.svg') }}" alt=""></a></span>
@@ -39,7 +39,7 @@
                                 @endforeach
                             </div>
                             <div class="person__info-my">
-                                <a href="{{route('my-appointments-practitioners',[app()->getLocale()])}}" class="mb-4 text-black d-block">My Appointments</a>
+                                <a href="{{route('my-appointments-practitioners',[app()->getLocale(),1])}}" class="mb-4 text-black d-block">My Appointments</a>
                                 <a href="{{route('type-form-practitioner',[app()->getLocale()])}}" class="mb-4 text-black d-block">My Intake Forms</a>
                                 <a target="_blank" href="https://typeform.com/" class="mb-4 text-black d-block">Create Intake Forms</a>
                                 <div role="button" class="mb-3 cursor-pointer bg-yellow px-3 py-2 br-5 text-center" data-toggle="modal" data-target="#myProtocolsModal">My Protocols</div>
@@ -285,48 +285,11 @@
                     <div class="profile__reviews">
                         <p class="profile__reviews-title">REVIEWS</p>
                         <div class="d-flex flex-lg-row flex-column">
+                            @if(count($Review)>0)
+                                @foreach($Review as $valR)
                             <div class="profile__reviews-block">
                                 <div class="profile__reviews-person flex-xl-row flex-column">
-                                    <img src="{{ asset('web_sayt/img/reviews-person.png') }}" alt="" srcset="">
-                                    <div class="profile__reviews-content">
-                                        <div class="person__info-rating">
-                              <span class="gl-star-rating gl-star-rating--ltr " data-star-rating="">
-                                 <select class="star-rating">
-
-                                    <option value="5"></option>
-                                    <option value="4"></option>
-                                    <option value="3"></option>
-                                    <option value="2"></option>
-                                    <option value="1"></option>
-                                 </select>
-                                 <span class="gl-star-rating--stars s50" role="tooltip" aria-label="">
-                                    <span data-index="0" data-value="1" class="gl-active"
-                                          style="font-size: 28px;"></span>
-                                    <span data-index="1" data-value="2" class="gl-active"></span>
-                                    <span data-index="2" data-value="3" class="gl-active"></span>
-                                    <span data-index="3" data-value="4" class="gl-active"></span>
-                                    <span data-index="4" data-value="5" class="gl-selected gl-active"></span>
-                                 </span>
-                              </span>
-                                        </div>
-
-                                        <div class="profile__reviews-content-clock">
-                                            <img src="{{ asset('web_sayt/img/clock.svg') }}" alt="" srcset="">
-                                            <span class="reviews-clock-data">January 02</span>
-                                        </div>
-                                        <div class="reviews-cooment">
-                                            Morbi commodo sagittis euismod. Donec non facilisis dolor, sed facilisis risus. Praesent
-                                            vitae posuere ante.
-                                            Donec
-                                            risus
-                                            dui, feugiat pretium
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="profile__reviews-block">
-                                <div class="profile__reviews-person flex-xl-row flex-column">
-                                    <img src="{{ asset('web_sayt/img/reviews-person-second.png') }}" alt="" srcset="">
+                                    <img src="{{ asset('web_sayt/img_customer/'.$valR->img) }}" alt="" srcset="">
                                     <div class="profile__reviews-content">
                                         <div class="person__info-rating">
                               <span class="gl-star-rating gl-star-rating--ltr " data-star-rating="">
@@ -338,29 +301,25 @@
                                     <option value="1"></option>
                                  </select>
                                  <span class="gl-star-rating--stars s50" role="tooltip" aria-label="">
-                                    <span data-index="0" data-value="1" class="gl-active"
-                                          style="font-size: 28px;"></span>
-                                    <span data-index="1" data-value="2" class="gl-active"></span>
-                                    <span data-index="2" data-value="3" class="gl-active"></span>
-                                    <span data-index="3" data-value="4" class="gl-active"></span>
-                                    <span data-index="4" data-value="5" class="gl-selected gl-active"></span>
-                                 </span>
-                              </span>
+                                  @for ($i = 0; $i < $valR->rate; $i++)
+                                        <span data-index="{{$i}}" data-value="{{$i}}" class="gl-active"
+                                              style="font-size: 28px;"></span>
+                                  @endfor
+                                </span>
                                         </div>
                                         <div class="profile__reviews-content-clock">
                                             <img src="{{ asset('web_sayt/img/clock.svg') }}" alt="" srcset="">
-                                            <span class="reviews-clock-data">January 02</span>
+                                            <span class="reviews-clock-data">{{ date('M-d',strtotime($valR->created_at)) }}</span>
+
                                         </div>
                                         <div class="reviews-cooment">
-                                            Morbi commodo sagittis euismod. Donec non facilisis dolor, sed facilisis risus. Praesent
-                                            vitae posuere ante.
-                                            Donec
-                                            risus
-                                            dui, feugiat pretium
+                                            {{$valR->description}}
                                         </div>
                                     </div>
                                 </div>
                             </div>
+                                @endforeach
+                            @endif
                         </div>
                     </div>
                 </div>

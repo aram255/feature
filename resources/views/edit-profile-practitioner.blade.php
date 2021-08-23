@@ -44,7 +44,7 @@
                 <div class="add-photo-edit">
 {{--                    <input  type="file" id="img-file" name="video">--}}
 
-                    <p><img src="@if(empty($Practitioners->video)){{ asset('web_sayt/img/add.svg') }}@else{{ asset('web_sayt/img/remove.svg') }}@endif">@if(empty($Practitioners->img)) Add Video @else
+                    <p><img src="@if(empty($Practitioners->video)){{ asset('web_sayt/img/add.svg') }}@else{{ asset('web_sayt/img/remove.svg') }}@endif">@if(empty($Practitioners->video)) Add Video @else
 
 {{--                            style="background:white;font-weight:unset;color: #00309e;"--}}
                             <a href="{{route('delete-photo-video',[app()->getLocale(),2])}}">Remove Video</a>
@@ -65,16 +65,16 @@
                                 <div class="form-info">
                                     <div class="user-info odd">
                                         <p class="user-info-p">First Name</p>
-                                        <input type="text" id="firsName" class="fadeIn" value="{{$Practitioners->first_name}}" name="first_name">
+                                        <input autocomplete="off" type="text" id="firsName" class="fadeIn" value="{{$Practitioners->first_name}}" name="first_name">
                                     </div>
                                     <div class="user-info">
                                         <p class="user-info-p">Last Name</p>
-                                        <input type="text" class="fadeIn" value="{{$Practitioners->last_name}}" name="last_name">
+                                        <input autocomplete="off" type="text" class="fadeIn" value="{{$Practitioners->last_name}}" name="last_name">
                                     </div>
                                     <br>
                                     <div class="user-info odd">
                                         <p class="user-info-p">E-mail</p>
-                                        <input type="email" id="email" class="fadeIn" value="{{$Practitioners->email}}" name="email">
+                                        <input autocomplete="off" type="email" id="email" class="fadeIn" value="{{$Practitioners->email}}" name="email">
                                     </div>
                                     <div class="user-info">
                                         <p class="user-info-p">Phone Number</p>
@@ -93,17 +93,17 @@
                                     <br>
                                     <div class="user-info odd">
                                         <p class="user-info-p">Current Password</p>
-                                        <input type="password" class="fadeIn" name="password">
+                                        <input autocomplete="off" type="password" class="fadeIn" name="password">
                                     </div>
                                     <div class="user-info odd">
                                         <p class="user-info-p">New Password</p>
-                                        <input type="password"  class="fadeIn" name="new_password">
+                                        <input autocomplete="off" type="password"  class="fadeIn" name="new_password">
                                     </div>
                                     <br>
 
                                     <div class="user-info odd">
                                         <p class="user-info-p">Confirm New Password</p>
-                                        <input type="password" id="password" class="fadeIn" name="conf_password" >
+                                        <input autocomplete="off" type="password" id="password" class="fadeIn" name="conf_password" >
                                     </div>
                                     <div class="user-info odd">
                                         <p class="create-p">Language</p>
@@ -146,7 +146,7 @@
                             <p class="user-info-p ml-4">Cases and specializations</p>
 
                             <div class="input-group ml-auto mb-3" style="max-width: 340px;margin-left:21px !important;">
-                                <input id="add_new_tag" type="text" class="fadeIn" style="width: 85%" placeholder="Select" aria-label="Select" aria-describedby="basic-addon2">
+                                <input autocomplete="off" id="add_new_tag" type="text" class="fadeIn" style="width: 85%" placeholder="Select" aria-label="Select" aria-describedby="basic-addon2">
                                 <div class="input-group-append ml-auto">
                                     <button class="btn px-3 text-white fs-18" style="border-radius: 5px; background-color: #8ba9ee" type="button" id="add_new_tag_submit">+</button>
                                 </div>
@@ -190,7 +190,11 @@
 
                     <div class="user-info odd">
                         <p class="user-info-p">Card Number<span>*</span></p>
-                        <input type="text"  class="fadeIn card-num" name="card_number" value="{{$Practitioners->card_number ?? ''}}">
+                        <input autocomplete="off" type="text"  class="fadeIn card-num" name="card_number" value="{{$Practitioners->card_number ?? ''}}">
+                        @if(!empty($Practitioners->card_number))
+                        <button class="btn px-4 text-white fs-18" style="border-radius: 5px; background-color: #8ba9ee; height: 46px;" type="button" id="add_new_tag_submit">
+                            <a style="color: white;" href="{{route('remove-card-practitioner',[app()->getLocale()])}}">X</a></button>
+                        @endif
                         @if($errors->has('card_number'))
                             <span class="text-danger d-block" role="alert">
                                <strong>{{ $errors->first('card_number') }}</strong>
@@ -205,7 +209,9 @@
                     <br>
                     <div class="add-card-edit-link">
                         <button type="submit" class="bg-yellow br-10 px-4 py-2 fs-16">Add </button>
+
                     </div>
+
                 </form>
             </div>
         </div>
@@ -224,7 +230,7 @@
                             @csrf
                             <div class="form-group">
                                 <label for="ConsultationName">Consultation Name</label>
-                                <input type="text" class="form-control" id="ConsultationName" name="title" required>
+                                <input autocomplete="off" type="text" class="form-control" id="ConsultationName" name="title" required>
                             </div>
                             <div class="form-group">
                                 <label for="Price">Price</label>
@@ -232,7 +238,7 @@
                             </div>
                             <div class="form-group" >
                                 <label for="Description">Add Description</label>
-                                <input type="text" class="form-control mb-3" name="description[]" id="Description" required>
+                                <input autocomplete="off" type="text" class="form-control mb-3" name="description[]" id="Description" required>
                             </div>
                             <div class="form-group"  id="Bdescription">
                                 <div class="d-flex align-items-center" role="button">
@@ -248,7 +254,7 @@
                             <div class="scrollable-space1"></div>
                             <div class="form-group" >
                                 <label for="SessionTitle">Session Title</label>
-                                <input type="text" class="form-control mb-3" name="sessiont_title[]"  id="SSession" required>
+                                <input autocomplete="off" type="text" class="form-control mb-3" name="sessiont_title[]"  id="SSession" required>
                             </div>
                             <button class="bg-yellow br-10 px-4 py-2 fs-16">Save Plan</button>
                         </form>
@@ -276,8 +282,7 @@
                                 <div class="@php echo $color; @endphp">
                                     <div class="abs">
                                         <i class="fas fa-pen mr-3 edit_form1"></i>
-
-                                        <a href="{{route('delete-service',[app()->getLocale(),'id'=>$Value->id])}}"><i class="fas fa-times delete"></i></a>
+                                        <a class="remove_service_id" id="{{$Value->id}}" ><i class="fas fa-times delete"></i></a>
 
                                     </div>
                                     <div class="d-flex flex-column align-items-center">
@@ -313,7 +318,15 @@
                                             <button class="bg-yellow br-10 px-4 py-2 fs-16 mt-4 save">Save</button>
                                         </div>
                                     </form>
+{{--                                    <script>--}}
+{{--                                        $('.removeee').on('click',function () {--}}
 
+{{--                                            if (confirm("2555 Are you sure you want to remove it?")) {--}}
+{{--                                                $(this).attr("href", "http://www.google.com/")--}}
+{{--                                            }--}}
+{{--                                        })--}}
+
+{{--                                    </script>--}}
                                 @endforeach
 
                             </div>
@@ -342,9 +355,34 @@
 
             <script>
                 $(document).ready(function(){
-
-
                     $(function() {
+                    $('.remove_service_id').on('click',function () {
+
+                        if (confirm("Are you sure you want to remove it?")) {
+
+                            var DeleteIDS = $(this).attr('id');
+                            var _token = $('input[name="_token"]').val();
+                            var th = $(this);
+
+                            $.ajax({
+                                url: "{{route('delete-service',[app()->getLocale()])}}",
+                                type: "POST",
+                                data: {
+                                    DeleteIDS: DeleteIDS,
+                                    _token:_token
+                                },
+                                success: function (data) {
+                                   return location.href = window.location.href;
+                                },
+                                error: function(returnval) {
+                                    alert('The service was not removed.');
+                                }
+                            });
+                        }
+                    });
+
+
+
 
                     $('.edit_form1').on('click', function(i) {
 

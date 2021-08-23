@@ -8,6 +8,7 @@ use App\Models\Card;
 use App\Models\ServiceDescriptionModel;
 use App\Models\ServiceSessionModel;
 use App\Models\ServicesModel;
+use App\Models\TypeFormModel;
 use Illuminate\Http\Request;
 use App\Models\LanguagesModel;
 use App\Models\TegManagements;
@@ -27,6 +28,9 @@ use Illuminate\Support\Collection;
 use App\Models\EventModel;
 use App\Models\ZoomModel;
 use App\Models\BlogModel;
+use App\Models\FavoriteModel;
+use App\Models\ReviewModel;
+use App\Models\User;
 use Illuminate\Support\Carbon;
 
 
@@ -68,7 +72,7 @@ class IndexController extends Controller
         return $request->teg_management;
     }
 
-    public function search(Request $request,$lang, $protocolId = null)
+    public function search(Request $request,$lang, $practitioner_id = null, $service_id = null)
     {
 
 //        $tags=null;
@@ -151,6 +155,7 @@ class IndexController extends Controller
       // dd($Practitioner);
 
 
+
 //        $Practitioner = DB::select(
 //            "select p.id, p.first_name, p.last_name, p.email, p.phone_number, group_concat(tm.id) as tag_ids, group_concat(tm.name)as tag_names from practitioner as p
 //            left join  practitioner_lang_rel as  plr on p.id=plr.practitioner_id
@@ -198,6 +203,8 @@ class IndexController extends Controller
             $ServiceDescription[] = ServiceDescriptionModel::where('services_id',$PrID)->get();
         }
 
+        $Favorite = FavoriteModel::all();
+
 
 //        dd($Practitioner);
 
@@ -232,6 +239,7 @@ class IndexController extends Controller
         $TegManagements = $this->tegManagements();
 
 
+        // Calendar
         if($request->ajax())
         {
 
@@ -242,17 +250,29 @@ class IndexController extends Controller
 
                     $data = ZoomModel::whereDate('start', '>=', $start)
                                         ->whereDate('end',   '<=', $end)
-                                        ->where('practitioner_id',$protocolId)
-                                        ->get();
+                        ->where(function ($query) use($practitioner_id,$service_id) {
+                            if(!empty($practitioner_id) and empty($service_id))
+                            {
+                                $query ->where('practitioner_id',$practitioner_id);
+                            }
+
+                            if(!empty($practitioner_id) and !empty($service_id))
+                            {
+                                $query ->where('practitioner_id',$practitioner_id)
+                                        ->where('service_id',$service_id);
+                            }
+                        })
+                        ->where('user_id',Auth::id())
+                        ->get();
 
                 return response()->json($data);
 
         }
 
+       $ZommInfo = ZoomModel::first();
 
 
-
-        return view('filter',compact('Practitioners','Languages','TegManagements','Tag','Virtual','Person','Gender','Lang','Service','ServiceSession','ServiceDescription','Week'));
+        return view('filter',compact('ZommInfo','Practitioners','Languages','TegManagements','Tag','Virtual','Person','Gender','Lang','Service','ServiceSession','ServiceDescription','Week','Favorite'));
 
     }
 
@@ -293,6 +313,83 @@ class IndexController extends Controller
         $BlogText = BlogTextModel::first();
 
       return view('blog',compact('Blog','BlogFirst','BlogText'));
+    }
+
+    public function profileViewCustomer($lang,$practitionerID)
+    {
+        $Practitioner = PractitionersModel::where('id',$practitionerID)->first();
+
+        $ServizeID = ZoomModel::where('user_id',Auth::id())->get();
+        //dd($ServizeID);
+//        $ServizeID = DB::table('zoom_meetings_list')
+//            ->join('practitioner', 'practitioner.id', 'zoom_meetings_list.practitioner_id')
+//            ->where('practitioner.id',$practitionerID)
+//            ->where('user_id',Auth::id())
+//            ->get();
+//        echo '<pre>';
+//print_r($ServizeID);
+//echo '<pre>';
+//dd('dsd');
+        $Service  =  ServicesModel::where('practitioner_id',$practitionerID)->get();
+
+        $title =[];
+        $price =[];
+        $ID =[];
+        foreach ($Service as $serviceV)
+        {
+            $title[] =  $serviceV->title;
+            $price[] =  $serviceV->price;
+            $ID[]    =  $serviceV->id;
+        }
+
+        $ServiceSession=[];
+
+        foreach ($ID as $PrId)
+        {
+            $ServiceSession[] = ServiceSessionModel::where('services_id',$PrId)->get();
+        }
+
+        $ServiceDescription=[];
+
+        foreach ($ID as $PrID)
+        {
+            $ServiceDescription[] = ServiceDescriptionModel::where('services_id',$PrID)->get();
+        }
+
+
+        $TagManagements = TegManagements::orderBy('published', 'DESC')->orderBy('id', 'DESC')->get();
+
+        $MyTagManagements = DB::table('teg_managements')
+            ->join('practitioner_teg_managements', 'practitioner_teg_managements.teg_managements_id', 'teg_managements.id')
+            ->where('practitioner_teg_managements.practitioner_id',$practitionerID)
+            ->where('published',1)
+            ->get();
+
+
+        $Review = DB::table('reviews')
+            ->select('reviews.rate','reviews.description','users.last_name','users.first_name','users.img','reviews.created_at')
+            ->join('users', 'users.id', 'reviews.user_id')
+            ->where('reviews.practitoner_id',$practitionerID)
+            ->get();
+
+
+        $ThisWeekMeetingsList = ZoomModel::whereBetween('start', [Carbon::now()->startOfWeek(), Carbon::now()->endOfWeek()])->where('practitioner_id',$practitionerID)->get();
+
+        return view('profile-view-as-a-customer',compact('Practitioner','Service','ServiceSession','ServiceDescription','TagManagements','MyTagManagements','ThisWeekMeetingsList','Review','ServizeID'));
+    }
+
+    public function typeFormPractitioner($lang,$practitionerID)
+    {
+        $TypeForm = TypeFormModel::where('practitioner_id',$practitionerID)->get();
+
+        return view('type-form',compact('TypeForm'));
+    }
+
+    public function typeFormPractitionerView($lang,$id)
+    {
+        $TypeFormView = TypeFormModel::find($id);
+
+        return view('type-form-view',compact('TypeFormView'));
     }
 
 

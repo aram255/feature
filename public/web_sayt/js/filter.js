@@ -1,8 +1,81 @@
 
 
 // Heart Active--------------------------------------
-$('.person__info-heart').click(function () {
-   $('.person__info-heart').toggleClass('active');
+$('.favorit').click(function () {
+
+   //$(this).toggleClass('active');
+    var practitioner_id =  $(this).attr('id');
+    var _token = $('input[name="_token"]').val();
+
+    var classn = $(this).attr('class');
+
+    if(classn == 'person__info-heart favorit active')
+    {
+        $('.person__info-heart').removeClass('active');
+        $.ajax({
+            url: "add-favorite",
+            type: "POST",
+            data: {
+                practitioner_id: practitioner_id,
+                _token:_token,
+                type: "delete"
+            },
+            success: function (response) {
+                alert("Removed from favorites list.");
+            },
+            error: function(returnval) {
+                alert('Not removed from favorites list.');
+            }
+        })
+    }
+
+    if(classn == 'person__info-heart favorit')
+    {
+         $(this).addClass('active');
+
+        $.ajax({
+            url: "add-favorite",
+            type: "POST",
+            data: {
+                practitioner_id: practitioner_id,
+                _token:_token,
+                type: "add"
+            },
+            success: function (response) {
+                alert("Added to favorites list");
+            },
+            error: function(returnval) {
+                alert('No favorites added to list of favorites');
+            }
+        })
+    }
+
+});
+
+$('.active-pr').click(function () {
+
+    var practitioner_id =  $(this).attr('id');
+    var th = $(this);
+    var _token = $('input[name="_token"]').val();
+
+    var classn = $(this).attr('class');
+
+    $.ajax({
+        url: "add-favorite",
+        type: "POST",
+        data: {
+            practitioner_id: practitioner_id,
+            _token:_token,
+            type: "delete"
+        },
+        success: function (response) {
+                $(th).parent().parent().parent().remove();
+        },
+        error: function(returnval) {
+            alert('Not removed from favorites list.');
+        }
+    })
+
 });
 
 // Video---------------------------------------------
@@ -158,14 +231,11 @@ $('.person__content-nav-category').click(function (event) {
    } else if (this.innerHTML === 'Intro') {
       $('.person__content-video').addClass('ds-none')
       $('.person__content-intro').removeClass('ds-none')
-      // $('.person__content-calendar').addClass('ds-none')
-       $('.person__content-maps').addClass('ds-none')
+
 
    }  else{
-
        $('.person__content-video').addClass('ds-none')
        $('.person__content-intro').addClass('ds-none')
-       // $('.person__content-calendar').addClass('ds-none')
        $('.person__content-maps').removeClass('ds-none')
    }
 
