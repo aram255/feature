@@ -42,36 +42,18 @@
                     </div>
                 </div>
                 <div class="add-photo-edit">
-{{--                    <input  type="file" id="img-file" name="video">--}}
-
                     <p class="position-relative">
-
-                        <img src="@if(empty($Practitioners->video)){{ asset('web_sayt/img/add.svg') }}@else{{ asset('web_sayt/img/remove.svg') }}@endif">@if(empty($Practitioners->video))
-                            Add Video  <input id="file-input" type="file" accept="video/*" style="position: absolute; left: 0; opacity: 0">
+                        <img src="@if(empty($Practitioners->video)){{ asset('web_sayt/img/add.svg') }}@else{{ asset('web_sayt/img/remove.svg') }}@endif">
+                        @if(empty($Practitioners->video))
+                            Add Video <input id="file-input" type="file" accept="video/*" style="position: absolute; left: 0; opacity: 0; cursor: pointer">
                         @else
-
-{{--                            style="background:white;font-weight:unset;color: #00309e;"--}}
                             <a href="{{route('delete-photo-video',[app()->getLocale(),2])}}">Remove Video</a>
-                        @endif</p>
+                        @endif
+                    </p>
 
                     <div class="edit-profile__contact-img edit-profile__contact-video">
-                        <input  type="file" id="video-file">
-                        <label for="video-file">
-{{--                            <img src="{{ asset('web_sayt/img/video-file.svg') }}" alt="" width="40">--}}
-                            <video id="video" width="200" height="200" ></video>
-                        </label>
+                        <video id="video" width="200" height="200" controls></video>
                     </div>
-
-
-
-
-
-
-
-
-
-
-
                 </div>
             </div>
             <div class="edit-profile">

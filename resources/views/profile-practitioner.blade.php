@@ -72,11 +72,12 @@
                 </div>
                 <div class="profile-practitioner__consultation nl">
                     <div class="d-flex flex-md-row flex-column">
-                        <div class="profile-practitioner__consultation-video flex-1 mr-md-3">
-                            <input type="file" id="video-file" name="video-file">
-                            <label for="video-file">
-                                <img class="upload" src="{{ asset('web_sayt/img/video-file.svg') }}" alt="">
-                            </label>
+                        <div class="profile-practitioner__consultation-video flex-1 mr-md-3 p-0 overflow-hidden">
+                            <video id="video" width="100%" height="100%" controls></video>
+{{--                            <input type="file" id="video-file" name="video-file">--}}
+{{--                            <label for="video-file">--}}
+{{--                                <img class="upload" src="{{ asset('web_sayt/img/video-file.svg') }}" alt="">--}}
+{{--                            </label>--}}
                         </div>
                         <div class="person__content-calendar ds-none flex-1">
                             <div class="container-calendar  w-75 mx-auto">
@@ -296,21 +297,23 @@
                                     <img src="{{ asset('web_sayt/img_customer/'.$valR->img) }}" alt="" srcset="">
                                     <div class="profile__reviews-content">
                                         <div class="person__info-rating">
-                              <span class="gl-star-rating gl-star-rating--ltr " data-star-rating="">
-                                 <select class="star-rating">
-                                    <option value="5"></option>
-                                    <option value="4"></option>
-                                    <option value="3"></option>
-                                    <option value="2"></option>
-                                    <option value="1"></option>
-                                 </select>
-                                 <span class="gl-star-rating--stars s50" role="tooltip" aria-label="">
-                                  @for ($i = 0; $i < $valR->rate; $i++)
-                                        <span data-index="{{$i}}" data-value="{{$i}}" class="gl-active"
-                                              style="font-size: 28px;"></span>
-                                  @endfor
-                                </span>
+                                          <span class="gl-star-rating gl-star-rating--ltr " data-star-rating="">
+                                             <select class="star-rating">
+                                                <option value="5"></option>
+                                                <option value="4"></option>
+                                                <option value="3"></option>
+                                                <option value="2"></option>
+                                                <option value="1"></option>
+                                             </select>
+                                             <span class="gl-star-rating--stars s50" role="tooltip" aria-label="">
+                                              @for ($i = 0; $i < $valR->rate; $i++)
+                                                    <span data-index="{{$i}}" data-value="{{$i}}" class="gl-active"
+                                                          style="font-size: 28px;"></span>
+                                              @endfor
+                                            </span>
+                                          </span>
                                         </div>
+                                    </div>
                                         <div class="profile__reviews-content-clock">
                                             <img src="{{ asset('web_sayt/img/clock.svg') }}" alt="" srcset="">
                                             <span class="reviews-clock-data">{{ date('M-d',strtotime($valR->created_at)) }}</span>
