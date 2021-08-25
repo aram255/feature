@@ -334,7 +334,7 @@
             <div class="service mt-5 py-5">
                 <h2 class="text-center">My Services</h2>
                 <h4 class="text-uppercase text-center mb-5">ONE ON ONE PROGRAMS</h4>
-                <div id="customer-testimonals" class="owl-carousel owl-theme owl-loaded owl-drag  d-flex justify-content-between">
+                <div id="customer-testimonal" class="owl-carousel owl-theme owl-loaded owl-drag  d-flex justify-content-between">
                     @foreach($Service as $Value)
                         @php
                             $array = array("item light-green","item light-yellow");
