@@ -25,7 +25,9 @@
                 <div class="profile-practitioner__user nl">
                     <div class="person__info">
                         <div class="person__info-cont1">
-                            <img class="person__info-img" src="@if($PractitionerInfo->img){{asset('web_sayt/img_practitioners/'.$PractitionerInfo->img)}}@else{{asset('web_sayt/img/person-foto.png')}}@endif" alt="">
+                            <div class="avatar-img">
+                                <img class="person__info-img" src="@if($PractitionerInfo->img){{asset('web_sayt/img_practitioners/'.$PractitionerInfo->img)}}@else{{asset('web_sayt/img/person-foto.png')}}@endif" alt="">
+                            </div>
                             <div class="person__info-name">
                                 <span class="profile-practitioner-name">{{$PractitionerInfo->first_name}} {{$PractitionerInfo->last_name}}</span>
                                 <span class="edit-pen"><a href="{{route('edit-profile-practitioner',[app()->getLocale()])}}"><img src="{{ asset('web_sayt/img/edit-pen.svg') }}" alt=""></a></span>
@@ -72,7 +74,9 @@
                     <div class="d-flex flex-md-row flex-column">
                         <div class="profile-practitioner__consultation-video flex-1 mr-md-3">
                             <input type="file" id="video-file" name="video-file">
-                            <label for="video-file"><img class="upload" src="{{ asset('web_sayt/img/video-file.svg') }}" alt=""></label>
+                            <label for="video-file">
+                                <img class="upload" src="{{ asset('web_sayt/img/video-file.svg') }}" alt="">
+                            </label>
                         </div>
                         <div class="person__content-calendar ds-none flex-1">
                             <div class="container-calendar  w-75 mx-auto">
@@ -329,55 +333,46 @@
 
             <div class="service mt-5 py-5">
                 <h2 class="text-center">My Services</h2>
-                <h4 class="text-uppercase text-center">ONE ON ONE PROGRAMS</h4>
-                <div class="col-lg-12">
-                    <div class="">
-
-                        <!-- 1 -->
-
-                        <div class="profile-practitioner__consultation-carusel-block">
-                            <div id="customer-testimonals1" class="owl-carousel owl-theme owl-loaded owl-drag ">
-                                @foreach($Service as $Value)
-                                    @php
-                                        $array = array("item light-green","item light-yellow");
-                                        $k = array_rand($array);
-                                        $color = $array[$k];
-                                    @endphp
-                                <div class="@php echo $color; @endphp">
-                                    <div class="d-flex flex-column align-items-center">
-                                        <h4  class="mb-3">{{$Value->title}}</h4>
-                                        <div class="d-flex flex-column mx-auto align-items-center mb-3 italic-text">
-                                            @foreach($ServiceSession as $valS)
-                                               @foreach($valS as $valSS)
-                                                   @if($valSS->services_id == $Value->id)
-                                                        <span>{{$valSS->sessions}}</span>
-                                                    @endif
-                                               @endforeach
-                                            @endforeach
-                                        </div>
-                                    </div>
-                                    <div class="price d-flex flex-column align-items-center mb-3">
-                                        <div class="d-flex">
-                                            <span class="">$</span> <span >{{$Value->price}}</span>
-                                        </div>
-                                        <small>USD plus HST</small>
-                                    </div>
-                                    <ul class="list-unstyled px-5 overflow-auto">
-                                        @foreach($ServiceDescription as $valD)
-                                            @foreach($valD as $valDD)
-                                                @if($valDD->services_id == $Value->id)
-                                                    <li><i class="fas fa-angle-right mr-2" ></i> <span>{{$valDD->description}}</span></li>
-                                                @endif
-                                            @endforeach
+                <h4 class="text-uppercase text-center mb-5">ONE ON ONE PROGRAMS</h4>
+                <div id="customer-testimonals" class="owl-carousel owl-theme owl-loaded owl-drag  d-flex justify-content-between">
+                    @foreach($Service as $Value)
+                        @php
+                            $array = array("item light-green","item light-yellow");
+                            $k = array_rand($array);
+                            $color = $array[$k];
+                        @endphp
+                        <div class="@php echo $color; @endphp" style="max-width: 530px">
+                            <div class="d-flex flex-column align-items-center">
+                                <h4  class="mb-3">{{$Value->title}}</h4>
+                                <div class="d-flex flex-column mx-auto align-items-center mb-3 italic-text">
+                                    @foreach($ServiceSession as $valS)
+                                        @foreach($valS as $valSS)
+                                            @if($valSS->services_id == $Value->id)
+                                                <span>{{$valSS->sessions}}</span>
+                                            @endif
                                         @endforeach
-                                    </ul>
-
-{{--                                    <button class="bg-yellow br-10 px-4 py-2 mt-4 fs-16 view-more">View More >></button>--}}
+                                    @endforeach
                                 </div>
-                                @endforeach
                             </div>
+                            <div class="price d-flex flex-column align-items-center mb-3">
+                                <div class="d-flex">
+                                    <span class="">$</span> <span >{{$Value->price}}</span>
+                                </div>
+                                <small>USD plus HST</small>
+                            </div>
+                            <ul class="list-unstyled px-5 overflow-auto">
+                                @foreach($ServiceDescription as $valD)
+                                    @foreach($valD as $valDD)
+                                        @if($valDD->services_id == $Value->id)
+                                            <li><i class="fas fa-angle-right mr-2" ></i> <span>{{$valDD->description}}</span></li>
+                                        @endif
+                                    @endforeach
+                                @endforeach
+                            </ul>
+
+                            {{--                                    <button class="bg-yellow br-10 px-4 py-2 mt-4 fs-16 view-more">View More >></button>--}}
                         </div>
-                    </div>
+                    @endforeach
                 </div>
             </div>
             @endif

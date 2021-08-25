@@ -7,11 +7,11 @@
     <link rel="stylesheet" href="{{ asset('web_sayt/css/owl.theme.default.min.css') }}">
     <link rel="stylesheet" href="{{ asset('web_sayt/css/star-rating.css') }}">
     <link rel="stylesheet" href="{{ asset('web_sayt/css/css/main.css') }}">
-    <link rel="stylesheet" href="{{ asset('web_sayt/css/service.css') }}">
     <link href="{{ asset('web_sayt/css/tagger.css')}}" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/bbbootstrap/libraries@main/choices.min.css">
     <link rel="stylesheet" href="{{ asset('web_sayt/css/multiSelect.css') }}">
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    <link rel="stylesheet" href="{{ asset('web_sayt/css/service.css') }}">
 @endsection
 
 @section('title', __('site.Home') )
@@ -44,16 +44,33 @@
                 <div class="add-photo-edit">
 {{--                    <input  type="file" id="img-file" name="video">--}}
 
-                    <p><img src="@if(empty($Practitioners->video)){{ asset('web_sayt/img/add.svg') }}@else{{ asset('web_sayt/img/remove.svg') }}@endif">@if(empty($Practitioners->video)) Add Video @else
+                    <p class="position-relative">
+
+                        <img src="@if(empty($Practitioners->video)){{ asset('web_sayt/img/add.svg') }}@else{{ asset('web_sayt/img/remove.svg') }}@endif">@if(empty($Practitioners->video))
+                            Add Video  <input id="file-input" type="file" accept="video/*" style="position: absolute; left: 0; opacity: 0">
+                        @else
 
 {{--                            style="background:white;font-weight:unset;color: #00309e;"--}}
                             <a href="{{route('delete-photo-video',[app()->getLocale(),2])}}">Remove Video</a>
                         @endif</p>
 
                     <div class="edit-profile__contact-img edit-profile__contact-video">
-                        <input  type="file" id="video-file" name="video">
-                        <label for="video-file"><img class="upload" src="{{ asset('web_sayt/img/video-file.svg') }}" alt="" width="38px"></label>
+                        <input  type="file" id="video-file">
+                        <label for="video-file">
+{{--                            <img src="{{ asset('web_sayt/img/video-file.svg') }}" alt="" width="40">--}}
+                            <video id="video" width="200" height="200" ></video>
+                        </label>
                     </div>
+
+
+
+
+
+
+
+
+
+
 
                 </div>
             </div>
@@ -521,16 +538,13 @@
                     completion: {list: []}
                 });
 
-
-
                 </script>
 
             <script>
-                $(document).ready(function(){
+                $(document).ready(function() {
                     $(document).on('#country_name', 'click', function () {
                         alert('asd');
                     })
-
                 });
             </script>
 
@@ -700,5 +714,32 @@
 
             </script>
 
+
+            <script>
+                const input = document.getElementById('file-input');
+                const video = document.getElementById('video');
+                const videoSource = document.createElement('source');
+
+                input.addEventListener('change', function() {
+                    const files = this.files || [];
+
+                    if (!files.length) return;
+
+                    const reader = new FileReader();
+
+                    reader.onload = function (e) {
+                        videoSource.setAttribute('src', e.target.result);
+                        video.appendChild(videoSource);
+                        video.load();
+                        video.play();
+                    };
+
+                    reader.onprogress = function (e) {
+                        console.log('progress: ', Math.round((e.loaded * 100) / e.total));
+                    };
+
+                    reader.readAsDataURL(files[0]);
+                });
+            </script>
 
 @endsection
