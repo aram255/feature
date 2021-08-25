@@ -50,7 +50,6 @@
                             <a href="{{route('delete-photo-video',[app()->getLocale(),2])}}">Remove Video</a>
                         @endif
                     </p>
-
                     <div class="edit-profile__contact-img edit-profile__contact-video">
                         <video id="video" width="200" height="200" controls></video>
                     </div>
