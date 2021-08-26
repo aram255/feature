@@ -328,7 +328,6 @@
                                         <div class="profile__reviews-content-clock">
                                             <img src="{{ asset('web_sayt/img/clock.svg') }}" alt="" srcset="">
                                             <span class="reviews-clock-data">{{ date('M-d',strtotime($valR->created_at)) }}</span>
-
                                         </div>
                                         <div class="reviews-cooment">
                                             {{$valR->description}}
