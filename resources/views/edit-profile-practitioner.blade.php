@@ -69,7 +69,6 @@
                                         <p class="user-info-p">Last Name</p>
                                         <input autocomplete="off" type="text" class="fadeIn" value="{{$Practitioners->last_name}}" name="last_name">
                                     </div>
-                                    <br>
                                     <div class="user-info odd">
                                         <p class="user-info-p">E-mail</p>
                                         <input autocomplete="off" type="email" id="email" class="fadeIn" value="{{$Practitioners->email}}" name="email">
@@ -78,7 +77,6 @@
                                         <p class="user-info-p">Phone Number</p>
                                         <input type="tel" id="phone" class="fadeIn" value="{{$Practitioners->phone_number}}" name="phone_number" >
                                     </div>
-                                    <br>
                                     <div class="user-info create__checkbox">
                                         <p>Gender</p>
                                         <input type="radio"  {{ ($Practitioners->gender=="Male")? "checked" : "" }} name="gender" id="Male" value="Male" class="lg-sg__checkin"><label
@@ -88,38 +86,30 @@
                                         <input type="radio" {{ ($Practitioners->gender=="Other")? "checked" : "" }} name="gender" id="Other"  value="Other" class="lg-sg__checkin"><label
                                             for="Other" style="margin-left:10px;font-size:15px;">Other</label>
                                     </div>
-                                    <br>
-                                    <div class="user-info odd">
-                                        <p class="user-info-p">Current Password</p>
-                                        <input autocomplete="off" type="password" class="fadeIn" name="password">
+                                    <div class="d-flex align-items-center">
+                                        <div class="user-info odd">
+                                            <p class="user-info-p">Current Password</p>
+                                            <input autocomplete="off" type="password" class="fadeIn" name="password">
+                                        </div>
+                                        <div class="user-info odd">
+                                            <p class="user-info-p">New Password</p>
+                                            <input autocomplete="off" type="password"  class="fadeIn" name="new_password">
+                                        </div>
                                     </div>
-                                    <div class="user-info odd">
-                                        <p class="user-info-p">New Password</p>
-                                        <input autocomplete="off" type="password"  class="fadeIn" name="new_password">
-                                    </div>
-                                    <br>
-
-                                    <div class="user-info odd">
-                                        <p class="user-info-p">Confirm New Password</p>
-                                        <input autocomplete="off" type="password" id="password" class="fadeIn" name="conf_password" >
-                                    </div>
-                                    <div class="user-info odd">
-                                        <p class="create-p">Language</p>
-{{--                                        <select class="fadeIn" name="language" id="state">--}}
-{{--                                            <option value="select-sanguage">Select Language</option>--}}
-{{--                                            <option value="English">English</option>--}}
-{{--                                        </select>--}}
-
-
-                                                <select id="choices-multiple-remove-button2" class="fadeIn form-control choices__input is-hidden" name="lang[]" multiple="" tabindex="-1" aria-hidden="true" data-choice="active">
-                                                    {{--  List of added Tags--}}
-                                                    @foreach($Lang as  $GetLang)
-                                                        <option class="delete_teg" value="{{$GetLang->id}}" @if($GetLang->selected == 1) selected="" @endif>{{$GetLang->title}}</option>
-                                                    @endforeach
-
-                                                </select>
-
-
+                                    <div class="d-flex align-items-center">
+                                        <div class="user-info odd">
+                                            <p class="user-info-p">Confirm New Password</p>
+                                            <input autocomplete="off" type="password" id="password" class="fadeIn" name="conf_password" >
+                                        </div>
+                                        <div class="user-info odd">
+                                            <p class="create-p">Language</p>
+                                            <select id="choices-multiple-remove-button2" class="fadeIn form-control choices__input is-hidden" name="lang[]" multiple="" tabindex="-1" aria-hidden="true" data-choice="active">
+                                                {{--  List of added Tags--}}
+                                                @foreach($Lang as  $GetLang)
+                                                    <option class="delete_teg" value="{{$GetLang->id}}" @if($GetLang->selected == 1) selected="" @endif>{{$GetLang->title}}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
                                     </div>
                                      <div class="lg-sg__button mob_save">
                                         <input type="submit"  class="btn bg-yellow" value="Save">
