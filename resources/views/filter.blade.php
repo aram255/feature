@@ -211,7 +211,6 @@
 
         </script>
         <script>
-
         $(document).on('click','.detail-btn', function()  {
 
 
@@ -253,6 +252,7 @@
                 events:'/en/Search/'+ practitionerId+'/'+service_id,
                 selectable:true,
                 selectHelper: true,
+
                 select:function(start, end, allDay)
                 {
 
@@ -326,6 +326,51 @@
                     }
 
                 },
+
+                eventRender: function(event, element,start) {
+console.log(event)
+                   if(event['status'] == null)
+                   {
+                       setTimeout(() => {
+                           // let x = document.querySelector('.fc-event-container');
+                           // // x.removeAttribute('class')
+                           // x.style.backgroundColor = "red";
+                           // x.style.color = "white";
+                           let day = document.querySelector('.fc-day-grid-event');
+                           day.style.backgroundColor = "#FED638";
+                           day.style.color = "black";
+                           day.style.border = "1px solid #abab95";
+
+                       }, 10)
+
+                      // var ssss =  document.querySelector('.fc-time-grid-event');
+                      //  ssss.style.backgroundColor = "#00d210ba";
+                  }
+                    element.css({
+                        'background-color': '#00d210ba',
+                        "border": "1px solid #826516 !important"
+                    });
+
+                    {{--var AuthIDd = "{{Auth::user()->id}}";--}}
+                    {{--var userID = event['user_id'];--}}
+                    {{--if(event['user_id'] != null  && userID != AuthIDd)--}}
+                    {{--{--}}
+                    {{--    alert('eee')--}}
+                    {{--}else{--}}
+                    {{--    alert('ppppp');--}}
+                    {{--}--}}
+
+
+            console.log(event['start'])
+
+                    // element.parent('.fc-event-container').css({
+                    //     'background-color': 'red',
+                    //     'border-color': 'red',
+                    //     'display':'none'
+                    // });
+
+                },
+
                 editable:true,
                 // eventDrop: function(event) {
                 //
@@ -402,6 +447,8 @@
 
                     var AuthID = {{Auth::user()->id}}
 
+
+                            // fc-event-container
 
                 if(AuthID === user_id) {
 

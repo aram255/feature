@@ -65,13 +65,18 @@ Route::group(['prefix' => '{locale?}','where' => ['locale' => '[a-zA-Z]{2}']], f
 
 
     // Practitioner
-    Route::get('/profile-practitioner', [PractitionersController::class, 'profilePractitioner'])->name('profile-practitioner');
+    Route::match(['get', 'post'],'/profile-practitioner/{protocolId?}/{service_id?}', [PractitionersController::class, 'profilePractitioner'])->name('profile-practitioner');
     Route::get('/edit-profile-practitioner', [PractitionersController::class, 'EditProfilePractitioner'])->name('edit-profile-practitioner');
     Route::get('/my-appointments-practitioners/{id}', [PractitionersController::class, 'myAppointmentsPractitioners'])->name('my-appointments-practitioners');
     Route::post('/edit-profile-practitioner-post', [PractitionersController::class, 'EditProfilePractitionerPost'])->name('edit-profile-practitioner-post');
     Route::post('/add-lang-practitioner', [PractitionersController::class, 'addLang'])->name('add-lang-practitioner');
     Route::post('/delete-lang-practitioner', [PractitionersController::class, 'deleteLang'])->name('delete-lang-practitioner');
     Route::get('/delete-photo-video/{id}', [PractitionersController::class, 'deletePhotoVideo'])->name('delete-photo-video');
+
+    // Add free date time calendar Practitioner
+    Route::post('/add-free-date-practitioner-calendar', [PractitionersController::class, 'calendarAddFreeDate'])->name('add-free-date-practitioner-calendar');
+    Route::post('/free-date-time-delete', [PractitionersController::class, 'calendarDeleteFreeDate'])->name('free-date-time-delete');
+    Route::post('/free-date-time-update', [PractitionersController::class, 'calendarEditFreeDate'])->name('free-date-time-update');
 
 
     // Type Form

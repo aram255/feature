@@ -86,9 +86,9 @@
                @endforeach
             @endif
 
-{{--                @if($id == 1 and count($InProcess)>0)--}}
-{{--                    {{ $InProcess->links() }}--}}
-{{--                @endif--}}
+                @if($id == 1 and count($InProcess)>0)
+                    {{ $InProcess->links() }}
+                @endif
 
 {{--                @if($id == 2 and count($Complete)>0)--}}
 {{--                    {{ $Complete->links() }}--}}

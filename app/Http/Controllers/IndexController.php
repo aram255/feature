@@ -240,6 +240,35 @@ class IndexController extends Controller
 
 
         // Calendar
+//        if($request->ajax())
+//        {
+//
+//            $start = (!empty($_GET["start"])) ? ($_GET["start"]) : ('');
+//            $end = (!empty($_GET["end"])) ? ($_GET["end"]) : ('');
+//
+//
+//
+//                    $data = ZoomModel::whereDate('start', '>=', $start)
+//                                        ->whereDate('end',   '<=', $end)
+//                        ->where(function ($query) use($practitioner_id,$service_id) {
+//                            if(!empty($practitioner_id) and empty($service_id))
+//                            {
+//                                $query ->where('practitioner_id',$practitioner_id);
+//                            }
+//
+//                            if(!empty($practitioner_id) and !empty($service_id))
+//                            {
+//                                $query ->where('practitioner_id',$practitioner_id)
+//                                        ->where('service_id',$service_id);
+//                            }
+//                        })
+//                        ->where('user_id',Auth::id())
+//                        ->get();
+//
+//                return response()->json($data);
+//
+//        }
+
         if($request->ajax())
         {
 
@@ -248,24 +277,31 @@ class IndexController extends Controller
 
 
 
-                    $data = ZoomModel::whereDate('start', '>=', $start)
-                                        ->whereDate('end',   '<=', $end)
-                        ->where(function ($query) use($practitioner_id,$service_id) {
-                            if(!empty($practitioner_id) and empty($service_id))
-                            {
-                                $query ->where('practitioner_id',$practitioner_id);
-                            }
+            $data = ZoomModel::whereDate('start', '>=', $start)
+                ->whereDate('end',   '<=', $end)
+                ->where(function ($query) use($practitioner_id,$service_id) {
+                    if(!empty($practitioner_id) and empty($service_id))
+                    {
+                        $query ->where('practitioner_id',$practitioner_id);
+                    }
 
-                            if(!empty($practitioner_id) and !empty($service_id))
-                            {
-                                $query ->where('practitioner_id',$practitioner_id)
-                                        ->where('service_id',$service_id);
-                            }
-                        })
-                        ->where('user_id',Auth::id())
-                        ->get();
+                    if(!empty($practitioner_id) and !empty($service_id))
+                    {
+                        $query ->where('practitioner_id',$practitioner_id);
+                            //->where('service_id',$service_id);
+                    }
+                })
+                //->where('user_id',Auth::id())
+                ->where(function ($query) use($practitioner_id,$service_id) {
+                    $query->where('user_id',Auth::id())
+                        ->where('service_id',$service_id)
+                        ->OrWhere('user_id',null);
+                })
+                // where practitioner_id=$practitioner_id and (user_id=$auth_id and service_id=$service_id or ( user_id=null))
+                ->get();
 
-                return response()->json($data);
+
+            return response()->json($data);
 
         }
 

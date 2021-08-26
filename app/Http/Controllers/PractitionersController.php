@@ -44,7 +44,7 @@ class PractitionersController extends Controller
         return PractitionersModel::where('id',session()->get('UserID'))->first();
     }
 
-    public function profilePractitioner()
+    public function profilePractitioner(Request $request,$lang, $practitioner_id = null, $service_id = null)
     {
         $Service  =  ServicesModel::where('practitioner_id',session()->get('UserID'))->get();
 
@@ -86,7 +86,9 @@ class PractitionersController extends Controller
 
         $PractitionerInfo= AuthPractitionersModel::where('id',session()->get('UserID'))->first();
 
-        $ThisWeekMeetingsList = ZoomModel::whereBetween('start', [Carbon::now()->startOfWeek(), Carbon::now()->endOfWeek()])->where('practitioner_id',session()->get('UserID'))->get();
+        $ThisWeekMeetingsList = ZoomModel::whereBetween('start', [Carbon::now()->startOfWeek(), Carbon::now()->endOfWeek()])->where('practitioner_id',session()->get('UserID'))->where('user_id','!=',null)->get();
+
+        $GetServiceID = ZoomModel::where('practitioner_id',session()->get('UserID'))->where('join_url','!=',null)->get();
 
 
         $Review = DB::table('reviews')
@@ -95,8 +97,70 @@ class PractitionersController extends Controller
             ->where('reviews.practitoner_id',session()->get('UserID'))
             ->get();
 
+        // Calendar
+        if($request->ajax())
+        {
 
-        return view('profile-practitioner',compact('Review','TagManagements','MyTagManagements','PractitionerInfo','ThisWeekMeetingsList','Service','ServiceSession','ServiceDescription'));
+            $start = (!empty($_GET["start"])) ? ($_GET["start"]) : ('');
+            $end = (!empty($_GET["end"])) ? ($_GET["end"]) : ('');
+
+
+            $data = ZoomModel::whereDate('start', '>=', $start)
+                //->select('practitioner_id','start','end','duration','join_url','user_id')
+                ->whereDate('end',   '<=', $end)
+                ->where('practitioner_id',session()->get('UserID'))
+                //->groupBy('practitioner_id','start','end','duration','join_url','user_id')
+                ->get();
+
+            return response()->json($data);
+
+        }
+
+
+        return view('profile-practitioner',compact('GetServiceID','Review','TagManagements','MyTagManagements','PractitionerInfo','ThisWeekMeetingsList','Service','ServiceSession','ServiceDescription'));
+    }
+
+    public function calendarAddFreeDate(request $request)
+    {
+//        foreach ($request->service_id as $GetServiceId)
+//        {
+
+            $Add = new ZoomModel;
+
+            $Add->title            = $request->title;
+            $Add->start            = $request->start;
+            $Add->end              = $request->end;
+            $Add->create           = $request->LiveDateTime;
+            $Add->practitioner_id  = session()->get('UserID');
+//            $Add->service_id  = $GetServiceId;
+            $Add->save();
+
+//        }
+        return response()->json(['success'=> 'Hours that are not convenient for you have been added to the calendar.','error' => 'Hours that are not convenient for you have not been added to the calendar.']);
+    }
+
+    public function calendarEditFreeDate(request $request)
+    {
+
+        $Edit = ZoomModel::where('id',$request->event_id)->where('user_id','=',null)->first();
+        $Edit->start = $request->start;
+        $Edit->end   = $request->end;
+        $Edit->save();
+
+        return response()->json(['success'=>'The list of your busy hours has been removed.','error'=>'The list of your busy hours has not been removed.']);
+    }
+
+    public function calendarDeleteFreeDate(request $request)
+    {
+
+//        $GetList = ZoomModel::where('practitioner_id',$request->practitioner_id)->where('join_url','=',null)->get();
+//        foreach ($GetList as $GetFreeId)
+//        {
+            $Delete = ZoomModel::where('id',$request->event_id)->where('join_url','=',null)->first();
+            $Delete->delete();
+//        }
+
+        return response()->json(['success'=>'The list of your busy hours has been removed.','error'=>'The list of your busy hours has not been removed.']);
     }
 
     public  function addTagMyListManagements(request $request)
@@ -110,6 +174,7 @@ class PractitionersController extends Controller
 
            return response()->json($AddProtocol);
     }
+
 
     public function deleteTeg(request $request)
     {
