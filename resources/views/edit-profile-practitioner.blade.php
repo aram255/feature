@@ -41,17 +41,26 @@
                         </label>
                     </div>
                 </div>
+
                 <div class="add-photo-edit">
                     <p class="position-relative">
                         <img src="@if(empty($Practitioners->video)){{ asset('web_sayt/img/add.svg') }}@else{{ asset('web_sayt/img/remove.svg') }}@endif">
                         @if(empty($Practitioners->video))
-                            Add Video <input id="file-input" type="file" accept="video/*" style="position: absolute; left: 0; opacity: 0; cursor: pointer">
+                            Add Video <input name="video" id="file-input" type="file" accept="video/*" style="position: absolute; left: 0; opacity: 0; cursor: pointer">
                         @else
                             <a href="{{route('delete-photo-video',[app()->getLocale(),2])}}">Remove Video</a>
                         @endif
                     </p>
                     <div class="edit-profile__contact-img edit-profile__contact-video">
-                        <video id="video" width="200" height="200" controls></video>
+                        @if($Practitioners->video != null)
+                        <video id="video" src="{{ asset('web_sayt/video_practitioners/'.$Practitioners->video) }}" width="200" height="200" controls>
+
+                        </video>
+                        @else
+                           <label for="file-input">
+                                   <img  class="upload" src="{{ asset('web_sayt/img/video-file.svg') }}" alt="">
+                            </label>
+                         @endif
                     </div>
                 </div>
             </div>
@@ -134,7 +143,7 @@
                             <p class="user-info-p ml-4">Cases and specializations</p>
 
                             <div class="input-group ml-auto mb-3" style="max-width: 340px;margin-left:21px !important;">
-                                <input autocomplete="off" id="add_new_tag" type="text" class="fadeIn" style="width: 85%" placeholder="Select" aria-label="Select" aria-describedby="basic-addon2">
+                                <input autocomplete="off" id="add_new_tag" type="text" class="fadeIn" style="width: 85%" placeholder="Add new tag" aria-label="Select" aria-describedby="basic-addon2">
                                 <div class="input-group-append ml-auto">
                                     <button class="btn px-3 text-white fs-18" style="border-radius: 5px; background-color: #8ba9ee" type="button" id="add_new_tag_submit">+</button>
                                 </div>
@@ -560,10 +569,10 @@
                                 },
                                 success: function (data) {
                                     console.log(data)
-                                    alert("The language you selected has been added.");
+                                    //alert("The language you selected has been added.");
                                 },
                                 error: function(returnval) {
-                                    alert('The language you selected has not been added.');
+                                    //alert('The language you selected has not been added.');
                                 }
                             });
                         },
@@ -585,10 +594,10 @@
                                 },
                                 success: function (data) {
                                     console.log(data)
-                                    alert("Your specified language removed.");
+                                    //alert("Your specified language removed.");
                                 },
                                 error: function(returnval) {
-                                    alert('The language you specified was not removed.');
+                                    //alert('The language you specified was not removed.');
                                 }
                             });
 
@@ -619,10 +628,10 @@
                                 },
                                 success: function (data) {
                                     console.log(data)
-                                    alert("Your tag has been removed.");
+                                    // alert("Your tag has been removed.");
                                 },
                                 error: function(returnval) {
-                                    alert('Your tag has not been removed.');
+                                    // alert('Your tag has not been removed.');
                                 }
                             });
                         },
@@ -649,10 +658,10 @@
                                 },
                                 success: function (data) {
                                     console.log(data)
-                                    alert("The tag you selected has been added to your list.");
+                                    // alert("The tag you selected has been added to your list.");
                                 },
                                 error: function(returnval) {
-                                    alert('The tag you selected has not been added to your list, or it has already been added.');
+                                    // alert('The tag you selected has not been added to your list, or it has already been added.');
                                 }
                             });
                         },

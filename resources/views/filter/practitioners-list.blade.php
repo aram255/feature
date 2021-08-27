@@ -41,6 +41,7 @@
                 <div class="person__info-heart favorit" id="{{$Result->id}}"></div>
             @endif
         </div>
+
         <div class="person__content">
             <ul class="person__content-nav">
                 <li class="borderbg"><a class="person__content-nav-category active">Video</a></li>
@@ -52,13 +53,14 @@
             <div class="person__content-video">
                 <div class="video_wrapper video_wrapper_full js-videoWrapper">
                     <iframe class="videoIframe js-videoIframe" src="" frameborder="0" allowtransparency="true"
-                            allowfullscreen="" data-src="{{ asset('web_sayt/img/video.mp4') }}"></iframe>
+                            allowfullscreen="" data-src="{{ asset('web_sayt/video_practitioners/'.$Result->video) }}"></iframe>
                     <button class="videoPoster js-videoPoster"></button>
                 </div>
             </div>
             <div class="person__content-intro ds-none">
-                <form method="post" action="{{route('add-zoom-meeting',[app()->getLocale()])}}">
-                    {{csrf_field()}}
+                {{$Result->description}}
+{{--                <form method="post" action="{{route('add-zoom-meeting',[app()->getLocale()])}}">--}}
+{{--                    {{csrf_field()}}--}}
 
                     <input type="hidden" name="email" value="{{$Result->email}}">
                     <input type="hidden" name="first_name" value="{{$Result->first_name}}">
@@ -66,13 +68,13 @@
                     <input type="hidden" name="phone_number" value="{{$Result->phone_number}}">
                     <input type="hidden" name="practitioner_id" value="{{$Result->id}}">
 
-                    <input type="text" name="m_name" placeholder="Meeting Name">
-                    <input type="text" name="password" placeholder="Password"><br>
-                    <input type="datetime-local" id="birthdaytime" name="birthdaytime">
-                    <input type="number" name="time" placeholder="Duration"><br>
-                    {{--                                <input type="number" name="type" placeholder="Type"><br>--}}
+{{--                    <input type="text" name="m_name" placeholder="Meeting Name">--}}
+{{--                    <input type="text" name="password" placeholder="Password"><br>--}}
+{{--                    <input type="datetime-local" id="birthdaytime" name="birthdaytime">--}}
+{{--                    <input type="number" name="time" placeholder="Duration"><br>--}}
+{{--                    --}}{{--                                <input type="number" name="type" placeholder="Type"><br>--}}
 
-                    <input type="submit">
+{{--                    <input type="submit">--}}
                 </form>
                 {{--                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been--}}
                 {{--                                the industry's--}}

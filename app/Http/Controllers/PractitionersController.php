@@ -503,7 +503,6 @@ class PractitionersController extends Controller
         }
         elseif($request->file('img')==null )
         {
-
             $VideoName = rand() . '.' . $request->file('video')->getClientOriginalExtension();
             $request->file('video')->move(public_path('web_sayt/video_practitioners/'), $VideoName);
 

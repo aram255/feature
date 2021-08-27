@@ -11,9 +11,7 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('web_sayt/maps/style.css') }}" />
     <link rel="stylesheet" href="{{ asset('web_sayt/css/service.css') }}">
     <link rel="stylesheet" href="{{ asset('web_sayt/css/css/responsive.css') }}">
-
-    {{--    calendar script--}}
-
+    {{--    calendar css--}}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/fullcalendar.css" />
 
     <style>
@@ -154,7 +152,6 @@
 
 
     {{--    Service Modal--}}
-
     @foreach($Practitioners as $Result)
 
         <!-- The Modal service -->
@@ -173,6 +170,7 @@
 
     @endforeach
 
+{{--    full calendar modal--}}
     <div class="modal" tabindex="-1" id="myModal">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -283,9 +281,6 @@
                             @endif
 
 
-
-
-
                         if(title !== "" && pasword !== "" && duration !== ""){
 
                             $.ajax({
@@ -327,114 +322,7 @@
 
                 },
 
-                eventRender: function(event, element,start) {
-console.log(event)
-                   if(event['status'] == null)
-                   {
-                       setTimeout(() => {
-                           // let x = document.querySelector('.fc-event-container');
-                           // // x.removeAttribute('class')
-                           // x.style.backgroundColor = "red";
-                           // x.style.color = "white";
-                           let day = document.querySelector('.fc-day-grid-event');
-                           day.style.backgroundColor = "#FED638";
-                           day.style.color = "black";
-                           day.style.border = "1px solid #abab95";
 
-                       }, 10)
-
-                      // var ssss =  document.querySelector('.fc-time-grid-event');
-                      //  ssss.style.backgroundColor = "#00d210ba";
-                  }
-                    element.css({
-                        'background-color': '#00d210ba',
-                        "border": "1px solid #826516 !important"
-                    });
-
-                    {{--var AuthIDd = "{{Auth::user()->id}}";--}}
-                    {{--var userID = event['user_id'];--}}
-                    {{--if(event['user_id'] != null  && userID != AuthIDd)--}}
-                    {{--{--}}
-                    {{--    alert('eee')--}}
-                    {{--}else{--}}
-                    {{--    alert('ppppp');--}}
-                    {{--}--}}
-
-
-            console.log(event['start'])
-
-                    // element.parent('.fc-event-container').css({
-                    //     'background-color': 'red',
-                    //     'border-color': 'red',
-                    //     'display':'none'
-                    // });
-
-                },
-
-                editable:true,
-                // eventDrop: function(event) {
-                //
-                //     var start = $.fullCalendar.formatDate(event.start, 'Y-MM-DD HH:mm:ss');
-                //     var end = $.fullCalendar.formatDate(event.end, 'Y-MM-DD HH:mm:ss');
-                //
-                //     // Check live DateTime
-                //     var today = new Date();
-                //     var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
-                //     var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
-                //     var LiveDateTime = date + ' ' + time;
-                //
-                //
-                //     // compare
-                //
-                //     var d1 = new Date(start);
-                //     var d2 = new Date(LiveDateTime);
-                //
-                //     if (d1 >= d2) {
-                //
-                //         var id = event.id;
-                //         var user_id = event.user_id;
-                //         var meeting_id = event.meeting_id;
-                //         var duration = event.duration;
-                //         var password = event.password;
-                //         var title = event.title;
-                //
-                //
-                //
-                //         if (confirm("Do you want to change your meeting details?")) {
-                //
-                //             var title = prompt('Edit Title:', title);
-                //             var password = prompt('Edit Password:', password);
-                //             var duration = prompt('Edit Title:', duration);
-                //
-                //             // submitTimeChanges(event.id);
-                //             $.ajax({
-                //                 url: "/en/update-zoom-meeting",
-                //                 type: "POST",
-                //                 data: {
-                //                     title: title,
-                //                     start: start,
-                //                     end: end,
-                //                     meeting_id: meeting_id,
-                //                     password: password,
-                //                     duration: duration,
-                //                     phone_number: phone_number,
-                //                     last_name: last_name,
-                //                     first_name: first_name,
-                //                     email:email,
-                //                     join_url:join_url,
-                //                     type: 'update'
-                //                 },
-                //                 success: function (response) {
-                //                     calendar.fullCalendar('refetchEvents');
-                //                     alert("Event Updated Successfully");
-                //                 }
-                //             })
-                //         }
-                //     }else{
-                //         alert('You can not make appointments with back date.');
-                //     }
-                //
-                // },
 
                 eventClick:function(event)
                 {

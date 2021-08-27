@@ -83,7 +83,7 @@ class IndexController extends Controller
 //        }
 
         $Practitioner = DB::table('practitioner')
-                        ->select('practitioner.id','practitioner.first_name','practitioner.phone_number','practitioner.last_name','practitioner.email')
+                        ->select('practitioner.id','practitioner.first_name','practitioner.phone_number','practitioner.last_name','practitioner.email','practitioner.video','practitioner.description')
 
             ->when(isset($_POST['state']), function ($query) {
 
@@ -108,7 +108,7 @@ class IndexController extends Controller
 
                       })
 
-            ->groupBy('practitioner.id', 'practitioner.email', 'practitioner.first_name', 'practitioner.last_name', 'practitioner.phone_number')
+            ->groupBy('practitioner.id', 'practitioner.email', 'practitioner.first_name', 'practitioner.last_name', 'practitioner.phone_number','practitioner.video','practitioner.description')
             ->orderBy('practitioner.first_name',"DESC")
             ->where(function ($query) use($request) {
 

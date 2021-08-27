@@ -209,7 +209,7 @@
                                         <div class="person__info-specialist">Acne Specialist &amp; Holistic nutritionist (CNP)</div>
                                         <div class="person__info-skin">
                                             @foreach($Teg->where("practitioner_id",$PractitionerFavoriteVal->partit_id) as $TegVal)
-                                            <span class="person__info-skin-tag">{{$TegVal->name}}</span>
+                                             <span class="person__info-skin-tag">{{$TegVal->name}}</span>
                                             @endforeach
                                         </div>
                                         <div class="person__info-rate">HOURLY RATE FROM</div>
