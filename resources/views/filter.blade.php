@@ -281,6 +281,9 @@
                             @endif
 
 
+
+
+
                         if(title !== "" && pasword !== "" && duration !== ""){
 
                             $.ajax({

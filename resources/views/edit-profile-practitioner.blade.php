@@ -132,7 +132,7 @@
                                                 <span class="text-success d-block" role="alert"></span>
                                             </div>
                                             <div class="add-card-edit-link" style="border-radius: 0 5px 5px 0; overflow: hidden">
-                                                <button type="submit" class="bg-yellow  px-2 add_card" style="height: 45px; font-size: medium">Add</button>
+                                                <button type="button" class="bg-yellow  px-2 add_card" style="height: 45px; font-size: medium">Add</button>
                                             </div>
                                         </div>
                                          <div class="lg-sg__button mob_save" style="width: 20%!important;">
