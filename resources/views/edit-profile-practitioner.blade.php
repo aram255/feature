@@ -23,195 +23,172 @@
     <section class="edit-profile-section">
         <form method="post" action="{{route('edit-profile-practitioner-post',[app()->getLocale()])}}" enctype="multipart/form-data">
             @csrf
-        <div class="container">
-            <div class="profile-edit-flex">
-                <div >
-                    <p> <img src="@if(empty($Practitioners->img)){{ asset('web_sayt/img/add.svg') }}@else{{ asset('web_sayt/img/remove.svg') }}@endif">@if(empty($Practitioners->img)) Add Photo @else
+            <div class="container">
+                <div class="profile-edit-flex">
+                    <div >
+                        <p> <img src="@if(empty($Practitioners->img)){{ asset('web_sayt/img/add.svg') }}@else{{ asset('web_sayt/img/remove.svg') }}@endif">@if(empty($Practitioners->img)) Add Photo @else
 
-                        <a href="{{route('delete-photo-video',[app()->getLocale(),1])}}">Remove Photo</a>
+                            <a href="{{route('delete-photo-video',[app()->getLocale(),1])}}">Remove Photo</a>
 
-                        @endif</p>
+                            @endif</p>
 
-                    <div class="edit-profile__contact-img">
-                        <input type="file" id="img-file" name="img">
-                        <label for="img-file">
-                            <img class="upload" src="@if(empty($Practitioners->img)){{asset('web_sayt/img/img-file.svg')}}@else{{ asset('web_sayt/img_practitioners/'.$Practitioners->img)}} @endif" alt="">
-                        </label>
-                    </div>
-                </div>
-                <div class="add-photo-edit">
-                    <p class="position-relative">
-                        <img src="@if(empty($Practitioners->video)){{ asset('web_sayt/img/add.svg') }}@else{{ asset('web_sayt/img/remove.svg') }}@endif">
-                        @if(empty($Practitioners->video))
-                            Add Video <input name="video" id="file-input" type="file" accept="video/*" style="position: absolute; left: 0; opacity: 0; cursor: pointer">
-                        @else
-                            <a href="{{route('delete-photo-video',[app()->getLocale(),2])}}">Remove Video</a>
-                        @endif
-                    </p>
-                    <div class="edit-profile__contact-img edit-profile__contact-video">
-                        @if($Practitioners->video != null)
-                        <video id="video" src="{{ asset('web_sayt/video_practitioners/'.$Practitioners->video) }}" width="200" height="200" controls>
-
-                        </video>
-                        @else
-                           <label for="file-input">
-                                   <img  class="upload" src="{{ asset('web_sayt/img/video-file.svg') }}" alt="">
+                        <div class="edit-profile__contact-img">
+                            <input type="file" id="img-file" name="img">
+                            <label for="img-file">
+                                <img class="upload" src="@if(empty($Practitioners->img)){{asset('web_sayt/img/img-file.svg')}}@else{{ asset('web_sayt/img_practitioners/'.$Practitioners->img)}} @endif" alt="">
                             </label>
-                         @endif
+                        </div>
+                    </div>
+                    <div class="add-photo-edit">
+                        <p class="position-relative">
+                            <img src="@if(empty($Practitioners->video)){{ asset('web_sayt/img/add.svg') }}@else{{ asset('web_sayt/img/remove.svg') }}@endif">
+                            @if(empty($Practitioners->video))
+                                Add Video <input name="video" id="file-input" type="file" accept="video/*" style="position: absolute; left: 0; opacity: 0; cursor: pointer">
+                            @else
+                                <a href="{{route('delete-photo-video',[app()->getLocale(),2])}}">Remove Video</a>
+                            @endif
+                        </p>
+                        <div class="edit-profile__contact-img edit-profile__contact-video">
+                            @if($Practitioners->video != null)
+                            <video id="video" src="{{ asset('web_sayt/video_practitioners/'.$Practitioners->video) }}" width="200" height="200" controls>
+
+                            </video>
+                            @else
+                               <label for="file-input">
+                                       <img  class="upload" src="{{ asset('web_sayt/img/video-file.svg') }}" alt="">
+                                </label>
+                             @endif
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="edit-profile">
-                <div class="edit-profile__contact">
-                    <div class="edit-profile-info ml-0">
-                        <div class="create__form pt-0">
-{{--                            <form action="#" id="auth" method="POST">--}}
-                                <div class="form-info">
-                                    <div class="user-info odd">
-                                        <p class="user-info-p">First Name</p>
-                                        <input autocomplete="off" type="text" id="firsName" class="fadeIn" value="{{$Practitioners->first_name}}" name="first_name">
-                                    </div>
-                                    <div class="user-info">
-                                        <p class="user-info-p">Last Name</p>
-                                        <input autocomplete="off" type="text" class="fadeIn" value="{{$Practitioners->last_name}}" name="last_name">
-                                    </div>
-                                    <div class="user-info odd">
-                                        <p class="user-info-p">E-mail</p>
-                                        <input autocomplete="off" type="email" id="email" class="fadeIn" value="{{$Practitioners->email}}" name="email">
-                                    </div>
-                                    <div class="user-info">
-                                        <p class="user-info-p">Phone Number</p>
-                                        <input type="tel" id="phone" class="fadeIn" value="{{$Practitioners->phone_number}}" name="phone_number" >
-                                    </div>
-                                    <div class="user-info create__checkbox">
-                                        <p>Gender</p>
-                                        <input type="radio"  {{ ($Practitioners->gender=="Male")? "checked" : "" }} name="gender" id="Male" value="Male" class="lg-sg__checkin"><label
-                                            for="Male" style="margin-left:10px;font-size:15px;">Male</label>
-                                        <input type="radio" {{ ($Practitioners->gender=="Famale")? "checked" : "" }} name="gender" id="Female" value="Famale" class="lg-sg__checkin"><label
-                                            for="Female" style="margin-left:10px;font-size:15px;">Female</label>
-                                        <input type="radio" {{ ($Practitioners->gender=="Other")? "checked" : "" }} name="gender" id="Other"  value="Other" class="lg-sg__checkin"><label
-                                            for="Other" style="margin-left:10px;font-size:15px;">Other</label>
-                                    </div>
-                                    <div class="d-flex align-items-center">
+                <div class="edit-profile">
+                    <div class="edit-profile__contact">
+                        <div class="edit-profile-info ml-0">
+                            <div class="create__form pt-0">
+                                    <div class="form-info">
                                         <div class="user-info odd">
-                                            <p class="user-info-p">Current Password</p>
-                                            <input autocomplete="off" type="password" class="fadeIn" name="password">
+                                            <p class="user-info-p">First Name</p>
+                                            <input autocomplete="off" type="text" id="firsName" class="fadeIn" value="{{$Practitioners->first_name}}" name="first_name">
+                                        </div>
+                                        <div class="user-info">
+                                            <p class="user-info-p">Last Name</p>
+                                            <input autocomplete="off" type="text" class="fadeIn" value="{{$Practitioners->last_name}}" name="last_name">
                                         </div>
                                         <div class="user-info odd">
-                                            <p class="user-info-p">New Password</p>
-                                            <input autocomplete="off" type="password"  class="fadeIn" name="new_password">
+                                            <p class="user-info-p">E-mail</p>
+                                            <input autocomplete="off" type="email" id="email" class="fadeIn" value="{{$Practitioners->email}}" name="email">
+                                        </div>
+                                        <div class="user-info">
+                                            <p class="user-info-p">Phone Number</p>
+                                            <input type="tel" id="phone" class="fadeIn" value="{{$Practitioners->phone_number}}" name="phone_number" >
+                                        </div>
+                                        <div class="user-info create__checkbox">
+                                            <p>Gender</p>
+                                            <input type="radio"  {{ ($Practitioners->gender=="Male")? "checked" : "" }} name="gender" id="Male" value="Male" class="lg-sg__checkin"><label
+                                                for="Male" style="margin-left:10px;font-size:15px;">Male</label>
+                                            <input type="radio" {{ ($Practitioners->gender=="Famale")? "checked" : "" }} name="gender" id="Female" value="Famale" class="lg-sg__checkin"><label
+                                                for="Female" style="margin-left:10px;font-size:15px;">Female</label>
+                                            <input type="radio" {{ ($Practitioners->gender=="Other")? "checked" : "" }} name="gender" id="Other"  value="Other" class="lg-sg__checkin"><label
+                                                for="Other" style="margin-left:10px;font-size:15px;">Other</label>
+                                        </div>
+                                        <div class="d-flex align-items-center">
+                                            <div class="user-info odd">
+                                                <p class="user-info-p">Current Password</p>
+                                                <input autocomplete="off" type="password" class="fadeIn" name="password">
+                                            </div>
+                                            <div class="user-info odd">
+                                                <p class="user-info-p">New Password</p>
+                                                <input autocomplete="off" type="password"  class="fadeIn" name="new_password">
+                                            </div>
+                                        </div>
+                                        <div class="d-flex align-items-center">
+                                            <div class="user-info odd">
+                                                <p class="user-info-p">Confirm New Password</p>
+                                                <input autocomplete="off" type="password" id="password" class="fadeIn" name="conf_password" >
+                                            </div>
+                                            <div class="user-info odd">
+                                                <p class="create-p">Language</p>
+                                                <select id="choices-multiple-remove-button2" class="fadeIn form-control choices__input is-hidden" name="lang[]" multiple="" tabindex="-1" aria-hidden="true" data-choice="active">
+                                                    {{--  List of added Tags--}}
+                                                    @foreach($Lang as  $GetLang)
+                                                        <option class="delete_teg" value="{{$GetLang->id}}" @if($GetLang->selected == 1) selected="" @endif>{{$GetLang->title}}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="stripe-payment d-flex align-items-end" id="stripe-payment">
+                                            <div style="margin-right: -47px" class="user-info odd mb-0 pb-0 pr-0">
+                                                <p class="user-info-p">Card Number<span>*</span></p>
+                                                <input autocomplete="off" type="text" style="padding-right: 60px"  class="fadeIn card-num" name="card_number" value="{{$Practitioners->card_number ?? ''}}">
+                                                @if(!empty($Practitioners->card_number))
+                                                    <button class="btn px-4 text-white fs-18" style="border-radius: 5px; background-color: #8ba9ee; height: 46px;" type="button" id="add_new_tag_submit">
+                                                        <a style="color: white;" href="{{route('remove-card-practitioner',[app()->getLocale()])}}">X</a></button>
+                                                @endif
+                                                @if($errors->has('card_number'))
+                                                <span class="text-danger d-block" role="alert">
+                                                       <strong>{{ $errors->first('card_number') }}</strong>
+                                                </span>
+                                                @enderror
+                                                <span class="text-success d-block" role="alert"></span>
+                                            </div>
+                                            <div class="add-card-edit-link" style="border-radius: 0 5px 5px 0; overflow: hidden">
+                                                <button type="submit" class="bg-yellow  px-2 add_card" style="height: 45px; font-size: medium">Add</button>
+                                            </div>
+                                        </div>
+                                         <div class="lg-sg__button mob_save" style="width: 20%!important;">
+                                            <input type="submit"  class="btn bg-yellow" value="Save">
                                         </div>
                                     </div>
-                                    <div class="d-flex align-items-center">
-                                        <div class="user-info odd">
-                                            <p class="user-info-p">Confirm New Password</p>
-                                            <input autocomplete="off" type="password" id="password" class="fadeIn" name="conf_password" >
-                                        </div>
-                                        <div class="user-info odd">
-                                            <p class="create-p">Language</p>
-                                            <select id="choices-multiple-remove-button2" class="fadeIn form-control choices__input is-hidden" name="lang[]" multiple="" tabindex="-1" aria-hidden="true" data-choice="active">
-                                                {{--  List of added Tags--}}
-                                                @foreach($Lang as  $GetLang)
-                                                    <option class="delete_teg" value="{{$GetLang->id}}" @if($GetLang->selected == 1) selected="" @endif>{{$GetLang->title}}</option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                    </div>
-                                     <div class="lg-sg__button mob_save">
-                                        <input type="submit"  class="btn bg-yellow" value="Save">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="edit-profile__other mt-0">
+                        <div class="d-flex">
+                            <div class="user-info odd">
+                                <p class="user-info-p" style="margin-bottom:15px">Insurance coverage</p>
+                                <input type="radio" {{ ($Practitioners->insurance=="Yes")? "checked" : "" }}  name="insurance" id="yes" value="Yes" class="lg-sg__checkin"><label
+                                    for="yes" style="margin-left:6px;">Yes</label>
+                                <input type="radio" {{ ($Practitioners->insurance=="No")? "checked" : "" }} name="insurance" id="No" value="No" class="lg-sg__checkin" style="margin-left:33px;"><label style="margin-left:6px;"
+                                    for="No">No</label>
+                            </div>
+                            <div class="user-info">
+                                <p class="user-info-p ml-4">Cases and specializations</p>
+
+                                <div class="input-group ml-auto mb-3" style="max-width: 340px;margin-left:21px !important;">
+                                    <input autocomplete="off" id="add_new_tag" type="text" class="fadeIn" style="width: 85%" placeholder="Add new tag" aria-label="Select" aria-describedby="basic-addon2">
+                                    <div class="input-group-append ml-auto">
+                                        <button class="btn px-3 text-white fs-18" style="border-radius: 5px; background-color: #8ba9ee" type="button" id="add_new_tag_submit">+</button>
                                     </div>
                                 </div>
-{{--                            </form>--}}
-                        </div>
-                    </div>
-                </div>
 
-                <div class="edit-profile__other mt-0">
-                    <div class="d-flex">
-                        <div class="user-info odd">
-                            <p class="user-info-p" style="margin-bottom:15px">Insurance coverage</p>
-{{--                            <input type="text" id="coverage" class="fadeIn" name="coverage">--}}
-                            <input type="radio" {{ ($Practitioners->insurance=="Yes")? "checked" : "" }}  name="insurance" id="yes" value="Yes" class="lg-sg__checkin"><label
-                                for="yes" style="margin-left:6px;">Yes</label>
-                            <input type="radio" {{ ($Practitioners->insurance=="No")? "checked" : "" }} name="insurance" id="No" value="No" class="lg-sg__checkin" style="margin-left:33px;"><label style="margin-left:6px;"
-                                for="No">No</label>
-                        </div>
-                        <div class="user-info">
-                            <p class="user-info-p ml-4">Cases and specializations</p>
+                                <div class="">
 
-                            <div class="input-group ml-auto mb-3" style="max-width: 340px;margin-left:21px !important;">
-                                <input autocomplete="off" id="add_new_tag" type="text" class="fadeIn" style="width: 85%" placeholder="Add new tag" aria-label="Select" aria-describedby="basic-addon2">
-                                <div class="input-group-append ml-auto">
-                                    <button class="btn px-3 text-white fs-18" style="border-radius: 5px; background-color: #8ba9ee" type="button" id="add_new_tag_submit">+</button>
+                                    <div class="" style="margin-left:21px;">
+                                        <div class="choices" data-type="select-multiple" role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" dir="ltr">
+                                                <select id="choices-multiple-remove-button" class="form-control choices__input is-hidden" multiple="" tabindex="-1" aria-hidden="true" data-choice="active">
+                                                    {{--  List of added Tags--}}
+                                                    @foreach($MyTagManagements as $ind => $GetTagManagements)
+                                                        <option class="delete_teg" value="{{$GetTagManagements->id}}" @if($GetTagManagements->selected == 1) selected="" @endif>{{$GetTagManagements->name}}</option>
+                                                    @endforeach
+                                                </select>
+                                         </div>
+                                    </div>
+
                                 </div>
                             </div>
-
-                            <div class="">
-
-                                <div class="" style="margin-left:21px;">
-                                    <div class="choices" data-type="select-multiple" role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false" dir="ltr">
-                                            <select id="choices-multiple-remove-button" class="form-control choices__input is-hidden" multiple="" tabindex="-1" aria-hidden="true" data-choice="active">
-                                                {{--  List of added Tags--}}
-                                                @foreach($MyTagManagements as $ind => $GetTagManagements)
-                                                    <option class="delete_teg" value="{{$GetTagManagements->id}}" @if($GetTagManagements->selected == 1) selected="" @endif>{{$GetTagManagements->name}}</option>
-                                                @endforeach
-
-                                            </select>
-                                     </div>
-                                </div>
-
-                            </div>
+                        </div>
+                        <div class="user-info-about mb-4">
+                            <p class="user-info-p">About me</p>
+                            <textarea class="fadeIn" name="description" rows="6" cols="100" style="resize: none;">{{$Practitioners->description}}</textarea>
                         </div>
                     </div>
-                    <div class="user-info-about mb-4">
-                        <p class="user-info-p">About me</p>
-                        <textarea class="fadeIn" name="description" rows="6" cols="100" style="resize: none;">{{$Practitioners->description}}</textarea>
-                    </div>
                 </div>
             </div>
-        </div>
-        <div class="lg-sg__button but_web">
-            <input type="submit"  class="btn bg-yellow" value="Save">
-        </div>
 
-     </form>
-        <div class="container">
-            <div>
-                <div class="stripe-payment" id="stripe-payment">
-{{--                <form role="form" action="{{ route('add-card-practitioner') }}" method="post" class="stripe-payment"--}}
-{{--                      data-cc-on-file="false" data-stripe-publishable-key="{{ env('STRIPE_KEY') }}"--}}
-{{--                      id="stripe-payment">--}}
-{{--                    @csrf--}}
-
-                    <div class="user-info odd">
-                        <p class="user-info-p">Card Number<span>*</span></p>
-                        <input autocomplete="off" type="text"  class="fadeIn card-num" name="card_number" value="{{$Practitioners->card_number ?? ''}}">
-                        @if(!empty($Practitioners->card_number))
-                        <button class="btn px-4 text-white fs-18" style="border-radius: 5px; background-color: #8ba9ee; height: 46px;" type="button" id="add_new_tag_submit">
-                            <a style="color: white;" href="{{route('remove-card-practitioner',[app()->getLocale()])}}">X</a></button>
-                        @endif
-                        @if($errors->has('card_number'))
-                            <span class="text-danger d-block" role="alert">
-                               <strong>{{ $errors->first('card_number') }}</strong>
-                        </span>
-                            @enderror
-
-                                <span class="text-success d-block" role="alert">
-
-                        </span>
-
-                    </div>
-                    <br>
-                    <div class="add-card-edit-link">
-                        <button type="submit" class="bg-yellow br-10 px-4 py-2 fs-16 add_card">Add </button>
-
-                    </div>
-{{--                </form>--}}
-
-                </div>
+            <div class="lg-sg__button but_web">
+                <input type="submit"  class="btn bg-yellow" value="Save">
             </div>
-        </div>
-
+        </form>
     </section>
 
     <section>
