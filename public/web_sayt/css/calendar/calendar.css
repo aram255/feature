@@ -58,7 +58,7 @@ a {
 
 .calendar-wrapper {
     width:360px;
-    margin:3em auto;
+    margin:0 auto;
     padding:2em;
     border:1px solid @calendar-border;
     border-radius:5px;

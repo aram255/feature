@@ -132,6 +132,7 @@
     text-align: center;
     background-color: #eff4fe;
     border-radius: 10px;
+    max-height: 266px;
 }
 .profile-practitioner__consultation-carusel-block {
     padding: 0 30px!important;

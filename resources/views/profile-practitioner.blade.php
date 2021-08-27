@@ -79,7 +79,7 @@
                     </div>
                 </div>
                 <div class="profile-practitioner__consultation nl">
-                    <div class="d-flex flex-md-row flex-column">
+                    <div class="d-flex flex-md-row flex-column align-items-center">
 
                             @if($PractitionerInfo->video != null)
                                 <div class="profile-practitioner__consultation-video flex-1 mr-md-3 p-0 overflow-hidden">
