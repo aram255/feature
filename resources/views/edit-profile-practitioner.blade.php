@@ -116,9 +116,9 @@
                                                 </select>
                                             </div>
                                         </div>
-                                        <div class="stripe-payment d-flex align-items-end" id="stripe-payment">
-                                            <div style="margin-right: -47px" class="user-info odd mb-0 pb-0 pr-0">
-                                                <p class="user-info-p">Card Number<span>*</span></p>
+                                        <div class="stripe-payment" id="stripe-payment">
+                                            <p class="user-info-p">Card Number<span>*</span></p>
+                                            <div style="margin-right: -47px; position: relative" class="user-info odd mb-0 pb-0 pr-0">
                                                 <input autocomplete="off" type="text" style="padding-right: 60px"  class="fadeIn card-num" name="card_number" value="{{$Practitioners->card_number ?? ''}}">
                                                 @if(!empty($Practitioners->card_number))
                                                     <button class="btn px-4 text-white fs-18" style="border-radius: 5px; background-color: #8ba9ee; height: 46px;" type="button" id="add_new_tag_submit">
@@ -130,9 +130,9 @@
                                                 </span>
                                                 @enderror
                                                 <span class="text-success d-block" role="alert"></span>
-                                            </div>
-                                            <div class="add-card-edit-link" style="border-radius: 0 5px 5px 0; overflow: hidden">
-                                                <button type="submit" class="bg-yellow  px-2 add_card" style="height: 45px; font-size: medium">Add</button>
+                                                    <div class="add-card-edit-link position-absolute" style="border-radius: 0 5px 5px 0; overflow: hidden; top: 0; right: 0">
+                                                        <button type="button" class="bg-yellow  px-2 add_card" style="height: 45px; font-size: medium">Add</button>
+                                                    </div>
                                             </div>
                                         </div>
                                          <div class="lg-sg__button mob_save" style="width: 20%!important;">
