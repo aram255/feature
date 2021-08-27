@@ -18,9 +18,7 @@
 
 @extends('app.layouts.app_home')
 
-
 @section('content')
-
 
     <section class="edit-profile-section">
         <form method="post" action="{{route('edit-profile-practitioner-post',[app()->getLocale()])}}" enctype="multipart/form-data">
@@ -41,7 +39,6 @@
                         </label>
                     </div>
                 </div>
-
                 <div class="add-photo-edit">
                     <p class="position-relative">
                         <img src="@if(empty($Practitioners->video)){{ asset('web_sayt/img/add.svg') }}@else{{ asset('web_sayt/img/remove.svg') }}@endif">
