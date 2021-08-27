@@ -180,10 +180,11 @@
      </form>
         <div class="container">
             <div>
-                <form role="form" action="{{ route('add-card-practitioner') }}" method="post" class="stripe-payment"
-                      data-cc-on-file="false" data-stripe-publishable-key="{{ env('STRIPE_KEY') }}"
-                      id="stripe-payment">
-                    @csrf
+                <div class="stripe-payment" id="stripe-payment">
+{{--                <form role="form" action="{{ route('add-card-practitioner') }}" method="post" class="stripe-payment"--}}
+{{--                      data-cc-on-file="false" data-stripe-publishable-key="{{ env('STRIPE_KEY') }}"--}}
+{{--                      id="stripe-payment">--}}
+{{--                    @csrf--}}
 
                     <div class="user-info odd">
                         <p class="user-info-p">Card Number<span>*</span></p>
@@ -197,19 +198,20 @@
                                <strong>{{ $errors->first('card_number') }}</strong>
                         </span>
                             @enderror
-                            @if($message = Session::get('success'))
+
                                 <span class="text-success d-block" role="alert">
-                               <strong>{{ $message }}</strong>
+
                         </span>
-                            @endif
+
                     </div>
                     <br>
                     <div class="add-card-edit-link">
-                        <button type="submit" class="bg-yellow br-10 px-4 py-2 fs-16">Add </button>
+                        <button type="submit" class="bg-yellow br-10 px-4 py-2 fs-16 add_card">Add </button>
 
                     </div>
+{{--                </form>--}}
 
-                </form>
+                </div>
             </div>
         </div>
 
@@ -353,6 +355,32 @@
             <script>
                 $(document).ready(function(){
                     $(function() {
+
+              $('.add_card').on('click',function () {
+
+                  var card_number = $('.card-num').val();
+                  var _token = $('input[name="_token"]').val();
+
+                  $.ajax({
+                      url: "{{route('add-card-practitioner',[app()->getLocale()])}}",
+                      type: "POST",
+                      data: {
+                          card_number: card_number,
+                          _token:_token
+                      },
+                      success: function (data) {
+                          return location.href = window.location.href;
+                      },
+                      error: function(data) {
+                      $('.d-block').append('<strong style="color: red">Invalid card.</strong>')
+                      }
+                  });
+              })
+
+
+
+
+
                     $('.remove_service_id').on('click',function () {
 
                         if (confirm("Are you sure you want to remove it?")) {
