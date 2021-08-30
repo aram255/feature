@@ -84,9 +84,14 @@
                 </div>
                 <div class="profile-customer__blok2 nl">
                     <div class="profile-customer-my-appointments">
-                        <div class="my-appointments__title">
-                            <p>My Appointments</p>
-                        </div>
+                        <div class="d-flex align-items-center justify-content-between">
+                                <div class="my-appointments__title">
+                                    <p class="mr-5 mb-0">My Appointments</p>
+                                </div>
+                                <div>
+                                    <a href="#" class="fs-18">Complete</a> | <a href="#" class="fs-18">In Process</a>
+                                </div>
+                            </div>
                         @if(count($InProcess)>0)
                             @foreach($InProcess as $InProcessVal)
 
@@ -95,7 +100,9 @@
                                     <div class="my-appointments__complete-process-content-flex">
                                         <div class="my-appointments-person__info">
                                             <div class="my-appointments-person__info-cont1 mr-4">
-                                                <img class="my-appointments-person__info-img" src="{{ asset('web_sayt/img_practitioners/'.$InProcessVal->img) }}" alt="">
+                                                <div style="width: 150px; height: 150px; overflow: hidden;border-radius: 10px">
+                                                    <img class="my-appointments-person__info-img w-100" src="{{ asset('web_sayt/img_practitioners/'.$InProcessVal->img) }}" alt="">
+                                                </div>
                                             </div>
                                             <div class="my-appointments-person__info-cont2">
                                                 <div class="my-appointments-person__info-name">{{$InProcessVal->first_name}} {{$InProcessVal->last_name}}</div>
@@ -270,7 +277,9 @@
                         <div class="profile-customer-reviews-cont">
                             <div class="profile-customer-reviews-cont__info">
                                 <div class="profile-customer-reviews-cont__info-cont1">
-                                    <img class="profile-customer-reviews-cont__info-img" src="{{asset('web_sayt/img_practitioners/'.$ReviewVal->img)}}" alt="">
+                                    <div style="width: 150px; height: 150px; overflow: hidden; border-radius: 10px">
+                                        <img class="profile-customer-reviews-cont__info-img w-100" src="{{asset('web_sayt/img_practitioners/'.$ReviewVal->img)}}" alt="">
+                                    </div>
                                 </div>
                                 <div class="profile-customer-reviews-cont__info-cont2">
                                     <div class="profile-customer-reviews-cont__info-name">
