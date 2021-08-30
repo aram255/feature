@@ -129,12 +129,15 @@
                                                        <strong>{{ $errors->first('card_number') }}</strong>
                                                 </span>
                                                 @enderror
+
                                                 <span class="text-success d-block" role="alert">
                                                     <strong style="color: red"></strong>
                                                 </span>
+                                                    @if(empty($Practitioners->card_number))
                                                     <div class="add-card-edit-link position-absolute" style="border-radius: 0 5px 5px 0; overflow: hidden; top: 0; right: 0">
                                                         <button type="button" class="bg-yellow  px-2 add_card" style="height: 45px; font-size: medium">Add</button>
                                                     </div>
+                                                    @endif
                                             </div>
                                         </div>
                                          <div class="lg-sg__button mob_save" style="width: 20%!important;">

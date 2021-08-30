@@ -143,6 +143,12 @@ Route::group(['prefix' => '{locale?}','where' => ['locale' => '[a-zA-Z]{2}']], f
     Route::post('/delete-service', [PractitionersController::class, 'deleteService'])->name('delete-service');
 
 
+    // Practitioners Protocol
+    Route::get('/protocol/{user_id}/{service_id}', [PractitionersController::class, 'protocol'])->name('protocol');
+    Route::post('/add-protocol', [PractitionersController::class, 'AddProtocol'])->name('add-protocol');
+    Route::get('/delete-protocol/{user_id}/{service_id}/{practitioner_id}', [PractitionersController::class, 'deleteProtocol'])->name('delete-protocol');
+
+
 
     Route::post('autocomplete', [PractitionersController::class, 'getAutocomplete'])->name('autocomplete');
 

@@ -4,6 +4,21 @@
           crossorigin="anonymous" />
     <link rel="stylesheet" href="{{ asset('web_sayt/css/bootstrap/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('web_sayt/css/css/main.css') }}">
+    <style>
+        .my-appointments-person-img{
+            display: flex;
+            align-items: center;
+            border-radius: 10px;
+            width: 150px;
+            height: 150px;
+            overflow: hidden;
+            justify-content: center;
+        }
+        .info_imgg{
+            width: 100%;
+        }
+
+    </style>
 @endsection
 
 @section('title', __('site.Home') )
@@ -12,6 +27,7 @@
 
 
 @section('content')
+
     <script>var body = document.body; body.classList.add("body");</script>
     <section>
         <div class="container">
@@ -31,8 +47,8 @@
                     <div class="my-appointments__complete-process-content">
                         <div class="my-appointments__complete-process-content-flex">
                             <div class="my-appointments-person__info">
-                                <div class="my-appointments-person__info-cont1 mr-3">
-                                    <img class="my-appointments-person__info-img" src="{{ asset('web_sayt/img_customer/'.$InProcessVal->img) }}" alt="">
+                                <div class="my-appointments-person__info-cont1 mr-3 my-appointments-person-img">
+                                    <img class="my-appointments-person__info-img .info_imgg" src="{{ asset('web_sayt/img_customer/'.$InProcessVal->img) }}" alt="">
                                 </div>
                                 <div class="my-appointments-person__info-cont2">
                                     <div class="my-appointments-person__info-name">{{$InProcessVal->first_name}} {{$InProcessVal->last_name}}</div>
@@ -63,8 +79,8 @@
                     <div class="my-appointments__complete-process-content">
                         <div class="my-appointments__complete-process-content-flex">
                             <div class="my-appointments-person__info">
-                                <div class="my-appointments-person__info-cont1 mr-3">
-                                    <img class="my-appointments-person__info-img" src="{{ asset('web_sayt/img_customer/'.$InCompleteVal->img) }}" alt="">
+                                <div class="my-appointments-person__info-cont1 mr-3 my-appointments-person-img">
+                                    <img class="my-appointments-person__info-img info_imgg" src="{{ asset('web_sayt/img_customer/'.$InCompleteVal->img) }}" alt="">
                                 </div>
                                 <div class="my-appointments-person__info-cont2">
                                     <div class="my-appointments-person__info-name">{{$InCompleteVal->first_name}} {{$InCompleteVal->last_name}}</div>
@@ -77,7 +93,8 @@
                             <div class="my-appointments-person__complete-process">
                                 <div class="my-appointments-person__complete-process-time">{{$InCompleteVal->duration}} Mins Consultation</div>
                                 <button
-                                    class="my-appointments-person__complete-process-button procces-button btn bg-yellow">Fill Protocol</button>
+                                    class="my-appointments-person__complete-process-button procces-button btn bg-yellow">
+                                    <a href="{{route('protocol',[app()->getLocale(),'user_id'=>$InCompleteVal->user_id,'service_id'=>$InCompleteVal->service_id])}}">Fill Protocol</a></button>
                             </div>
 
                         </div>

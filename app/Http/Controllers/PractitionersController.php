@@ -21,6 +21,9 @@ use App\Models\ServicesModel;
 use Illuminate\Support\Carbon;
 //use Illuminate\Pagination\Paginator;
 //use Illuminate\Pagination\LengthAwarePaginator;
+use App\Models\ProtocolHeading;
+use App\Models\ProtocolProduct;
+use App\Models\ProtocolLink;
 use Hash;
 use File;
 
@@ -116,8 +119,19 @@ class PractitionersController extends Controller
 
         }
 
+        $Complete  = DB::table('users')
+            ->select('users.id as user_id','zoom_meetings_list.practitioner_id as practitioner_idd','users.img as user_img','services.id as service_id','users.first_name','users.last_name','services.title')
+            ->join('zoom_meetings_list', 'users.id', 'zoom_meetings_list.user_id')
+            ->where('zoom_meetings_list.practitioner_id',$request->session()->get('UserID'))
+            ->join('services','services.id','zoom_meetings_list.service_id')
+            ->whereDate("zoom_meetings_list.start", "<=",date('Y-m-d'))
+            ->orderBy('zoom_meetings_list.id','DESC')
+           ->get();
 
-        return view('profile-practitioner',compact('GetServiceID','Review','TagManagements','MyTagManagements','PractitionerInfo','ThisWeekMeetingsList','Service','ServiceSession','ServiceDescription'));
+
+
+
+        return view('profile-practitioner',compact('Complete','GetServiceID','Review','TagManagements','MyTagManagements','PractitionerInfo','ThisWeekMeetingsList','Service','ServiceSession','ServiceDescription'));
     }
 
     public function calendarAddFreeDate(request $request)
@@ -627,6 +641,74 @@ class PractitionersController extends Controller
         $EditVideoPhoto->save();
 
         return back()->with('status','Your request has been completed.');
+    }
+
+    public function protocol($Lang,$UserID,$ServiceID)
+    {
+
+//        $ProtocolHeading =   ProtocolHeading::where('service_id',$ServiceID)
+//                             ->where('user_id',$UserID)
+//                             ->where('practitioner_id',session()->get('UserID'))
+//                             ->first();
+
+        return view('protocol');
+    }
+
+    public function AddProtocol(request $request)
+    {
+
+        foreach ($request->text_heading as $ValHeading)
+        {
+            $Add = new ProtocolHeading;
+            $Add->text_heading = $ValHeading;
+            $Add->user_id = $request->user_id;
+            $Add->service_id = $request->service_id;
+            $Add->practitioner_id = session()->get('UserID');
+            $Add->save();
+        }
+
+        foreach ($request->title_product as $keyProduct => $valProduct)
+        {
+            $input['title_product'] = $valProduct;
+            $input['brand']  = $request->brand[$keyProduct];
+            $input['dosage'] = $request->dosage[$keyProduct];
+            $input['instructions'] = $request->instructions[$keyProduct];
+            $input['product_link'] = $request->product_link[$keyProduct];
+
+            $input['user_id']      = $request->user_id;
+            $input['service_id']   = $request->service_id;
+            $input['practitioner_id'] = session()->get('UserID');
+//            $input['img'] = $request->img[$keyProduct];
+            ProtocolProduct::create($input);
+        }
+
+        foreach ($request->link_title as $keyVal => $valLink)
+        {
+            $inp['link_title']   = $valLink;
+            $inp['link_link']    = $request->link_link[$keyVal];
+            $inp['user_id']      = $request->user_id;
+            $inp['service_id']   = $request->service_id;
+            $inp['practitioner_id'] = session()->get('UserID');
+
+
+            ProtocolLink::create($inp);
+        }
+
+        return  back()->with('status','Add');
+    }
+
+
+    public function deleteProtocol($lang,$user_id,$service_id,$practitioner_id)
+    {
+
+      //  $ProtocolHeading = DB::table('protocol_heading')->where('service_id',$service_id)->where('user_id',$user_id)->where('practitioner_id',$practitioner_id)->delete();
+
+        $ProtocolProduct = DB::table('protocol_product')->where('service_id',$service_id)->where('user_id',$user_id)->where('practitioner_id',$practitioner_id)->delete();
+
+
+        $ProtocolLink = DB::table('protocol_link')->where('service_id',$service_id)->where('user_id',$user_id)->where('practitioner_id',$practitioner_id)->delete();
+
+        return  back()->with('status','Delete');
     }
 
 
