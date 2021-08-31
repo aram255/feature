@@ -700,17 +700,17 @@ class PractitionersController extends Controller
     }
 
 
-    public function deleteProtocol($lang,$user_id,$service_id,$practitioner_id)
+    public function deleteProtocol(request $request)
     {
 
-        $ProtocolHeading = DB::table('protocol_heading')->where('service_id',$service_id)->where('user_id',$user_id)->where('practitioner_id',$practitioner_id)->delete();
+        $ProtocolHeading = DB::table('protocol_heading')->where('service_id',$request->service_id)->where('user_id',$request->user_id)->where('practitioner_id',$request->practitioner_id)->delete();
 
-        $ProtocolProduct = DB::table('protocol_product')->where('service_id',$service_id)->where('user_id',$user_id)->where('practitioner_id',$practitioner_id)->delete();
+        $ProtocolProduct = DB::table('protocol_product')->where('service_id',$request->service_id)->where('user_id',$request->user_id)->where('practitioner_id',$request->practitioner_id)->delete();
 
 
-        $ProtocolLink = DB::table('protocol_link')->where('service_id',$service_id)->where('user_id',$user_id)->where('practitioner_id',$practitioner_id)->delete();
+        $ProtocolLink = DB::table('protocol_link')->where('service_id',$request->service_id)->where('user_id',$request->user_id)->where('practitioner_id',$request->practitioner_id)->delete();
 
-        return  back()->with('status','Delete');
+        return response()->json($ProtocolHeading);
     }
 
 

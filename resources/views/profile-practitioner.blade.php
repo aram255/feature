@@ -246,14 +246,12 @@
                                     <div class="text-blue">{{$GetVal->title}}</div>
                                 </div>
                             </div>
-                            <button type="button" class="close" >
-                                <a href="{{route('delete-protocol',[app()->getLocale(),
-                                        'user_id' =>$GetVal->user_id,
-                                        'practitioner_id' =>$GetVal->practitioner_idd,
-                                         'service_id' =>$GetVal->service_id])}}">
+                            <button type="button" class="close delete-protocol"  data-dismiss="alert" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
-                                </a>
                             </button>
+                            <input  type="hidden" value="{{$GetVal->user_id}}">
+                            <input  type="hidden" value="{{$GetVal->practitioner_idd}}">
+                            <input  type="hidden" value="{{$GetVal->service_id}}">
                         </div>
                         @endforeach
                     </div>
@@ -599,6 +597,37 @@
 
         $('.view-more').click(function () {
             $(this).parent().parent().prev('.list-unstyled').css( "max-height","270px" );
+
+        })
+
+
+        // add new tag
+        $('.delete-protocol').on('click',function () {
+
+            var user_id         = $(this).next().val();
+            var practitioner_id = $(this).next().next().val();
+            var service_id         = $(this).next().next().next().val();
+
+            // alert(user_id)
+            // alert(practitioner_id)
+            // alert(service_id)
+
+            var _token = $('input[name="_token"]').val();
+            $.ajax({
+                url:"{{route('delete-protocol',[app()->getLocale()])}}",
+                method:"POST",
+                data:{user_id:user_id,practitioner_id:practitioner_id,service_id:service_id, _token:_token},
+                success:function(data){
+                    console.log(data)
+
+                   // alert('The tag you entered has been added.')
+                },error: function (error) {
+                    if(error.status == 500)
+                    {
+                        //alert('The tag you entered was not entered, or it currently exists.')
+                    }
+                }
+            });
 
         })
 
