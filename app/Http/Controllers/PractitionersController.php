@@ -124,8 +124,10 @@ class PractitionersController extends Controller
             ->join('zoom_meetings_list', 'users.id', 'zoom_meetings_list.user_id')
             ->where('zoom_meetings_list.practitioner_id',$request->session()->get('UserID'))
             ->join('services','services.id','zoom_meetings_list.service_id')
+            ->join('protocol_heading','protocol_heading.service_id','zoom_meetings_list.service_id')
             ->whereDate("zoom_meetings_list.start", "<=",date('Y-m-d'))
-            ->orderBy('zoom_meetings_list.id','DESC')
+            ->GroupBy('user_id','practitioner_idd','user_img','service_id','users.first_name','users.last_name','services.title')
+           // ->orderBy('zoom_meetings_list.id','DESC')
            ->get();
 
 
@@ -701,7 +703,7 @@ class PractitionersController extends Controller
     public function deleteProtocol($lang,$user_id,$service_id,$practitioner_id)
     {
 
-      //  $ProtocolHeading = DB::table('protocol_heading')->where('service_id',$service_id)->where('user_id',$user_id)->where('practitioner_id',$practitioner_id)->delete();
+        $ProtocolHeading = DB::table('protocol_heading')->where('service_id',$service_id)->where('user_id',$user_id)->where('practitioner_id',$practitioner_id)->delete();
 
         $ProtocolProduct = DB::table('protocol_product')->where('service_id',$service_id)->where('user_id',$user_id)->where('practitioner_id',$practitioner_id)->delete();
 
