@@ -4,6 +4,7 @@
           crossorigin="anonymous" />
     <link rel="stylesheet" href="{{ asset('web_sayt/css/bootstrap/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('web_sayt/css/css/main.css') }}">
+    <link rel="stylesheet" href="{{ asset('web_sayt/css/service.css') }}">
     <style>
         .my-appointments-person-img{
             display: flex;
@@ -17,7 +18,6 @@
         .info_imgg{
             width: 100%;
         }
-
     </style>
 @endsection
 
@@ -103,15 +103,18 @@
                @endforeach
             @endif
 
-                @if($id == 1 and count($InProcess)>0)
-                    {{ $InProcess->links() }}
-                @endif
+
 
 {{--                @if($id == 2 and count($Complete)>0)--}}
 {{--                    {{ $Complete->links() }}--}}
 {{--                @endif--}}
 
                 <div class="my-appointments__pagination">
+                    <div class="py-5 d-flex justify-content-end">
+                        @if($id == 1 and count($InProcess)>0)
+                            {{ $InProcess->links("pagination::bootstrap-4") }}
+                        @endif
+                    </div>
 {{--                    <a class="page-item-sign" href="#">&lt;</a>--}}
 {{--                    <a class="page-item page-item-first" href="#">1</a>--}}
 {{--                    <a class="page-item" href="#">2</a>--}}

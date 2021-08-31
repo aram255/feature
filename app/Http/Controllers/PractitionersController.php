@@ -285,7 +285,7 @@ class PractitionersController extends Controller
                      ->where('zoom_meetings_list.practitioner_id',$request->session()->get('UserID'))
                      ->whereDate("zoom_meetings_list.start", ">=",date('Y-m-d'))
                      ->orderBy('zoom_meetings_list.id','DESC')
-                     ->paginate(5);
+                     ->paginate(1);
 
 //        dd($InProcess);
 
@@ -295,7 +295,7 @@ class PractitionersController extends Controller
                      ->where('zoom_meetings_list.practitioner_id',$request->session()->get('UserID'))
                      ->whereDate("zoom_meetings_list.start", "<=",date('Y-m-d'))
                      ->orderBy('zoom_meetings_list.id','DESC')
-                     ->paginate(5);
+                     ->paginate(1);
 
         //$result = new Paginator($InProcess,1,1,[]);
 
