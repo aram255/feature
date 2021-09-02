@@ -158,7 +158,7 @@
                                         </div>
 {{--                                        @endforeach--}}
                                     </div>
-                                    <div class="protocol__section-add" id="add-link">
+                                    <div class="protocol__section-add" id="add-link" data-count="">
                                         <p>Add Another Link<span class="protocol__section-add-icon"> <img src="{{ asset('web_sayt/img/add-icon.svg') }}"
                                                                                                           alt=""></span></p>
                                     </div>
@@ -221,15 +221,15 @@
 
                         $.each(data.ProtocolProduct, function(k_product, v_product) {
 
-                            var button = document.getElementById("clickme");
-                             count = v_product.id;
-                            button.onclick = function() {
-                                count += 1;
-                                var  s = 'k'+count;
-                                alert(s)
-
-
-                            }
+                            // var button = document.getElementById("clickme");
+                            //  count = v_product.id;
+                            // button.onclick = function() {
+                            //     count += 1;
+                            //     var  s = 'k'+count;
+                            //     alert(s)
+                            //
+                            //
+                            // }
 
 
                             if(v_product.img == '')
@@ -246,6 +246,7 @@
                                 var g  = (Math.floor(Math.random() * (9999)))
 
                             })
+                                $('#add-product').attr('data-count',k_product)
                             //var g  = (Math.floor(Math.random() * (9999)))
                                 $('.product').append("<div class='protocol__section-product-cont product_remove' id='protocol__section-product-cont"+k_product+"'> <div class='protocol__section-product-cont-img'>"
                                 +"<input type='file' id='img-file"+k_product+"'  name='img[]' >"

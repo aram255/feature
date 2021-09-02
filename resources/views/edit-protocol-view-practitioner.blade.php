@@ -51,6 +51,7 @@
         <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
             Dropdown button
         </button>
+
         <div class="dropdown-menu">
             @foreach($GetProtocol as $key => $ValProtocol)
                 <a class="dropdown-item"  title="{{$ValProtocol->user_id}}" data-toggle="{{$ValProtocol->service_id}}">Protocol {{$key}}</a>
@@ -221,15 +222,15 @@
 
                         $.each(data.ProtocolProduct, function(k_product, v_product) {
 
-                            var button = document.getElementById("clickme");
-                            count = v_product.id;
-                            button.onclick = function() {
-                                count += 1;
-                                var  s = 'k'+count;
-                                alert(s)
-
-
-                            }
+                            // var button = document.getElementById("clickme");
+                            // count = v_product.id;
+                            // button.onclick = function() {
+                            //     count += 1;
+                            //     var  s = 'k'+count;
+                            //     alert(s)
+                            //
+                            //
+                            // }
 
 
                             if(v_product.img == '')
@@ -242,10 +243,10 @@
                                 {{--        alert(st)--}}
 
                                 {{--    }--}}
-                                $('#clickme').click(function () {
-                                    var g  = (Math.floor(Math.random() * (9999)))
-
-                                })
+                                // $('#clickme').click(function () {
+                                //     var g  = (Math.floor(Math.random() * (9999)))
+                                //
+                                // })
                                 //var g  = (Math.floor(Math.random() * (9999)))
                                 $('.product').append("<div class='protocol__section-product-cont product_remove' id='protocol__section-product-cont"+k_product+"'> <div class='protocol__section-product-cont-img'>"
                                     +"<input type='file' id='img-file"+k_product+"'  name='img[]' >"
@@ -289,7 +290,7 @@
                                 // }
 
 
-
+                                    // alert(k_product)
 
                                 $('.product').append("<div class='protocol__section-product-cont product_remove' id='protocol__section-product-cont"+k_product+"'> <div class='protocol__section-product-cont-img'>"
                                     +"<input class='idd_c' type='file' id='img-file"+k_product+"'  name='img[]' >"

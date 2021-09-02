@@ -21,8 +21,8 @@ function addProduct() {
    productClone.id = "protocol__section-product-cont" + ++j;
    addProduct.parentNode.appendChild(productClone);
    $("#protocol__section-product-cont" + j).find('input,textarea,select').val('');
-
-// $('.img-file').attr('id',(Math.floor(Math.random() * (9999))))
+   $("#protocol__section-product-cont" + j).find('input').attr('id', 'img-file' + j);
+   $("#protocol__section-product-cont" + j).find('label').attr('for', 'img-file' + j);
 
 }
 

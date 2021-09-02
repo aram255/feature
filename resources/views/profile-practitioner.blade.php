@@ -52,7 +52,7 @@
                                 <a href="{{route('my-appointments-practitioners',[app()->getLocale(),1])}}" class="mb-4 text-black d-block">My Appointments</a>
                                 <a href="{{route('type-form-practitioner',[app()->getLocale()])}}" class="mb-4 text-black d-block">My Intake Forms</a>
                                 <a target="_blank" href="https://typeform.com/" class="mb-4 text-black d-block">Create Intake Forms</a>
-                                <a  class="mb-4 text-black d-block"  data-toggle="modal" data-target="#EditProtocolsModal">Edit Protocols</a>
+
                                 <a  class="mb-4 text-black d-block"  data-toggle="modal" data-target="#myProtocolsModal">My Protocols
                                 </a>
 
