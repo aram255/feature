@@ -10,5 +10,5 @@ class ProtocolLink extends Model
     use HasFactory;
     protected $table = 'protocol_link';
     public    $timestamps = false;
-    protected $fillable = ['link_title','link_link','user_id','service_id','practitioner_id'];
+    protected $fillable = ['link_title','link_link','user_id','service_id','practitioner_id','iframe'];
 }

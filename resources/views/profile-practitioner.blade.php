@@ -52,6 +52,7 @@
                                 <a href="{{route('my-appointments-practitioners',[app()->getLocale(),1])}}" class="mb-4 text-black d-block">My Appointments</a>
                                 <a href="{{route('type-form-practitioner',[app()->getLocale()])}}" class="mb-4 text-black d-block">My Intake Forms</a>
                                 <a target="_blank" href="https://typeform.com/" class="mb-4 text-black d-block">Create Intake Forms</a>
+                                <a  class="mb-4 text-black d-block"  data-toggle="modal" data-target="#EditProtocolsModal">Edit Protocols</a>
                                 <a  class="mb-4 text-black d-block"  data-toggle="modal" data-target="#myProtocolsModal">My Protocols
                                 </a>
 
@@ -242,7 +243,12 @@
                                     <img src="{{asset('web_sayt/img_customer/'.$GetVal->user_img)}}" alt="">
                                 </div>
                                 <div class="px-4">
-                                    <p><b>{{$GetVal->first_name}} {{$GetVal->last_name}}</b></p>
+                                    <p><b><a href="{{route('edit-protocol-practitioner-view',[
+                                     app()->getLocale(),
+                                    'user_id'=> $GetVal->user_id,
+                                    'practitioner_id'=>$GetVal->practitioner_idd,
+                                    'service_id'=>$GetVal->service_id
+                                    ])}}">{{$GetVal->first_name}} {{$GetVal->last_name}}</a></b></p>
                                     <div class="text-blue">{{$GetVal->title}}</div>
                                 </div>
                             </div>
@@ -253,6 +259,51 @@
                             <input  type="hidden" value="{{$GetVal->practitioner_idd}}">
                             <input  type="hidden" value="{{$GetVal->service_id}}">
                         </div>
+                        @endforeach
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="EditProtocolsModal" tabindex="-1" aria-labelledby="myProtocolsModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content pb-5">
+                <div class="p-4 m-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true" class="color-blue">&times;</span>
+                    </button>
+                    <br>
+                    <h2 class="modal-title" id="myProtocolsModalLabel">All Protocol</h2>
+                </div>
+
+                <div class="scrollbar py-4"  id="style-1">
+                    <div class="modal-body force-overflow">
+                        @foreach($Complete as $GetVal)
+                            <div class="alert bg-light alert-dismissible fade show" role="alert">
+                                <div class="d-flex align-items-center">
+                                    <div class="img-space">
+                                        <img src="{{asset('web_sayt/img_customer/'.$GetVal->user_img)}}" alt="">
+                                    </div>
+                                    <div class="px-4">
+                                        <p><b><a href="{{route('add-edit-protocol-practitioner',[
+                                     app()->getLocale(),
+                                    'user_id'=> $GetVal->user_id,
+                                    'practitioner_id'=>$GetVal->practitioner_idd,
+                                    'service_id'=>$GetVal->service_id
+                                    ])}}">{{$GetVal->first_name}} {{$GetVal->last_name}}</a></b></p>
+                                        <div class="text-blue">{{$GetVal->title}}</div>
+                                    </div>
+                                </div>
+                                <button type="button" class="close "  data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                                <input  type="hidden" value="{{$GetVal->user_id}}">
+                                <input  type="hidden" value="{{$GetVal->practitioner_idd}}">
+                                <input  type="hidden" value="{{$GetVal->service_id}}">
+                            </div>
                         @endforeach
                     </div>
                 </div>
@@ -601,16 +652,12 @@
         })
 
 
-        // add new tag
+        // Delete Protocol
         $('.delete-protocol').on('click',function () {
 
             var user_id         = $(this).next().val();
             var practitioner_id = $(this).next().next().val();
             var service_id         = $(this).next().next().next().val();
-
-            // alert(user_id)
-            // alert(practitioner_id)
-            // alert(service_id)
 
             var _token = $('input[name="_token"]').val();
             $.ajax({
@@ -630,9 +677,6 @@
             });
 
         })
-
-
-
 
 
     </script>

@@ -147,8 +147,15 @@ Route::group(['prefix' => '{locale?}','where' => ['locale' => '[a-zA-Z]{2}']], f
     Route::get('/protocol/{user_id}/{service_id}', [PractitionersController::class, 'protocol'])->name('protocol');
     Route::post('/add-protocol', [PractitionersController::class, 'AddProtocol'])->name('add-protocol');
     Route::post('/delete-protocol/', [PractitionersController::class, 'deleteProtocol'])->name('delete-protocol');
+    Route::get('/view-protocol-practitioner/{service_id}/{user_id}/{practitioner_id}', [PractitionersController::class, 'ViewProtocol'])->name('view-protocol-practitioner');
+    Route::get('/add-edit-protocol-practitioner/{service_id}/{user_id}/{practitioner_id}', [PractitionersController::class, 'addEditProtocol'])->name('add-edit-protocol-practitioner');
+    Route::get('/edit-protocol-practitioner-view/{service_id}/{user_id}/{practitioner_id}', [PractitionersController::class, 'EditProtocolView'])->name('edit-protocol-practitioner-view');
 
+    Route::post('/edit-protocol', [PractitionersController::class, 'EditProtocol'])->name('edit-protocol');
 
+    Route::post('/view-protocol-practitioner-ajax', [PractitionersController::class, 'getDataProtocolAjax'])->name('view-protocol-practitioner-ajax');
+
+    Route::get('/edit-protocol-view', [PractitionersController::class, 'editProtocolView'])->name('edit-protocol-view');
 
     Route::post('autocomplete', [PractitionersController::class, 'getAutocomplete'])->name('autocomplete');
 

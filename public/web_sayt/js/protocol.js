@@ -22,6 +22,8 @@ function addProduct() {
    addProduct.parentNode.appendChild(productClone);
    $("#protocol__section-product-cont" + j).find('input,textarea,select').val('');
 
+// $('.img-file').attr('id',(Math.floor(Math.random() * (9999))))
+
 }
 
 let addLinkButton = document.getElementById("add-link");

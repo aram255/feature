@@ -71,10 +71,12 @@
               @endif
 
 
-                <!-- In Process -->
+                <!-- Complete -->
 {{--                <div class="my-appointments__complete-process d-none">--}}
             @if($id == 2  and count($Complete)>0)
+
                @foreach($Complete as $InCompleteVal)
+
                  <div class="my-appointments__complete-process">
                     <div class="my-appointments__complete-process-content">
                         <div class="my-appointments__complete-process-content-flex">
@@ -83,7 +85,12 @@
                                     <img class="my-appointments-person__info-img info_imgg" src="{{ asset('web_sayt/img_customer/'.$InCompleteVal->img) }}" alt="">
                                 </div>
                                 <div class="my-appointments-person__info-cont2">
-                                    <div class="my-appointments-person__info-name">{{$InCompleteVal->first_name}} {{$InCompleteVal->last_name}}</div>
+                                    <div class="my-appointments-person__info-name"><a href="{{route('add-edit-protocol-practitioner',[
+                                     app()->getLocale(),
+                                    'user_id'=> $InCompleteVal->user_id,
+                                    'practitioner_id'=>$InCompleteVal->practitioner_id,
+                                    'service_id'=>$InCompleteVal->service_id
+                                    ])}}">{{$InCompleteVal->first_name}} {{$InCompleteVal->last_name}}</a></div>
                                     <div class="my-appointments-person__info-specialist">Acne Specialist &amp; Holistic
                                         nutritionist (CNP)
                                     </div>
@@ -92,9 +99,33 @@
                             </div>
                             <div class="my-appointments-person__complete-process">
                                 <div class="my-appointments-person__complete-process-time">{{$InCompleteVal->duration}} Mins Consultation</div>
-                                <button
-                                    class="my-appointments-person__complete-process-button procces-button btn bg-yellow">
-                                    <a href="{{route('protocol',[app()->getLocale(),'user_id'=>$InCompleteVal->user_id,'service_id'=>$InCompleteVal->service_id])}}">Fill Protocol</a></button>
+                                @php
+                                  $CheckStatusProtocol = $StatusProtocol->where('user_id','=',$InCompleteVal->user_id)->where('service_id','=',$InCompleteVal->service_id);
+                                @endphp
+
+                                    @if((count($CheckStatusProtocol)>0))
+                                        <button
+                                            class="my-appointments-person__complete-process-button procces-button btn bg-yellow">
+                                            <a href="{{route('view-protocol-practitioner',[
+                                     app()->getLocale(),
+                                    'user_id'=>$InCompleteVal->user_id,
+                                    'practitioner_id'=>$InCompleteVal->practitioner_id,
+                                    'service_id'=>$InCompleteVal->service_id
+                                    ])}}
+                                     ">View Protocol</a>
+                                        </button>
+                                    @else
+                                        <button
+                                            class="my-appointments-person__complete-process-button procces-button btn bg-yellow">
+                                            <a href="{{route('add-edit-protocol-practitioner',[
+                                     app()->getLocale(),
+                                    'user_id'=> $InCompleteVal->user_id,
+                                    'practitioner_id'=>$InCompleteVal->practitioner_id,
+                                    'service_id'=>$InCompleteVal->service_id
+                                    ])}}">Fill Protocol</a>
+                                        </button>
+                                    @endif
+
                             </div>
 
                         </div>
@@ -107,9 +138,9 @@
                     {{ $InProcess->links() }}
                 @endif
 
-{{--                @if($id == 2 and count($Complete)>0)--}}
-{{--                    {{ $Complete->links() }}--}}
-{{--                @endif--}}
+                @if($id == 2 and count($Complete)>0)
+                    {{ $Complete->links() }}
+                @endif
 
                 <div class="my-appointments__pagination">
 {{--                    <a class="page-item-sign" href="#">&lt;</a>--}}
