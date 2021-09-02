@@ -440,6 +440,9 @@ a .fa-times {
 .avatar-img img{
     width: 100%;
 }
+.my-appointments__pagination  .page-link {
+    border: 0!important;
+}
 
 @media (max-width: 768px) {
     .profile-practitioner__consultation {

@@ -283,7 +283,7 @@ class PractitionersController extends Controller
                      ->where('zoom_meetings_list.practitioner_id',$request->session()->get('UserID'))
                      ->whereDate("zoom_meetings_list.start", ">=",date('Y-m-d'))
                      ->orderBy('zoom_meetings_list.id','DESC')
-                     ->paginate(5);
+                     ->paginate(1);
 
 
 
@@ -292,7 +292,7 @@ class PractitionersController extends Controller
                      ->where('zoom_meetings_list.practitioner_id',$request->session()->get('UserID'))
                      ->whereDate("zoom_meetings_list.start", "<=",date('Y-m-d'))
                      ->orderBy('zoom_meetings_list.id','DESC')
-                     ->paginate(5);
+                     ->paginate(1);
 
 
             $StatusProtocol = DB::table('protocol_heading')->where('practitioner_id',$request->session()->get('UserID'))->get();
