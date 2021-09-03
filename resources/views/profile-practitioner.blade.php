@@ -53,7 +53,7 @@
                                 <a href="{{route('type-form-practitioner',[app()->getLocale()])}}" class="mb-4 text-black d-block">My Intake Forms</a>
                                 <a target="_blank" href="https://typeform.com/" class="mb-4 text-black d-block">Create Intake Forms</a>
 
-                                <a  class="mb-4 text-black d-block"  data-toggle="modal" data-target="#myProtocolsModal">My Protocols
+                                <a href="#" class="mb-4 text-black d-block"  data-toggle="modal" data-target="#myProtocolsModal">My Protocols
                                 </a>
 
                             </div>
@@ -235,7 +235,7 @@
                     </select>
                 </div>
                 <div class="scrollbar py-4"  id="style-1">
-                    <div class="modal-body force-overflow">
+                    <div class="modal-body force-overflow" style="overflow-y: auto; max-height: 450px">
                         @foreach($Complete as $GetVal)
                         <div class="alert bg-light alert-dismissible fade show" role="alert">
                             <div class="d-flex align-items-center">
