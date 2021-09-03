@@ -11,18 +11,29 @@ function addText() {
 }
 
 let addProductButton = document.getElementById("add-product");
-addProductButton.addEventListener('click', addProduct)
-let j = 0;
+addProductButton.addEventListener('click', addProduct);
+
 
 
 function addProduct() {
+    let j = $('#add-product').attr('data-id');
+    let dataId = j;
+   // console.log('2', j);
+    // alert($('#add-product').attr('data-id'))
+    $('#add-product').attr('data-id', ++dataId);
    let addProduct = document.getElementById('protocol__section-product-cont' + j);
+   console.log(addProduct)
    let productClone = addProduct.cloneNode(true);
    productClone.id = "protocol__section-product-cont" + ++j;
    addProduct.parentNode.appendChild(productClone);
-   $("#protocol__section-product-cont" + j).find('input,textarea,select').val('');
+   $("#protocol__section-product-cont" + j).find('input,textarea,select,img').val('');
+
+
+    $("#protocol__section-product-cont" + j).find('img').attr("src",'http://new-feature/web_sayt/img/protocol-img.svg');
+
    $("#protocol__section-product-cont" + j).find('input').attr('id', 'img-file' + j);
    $("#protocol__section-product-cont" + j).find('label').attr('for', 'img-file' + j);
+
 
 }
 

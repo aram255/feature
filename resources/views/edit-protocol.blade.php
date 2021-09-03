@@ -71,11 +71,11 @@
                                     <div class="protocol__section-title">Product</div>
                                     <div class="protocol__section-product-parent-cont product">
 
-                                   @foreach($ProtocolProduct as $ValProduct)
-                                        <div class="protocol__section-product-cont product_remove" id="protocol__section-product-cont0">
+                                   @foreach($ProtocolProduct as $key => $ValProduct)
+                                        <div class="protocol__section-product-cont product_remove" id="protocol__section-product-cont{{$key}}">
                                             <div class="protocol__section-product-cont-img">
-                                                <input type="file" id="img-file"  name="img[]" >
-                                                <label for="img-file" class="img-file"><img class="upload"  @if($ValProduct->img != null) src="{{ asset('web_sayt/img_protocol/'.$ValProduct->img) }}" @else src="{{ asset('web_sayt/img/protocol-img.svg') }}" @endif
+                                                <input type="file" id="img-file{{$key}}"  name="img[]" >
+                                                <label for="img-file{{$key}}" class="img-file"><img class="upload"  @if($ValProduct->img != null) src="{{ asset('web_sayt/img_protocol/'.$ValProduct->img) }}" @else src="{{ asset('web_sayt/img/protocol-img.svg') }}" @endif
                                                                                              alt=""></label>
                                             </div>
                                             <input type="hidden" name="id_Product[]" value="{{$ValProduct->id}}">
@@ -108,7 +108,7 @@
                                                                                 @endforeach
                                     </div>
 
-                                    <div class="protocol__section-add" id="add-product">
+                                    <div class="protocol__section-add" id="add-product" data-id="0">
                                         <p id="clickme" >Add Another Product<span class="protocol__section-add-icon"> <img
                                                     src="{{ asset('web_sayt/img/add-icon.svg') }}" alt=""></span></p>
                                     </div>

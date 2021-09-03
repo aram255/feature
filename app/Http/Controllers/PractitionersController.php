@@ -655,6 +655,8 @@ class PractitionersController extends Controller
     public function AddProtocol(request $request)
     {
 
+
+
         foreach ($request->text_heading as $ValHeading)
         {
             $Add = new ProtocolHeading;
@@ -667,6 +669,9 @@ class PractitionersController extends Controller
 
         foreach ($request->title_product as $keyProduct => $valProduct)
         {
+
+        if(empty($request->file('img')[$keyProduct]))
+        {
             $input['title_product'] = $valProduct;
             $input['brand']  = $request->brand[$keyProduct];
             $input['dosage'] = $request->dosage[$keyProduct];
@@ -676,8 +681,30 @@ class PractitionersController extends Controller
             $input['user_id']      = $request->user_id;
             $input['service_id']   = $request->service_id;
             $input['practitioner_id'] = session()->get('UserID');
-//            $input['img'] = $request->img[$keyProduct];
             ProtocolProduct::create($input);
+
+        }else{
+//            $request->validate([
+//                'img' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+//            ]);
+
+            $ImgName[$keyProduct] = rand() . '.' . $request->file('img')[$keyProduct]->getClientOriginalExtension();
+            $request->file('img')[$keyProduct]->move(public_path('web_sayt/img_protocol/'), $ImgName[$keyProduct]);
+
+            $input['title_product'] = $valProduct;
+            $input['brand']  = $request->brand[$keyProduct];
+            $input['dosage'] = $request->dosage[$keyProduct];
+            $input['instructions'] = $request->instructions[$keyProduct];
+            $input['product_link'] = $request->product_link[$keyProduct];
+            $input['user_id']      = $request->user_id;
+            $input['service_id']   = $request->service_id;
+            $input['practitioner_id'] = session()->get('UserID');
+            $input['img'] = $ImgName[$keyProduct];
+
+            ProtocolProduct::create($input);
+        }
+
+
         }
 
         foreach ($request->link_title as $keyVal => $valLink)
@@ -763,6 +790,7 @@ class PractitionersController extends Controller
     public function EditProtocol(request $request)
     {
 
+
         foreach($request->text_heading  as $KeyHeading => $ValHeading)
         {
             $EditProtocolHeading = DB::table('protocol_heading')->where('service_id',$request->service_id)->where('user_id',$request->user_id)->where('practitioner_id',session()->get('UserID'))->where('id',$request->id_text_heading[$KeyHeading])->update(['text_heading' => $ValHeading]);
@@ -770,14 +798,33 @@ class PractitionersController extends Controller
 
         foreach($request->id_Product  as $KeyProduct => $ValProduct)
         {
-            $EditProtocolProduct =  $ProtocolProduct = DB::table('protocol_product')->where('service_id',$request->service_id)->where('user_id',$request->user_id)->where('practitioner_id',session()->get('UserID'))->where('id',$ValProduct)
-                ->update([
-                    'title_product' => $request->title_product[$KeyProduct],
-                    'brand' => $request->brand[$KeyProduct],
-                    'dosage' => $request->dosage[$KeyProduct],
-                    'instructions' => $request->instructions[$KeyProduct],
-                    'product_link' => $request->product_link[$KeyProduct]
+            if(empty($request->file('img')[$KeyProduct])) {
+
+                $EditProtocolProduct = $ProtocolProduct = DB::table('protocol_product')->where('service_id', $request->service_id)->where('user_id', $request->user_id)->where('practitioner_id', session()->get('UserID'))->where('id', $ValProduct)
+                    ->update([
+                        'title_product' => $request->title_product[$KeyProduct],
+                        'brand' => $request->brand[$KeyProduct],
+                        'dosage' => $request->dosage[$KeyProduct],
+                        'instructions' => $request->instructions[$KeyProduct],
+                        'product_link' => $request->product_link[$KeyProduct]
+                    ]);
+            }else{
+                $request->validate([
+                    'img.*' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
                 ]);
+                $ImgName[$KeyProduct] = rand() . '.' . $request->file('img')[$KeyProduct]->getClientOriginalExtension();
+                $request->file('img')[$KeyProduct]->move(public_path('web_sayt/img_protocol/'), $ImgName[$KeyProduct]);
+
+                $EditProtocolProduct = $ProtocolProduct = DB::table('protocol_product')->where('service_id', $request->service_id)->where('user_id', $request->user_id)->where('practitioner_id', session()->get('UserID'))->where('id', $ValProduct)
+                    ->update([
+                        'title_product' => $request->title_product[$KeyProduct],
+                        'brand' => $request->brand[$KeyProduct],
+                        'dosage' => $request->dosage[$KeyProduct],
+                        'instructions' => $request->instructions[$KeyProduct],
+                        'product_link' => $request->product_link[$KeyProduct],
+                        'img' => $ImgName[$KeyProduct]
+                    ]);
+            }
         }
 
         foreach($request->link_id  as $Keylink => $ValLink)
@@ -807,24 +854,51 @@ class PractitionersController extends Controller
             }
 
         }
+if(count($request->id_Product)>0) {
 
-        foreach ($request->title_product as $keyProduct => $valProduct)
-        {
-            if(empty($request->id_Product[$keyProduct])) {
 
-                $input['title_product'] = $valProduct;
-                $input['brand'] = $request->brand[$keyProduct];
-                $input['dosage'] = $request->dosage[$keyProduct];
-                $input['instructions'] = $request->instructions[$keyProduct];
-                $input['product_link'] = $request->product_link[$keyProduct];
+//    $request->validate([
+//
+//        'title_product.*' => 'required',
+//        'brand.*' => 'required',
+//        'dosage.*' => 'required',
+//        'instructions.*' => 'required',
+//        'product_link.*' => 'required',
+//        'user_id.*' => 'required',
+//        'service_id.*' => 'required',
+//        'practitioner_id.*' => 'required',
+//    ]);
 
-                $input['user_id'] = $request->user_id;
-                $input['service_id'] = $request->service_id;
-                $input['practitioner_id'] = session()->get('UserID');
-//            $input['img'] = $request->img[$keyProduct];
-                ProtocolProduct::create($input);
+    foreach ($request->title_product as $keyProduct => $valProduct) {
+
+        if (empty($request->id_Product[$keyProduct])) {
+
+            $input['title_product'] = $valProduct;
+            $input['brand'] = $request->brand[$keyProduct];
+            $input['dosage'] = $request->dosage[$keyProduct];
+            $input['instructions'] = $request->instructions[$keyProduct];
+            $input['product_link'] = $request->product_link[$keyProduct];
+            $input['user_id'] = $request->user_id;
+            $input['service_id'] = $request->service_id;
+            $input['practitioner_id'] = session()->get('UserID');
+            if(!empty($ImgName[$keyProduct]))
+            {
+//                $file_type = $_FILES['img'];
+//                if($file_type != "jpg" || $file_type != "jpeg"){
+
+                    $ImgNames[$keyProduct] = rand() . '.' . $request->file('img')[$keyProduct]->getClientOriginalExtension();
+                   // $request->file('img')[$keyProduct]->move(public_path('web_sayt/img_protocol/'), $ImgName[$keyProduct]);
+                    move_uploaded_file($_FILES["img"]["tmp_name"][$keyProduct], public_path('web_sayt/img_protocol/') . $ImgNames[$keyProduct]);
+                    $input['img'] = $ImgName[$keyProduct];
+
+//                }
             }
+
+            ProtocolProduct::create($input);
+
         }
+    }
+}
 
         foreach ($request->link_id as $keyVal => $valLink)
         {
@@ -840,10 +914,9 @@ class PractitionersController extends Controller
                 ProtocolLink::create($inp);
             }
 
-
         }
 
-        return back()->with('status','Your data has changed.');
+      return back()->with('status','Your data has changed.');
 
 
     }

@@ -83,7 +83,7 @@
                                     </div>
 {{--                                    @endforeach--}}
                                 </div>
-                                <div class="protocol__section-add" id="add-text">
+                                <div class="protocol__section-add" id="add-text" >
                                     <p>Add Another Section<span class="protocol__section-add-icon"> <img src="{{ asset('web_sayt/img/add-icon.svg') }}"
                                                                                                          alt=""></span></p>
                                 </div>
@@ -129,7 +129,7 @@
 {{--                                        @endforeach--}}
                                     </div>
 
-                                    <div class="protocol__section-add" id="add-product">
+                                    <div class="protocol__section-add" id="add-product" data-id="0">
                                         <p id="clickme" >Add Another Product<span class="protocol__section-add-icon"> <img
                                                     src="{{ asset('web_sayt/img/add-icon.svg') }}" alt=""></span></p>
                                     </div>
@@ -158,7 +158,7 @@
                                         </div>
 {{--                                        @endforeach--}}
                                     </div>
-                                    <div class="protocol__section-add" id="add-link" data-count="">
+                                    <div class="protocol__section-add" id="add-link" >
                                         <p>Add Another Link<span class="protocol__section-add-icon"> <img src="{{ asset('web_sayt/img/add-icon.svg') }}"
                                                                                                           alt=""></span></p>
                                     </div>
@@ -234,20 +234,13 @@
 
                             if(v_product.img == '')
                             {
-                            {{--    var buttonn = document.getElementById("clickme");--}}
-                            {{--    var countt = v_product.id;--}}
-                            {{--    buttonn.onclick = function() {--}}
-                            {{--        countt += 1;--}}
-                            {{--        var  st = 'k'+countt;--}}
-                            {{--        alert(st)--}}
 
-                            {{--    }--}}
                                     $('#clickme').click(function () {
                                 var g  = (Math.floor(Math.random() * (9999)))
 
                             })
-                                $('#add-product').attr('data-count',k_product)
-                            //var g  = (Math.floor(Math.random() * (9999)))
+                                // $('#add-product').attr('data-id', 222);
+
                                 $('.product').append("<div class='protocol__section-product-cont product_remove' id='protocol__section-product-cont"+k_product+"'> <div class='protocol__section-product-cont-img'>"
                                 +"<input type='file' id='img-file"+k_product+"'  name='img[]' >"
                                 +"<label for='img-file"+k_product+"' class='img-file'><img class='upload'  src='{{ asset('web_sayt/img/protocol-img.svg') }}'></label>"
@@ -280,17 +273,8 @@
                             +"</div>");
 
                             }else{
-                                // var button = document.getElementById("clickme");
-                                //     count = k_product;
-                                // button.onclick = function() {
-                                //     count += 1;
-                                //     var  s = 'k'+count;
-                                //     alert(s)
-                                //
-                                // }
 
-
-
+                                $('#add-product').attr('data-id', k_product);
 
                                 $('.product').append("<div class='protocol__section-product-cont product_remove' id='protocol__section-product-cont"+k_product+"'> <div class='protocol__section-product-cont-img'>"
                                     +"<input class='idd_c' type='file' id='img-file"+k_product+"'  name='img[]' >"
