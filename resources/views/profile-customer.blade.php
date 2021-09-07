@@ -41,6 +41,7 @@
                                 <span class="person-customer-name">{{auth()->user()->first_name }} {{auth()->user()->last_name }}</span>
                                 <span class="edit-pen"><a href="{{route('edit-profile-customer',[app()->getLocale()])}}"><img src="{{ asset('web_sayt/img/edit-pen.svg') }}" alt=""></a></span>
                             </div>
+                            <div class="person-customer-my-pay"><a href="{{route('my-appointments-customer',[app()->getLocale(),'id'=>1])}}">My Appointments</a></div>
                             <div class="person-customer-my-pay">My payments</div>
                             <div class="person-customer__payments">
                                 <div class="person-customer__payments-phone d-none">

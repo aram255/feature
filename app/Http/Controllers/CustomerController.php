@@ -9,6 +9,7 @@ use App\Models\ServiceSessionModel;
 use App\Models\ServicesModel;
 use App\Models\TypeFormModel;
 use App\Models\FavoriteModel;
+use App\Models\ProtocolAnotherModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
@@ -218,6 +219,73 @@ class CustomerController extends Controller
 
             return response()->json($DeleteFavorite);
         }
+
+    }
+
+    public function myAppointmentsCustomer(request $request,$lang,$id)
+    {
+
+        //  dd(date('Y-m-d H:i:s'));
+
+        $InProcess = DB::table('practitioner')
+            ->join('zoom_meetings_list', 'practitioner.id', 'zoom_meetings_list.practitioner_id')
+            ->where('zoom_meetings_list.user_id',Auth::id())
+            ->whereDate("zoom_meetings_list.start", ">=",date('Y-m-d'))
+            ->orderBy('zoom_meetings_list.id','DESC')
+            ->paginate(5);
+
+
+
+
+        $Complete  = DB::table('practitioner')
+            ->join('zoom_meetings_list', 'practitioner.id', 'zoom_meetings_list.practitioner_id')
+            ->where('zoom_meetings_list.user_id',Auth::id())
+            ->whereDate("zoom_meetings_list.start", "<=",date('Y-m-d'))
+            ->orderBy('zoom_meetings_list.id','DESC')
+            ->paginate(5);
+
+
+        $StatusProtocol = DB::table('protocol_heading')->where('user_id',Auth::id())->get();
+
+        return view('my-appointments-customer',compact('InProcess','Complete','id','StatusProtocol'));
+    }
+
+    public function ViewProtocol($lang,$serviceID,$userID,$practitionerID)
+    {
+
+        $ProtocolHeading = DB::table('protocol_heading')->where('service_id',$serviceID)->where('user_id',$userID)->where('practitioner_id',$practitionerID)->get();
+        $ProtocolProduct = DB::table('protocol_product')->where('service_id',$serviceID)->where('user_id',$userID)->where('practitioner_id',$practitionerID)->get();
+        $ProtocolLink    = DB::table('protocol_link')->where('service_id',$serviceID)->where('user_id',$userID)->where('practitioner_id',$practitionerID)->get();
+        $ProtocolAnother = DB::table('protocol_another')->where('service_id',$serviceID)->where('user_id',$userID)->where('practitioner_id',$practitionerID)->get();
+        $Services = ServicesModel::where('id',$serviceID)->where('practitioner_id',$practitionerID)->first();
+
+
+
+
+        $GetProtocol   = DB::table('protocol_heading')
+            ->select('service_id','user_id')
+            ->where('practitioner_id',$practitionerID)
+            ->groupBy('service_id','user_id')
+            ->get();
+
+
+        return view('protocol-view-customer',compact('ProtocolHeading','ProtocolProduct','ProtocolLink','GetProtocol','ProtocolAnother','Services'));
+    }
+
+    public function addSelectProtocol(request $request, $lang,$practitionerID,$serviceID)
+    {
+
+        foreach ($request->another_id as $key => $value) {
+
+            if (isset($request->another[$key])) {
+                $Edit = DB::table('protocol_another')->where('service_id', $serviceID)->where('user_id', Auth::id())->where('practitioner_id', $practitionerID)->where('id', $value)->update(['selected' => $request->another[$key]]);
+            } else {
+                $Edit = DB::table('protocol_another')->where('service_id', $serviceID)->where('user_id', Auth::id())->where('practitioner_id', $practitionerID)->where('id', $request->another_id[$key])->update(['selected' => 'no']);
+            }
+        }
+
+        return back()->with('status','Your request has been completed.');
+
 
     }
 }

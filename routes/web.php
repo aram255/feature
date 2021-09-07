@@ -99,6 +99,11 @@ Route::group(['prefix' => '{locale?}','where' => ['locale' => '[a-zA-Z]{2}']], f
     Route::post('/edit-profile-customer-post', [CustomerController::class, 'editProfileCustmerPost'])->name('edit-profile-customer-post');
     Route::post('/add-favorite', [CustomerController::class, 'addFavorite'])->name('add-favorite');
 
+    // Protocol
+    Route::get('/my-appointments-customer/{id}', [CustomerController::class, 'myAppointmentsCustomer'])->name('my-appointments-customer');
+    Route::get('/view-protocol-customer/{service_id}/{user_id}/{practitioner_id}', [CustomerController::class, 'ViewProtocol'])->name('view-protocol-customer');
+    Route::post('/add-select-another/{practitioner_id}/{service_id}', [CustomerController::class, 'addSelectProtocol'])->name('add-select-another');
+
 
     // ZOOM
     Route::match(['get', 'post'],'/zoom', [ZoomController::class, 'index'])->name('meetings-list-zoom');
