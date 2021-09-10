@@ -444,6 +444,54 @@ a .fa-times {
     border: 0!important;
 }
 
+
+/*MY INTAKE FORM*/
+.h2_title {
+    font: normal normal 600 40px/49px Montserrat;
+    color: #462847;
+}
+.btn-yellow {
+    background: #FED638 0 0 no-repeat padding-box;
+    box-shadow: 0 0 6px #00000029;
+    border-radius: 10px;
+    height: 42px;
+    font: normal normal 500 18px/22px Montserrat;
+    color: #462847;
+    display: flex;
+    max-width: fit-content;
+    align-items: center;
+}
+.btn-light-blue {
+    background: #8BA9EE 0 0 no-repeat padding-box;
+    box-shadow: 0 0 6px #00000029;
+    border-radius: 10px;
+    height: 42px;
+    font: normal normal 500 18px/22px Montserrat;
+    color: #462847;
+    display: flex;
+    max-width: fit-content;
+    align-items: center;
+}
+
+.table td a {
+    font: normal normal 500 16px/19px Montserrat;
+    color: #462847;
+}
+.table th {
+    font: normal normal 600 18px/22px Montserrat;
+    color: #462847;
+}
+.table td,
+.table th {
+    padding: 0.75rem;
+    vertical-align: middle;
+    border-top: 1px solid #EAF2FB;
+}
+.table thead th {
+    vertical-align: bottom;
+    border-bottom: 1px solid #EAF2FB;
+}
+
 @media (max-width: 768px) {
     .profile-practitioner__consultation {
         padding-left: 0;

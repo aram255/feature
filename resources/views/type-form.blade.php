@@ -33,24 +33,23 @@
     @endif
 
      <section>
-             <div class="container">
-                        <div class="card mb-3">
-                            <h2 style="text-align: center;">My Intake Forms  </h2>
+             <div class="container pb-5">
+                 <h2 class="h2_title my-4">My Intake Forms  </h2>
+                 <div class="card mb-5" style="border: 1px solid #eaf2fb;">
                             <form action="{{route('delete-type-form-practitioner',[app()->getLocale()])}}" method="post">
                                 @if(session()->get('UserID'))
                                 {{csrf_field()}}
-                                <div class="card-header py-3">
-                                    <button class="btn btn-primary"  data-toggle="modal" data-target="#add" type="button">Add</button>
-                                    <button class="btn btn-danger"  type="submit">Remove</button>
+                                <div class="card-header border-bottom-0 py-3 d-flex">
+                                    <button class="btn-yellow px-2 mr-3"  data-toggle="modal" data-target="#add" type="button">Add</button>
+                                    <button class="btn-light-blue px-3"  type="submit">Remove</button>
                                 </div>
                                 @endif
                             {{--  Edit category title--}}
-                            <div class="card-body">
+                            <div class="card-body p-0">
                                 <div class="table-responsive">
-                                    <table class="table table-bordered"  width="100%" cellspacing="0">
-                                        <thead>
+                                    <table class="table border-0 mb-0"  width="100%" cellspacing="0">
+                                        <thead style="background-color: #EAF2FB">
                                         <tr>
-
                                             @if(session()->get('UserID'))
                                             <th style="width: 3%;"><input id="checkAll" class="group-checkable sb-checkbox" type="checkbox" ></th>
                                             @endif
@@ -67,13 +66,14 @@
                                             @if(session()->get('UserID'))
                                             <td><input class="group-checkable sb-checkbox" type="checkbox" name="form_id[]" value="{{$val->id}}"></td>
                                             <td><a href="{{route('type-form-practitioner-view',[app()->getLocale(),'id'=>$val->id])}}">{{$val->title}}</a></td>
-                                            <td><a data-toggle="modal" data-target="#edit{{$val->id}}" href="javascript:;"  class="btn btn-success item_edit btn-sm btn-circle">Edit</a></td>
+                                            <td><a data-toggle="modal" data-target="#edit{{$val->id}}" href="javascript:;"  class="btn-light-blue px-4 item_edit btn-sm btn-circle">Edit</a></td>
                                             @endif
                                             @if(!session()->get('UserID'))
                                             <td><a href="{{route('view-type-form-practitioner-view',[app()->getLocale(),'id'=>$val->id])}}">{{$val->title}}</a></td>
                                             @endif
                                             @if(session()->get('UserID'))
-                                            <td><a href="{{route('default-type-form-practitioner-view',[app()->getLocale(),'id'=>$val->id])}}"><button type="button" class="btn @if($val->defaultt == 1) btn-danger @else btn-primary @endif">Default</button></a></td>
+                                            <td><a href="{{route('default-type-form-practitioner-view',[app()->getLocale(),'id'=>$val->id])}}">
+                                                    <button type="button" class="@if($val->defaultt == 1) btn-yellow px-3 @else btn-yellow px-3 @endif">Default</button></a></td>
                                             @endif
                                         </tr>
                                          @endforeach
