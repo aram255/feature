@@ -30,7 +30,7 @@
             font-size: 16px;
             line-height: 19px;
             color: #ACACAC;
-         } 
+         }
       }
       &-title {
          font-weight: 600;
@@ -55,10 +55,10 @@
             border-radius: 32px;
             margin-bottom: 37px;
             transition: all 0.5s;
-            
-            
+
+
             &-img {
-               
+
                width: 126px;
                height: 124px;
                background-color: $white;
@@ -89,7 +89,7 @@
                   & input {
                      left: 202px;
                      width: 311px;
-                     
+
                      margin-left: 102px;
                   }
                }
@@ -97,11 +97,11 @@
                   background-color: transparent;
                   border: 0;
                   border-bottom: 1px solid #98C6F9;
-                  
+
                }
 
             }
-            
+
          }
       }
       &-link {
@@ -114,7 +114,7 @@
             margin-bottom: 35px;
 
             &-title {
-               
+
 
                &-item {
                   display: flex;
@@ -122,7 +122,7 @@
                   justify-content: space-between;
                   padding-bottom: 9px;
 
-                  
+
 
                   font-weight: 500;
                   font-size: 16px;
@@ -144,7 +144,7 @@
                }
 
             }
-         
+
 
          }
       }
@@ -162,14 +162,14 @@
       }
 
    }
-   
+
 }
 .protocol__section-add {
    font-weight: 600;
    font-size: 20px;
    line-height: 24px;
    letter-spacing: 0px;
-   color: $light-blue;
+   color: #8BA9EE;
    cursor: pointer;
    &-icon {
       padding-left: 19.72px;
@@ -184,6 +184,7 @@
    }
 
 }
+
 
 // Protocol View
 
@@ -216,7 +217,7 @@
     &-text-cont {
        display: flex;
        margin-bottom: 29px;
-       
+
 
        &-p {
           width: 75%;
@@ -230,9 +231,9 @@
           margin-right: 23px;
 
        }
-       
+
     }
-    
+
 
 }
 .protocol__section-product-link-view {
@@ -245,7 +246,7 @@
    }
 
    .protocol__section-link {
-       margin-top: 0px; 
+       margin-top: 0px;
    }
    .protocol__section-link-title {
       font-weight: 600;
@@ -264,7 +265,7 @@
       background: #F5F9FE 0% 0% no-repeat padding-box;
       border-radius: 32px;
       margin-bottom: 35px;
-      
+
 
       &-item {
          & .link-photo {
@@ -272,7 +273,7 @@
             height: 152px;
          }
          &-text {
-            
+
             padding: 13px 0px 18px 22px;
             & .link-text {
                font-weight: 600;
@@ -294,8 +295,8 @@
             }
 
          }
-         
-         
+
+
       }
    }
    .protocol__section-product-view {
@@ -332,7 +333,7 @@
                line-height: 19px;
 
                .product-color {
-                  color: $light-blue
+                  color: #8BA9EE
                }
 
             }
@@ -363,7 +364,7 @@
             }
 
             &-td {
-               color: $light-blue;
+               color: #8BA9EE;
                padding-left: 40px;
             }
          }

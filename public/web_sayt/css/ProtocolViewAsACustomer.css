@@ -24,7 +24,7 @@
 }
 .my-plan-background {
     margin-top: -25px;
-    background-image: url(../img/protocol-img/background2.svg);
+    background-image: url("../img/protocol-img/background2.svg");
     height: 503px;
     width: 100%;
     background-size: cover;
@@ -77,17 +77,17 @@
     left: -42px;
     width: 336px;
     height: 234px;
-    background-image: url("../img/protocol-img/Rectangle\ 3665.svg");
+    background-image: url("../img/protocol-img/Rectangle 3665.svg");
     background-repeat: no-repeat;
 }
 .content::after {
     content:"";
-    position: absolute;   
+    position: absolute;
     top: 40px;
     right: -60px;
     width: 311px;
     height: 397px;
-    background-image: url("../img/protocol-img/Rectangle\ 3664.svg");
+    background-image: url("../img/protocol-img/Rectangle 3664.svg");
     background-repeat: no-repeat;
 }
 .follow-up-btn {
@@ -144,7 +144,7 @@
     margin: 0 auto;
 }
 .product-items::before {
-    content: "";    
+    content: "";
     z-index: -1;
     position: absolute;
     left: 40px;
@@ -154,10 +154,10 @@
     border-radius: 15px;
     background-repeat: no-repeat;
     background-size: 67%;
-    background-image:url("../img/protocol-img/Rectangle\ 3674.svg")
+    background-image:url("../img/protocol-img/Rectangle 3674.svg")
 }
 .product-items::after {
-    content: "";    
+    content: "";
     z-index: -1;
     position: absolute;
     right: 0;
@@ -167,7 +167,7 @@
     border-radius: 15px;
     background-repeat: no-repeat;
     background-size: 67%;
-    background-image:url("../img/protocol-img/Rectangle\ 3673.svg")
+    background-image:url("../img/protocol-img/Rectangle 3673.svg")
 }
 .product-image {
     width: 103px;
@@ -200,13 +200,13 @@
     background: #FFFFFF 0% 0% no-repeat padding-box;
     box-shadow: 0px 0px 6px #00000029;
     border-bottom: 2px solid #FED638;
-    border-radius: 18px;  
+    border-radius: 18px;
 }
 .product-image2 {
     width: 120px;
     height: 92px;
 }
-.item2 {    
+.item2 {
     position: relative;
 }
 .item2 .form-control{
@@ -233,9 +233,9 @@
     height: 145px;
     background: #D9EAFD 0% 0% no-repeat padding-box;
     box-shadow: 0 2px 0px #8BA9EE;
-    border-radius: 18px; 
+    border-radius: 18px;
 }
-.item3 {    
+.item3 {
     position: relative;
 }
 .item3 .form-control{
@@ -286,8 +286,8 @@
 .card-btn {
     box-shadow: 0 0 0;
 }
-.card-bottom1::before{    
-    content: "";    
+.card-bottom1::before{
+    content: "";
     z-index: -1;
     position: absolute;
     right: 25px;
@@ -296,17 +296,17 @@
     height: 190px;
     border-radius: 15px;
     background-repeat: no-repeat;
-    background-image:url("../img/protocol-img/Rectangle\ 3680.svg")
+    background-image:url("../img/protocol-img/Rectangle 3680.svg")
 
 }
 .card-bottom2::after {
-    content: ""; 
+    content: "";
     z-index: -1;
     position: absolute;
     left: 62px;
     top: 79px;
     width: 220px;
-    height: 150px;    
+    height: 150px;
     border-radius: 15px;
     background-repeat: no-repeat;
     background-image: url("../img/protocol-img/Rectangle2.svg");
@@ -320,4 +320,8 @@
     .card-bottom2::after {
       display: none;
     }
+}
+h4 {
+    font-size: 1.5rem!important;
+    font-weight: bold!important;
 }

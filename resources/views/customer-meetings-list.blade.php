@@ -123,10 +123,10 @@
             </div>
     </section>
 @endsection
-{{--<form method="post" action="{{route('update-zoom-meeting',[app()->getLocale()])}}">--}}
-{{--    {{csrf_field()}}--}}
-{{--    <input type="submit">--}}
-{{--</form>--}}
+<form method="post" action="{{route('update-zoom-meeting',[app()->getLocale()])}}">
+    {{csrf_field()}}
+    <input type="submit">
+</form>
 @section('style')
 
 

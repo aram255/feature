@@ -48,3 +48,16 @@ function addLink() {
    $("#protocol__section-link-cont" + k).find('input,textarea,select').val('');
 
 }
+
+let addAnotherButton = document.getElementById("add-text-another");
+addAnotherButton.addEventListener('click', addTextAnother)
+let c = 0
+function addTextAnother() {
+
+    let addTextAnother = document.getElementById('protocol__section-heading-text-another' + c);
+    let textCloneAnother = addTextAnother.cloneNode(true);
+    textCloneAnother.id = "protocol__section-heading-text-another" + ++c;
+    addTextAnother.parentNode.appendChild(textCloneAnother);
+    $("#protocol__section-heading-text-another" + c).find('input,textarea,select').val('');
+
+}

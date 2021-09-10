@@ -2,6 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use \Firebase\JWT\JWT;
+use GuzzleHttp\Client;
+use GuzzleHttp\RequestOptions;
+
 use App\Models\Card;
 use App\Models\CustomerModel;
 use App\Models\ServiceDescriptionModel;
@@ -10,9 +14,11 @@ use App\Models\ServicesModel;
 use App\Models\TypeFormModel;
 use App\Models\FavoriteModel;
 use App\Models\ProtocolAnotherModel;
+use App\Models\ZoomModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
+use DateTime;
 use File;
 use Hash;
 use DB;
@@ -235,6 +241,9 @@ class CustomerController extends Controller
             ->paginate(5);
 
 
+        $TypeForm = DB::table('type_form_practitioner')->where('defaultt',1)->get();
+
+
 
 
         $Complete  = DB::table('practitioner')
@@ -247,8 +256,48 @@ class CustomerController extends Controller
 
         $StatusProtocol = DB::table('protocol_heading')->where('user_id',Auth::id())->get();
 
-        return view('my-appointments-customer',compact('InProcess','Complete','id','StatusProtocol'));
+//        $a  = Carbon::now()->add('2021-08-27');
+//        dd($a);
+//        $dateTime = date('m/d/Y');
+//        $h =  Carbon::createFromFormat('Y-m-d', $dateTime)->format('m/d/Y');
+        Carbon::createFromFormat('m/d/Y', '08/31/2021')->format('m/d/Y');
+
+
+//        $now = Carbon::now();
+//        $weekStartDate = $now->startOfWeek()->format('Y-m-d H:i');
+//        $weekEndDate = $now->endOfWeek()->format('Y-m-d H:i');
+//
+//
+//        $a  =  $weekStartDate - $weekEndDate;
+//
+//        dd($a);
+
+//        $current_week = ZoomModel::whereBetween('start', [Carbon::now()->startOfWeek(), Carbon::now()->endOfWeek()])->get();
+//        dd($current_week);
+
+        function week_between_two_dates($date1, $date2)
+        {
+            $first = DateTime::createFromFormat('m/d/Y', $date1);
+            $second = DateTime::createFromFormat('m/d/Y', $date2);
+            if($date1 > $date2) return week_between_two_dates($date2, $date1);
+            return floor($first->diff($second)->days/7);
+        }
+
+        $StartDate = Carbon::createFromFormat('m/d/Y', '08/31/2021')->format('m/d/Y');
+        $LiveDate = Carbon::now()->format('m/d/Y');
+        week_between_two_dates($StartDate, $LiveDate);
+
+
+        return view('my-appointments-customer',compact('InProcess','Complete','id','StatusProtocol','TypeForm'));
     }
+
+      public  function week_between_two_dates($date1, $date2)
+      {
+            $first = DateTime::createFromFormat('m/d/Y', $date1);
+            $second = DateTime::createFromFormat('m/d/Y', $date2);
+            if($date1 > $date2) return week_between_two_dates($date2, $date1);
+            return floor($first->diff($second)->days/7);
+      }
 
     public function ViewProtocol($lang,$serviceID,$userID,$practitionerID)
     {
@@ -259,6 +308,17 @@ class CustomerController extends Controller
         $ProtocolAnother = DB::table('protocol_another')->where('service_id',$serviceID)->where('user_id',$userID)->where('practitioner_id',$practitionerID)->get();
         $Services = ServicesModel::where('id',$serviceID)->where('practitioner_id',$practitionerID)->first();
 
+        $CheckWeek = ZoomModel::where('service_id',$serviceID)->where('practitioner_id',$practitionerID)->where('user_id',Auth::id())->first();
+
+        // Get Week count
+        $StartDate = Carbon::createFromFormat('Y-m-d H:i:s', $CheckWeek->start)->format('m/d/Y');
+        $LiveDate = Carbon::now()->format('m/d/Y');
+        $Week =  $this->week_between_two_dates($StartDate, $LiveDate);
+
+        $ProtocolCheckSelected = DB::table('protocol_another')->where('service_id',$serviceID)->where('user_id',$userID)->where('practitioner_id',$practitionerID)->whereNull('selected')->get();
+
+        $CheckCountSelected = count($ProtocolCheckSelected);
+
 
 
 
@@ -268,8 +328,11 @@ class CustomerController extends Controller
             ->groupBy('service_id','user_id')
             ->get();
 
+        $Practitioner = DB::table('practitioner')->where('id',$practitionerID)->first();
 
-        return view('protocol-view-customer',compact('ProtocolHeading','ProtocolProduct','ProtocolLink','GetProtocol','ProtocolAnother','Services'));
+
+
+        return view('protocol-view-customer',compact('ProtocolHeading','ProtocolProduct','ProtocolLink','GetProtocol','ProtocolAnother','Services','Week','CheckCountSelected','Practitioner'));
     }
 
     public function addSelectProtocol(request $request, $lang,$practitionerID,$serviceID)

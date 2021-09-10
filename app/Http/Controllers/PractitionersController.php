@@ -24,6 +24,7 @@ use Illuminate\Support\Carbon;
 use App\Models\ProtocolHeading;
 use App\Models\ProtocolProduct;
 use App\Models\ProtocolLink;
+use App\Models\ProtocolAnotherModel;
 use Hash;
 use File;
 
@@ -657,6 +658,17 @@ class PractitionersController extends Controller
 
 
 
+        foreach ($request->another as $ValAnother)
+        {
+            $Add = new ProtocolAnotherModel;
+            $Add->name = $ValAnother;
+            $Add->user_id = $request->user_id;
+            $Add->service_id = $request->service_id;
+
+            $Add->practitioner_id = session()->get('UserID');
+            $Add->save();
+        }
+
         foreach ($request->text_heading as $ValHeading)
         {
             $Add = new ProtocolHeading;
@@ -673,9 +685,9 @@ class PractitionersController extends Controller
         if(empty($request->file('img')[$keyProduct]))
         {
             $input['title_product'] = $valProduct;
-            $input['brand']  = $request->brand[$keyProduct];
-            $input['dosage'] = $request->dosage[$keyProduct];
-            $input['instructions'] = $request->instructions[$keyProduct];
+           // $input['brand']  = $request->brand[$keyProduct];
+           // $input['dosage'] = $request->dosage[$keyProduct];
+           // $input['instructions'] = $request->instructions[$keyProduct];
             $input['product_link'] = $request->product_link[$keyProduct];
 
             $input['user_id']      = $request->user_id;
@@ -692,9 +704,9 @@ class PractitionersController extends Controller
             $request->file('img')[$keyProduct]->move(public_path('web_sayt/img_protocol/'), $ImgName[$keyProduct]);
 
             $input['title_product'] = $valProduct;
-            $input['brand']  = $request->brand[$keyProduct];
-            $input['dosage'] = $request->dosage[$keyProduct];
-            $input['instructions'] = $request->instructions[$keyProduct];
+           // $input['brand']  = $request->brand[$keyProduct];
+           // $input['dosage'] = $request->dosage[$keyProduct];
+          //  $input['instructions'] = $request->instructions[$keyProduct];
             $input['product_link'] = $request->product_link[$keyProduct];
             $input['user_id']      = $request->user_id;
             $input['service_id']   = $request->service_id;
@@ -711,7 +723,7 @@ class PractitionersController extends Controller
         {
             $inp['link_title']   = $valLink;
             $inp['link_link']    = $request->link_link[$keyVal];
-            $inp['iframe']    = $request->iframe[$keyVal];
+           // $inp['iframe']    = $request->iframe[$keyVal];
             $inp['user_id']      = $request->user_id;
             $inp['service_id']   = $request->service_id;
             $inp['practitioner_id'] = session()->get('UserID');
@@ -803,9 +815,9 @@ class PractitionersController extends Controller
                 $EditProtocolProduct = $ProtocolProduct = DB::table('protocol_product')->where('service_id', $request->service_id)->where('user_id', $request->user_id)->where('practitioner_id', session()->get('UserID'))->where('id', $ValProduct)
                     ->update([
                         'title_product' => $request->title_product[$KeyProduct],
-                        'brand' => $request->brand[$KeyProduct],
-                        'dosage' => $request->dosage[$KeyProduct],
-                        'instructions' => $request->instructions[$KeyProduct],
+                        //'brand' => $request->brand[$KeyProduct],
+                        //'dosage' => $request->dosage[$KeyProduct],
+                       // 'instructions' => $request->instructions[$KeyProduct],
                         'product_link' => $request->product_link[$KeyProduct]
                     ]);
             }else{
@@ -818,9 +830,9 @@ class PractitionersController extends Controller
                 $EditProtocolProduct = $ProtocolProduct = DB::table('protocol_product')->where('service_id', $request->service_id)->where('user_id', $request->user_id)->where('practitioner_id', session()->get('UserID'))->where('id', $ValProduct)
                     ->update([
                         'title_product' => $request->title_product[$KeyProduct],
-                        'brand' => $request->brand[$KeyProduct],
-                        'dosage' => $request->dosage[$KeyProduct],
-                        'instructions' => $request->instructions[$KeyProduct],
+                        //'brand' => $request->brand[$KeyProduct],
+                        //'dosage' => $request->dosage[$KeyProduct],
+                        //'instructions' => $request->instructions[$KeyProduct],
                         'product_link' => $request->product_link[$KeyProduct],
                         'img' => $ImgName[$KeyProduct]
                     ]);
@@ -832,14 +844,16 @@ class PractitionersController extends Controller
             $EditProtocolLink = DB::table('protocol_link')->where('service_id',$request->service_id)->where('user_id',$request->user_id)->where('practitioner_id',session()->get('UserID'))->where('id',$ValLink)
                 ->update([
                     'link_title' => $request->link_title[$Keylink],
-                    'link_link'  => $request->link_link[$Keylink],
-                    'iframe'     => $request->iframe[$Keylink]
+                    'link_link'  => $request->link_link[$Keylink]
+                   // 'iframe'     => $request->iframe[$Keylink]
                 ]);
         }
 
 
 
         // Insert
+
+
         foreach ($request->text_heading as $keyH => $ValHeading)
         {
 
@@ -874,9 +888,9 @@ if(count($request->id_Product)>0) {
         if (empty($request->id_Product[$keyProduct])) {
 
             $input['title_product'] = $valProduct;
-            $input['brand'] = $request->brand[$keyProduct];
-            $input['dosage'] = $request->dosage[$keyProduct];
-            $input['instructions'] = $request->instructions[$keyProduct];
+           // $input['brand'] = $request->brand[$keyProduct];
+           // $input['dosage'] = $request->dosage[$keyProduct];
+           // $input['instructions'] = $request->instructions[$keyProduct];
             $input['product_link'] = $request->product_link[$keyProduct];
             $input['user_id'] = $request->user_id;
             $input['service_id'] = $request->service_id;
@@ -906,7 +920,7 @@ if(count($request->id_Product)>0) {
             {
                 $inp['link_title'] = $request->link_title[$keyVal];;
                 $inp['link_link'] = $request->link_link[$keyVal];
-                $inp['iframe'] = $request->iframe[$keyVal];
+                //$inp['iframe'] = $request->iframe[$keyVal];
                 $inp['user_id'] = $request->user_id;
                 $inp['service_id'] = $request->service_id;
                 $inp['practitioner_id'] = session()->get('UserID');
@@ -928,8 +942,9 @@ if(count($request->id_Product)>0) {
         $ProtocolHeading = DB::table('protocol_heading')->where('service_id',$request->service_id)->where('practitioner_id',session()->get('UserID'))->get();
         $ProtocolProduct = DB::table('protocol_product')->where('service_id',$request->service_id)->where('practitioner_id',session()->get('UserID'))->get();
         $ProtocolLink    = DB::table('protocol_link')->where('service_id',$request->service_id)->where('practitioner_id',session()->get('UserID'))->get();
+        $ProtocolAnother = DB::table('protocol_another')->where('service_id',$request->service_id)->where('practitioner_id',session()->get('UserID'))->get();
 
-        return response()->json(['ProtocolHeading' => $ProtocolHeading, 'ProtocolProduct' => $ProtocolProduct, 'ProtocolLink' => $ProtocolLink]);
+        return response()->json(['ProtocolHeading' => $ProtocolHeading, 'ProtocolProduct' => $ProtocolProduct, 'ProtocolLink' => $ProtocolLink, 'ProtocolAnother' => $ProtocolAnother]);
     }
 
 

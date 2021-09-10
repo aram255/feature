@@ -10,5 +10,5 @@ class ProtocolAnotherModel extends Model
     use HasFactory;
 
     protected $table = 'protocol_another';
-    //public    $timestamps = false;
+    public    $timestamps = false;
 }

@@ -312,6 +312,7 @@
                                     console.log(data)
                                 },
                                 error: function(returnval) {
+                                    console.log(returnval.pp)
                                     alert('Your appointment has not been created');
                                 }
                             });

@@ -5,6 +5,7 @@
     <link rel="stylesheet" href="{{ asset('web_sayt/css/bootstrap/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('web_sayt/css/css/main.css') }}">
     <link rel="stylesheet" href="{{ asset('web_sayt/css/service.css') }}">
+
     <style>
         .my-appointments-person-img{
             display: flex;
@@ -16,7 +17,10 @@
             justify-content: center;
         }
         .info_imgg{
-            width: 100%;
+            /*width: 100%;*/
+            object-fit: cover;
+            width: 150px;
+            height: 150px;
         }
     </style>
 @endsection
@@ -60,8 +64,11 @@
                                     <div class="my-appointments-person__complete-process">
                                         <div class="my-appointments-person__complete-process-time">{{$InProcessVal->duration}} Mins Consultation</div>
                                         <div class="my-appointments-person__complete-process-session"><a target="_blank" href="{{$InProcessVal->join_url}}">Join session</a></div>
-                                        <button class="my-appointments-person__complete-process-button btn bg-yellow">Fill Intake
-                                            Form</button>
+                                       @foreach( $TypeForm->where('practitioner_id',1) as $valTypeForm)
+                                        <button class="my-appointments-person__complete-process-button btn bg-yellow"><a
+                                                href="{{route('customer-type-form-practitioner-view',[app()->getLocale(), 'id' => $valTypeForm->id])}}">Fill Intake Form</a>
+                                            </button>
+                                        @endforeach
                                     </div>
 
                                 </div>
@@ -130,7 +137,7 @@
                 @endif
 
 
-
+8
                 @if($id == 2 and count($Complete)>0)
                     {{ $Complete->links() }}
                 @endif
