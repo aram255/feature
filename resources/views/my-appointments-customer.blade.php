@@ -137,7 +137,6 @@
                 @endif
 
 
-8
                 @if($id == 2 and count($Complete)>0)
                     {{ $Complete->links() }}
                 @endif
