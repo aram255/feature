@@ -30,7 +30,7 @@
 }
 .plan {
     width: 260px;
-    margin-bottom: 35px;    
+    margin-bottom: 35px;
 }
 .my-plan-background {
     margin-top: -25px;
@@ -113,7 +113,7 @@ select {
     box-shadow: none;
     border: 0 !important;
     background: #2c3e50;
-    background-image: none;    
+    background-image: none;
 }
 
 .duration-select {
@@ -123,7 +123,7 @@ select {
 }
 .duration::-ms-expand {
     display: none;
-} 
+}
 .duration {
     position: relative;
     display: flex;
@@ -168,7 +168,7 @@ select {
     background: #FFFFFF 0 0 no-repeat padding-box;
     box-shadow: 0 0 14px #00000014;
     border-radius: 43px;
-    height: 265px;
+    min-height: 265px;
 }
 .content {
     position: relative;
@@ -189,7 +189,7 @@ select {
 }
 .content::after {
     content:"";
-    position: absolute;   
+    position: absolute;
     top: 93px;
     right: -165px;
     width: 311px;
@@ -242,7 +242,7 @@ select {
     left: 0;
     width: 60px;
     height: 6px;
-    background-color: #FED638;    
+    background-color: #FED638;
 }
 .diet {
     font: normal normal 500 30px/37px "Montserrat";
@@ -286,7 +286,7 @@ select {
     margin-bottom: 15px;
     padding: 7px;
     width: 100%;
-    max-width: 470px; 
+    max-width: 470px;
     height: 170px;
     background: #FBDE75 0 0 no-repeat padding-box;
     border-radius: 18px;
@@ -295,11 +295,11 @@ select {
 .product-items{
     position: relative;
     max-width: 1450px;
-    margin:auto;    
+    margin:auto;
     padding: 15px 30px;
 }
 .product-items::before {
-    content: "";    
+    content: "";
     z-index: -1;
     position: absolute;
     left: 126px;
@@ -312,7 +312,7 @@ select {
     background-image:url("../img/protocol-img/Rectangle\ 3674.svg")
 }
 .product-items::after {
-    content: "";    
+    content: "";
     z-index: -1;
     position: absolute;
     right: 75px;
@@ -369,7 +369,7 @@ select {
     background: #FFFFFF 0 0 no-repeat padding-box;
     box-shadow: 0 0 6px #00000029;
     border-bottom: 2px solid #FED638;
-    border-radius: 18px;  
+    border-radius: 18px;
 }
 .product-image2 {
     background-color:#F8F9FC;
@@ -380,13 +380,13 @@ select {
 }
 .product-image2 img {
     width: 25px;
-} 
+}
 .input-product-brand2 .form-control {
     background: #FFFFFF 0 0 no-repeat padding-box;
     box-shadow: 0 0 6px #00000029;
     border-radius: 15px;
 }
-.item2 {    
+.item2 {
     position: relative;
 }
 .item2 .form-control{
@@ -413,10 +413,10 @@ select {
     height: 170px;
     background: #D9EAFD 0 0 no-repeat padding-box;
     border-bottom: 2px solid #8BA9EE;
-    border-radius: 18px;  
+    border-radius: 18px;
 }
 
-.item3 {    
+.item3 {
     position: relative;
 }
 .item3 .form-control{
@@ -524,9 +524,9 @@ select {
 @media (max-width: 1200px){
     .content::after, .content::before, .product-items::after, .product-items::before{
         display: none;
-       }    
+       }
 }
-@media (max-width: 768px) { 
+@media (max-width: 768px) {
     .btn-arrow-1 {
         display: none;
     }

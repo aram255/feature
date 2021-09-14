@@ -225,6 +225,8 @@
             var password       = $(this).prev().prev().prev().prev().prev().prev().prev().prev().val();
             var join_url       = $(this).prev().prev().prev().prev().prev().prev().prev().prev().prev().val();
 
+
+
             if(service_id == null)
 
                 service_id = '';

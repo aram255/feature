@@ -202,25 +202,25 @@ class ZoomController extends Controller
             if ($response->getStatusCode() == 201) {
                 $code = Str::random(50);
 
-//                Mail::send('email.zoom-from-customer',
-//                    [
-//                        'title' => $request->m_name,
-//                        'start_time' => new Carbon($request->birthdaytime),
-//                        'duration' => $request->time,
-//                        'password' => $request->password,
-//                        'JoinUrl' => $JoinUrl->join_url,
-//                        'email' => Auth::user()->email,
-//                        'first_name' => $request->first_name,
-//                        'last_name' => $request->last_name,
-//                        'phone_number' => $request->phone_number,
-//                        'URLAccept' => $URLAccept,
-//                        'URLReject' => $URLReject
-//
-//                    ], function ($message) use ($request) {
-//                        $message->from($request->email);
-//                        $message->to($request->email);
-//                        $message->subject('Generate Zoom Meeting');
-//                    });
+                Mail::send('email.zoom-from-customer',
+                    [
+                        'title' => $request->m_name,
+                        'start_time' => new Carbon($request->birthdaytime),
+                        'duration' => $request->time,
+                        'password' => $request->password,
+                        'JoinUrl' => $JoinUrl->join_url,
+                        'email' => $request->email,
+                        'first_name' => $request->first_name,
+                        'last_name' => $request->last_name,
+                        'phone_number' => $request->phone_number,
+                        'URLAccept' => $URLAccept,
+                        'URLReject' => $URLReject
+
+                    ], function ($message) use ($request) {
+                        $message->from($request->email);
+                        $message->to($request->email);
+                        $message->subject('Generate Zoom Meeting');
+                    });
 
                 $Add = new ZoomModel;
                 $Add->title = $request->title;

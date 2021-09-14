@@ -87,18 +87,18 @@
                                                 <th class="protocol-product-table-tbody-tr-th">Product title:</th>
                                                 <td class="protocol-product-table-tbody-tr-td">{{$ValProduct->title_product}}</td>
                                             </tr>
-                                            <tr>
-                                                <th class="protocol-product-table-tbody-tr-th">Brand:</th>
-                                                <td class="protocol-product-table-tbody-tr-td">{{$ValProduct->brand}}</td>
-                                            </tr>
-                                            <tr>
-                                                <th class="protocol-product-table-tbody-tr-th">Dosage:</th>
-                                                <td class="protocol-product-table-tbody-tr-td">{{$ValProduct->dosage}}</td>
-                                            </tr>
-                                            <tr>
-                                                <th class="protocol-product-table-tbody-tr-th">Instructions:</th>
-                                                <td class="protocol-product-table-tbody-tr-td">{{$ValProduct->instructions}}</td>
-                                            </tr>
+{{--                                            <tr>--}}
+{{--                                                <th class="protocol-product-table-tbody-tr-th">Brand:</th>--}}
+{{--                                                <td class="protocol-product-table-tbody-tr-td">{{$ValProduct->brand}}</td>--}}
+{{--                                            </tr>--}}
+{{--                                            <tr>--}}
+{{--                                                <th class="protocol-product-table-tbody-tr-th">Dosage:</th>--}}
+{{--                                                <td class="protocol-product-table-tbody-tr-td">{{$ValProduct->dosage}}</td>--}}
+{{--                                            </tr>--}}
+{{--                                            <tr>--}}
+{{--                                                <th class="protocol-product-table-tbody-tr-th">Instructions:</th>--}}
+{{--                                                <td class="protocol-product-table-tbody-tr-td">{{$ValProduct->instructions}}</td>--}}
+{{--                                            </tr>--}}
 
                                             <tr>
                                                 <th class="protocol-product-table-tbody-tr-th">Link:</th>
@@ -116,11 +116,12 @@
                                 @foreach($ProtocolLink as $ValLink)
                                 <div class="protocol__section-link-cont-view">
                                     <div class="protocol__section-link-cont-view-item">
-                                        <iframe width="291" height="152" src="{{$ValLink->iframe}}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                        <iframe width="291" height="152" src="{{$ValLink->link_link}}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                                         <div class="protocol__section-link-cont-view-item-text">
+                                            </span><a href="{{$ValLink->link_link}}">
                                             <p class="link-text">{{$ValLink->link_title}}</p>
-                                            <p class="link-url"><span class="link-icon"><img
-                                                        src="{{ asset('web_sayt/img/youtube-icon.svg') }}"></span><a href="{{$ValLink->link_link}}">{{\Illuminate\Support\Str::limit($ValLink->link_link, 25)}}</a></p>
+                                            <p class="link-url"><span class="link-icon"><img src="{{ asset('web_sayt/img/youtube-icon.svg') }}"></p>
+                                            </a>
                                         </div>
                                     </div>
                                 </div>

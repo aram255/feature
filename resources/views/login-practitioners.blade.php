@@ -71,6 +71,9 @@
                     <div class="lg-sg__button">
                         <input type="submit"  class="btn bg-yellow" value="Log In">
                     </div>
+{{--                    <div class="lg-sg__button">--}}
+{{--                        <a href="{{ url('en/customer-redirect',['id'=>2]) }}" class="btn bg-yellow">Login Google</a>--}}
+{{--                    </div>--}}
                     <div class="lg-sg__signup">
                         <p class="lg-sg-p"> Don't have an account? <a href="{{route('register-practitioners',[app()->getLocale()])}}"><span> Sign Up
                            </span></a></p>

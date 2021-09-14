@@ -26,10 +26,11 @@ function addProduct() {
    let productClone = addProduct.cloneNode(true);
    productClone.id = "protocol__section-product-cont" + ++j;
    addProduct.parentNode.appendChild(productClone);
-   $("#protocol__section-product-cont" + j).find('input,textarea,select,img').val('');
+   $("#protocol__section-product-cont" + j).find('input,textarea,select,img').removeAttr("value");
 
 
-    $("#protocol__section-product-cont" + j).find('img').attr("src",'http://new-feature/web_sayt/img/protocol-img.svg');
+    $("#protocol__section-product-cont" + j).find('img').attr("src",'https://40.freelancedeveloper.site/web_sayt/img/protocol-img/protocol-img/product-img2.svg');
+    $("#protocol__section-product-cont" + j).find(".id_Product").attr('name', 'clone_id_product[]');
 
    $("#protocol__section-product-cont" + j).find('input').attr('id', 'img-file' + j);
    $("#protocol__section-product-cont" + j).find('label').attr('for', 'img-file' + j);
@@ -52,12 +53,14 @@ function addLink() {
 let addAnotherButton = document.getElementById("add-text-another");
 addAnotherButton.addEventListener('click', addTextAnother)
 let c = 0
+
 function addTextAnother() {
 
+    let main = document.getElementsByClassName('content-background-child')[0];
     let addTextAnother = document.getElementById('protocol__section-heading-text-another' + c);
     let textCloneAnother = addTextAnother.cloneNode(true);
     textCloneAnother.id = "protocol__section-heading-text-another" + ++c;
-    addTextAnother.parentNode.appendChild(textCloneAnother);
+    main.appendChild(textCloneAnother);
     $("#protocol__section-heading-text-another" + c).find('input,textarea,select').val('');
 
 }

@@ -32,6 +32,8 @@
 
 @section('content')
 
+
+
     <script>var body = document.body; body.classList.add("body");</script>
     <section>
         <div class="container">
@@ -46,7 +48,7 @@
                 </div>
 
                 @if($id == 1 and count($InProcess)>0)
-                    @foreach($InProcess as $InProcessVal)
+                    @foreach($InProcess as $keyP => $InProcessVal)
                         <div class="my-appointments__complete-process">
                             <div class="my-appointments__complete-process-content">
                                 <div class="my-appointments__complete-process-content-flex">
@@ -64,10 +66,16 @@
                                     <div class="my-appointments-person__complete-process">
                                         <div class="my-appointments-person__complete-process-time">{{$InProcessVal->duration}} Mins Consultation</div>
                                         <div class="my-appointments-person__complete-process-session"><a target="_blank" href="{{$InProcessVal->join_url}}">Join session</a></div>
-                                       @foreach( $TypeForm->where('practitioner_id',1) as $valTypeForm)
-                                        <button class="my-appointments-person__complete-process-button btn bg-yellow"><a
-                                                href="{{route('customer-type-form-practitioner-view',[app()->getLocale(), 'id' => $valTypeForm->id])}}">Fill Intake Form</a>
-                                            </button>
+
+                                        @foreach( $TypeForm->where('practitioner_id',$InProcessVal->practitioner_id) as $valTypeForm)
+                                            @if($CheckTypeForm[$keyP] !== false)
+                                                <button style="cursor: unset;" class="my-appointments-person__complete-process-button btn bg-yellow">Completed
+                                                </button>
+                                            @else
+                                                <button class="my-appointments-person__complete-process-button btn bg-yellow">
+                                                    <a href="{{route('customer-type-form-practitioner-view',[app()->getLocale(), 'id' => $valTypeForm->id, 'meeting_id' => $InProcessVal->id])}}">Fill Intake Form</a>
+                                                </button>
+                                            @endif
                                         @endforeach
                                     </div>
 
@@ -92,12 +100,12 @@
                                             <img class="my-appointments-person__info-img info_imgg" src="{{ asset('web_sayt/img_practitioners/'.$InCompleteVal->img) }}" alt="">
                                         </div>
                                         <div class="my-appointments-person__info-cont2">
-                                            <div class="my-appointments-person__info-name"><a href="{{route('add-edit-protocol-practitioner',[
+                                            <div class="my-appointments-person__info-name"><a href="{{--route('add-edit-protocol-practitioner',[
                                      app()->getLocale(),
                                     'user_id'=> $InCompleteVal->user_id,
                                     'practitioner_id'=>$InCompleteVal->practitioner_id,
                                     'service_id'=>$InCompleteVal->service_id
-                                    ])}}">{{$InCompleteVal->first_name}} {{$InCompleteVal->last_name}}</a></div>
+                                    ])--}}">{{$InCompleteVal->first_name}} {{$InCompleteVal->last_name}}</a></div>
                                             <div class="my-appointments-person__info-specialist">Acne Specialist &amp; Holistic
                                                 nutritionist (CNP)
                                             </div>
@@ -117,7 +125,8 @@
                                      app()->getLocale(),
                                     'user_id'=>$InCompleteVal->user_id,
                                     'practitioner_id'=>$InCompleteVal->practitioner_id,
-                                    'service_id'=>$InCompleteVal->service_id
+                                    'service_id'=>$InCompleteVal->service_id,
+                                    'meeting_id'=>$InCompleteVal->id
                                     ])}}
                                                     ">View Protocol</a>
                                             </button>

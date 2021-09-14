@@ -25,6 +25,7 @@ class AuthPractitionersModel extends Authenticatable
         'time_zone',
         'email',
         'password',
+        'google_id',
     ];
 
 

@@ -21,6 +21,9 @@ use App\Http\Controllers\ZoomController;
 use App\Http\Controllers\SocialController;
 use App\Http\Controllers\CalendarController;
 
+// google Login
+use App\Http\Controllers\LoginGoogleCustommerController;
+
 use Illuminate\Support\Facades\Route;
 
 
@@ -86,7 +89,7 @@ Route::group(['prefix' => '{locale?}','where' => ['locale' => '[a-zA-Z]{2}']], f
     Route::post('/add-type-form-practitioner', [PractitionersController::class, 'addTypeFormPractitioner'])->name('add-type-form-practitioner');
     Route::post('/edit-type-form-practitioner', [PractitionersController::class, 'editTypeFormPractitioner'])->name('edit-type-form-practitioner');
     Route::post('/delete-type-form-practitioner', [PractitionersController::class, 'deleteTypeFormPractitioner'])->name('delete-type-form-practitioner');
-    Route::get('/customer-type-form-practitioner-view/{id}', [CustomerController::class, 'typeFormPractitionerView'])->name('customer-type-form-practitioner-view');
+    Route::get('/customer-type-form-practitioner-view/{id}/{meeting_id}', [CustomerController::class, 'typeFormPractitionerView'])->name('customer-type-form-practitioner-view');
 
     // Tag
     Route::post('/add-tag-my-list-management', [PractitionersController::class, 'addTagMyListManagements'])->name('add-tag-my-list-management');
@@ -98,10 +101,11 @@ Route::group(['prefix' => '{locale?}','where' => ['locale' => '[a-zA-Z]{2}']], f
     Route::get('/edit-profile-customer', [CustomerController::class, 'editProfileCustomer'])->name('edit-profile-customer');
     Route::post('/edit-profile-customer-post', [CustomerController::class, 'editProfileCustmerPost'])->name('edit-profile-customer-post');
     Route::post('/add-favorite', [CustomerController::class, 'addFavorite'])->name('add-favorite');
+    Route::post('/edit-response-id', [CustomerController::class, 'editTypeForm'])->name('edit-response-id');
 
     // Protocol
     Route::get('/my-appointments-customer/{id}', [CustomerController::class, 'myAppointmentsCustomer'])->name('my-appointments-customer');
-    Route::get('/view-protocol-customer/{service_id}/{user_id}/{practitioner_id}', [CustomerController::class, 'ViewProtocol'])->name('view-protocol-customer');
+    Route::get('/view-protocol-customer/{service_id}/{user_id}/{practitioner_id}/{meeting_id}', [CustomerController::class, 'ViewProtocol'])->name('view-protocol-customer');
     Route::post('/add-select-another/{practitioner_id}/{service_id}', [CustomerController::class, 'addSelectProtocol'])->name('add-select-another');
 
 
@@ -152,10 +156,11 @@ Route::group(['prefix' => '{locale?}','where' => ['locale' => '[a-zA-Z]{2}']], f
     Route::get('/protocol/{user_id}/{service_id}', [PractitionersController::class, 'protocol'])->name('protocol');
     Route::post('/add-protocol', [PractitionersController::class, 'AddProtocol'])->name('add-protocol');
     Route::post('/delete-protocol/', [PractitionersController::class, 'deleteProtocol'])->name('delete-protocol');
-    Route::get('/view-protocol-practitioner/{service_id}/{user_id}/{practitioner_id}', [PractitionersController::class, 'ViewProtocol'])->name('view-protocol-practitioner');
-    Route::get('/add-edit-protocol-practitioner/{service_id}/{user_id}/{practitioner_id}', [PractitionersController::class, 'addEditProtocol'])->name('add-edit-protocol-practitioner');
-    Route::get('/edit-protocol-practitioner-view/{service_id}/{user_id}/{practitioner_id}', [PractitionersController::class, 'EditProtocolView'])->name('edit-protocol-practitioner-view');
+    Route::get('/view-protocol-practitioner/{service_id}/{user_id}/{practitioner_id}/{meeting_id}', [PractitionersController::class, 'ViewProtocol'])->name('view-protocol-practitioner');
+    Route::get('/add-edit-protocol-practitioner/{service_id}/{user_id}/{practitioner_id}/{meeting_id}', [PractitionersController::class, 'addEditProtocol'])->name('add-edit-protocol-practitioner');
+    Route::get('/edit-protocol-practitioner-view/{service_id}/{user_id}/{practitioner_id}/{meeting_id}', [PractitionersController::class, 'EditProtocolView'])->name('edit-protocol-practitioner-view');
 
+    Route::get('/edit-view-protocol/{service_id}/{user_id}/{practitioner_id}/{meeting_id}', [PractitionersController::class, 'EditViewProtocol'])->name('edit-view-protocol');
     Route::post('/edit-protocol', [PractitionersController::class, 'EditProtocol'])->name('edit-protocol');
 
     Route::post('/view-protocol-practitioner-ajax', [PractitionersController::class, 'getDataProtocolAjax'])->name('view-protocol-practitioner-ajax');
@@ -166,12 +171,16 @@ Route::group(['prefix' => '{locale?}','where' => ['locale' => '[a-zA-Z]{2}']], f
 
 
     // login
+    Route::get('/customer-redirect/{id}', 'LoginGoogleCustommerController@redirect');
+    Route::get('/callback/google/', 'LoginGoogleCustommerController@callback');
+
+
 
     // Testing
 
-     // Route::get('/redirect', 'SocialController@redirect');
-     // Route::get('/callback/google', 'SocialController@callback');
-//     Route::get('/index', 'SocialController@index');
+//      Route::get('/redirect', 'SocialController@redirect');
+//      Route::get('/callback/google', 'SocialController@callback');
+//     Route::get('/indexx', 'SocialController@index');
 //
 //    Route::get('redirect', [SocialController::class, 'redirect']);
 //    Route::get('callback/google', [SocialController::class, 'callback']);

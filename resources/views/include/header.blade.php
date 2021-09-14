@@ -254,6 +254,7 @@
                         <div class="lg-sg__button">
                             <input type="submit"  class="btn bg-yellow" value="Log In">
                         </div>
+
                         <div class="lg-sg__signup">
                             <p class="lg-sg-p lg-sg-overflow"> Don't have an account? <a class="lg-sg-overflow" href="#"
                                                                                          aria-label="Close" data-toggle="modal" data-dismiss="modal"
@@ -262,9 +263,12 @@
                             </p>
                         </div>
                     </form>
-
+                    <div class="lg-sg__button">
+                        <a href="{{ url('en/customer-redirect',['id'=>1]) }}" class="btn bg-yellow">Login Google</a>
+                    </div>
                 </div>
             </div>
         </div>
+
     </div>
 </div>

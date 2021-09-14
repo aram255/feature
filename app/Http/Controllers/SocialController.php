@@ -20,7 +20,6 @@ class SocialController extends Controller
 
     public function redirect()
     {
-
         return Socialite::driver('google')->redirect();
     }
 
@@ -70,14 +69,17 @@ class SocialController extends Controller
 
     public function callback()
     {
+
         try {
             $user_info_google = Socialite::driver('google')->user();
             $user = User::where('google_id', $user_info_google->id)->first();
 
             if($user){
                 Auth::login($user);
-                return redirect('/home');
+
+                return redirect('/');
             }else{
+
                 $newUser = User::create([
                     'first_name' => $user_info_google->name,
                     'email' => $user_info_google->email,
@@ -86,7 +88,7 @@ class SocialController extends Controller
                 ]);
                 Auth::login($newUser);
 
-                return redirect('/home');
+                return redirect('/');
                 dd('ededed');
             }
         } catch (Exception $e) {

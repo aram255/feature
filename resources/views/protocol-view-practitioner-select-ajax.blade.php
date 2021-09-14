@@ -58,21 +58,19 @@
 
 
 
-
     <main class="main mt-5">
         <form id="protocol" action="{{route('add-protocol',[app()->getLocale()])}}" method="post" enctype="multipart/form-data">
         <div class="container">
             <h1 class="protoco ml-5">Protocol</h1>
-
-
                 @csrf
                 <input type="hidden" name="user_id" value="{{ Request::segment(4) }}">
                 <input type="hidden" name="service_id" value="{{ Request::segment(3) }}">
+            <input type="hidden" name="meeting_id" value="{{ Request::segment(6) }}">
 
             <div class="d-flex justify-content-around protoco-container flex-wrap mt-5 ">
                 <div class="plan d-flex justify-content-between">
                     <div>
-                        <a href="#" class="my-plan">My Plan</a>
+                        <a href="#" class="my-plan">Select Protocol</a>
                     </div>
                     <div>
                         <i class="fas fa-chevron-right mt-2"></i>
@@ -150,7 +148,7 @@
             <h4 class="product ml-5 mt-5">Product:</h4>
             <div class="d-block product-items">
                 <div class="d-flex justify-content-center flex-wrap mt-5 mb-5 productt">
-                    <div class="product-item1 product_remove" id="protocol__section-product-cont0">
+                    <div class="product-item1 m-2 product_remove" id="protocol__section-product-cont0">
                         <div class="item1-topside d-flex justify-content-around">
                             <div class="product-image1 d-flex justify-content-center align-items-center">
                                 <input style="display: none" type="file" id="img-file0"  name="img[]" >
@@ -265,18 +263,6 @@
 
                         $.each(data.ProtocolProduct, function(k_product, v_product) {
 
-                            // var button = document.getElementById("clickme");
-                            //  count = v_product.id;
-                            // button.onclick = function() {
-                            //     count += 1;
-                            //     var  s = 'k'+count;
-                            //     alert(s)
-                            //
-                            //
-                            // }
-
-                            console.log(v_product)
-
 
                             if(v_product.img == '')
                             {
@@ -309,8 +295,6 @@
                             }else{
 
                                 $('#add-product').attr('data-id', k_product);
-
-
 
                                 $('.productt').append(
                                     "<div class='product-item1 product_remove' id='protocol__section-product-cont"+k_product+"'>"+

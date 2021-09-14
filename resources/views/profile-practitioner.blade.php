@@ -243,11 +243,14 @@
                                     <img src="{{asset('web_sayt/img_customer/'.$GetVal->user_img)}}" alt="">
                                 </div>
                                 <div class="px-4">
-                                    <p><b><a href="{{route('edit-protocol-practitioner-view',[
+
+{{--                                    edit-protocol-practitioner-view--}}
+                                    <p><b><a href="{{route('edit-view-protocol',[
                                      app()->getLocale(),
                                     'user_id'=> $GetVal->user_id,
                                     'practitioner_id'=>$GetVal->practitioner_idd,
-                                    'service_id'=>$GetVal->service_id
+                                    'service_id'=>$GetVal->service_id,
+                                    'meeting_id'=>$GetVal->meeting_id
                                     ])}}">{{$GetVal->first_name}} {{$GetVal->last_name}}</a></b></p>
                                     <div class="text-blue">{{$GetVal->title}}</div>
                                 </div>
@@ -292,7 +295,8 @@
                                      app()->getLocale(),
                                     'user_id'=> $GetVal->user_id,
                                     'practitioner_id'=>$GetVal->practitioner_idd,
-                                    'service_id'=>$GetVal->service_id
+                                    'service_id'=>$GetVal->service_id,
+                                    'meeting_id'=>$GetVal->meeting_id
                                     ])}}">{{$GetVal->first_name}} {{$GetVal->last_name}}</a></b></p>
                                         <div class="text-blue">{{$GetVal->title}}</div>
                                     </div>

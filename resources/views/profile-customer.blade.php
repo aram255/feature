@@ -193,24 +193,34 @@
                            <div class="find-result">
                             <div class="person">
                                 <div class="person__info">
-                                    <div class="person__info-cont1">
-                                        <img class="person__info-img" src="{{ asset('web_sayt/img/person-foto.png') }}" alt="">
-                                        <div class="person__info-rating">
-                              <span class="gl-star-rating gl-star-rating--ltr" data-star-rating=""><select class="star-rating">
+                                    <div class=" d-flex flex-column">
+
+                                        <div class="person__info-cont1" style="width: 150px; height: 150px; overflow: hidden;border-radius: 10px">
+                                            <img class="my-appointments-person__info-img w-100" src="{{ asset('web_sayt/img_practitioners/'.$PractitionerFavoriteVal->img) }}" alt="">
+                                        </div>
+                                        <div>
+                                            <div class="person__info-rating">
+                              <span class="gl-star-rating gl-star-rating--ltr" data-star-rating="">
+                                  <select class="star-rating">
 
                                     <option value="5">5.0</option>
                                     <option value="4">4.0</option>
                                     <option value="3">3.0</option>
                                     <option value="2">2.0</option>
                                     <option value="1">1.0</option>
-                                 </select><span class="gl-star-rating--stars s50" role="tooltip" aria-label="5.0"><span data-index="0"
-                                                                                                                        data-value="1" class="gl-active"></span><span data-index="1" data-value="2"
-                                                                                                                                                                      class="gl-active"></span><span data-index="2" data-value="3" class="gl-active"></span><span
+                                 </select>
+                                  <span class="gl-star-rating--stars s50" role="tooltip" aria-label="5.0">
+                                      <span data-index="0"
+                                            data-value="1" class="gl-active"></span>
+                                      <span data-index="1" data-value="2"
+                                            class="gl-active"></span>
+                                      <span data-index="2" data-value="3" class="gl-active"></span><span
                                           data-index="3" data-value="4" class="gl-active"></span><span data-index="4" data-value="5"
                                                                                                        class="gl-active gl-selected"></span></span></span>
+                                            </div>
+                                            <p class="perion__info-session">256<span>Sessions</span></p>
+                                            <a href=""   class="btn bg-yellow" data-toggle="modal" data-target="#service-modal{{$PractitionerFavoriteVal->partit_id}}">View Services</a>
                                         </div>
-                                        <p class="perion__info-session">256<span> Sessions</span></p>
-                                        <a href=""  class="btn bg-yellow" data-toggle="modal" data-target="#service-modal{{$PractitionerFavoriteVal->partit_id}}">View Services</a>
                                     </div>
                                     <div class="person__info-cont2">
                                         <div class="person__info-name">{{$PractitionerFavoriteVal->first_name}} {{$PractitionerFavoriteVal->last_name}}</div>
@@ -235,7 +245,7 @@
                                     <div class="person__content-video">
                                         <div class="video_wrapper video_wrapper_full js-videoWrapper">
                                             <iframe class="videoIframe js-videoIframe" src="" frameborder="0" allowtransparency="true"
-                                                    allowfullscreen="" data-src="{{ asset('web_sayt/video_practitio/'.$PractitionerFavoriteVal->video) }}"></iframe>
+                                                    allowfullscreen="" data-src="{{ asset('web_sayt/video_practitioners/'.$PractitionerFavoriteVal->video) }}"></iframe>
                                             <button class="videoPoster js-videoPoster"></button>
                                         </div>
                                     </div>
@@ -417,6 +427,7 @@
             var durationn      = $(this).prev().prev().prev().prev().prev().prev().prev().val();
             var password       = $(this).prev().prev().prev().prev().prev().prev().prev().prev().val();
             var join_url       = $(this).prev().prev().prev().prev().prev().prev().prev().prev().prev().val();
+
 
 
 // alert('practitionerID => '+practitionerID);
@@ -666,7 +677,5 @@ if(service_id == null)
 {{--        });--}}
 {{--    </script>--}}
 
-    <script>
-        alert(diff)
-    </script>
+
 @endsection
