@@ -350,6 +350,7 @@ select {
     height: 44px;
     border-radius: 10px;
     background-color: #FFFFFF;
+    padding-right: 75px;
 }
 .item1-bottomside .fa-arrow-alt-circle-right {
     position: absolute;
