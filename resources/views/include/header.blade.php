@@ -1,3 +1,19 @@
+<style>
+    .lg_w_G-btn {
+        background: #FFFFFF 0 0 no-repeat padding-box;
+        box-shadow: 0 0 6px #00000029;
+        border-radius: 10px;
+        width: 265px;
+        height: 51px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font: normal normal 600 13px/16px Montserrat;
+        letter-spacing: 0;
+        color: #000000;
+        margin: 0 auto;
+    }
+</style>
 @if(Session::has('status'))
     <div class="alert alert-info" style="text-align: center;">
         <a class="close" data-dismiss="alert">×</a>
@@ -264,8 +280,8 @@
                             </div>
                             <hr>
                             <div class="lg-sg__button">
-                                <a href="{{ url('en/customer-redirect',['id'=>1]) }}">
-                                    <img src="{{ asset('web_sayt/img/google.png') }}" alt="">
+                                <a href="{{ url('en/customer-redirect',['id'=>1]) }}" class="lg_w_G-btn">
+                                    <img src="{{ asset('web_sayt/img/Group 20.svg') }}" alt="" class="mr-3">log In with Google
                                 </a>
                             </div>
                         </div>

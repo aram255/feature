@@ -250,14 +250,10 @@
                             <div class="item1-topside d-flex justify-content-around">
                                 <div class="product-image1 d-flex justify-content-center align-items-center">
                                     <input class="id_Product" type="hidden" name="id_Product[]" value="{{$ValProduct->id}}">
-                                    <label
-                                        style=" position: relative;
-" for="img-file{{$keyProduct}}" class="img-file">
-
+                                    <label style=" position: relative; cursor: pointer;" for="img-file{{$keyProduct}}" class="img-file">
                                         <input  style="opacity: 0; position:absolute;" type="file" id="img-file{{$keyProduct}}"  name="img[]" >
                                         <img  class="upload" @if($ValProduct->img != null) src="{{ asset('web_sayt/img_protocol/'.$ValProduct->img) }}" @else src="{{ asset('web_sayt/img/protocol-img/protocol-img/product-img2.svg') }}" @endif   alt="img">
                                     </label>
-
                                 </div>
                                 <div class="product-brand">
                                     <input class="form-control input-product-brand" type="text"  name="title_product[]" value="{{ $ValProduct->title_product }}" placeholder="Add Product Brand" >
