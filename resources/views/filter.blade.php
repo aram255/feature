@@ -20,6 +20,57 @@
             background: white;
             border-radius: 3px;
         }
+
+        [type="radio"]:checked,
+        [type="radio"]:not(:checked) {
+            position: absolute;
+            left: -9999px;
+        }
+        [type="radio"]:checked + label,
+        [type="radio"]:not(:checked) + label
+        {
+            position: relative;
+            padding-left: 28px;
+            cursor: pointer;
+            line-height: 20px;
+            display: inline-block;
+            color: #666;
+        }
+        [type="radio"]:checked + label:before,
+        [type="radio"]:not(:checked) + label:before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 18px;
+            height: 18px;
+            border: 1px solid #8BA9EE;
+            border-radius: 100%;
+            background: #fff;
+        }
+        [type="radio"]:checked + label:after,
+        [type="radio"]:not(:checked) + label:after {
+            content: '';
+            width: 12px;
+            height: 12px;
+            background: #8BA9EE;
+            position: absolute;
+            top: 3px;
+            left: 3px;
+            border-radius: 100%;
+            -webkit-transition: all 0.2s ease;
+            transition: all 0.2s ease;
+        }
+        [type="radio"]:not(:checked) + label:after {
+            opacity: 0;
+            -webkit-transform: scale(0);
+            transform: scale(0);
+        }
+        [type="radio"]:checked + label:after {
+            opacity: 1;
+            -webkit-transform: scale(1);
+            transform: scale(1);
+        }
     </style>
 
     <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -66,15 +117,15 @@
                     </div>
                     <div class="create__checkbox">
                         <p>Preferred Practitioner Gender</p>
-                        <input  type="radio" name="gender" id="male" value="Male" class="lg-sg__checkin"  @if(!empty($Gender)) @if($Gender == 'Male') checked="checked"  @endif @endif  />
+                        <input  type="radio" name="gender" id="male" value="Male"  @if(!empty($Gender)) @if($Gender == 'Male') checked="checked"  @endif @endif  />
                         <label for="male" class="ml-2">Male</label>
-                        <input  type="radio" name="gender"  id="female" value="Famale" class="lg-sg__checkin" @if(!empty($Gender)) @if($Gender == 'Famale') checked="checked"  @endif @endif />
+                        <input  type="radio" name="gender"  id="female" value="Famale"  @if(!empty($Gender)) @if($Gender == 'Famale') checked="checked"  @endif @endif />
                         <label for="female" class="ml-2">Female</label>
                     </div>
                     <div class="create__checkbox">
                         <p>
                             <input  type="checkbox" name="check" value="check" id="check" class="lg-sg__checkin delivery" />
-                            <label for="check">Avalible appointments this week</label>
+                            <label for="check">Available appointments this week</label>
                         </p>
 
 {{--                        <input type="radio" name="yesNo" value="Yes" id="yes" @if(!empty($Week)) @if($Week == 'Yes') checked="checked"  @endif @endif class="lg-sg__checkin">--}}
