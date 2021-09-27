@@ -54,6 +54,7 @@
             <div class="text mt-5">5 Days left until check-in</div>
             <div class="d-flex justify-content-center align-items-center mt-5">
                 <div class="content">
+                    <input type="hidden" id="service_name" value="{{$Services->title}}">
                     <form action="{{route('add-select-another',[app()->getLocale(),'practitioner_id' => Request::segment(5),'service_id' => Request::segment(3)])}}"  method="post">
                         @csrf
                         <div class="content-background">
@@ -77,7 +78,7 @@
                                         <input type="hidden"  value="{{$Practitioner->id}}">
                                         <input type="hidden"  value="{{auth()->user()->id}}">
                                         <input type="hidden"  value="{{$Practitioner->email}}">
-                                        <button type="button" class="follow-up-btn detail-btn" data-toggle="modal" data-target="#service-modal">Book follow-up appointment Calendar</button>
+                                        <button type="button" class="follow-up-btn detail-btn" data-toggle="modal" data-target="#service-modal" data-id="ff">Book follow-up appointment Calendar</button>
                                     </div>
                               @else
                                 <div class="d-flex justify-content-center mt-5">
@@ -153,6 +154,8 @@
 
     </main>
 
+
+
     {{--    full calendar modal--}}
     <div class="modal" tabindex="-1" id="service-modal">
         <div class="modal-dialog">
@@ -164,6 +167,26 @@
                 </div>
                 <div class="modal-body">
                     <div id="calendar"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="myModal2" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 id="myModalLabel">Modal 2</h3>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                </div>
+                <div id="zoom" class="modal-body">
+                    <a href="#">Zoom</a>
+                </div>
+                <div id="offline" class="modal-body">
+                    <a href="#">Offline</a>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
                 </div>
             </div>
         </div>
@@ -190,7 +213,9 @@
             var first_name =    $(this).prev().prev().prev().prev().prev().prev().val();
 
 
+
             var  service_id = $(this).parent().prev().children().children().val();
+            var  serviceName =    $("#service_name").val();
 
             if(service_id == null)
 
@@ -214,12 +239,22 @@
                     center:'title',
                     right:'month,agendaWeek,agendaDay'
                 },
-                events:'/en/Search/'+ practitionerID+'/'+service_id,
+                events:'/en/Search/'+ practitionerID,
                 selectable:true,
                 selectHelper: true,
 
                 select:function(start, end, allDay)
                 {
+                    // Generate password zoom
+                    const characters =
+                        "abcdefghijklmnopqrstuvwxyz0123456789";
+                    const length = 6;
+                    let password = "";
+
+                    for (let i = 0; i < length; i++) {
+                        const randomNum = Math.floor(Math.random() * characters.length);
+                        password += characters[randomNum];
+                    }
 
                     var start = $.fullCalendar.formatDate(start, 'Y-MM-DD HH:mm:ss');
 
@@ -234,15 +269,22 @@
 
 
                     // compare
-
                     var d1 = new Date(start);
+                    var d5 = new Date(end);
                     var d2 = new Date(LiveDateTime);
+                    var diff_time = d5-d1;
 
                     if (d1 >= d2) {
 
-                        var title       = prompt('Event Title:');
-                        var pasword     = prompt('Event password:');
-                        var duration    = prompt('Event Duration:');
+                        $("#myModal2").modal("show");
+                        $("#zoom").click(function () {
+
+                         var  duration = diff_time/(60000);
+                         alert(password)
+
+                       // var title       = prompt('Event Title:');
+                      //  var pasword     = prompt('Event password:');
+                       // var duration    = prompt('Event Duration:');
                             @if(isset(auth()->user()->id))
                         var add_user_id = "{{auth()->user()->id}}";
                         @endif
@@ -264,13 +306,13 @@
 
 
 
-                        if(title !== "" && pasword !== "" && duration !== ""){
+                     //   if(title !== "" && pasword !== "" && duration !== ""){
 
                             $.ajax({
                                 url: "{{ route('add-zoom-meeting',app()->getLocale()) }}",
                                 type: "POST",
                                 data: {
-                                    title: title,
+                                    title: serviceName,
                                     start: start,
                                     end: end,
                                     practitionerID: practitionerID,
@@ -280,43 +322,154 @@
                                     first_name: first_name,
                                     email: email,
                                     duration: duration,
-                                    password: pasword,
+                                    password: password,
                                     service_id: service_id,
                                     LiveDateTime:LiveDateTime,
                                     type: 'add',
                                     too_meet: 'yes'
                                 },
                                 success: function (data) {
+                                //     calendar.fullCalendar('refetchEvents');
+                                //     alert("Event Created Successfully");
+                                //     console.log(data)
+                                // },
+                                // error: function(returnval) {
+                                //     alert('Your appointment has not been created');
+                                // }
                                     calendar.fullCalendar('refetchEvents');
-                                    alert("Event Created Successfully");
-                                    console.log(data)
+                                   // console.log(data.select_error)
+
+                                    if(data.select_error == null)
+                                    {
+                                        if(data.NoRepeatService != null)
+                                        {
+                                            alert(data.NoRepeatService)
+                                        }else{
+                                            alert("Event Created Successfully");
+                                        }
+                                    }else{
+                                        alert(data.select_error);
+                                    }
+
                                 },
-                                error: function(returnval) {
+                                error: function(data) {
                                     alert('Your appointment has not been created');
                                 }
                             });
 
-                        }else{
-                            alert('Empty');
-                        }
+                        // }else{
+                        //     alert('Empty');
+                        // }
+                        });
                     }else{
                         alert('You can not make appointments with back date.');
                     }
 
                 },
+                eventRender: function(event, element,start, end, allDay) {
+                    var us_id = "{{Auth::user()->id}}";
+                    if(event['status'] == null) {
+
+  // console.log(event)
+                        setTimeout(() => {
+
+                            element[0].setAttribute('class', 'activeNull  fc-day-grid-event fc-h-event fc-event fc-start fc-end fc-draggable');
+
+                            // let day = document.getElementsByClassName('fc-day-grid-event');
+                            //
+                            // for (let a of day) {
+                            //     a.setAttribute('izNull', `${event.id}`)
+                            //     console.log(a);
+                            // }
+
+                            let x = document.querySelector('.fc-event-container');
+                            x.removeAttribute('class');
+
+
+                            // let y = document.querySelector('div .fc-event-container');
+                            // y.removeAttribute('class');
+                            // alert('edede')
+                            // x.style.backgroundColor = "red";
+                            // x.style.color = "white";
+
+                            // for (let a of day) {
+                            //     if (event.id === a.getAttribute('id')) {
+                            //         console.log('000000000000000000', a);
+                            //         a.style.backgroundColor = "#FED638";
+                            //         a.style.color = "black";
+                            //         a.style.border = "1px solid #abab95";
+                            //     }
+                            //
+                            // }
+
+                        }, 10)
+
+                        // var ssss =  document.querySelector('.fc-time-grid-event');
+                        //  ssss.style.backgroundColor = "#00d210ba";
+                    }else{
+
+                        if(event['user_id'] == us_id)
+                        {
+
+                            setTimeout(() => {
+                                element[0].setAttribute('class', ' activeUser fc-day-grid-event fc-h-event fc-event fc-start fc-end fc-draggable');
+                                element[0].setAttribute('active', 'activeUser');
+                                let div = document.getElementsByClassName('fc-content-col');
+                                let aArray = div[0].childNodes[1].childNodes;
+                                // console.log('5555555555',aArray[0]?.getAttribute('active'));
+                                for(let key of aArray) {
+                                    if (key.getAttribute('active') === 'activeUser') {
+                                        let aDiv = document.createElement('div');
+                                        aDiv.setAttribute('class', 'fc-event-container');
+                                        aDiv.appendChild(element[0])
+                                        div[0].childNodes[1].appendChild(aDiv)
+                                    }
+                                }
+                                console.log( '***************************************', aArray)
+
+                            }, 20)
+                        }
+                        if(event['user_id'] != us_id)
+                            {
+                                setTimeout(() => {
+                                    // let x = document.querySelector('.fc-event-container');
+                                    // x.removeAttribute('class');
+
+                                    element[0].setAttribute('class', 'DeactiveUser fc-day-grid-event fc-h-event fc-event fc-start fc-end fc-draggable');
+                                }, 10)
+                            }
+
+                        if(event['service_id'] != service_id)
+                        {
+                            setTimeout(() => {
+                                element[0].setAttribute('class', 'DeactiveUser fc-day-grid-event fc-h-event fc-event fc-start fc-end fc-draggable');
+                            }, 10)
+                        }
+                        $($(element[0]).find('.DeactiveUser')).prepend('<div class="kkkkkkkkkkkk">'+element[0]+'</div>');
+
+                        console.log($(element[0]).find('.DeactiveUser').prepend('<ol>eeeeeee</ol>'))
+
+                        // Display none booking date
+                        setTimeout(() => {
+                            $(".DeactiveUser" ).css( "display", "none" );
+                            $(".DeactiveUser" ).next().css( "display", "none" );
+                        }, 20);
+
+                        }
+                },
 
 
 
-                eventClick:function(event)
-                {
-                    var id         = event.id;
-                    var user_id    = event.user_id;
-                    var meeting_id = event.meeting_id;
+                    eventClick:function(event)
+                    {
+                        var id         = event.id;
+                        var user_id    = event.user_id;
+                        var meeting_id = event.meeting_id;
 
 
-                        @if(!empty(Auth::user()->id))
+                            @if(!empty(Auth::user()->id))
 
-                    var AuthID = {{Auth::user()->id}}
+                        var AuthID = {{Auth::user()->id}}
 
 
                     // fc-event-container

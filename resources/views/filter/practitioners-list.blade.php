@@ -1,9 +1,8 @@
 <div class="find-result mt-4">
-
     <div class="person">
         <div class="person__info">
             <div class="person__info-cont1">
-                <img class="person__info-img" src="{{ asset('web_sayt/img/person-foto.png') }}" alt="">
+                <img class="person__info-img" style="width: 150px;" src="{{ asset('web_sayt/img_practitioners/'.$Result->img) }}" alt="">
                 <div class="person__info-rating">
                         <span class="gl-star-rating gl-star-rating--ltr" data-star-rating="">
                             <select class="star-rating">
@@ -23,7 +22,7 @@
                         </span>
                 </div>
                 <p class="perion__info-session">256<span> Sessions</span></p>
-                <a href="" class="btn bg-yellow" data-toggle="modal" data-target="#service-modal{{$Result->id}}">View Services</a>
+                <a href="" class="btn bg-yellow" data-toggle="modal" data-target="#service-modal{{$Result->id}}">Book</a>
             </div>
             <div class="person__info-cont2">
                 <div class="person__info-name"><a href="{{route('profile-view-customer',[app()->getLocale(),$Result->id])}}">{{$Result->first_name}} {{$Result->last_name}}</a></div>

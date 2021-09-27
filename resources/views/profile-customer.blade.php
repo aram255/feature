@@ -11,12 +11,36 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('web_sayt/maps/style.css') }}" />
     <link rel="stylesheet" href="{{ asset('web_sayt/css/service.css') }}">
     <link rel="stylesheet" href="{{ asset('web_sayt/css/css/responsive.css') }}">
-
+    <script src="{{ asset('web_sayt/js/jquery.js') }}"></script>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/fullcalendar.css" />
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, Helvetica Neue, Helvetica, sans-serif;
+            font-size: 14px;
+        }
 
+        #calendar {
+            max-width: 1100px;
+            margin: 40px auto;
+        }
+
+        .fc-timegrid-event .fc-event-resizer {
+            color: #fff;
+            text-align: center;
+            font-family: monospace;
+        }
+        .fc-timegrid-event:hover .fc-event-resizer:after {
+            content: "=";
+            display: inline-block;
+            vertical-align: top;
+            line-height: 0px;
+        }
+    </style>
 @endsection
 
 @section('title', __('site.Home') )
@@ -93,6 +117,7 @@
                                     <a href="#" class="fs-18">Complete</a> | <a href="#" class="fs-18">In Process</a>
                                 </div>
                             </div>
+
                         @if(count($InProcess)>0)
                             @foreach($InProcess as $InProcessVal)
 
@@ -114,7 +139,7 @@
 
                                         <button
                                             class="profile-customer__my-appointments-button-edit my-appointments-person__complete-process-button btn bg-blue-white ">
-                                            <a target="_blank" href="{{route('customer-type-form-practitioner-view',[app()->getLocale(),'id'=>$InProcessVal->type_form_id])}}">Fill
+                                            <a target="_blank" href="{{route('customer-type-form-practitioner-view',[app()->getLocale(),'id'=>$InProcessVal->type_form_id,'meeting_id'=>1])}}">Fill
                                                 Intake Form</a>
                                         </button>
 
@@ -125,7 +150,9 @@
                                             <div class="profile-customer__my-appointments-session  my-appointments-person__complete-process-session">
                                                 <a target="_blank" href="{{$InProcessVal->join_url}}">Join session</a>
                                             </div>
+
                                             <div class="profile-customer__my-appointments-button-fill">
+                                                <input type="hidden" name="service_name_myapp" class="service_name_appointments" value="{{$InProcessVal->service_name}}">
                                                 <input type="hidden" name="join_url" value="{{$InProcessVal->create}}">
                                                 <input type="hidden" name="join_url" value="{{$InProcessVal->join_url}}">
                                                 <input type="hidden" name="password" value="{{$InProcessVal->password}}">
@@ -136,9 +163,11 @@
                                                 <input type="hidden" name="last_name" value="{{$InProcessVal->last_name}}">
                                                 <input type="hidden" name="phone_number" value="{{$InProcessVal->phone_number}}">
                                                 <input type="hidden" name="practitioner_id" value="{{$InProcessVal->id}}">
-{{--                                                <button--}}
+
+                                                {{--                                                <button--}}
 {{--                                                    class="profile-customer__my-appointments-button my-appointments-person__complete-process-button btn bg-yellow detail-btn" data-toggle="modal" data-target="#myModal" data-id="{{ $InProcessVal->id }}">Edit--}}
 {{--                                                </button>--}}
+
                                                 @php
                                                     $date1 = $InProcessVal->create;
                                                     $date2 = now()->toDateTimeString();
@@ -160,6 +189,7 @@
                                     </div>
                                 </div>
                             </div>
+
 {{--                                @php--}}
 {{--                                    $t1 = strtotime($InProcessVal->create);--}}
 {{--                                    $t2 = strtotime(now()->toDateTimeString() );--}}
@@ -219,7 +249,7 @@
                                                                                                        class="gl-active gl-selected"></span></span></span>
                                             </div>
                                             <p class="perion__info-session">256<span>Sessions</span></p>
-                                            <a href=""   class="btn bg-yellow" data-toggle="modal" data-target="#service-modal{{$PractitionerFavoriteVal->partit_id}}">View Services</a>
+                                            <a href=""   class="btn bg-yellow" data-toggle="modal" data-target="#service-modal{{$PractitionerFavoriteVal->partit_id}}">Book</a>
                                         </div>
                                     </div>
                                     <div class="person__info-cont2">
@@ -365,8 +395,30 @@
                         <span class="x" aria-hidden="true">×</span>
                     </button>
                     <div class="lg-sg__form">
-                        <div class="lg-sg__form-text">You can change the date only <span style="color: red;">12 hours in advance.</span</div>
+                        <div class="lg-sg__form-text">You can change the date only <span style="color: red;">12 hours in advance.</span></div>
                     </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <div id="myModal2" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 id="myModalLabel">Modal 2</h3>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                </div>
+                <div id="zoom" class="modal-body">
+                    <a href="#">Zoom</a>
+                </div>
+                <div id="offline" class="modal-body">
+                    <a href="#">Offline</a>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
                 </div>
             </div>
         </div>
@@ -375,45 +427,8 @@
 
 @section('style')
 
-    <script src="{{ asset('web_sayt/js/jquery.js') }}"></script>
-    <script>
-        // $(document).on('click','.detail-btn', function(){
-
-            // var create         = $(this).prev().prev().prev().prev().prev().prev().prev().prev().prev().prev().val();
-            //
-            //
-            // // Check live DateTime
-            // var today = new Date();
-            // var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
-            // var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
-            // var LiveDateTime = date + ' ' + time;
-            //
-            //
-            // function diff_hours(dt2, dt1)
-            // {
-            //     var diff =(dt2.getTime() - dt1.getTime()) / 1000;
-            //     diff /= (60 * 60);
-            //     return Math.abs(Math.round(diff));
-            // }
-            //
-            // var d1 = new Date(create);
-            // var d2 = new Date(LiveDateTime);
-            //
-            // var diff = diff_hours(d1, d2);
-            //
-            // if(diff<14)
-            // {
-            //     alert('Yes');
-            // }
-            //
-            //
-            // })
-    </script>
-
     <script>
         $(document).on('click','.detail-btn', function()  {
-
-
 
             var practitionerId = $(this).attr('data-id');
             var calendar = null;
@@ -425,20 +440,13 @@
             var email          = $(this).prev().prev().prev().prev().prev().val();
             var service_id     = $(this).prev().prev().prev().prev().prev().prev().val();
             var durationn      = $(this).prev().prev().prev().prev().prev().prev().prev().val();
-            var password       = $(this).prev().prev().prev().prev().prev().prev().prev().prev().val();
+          //  var password       = $(this).prev().prev().prev().prev().prev().prev().prev().prev().val();
             var join_url       = $(this).prev().prev().prev().prev().prev().prev().prev().prev().prev().val();
+            var serviceName    = $(this).prev().prev().prev().prev().prev().prev().prev().prev().prev().prev().prev().val();
 
 
 
-// alert('practitionerID => '+practitionerID);
-// alert('phone_number => '+phone_number);
-// alert('last_name => '+last_name);
-// alert('first_name => '+first_name);
-// alert('email => '+email);
-//  alert('service_id => '+service_id);
-// alert('durationn => '+durationn);
-// alert('password => '+password);
-// alert('join_url => '+join_url);
+
 if(service_id == null)
 
     service_id = '';
@@ -460,90 +468,24 @@ if(service_id == null)
                     center:'title',
                     right:'month,agendaWeek,agendaDay'
                 },
-                events:'/en/Search/'+ practitionerId+'/'+service_id,
+                //events:'/en/Search/'+ practitionerId+'/'+service_id,
+                events:'/en/Search/'+ practitionerId,
                 selectable:true,
                 selectHelper: true,
-                select:function(start, end, allDay)
-                {
-
-                    var start = $.fullCalendar.formatDate(start, 'Y-MM-DD HH:mm:ss');
-
-                    var end = $.fullCalendar.formatDate(end, 'Y-MM-DD HH:mm:ss');
-
-
-                    // Check live DateTime
-                    var today = new Date();
-                    var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
-                    var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
-                    var LiveDateTime = date + ' ' + time;
-
-
-                    // compare
-
-                    var d1 = new Date(start);
-                    var d2 = new Date(LiveDateTime);
-
-                    if (d1 >= d2) {
-
-                        var title       = prompt('Event Title:');
-                        var pasword     = prompt('Event password:');
-                        var duration    = prompt('Event Duration:');
-                            @if(isset(Auth::user()->id))
-                        var add_user_id = "{{Auth::user()->id}}";
-                        @endif
-
-
-
-
-
-                        if(title !== "" && pasword !== "" && duration !== ""){
-
-                            $.ajax({
-                                url: "{{ route('add-zoom-meeting',app()->getLocale()) }}",
-                                type: "POST",
-                                data: {
-                                    title: title,
-                                    start: start,
-                                    end: end,
-                                    practitionerId: practitionerId,
-                                    add_user_id: add_user_id,
-                                    phone_number: phone_number,
-                                    last_name: last_name,
-                                    first_name: first_name,
-                                    email: email,
-                                    duration: duration,
-                                    password: pasword,
-                                    practitionerID: practitionerID,
-                                    service_id: service_id,
-                                    LiveDateTime:LiveDateTime,
-                                    type: 'add'
-                                },
-                                success: function (data) {
-                                    calendar.fullCalendar('refetchEvents');
-
-                                    if(data.NoRepeatService != null)
-                                    {
-                                        alert(data.NoRepeatService)
-                                    }else{
-                                        alert("Event Created Successfully");
-                                    }
-
-                                },
-                                error: function(returnval) {
-                                    alert('Your appointment has not been created');
-                                }
-                            });
-
-                        }else{
-                            alert('Empty');
-                        }
-                    }else{
-                        alert('You can not make appointments with back date.');
-                    }
-
-                },
                 editable:true,
                 eventDrop: function(event) {
+
+                    // Generate password zoom
+                    const characters =
+                        "abcdefghijklmnopqrstuvwxyz0123456789";
+                    const length = 6;
+                    let password = "";
+
+                    for (let i = 0; i < length; i++) {
+                        const randomNum = Math.floor(Math.random() * characters.length);
+                        password += characters[randomNum];
+                    }
+
 
                     var start = $.fullCalendar.formatDate(event.start, 'Y-MM-DD HH:mm:ss');
                     var end = $.fullCalendar.formatDate(event.end, 'Y-MM-DD HH:mm:ss');
@@ -556,33 +498,24 @@ if(service_id == null)
 
 
                     // compare
-
                     var d1 = new Date(start);
+                    var d5 = new Date(end);
                     var d2 = new Date(LiveDateTime);
+                    var diff_time = d5-d1;
+                    var  duration = diff_time/(60000);
 
                     if (d1 >= d2) {
 
                         var id = event.id;
                         var user_id = event.user_id;
                         var meeting_id = event.meeting_id;
-                        var duration = event.duration;
-                        var password = event.password;
-                        var title = event.title;
-
-
-
-                        if (confirm("Do you want to change your meeting details?")) {
-
-                            var title = prompt('Edit Title:', title);
-                            var password = prompt('Edit Password:', password);
-                            var duration = prompt('Edit Title:', duration);
 
                             // submitTimeChanges(event.id);
                             $.ajax({
                                 url: "/en/update-zoom-meeting",
                                 type: "POST",
                                 data: {
-                                    title: title,
+                                    title: serviceName,
                                     start: start,
                                     end: end,
                                     meeting_id: meeting_id,
@@ -596,40 +529,177 @@ if(service_id == null)
                                     type: 'update'
                                 },
                                 success: function (response) {
+                                    // calendar.fullCalendar('refetchEvents');
+                                    // alert("Event Updated Successfully");
+                                    //
+                                    // if(response.Hour != null)
+                                    // {
+                                    //     alert(response.Hour)
+                                    // }else{
+                                    //     alert("Event Updated Successfully");
+                                    // }
                                     calendar.fullCalendar('refetchEvents');
-                                    //alert("Event Updated Successfully");
+                                    console.log(response.select_error)
 
-                                    if(response.Hour != null)
+                                    if(response.select_error == null)
                                     {
-                                        alert(response.Hour)
+                                        if(response.Hour != null)
+                                        {
+                                            alert(response.Hour)
+                                        }else{
+                                            alert("Event Updated Successfully");
+                                        }
                                     }else{
-                                        alert("Event Updated Successfully");
+                                        alert(response.select_error);
                                     }
+
+                                },
+                                error: function(data) {
+                                    console.log(data)
+                                    alert('Your appointment has not been created');
                                 }
+
                             })
                         }
+                },
+                // eventRender: function(event, element,start) {
+                //
+                //     if(event['status'] == null) {
+                //
+                //         setTimeout(() => {
+                //
+                //             element[0].setAttribute('class', 'activeNull  fc-day-grid-event fc-h-event fc-event fc-start fc-end fc-draggable');
+                //
+                //             // let day = document.getElementsByClassName('fc-day-grid-event');
+                //             //
+                //             // for (let a of day) {
+                //             //     a.setAttribute('izNull', `${event.id}`)
+                //             //     console.log(a);
+                //             // }
+                //
+                //             let x = document.querySelector('.fc-event-container');
+                //              x.removeAttribute('class');
+                //
+                //
+                //             // let y = document.querySelector('div .fc-event-container');
+                //             // y.removeAttribute('class');
+                //              // alert('edede')
+                //             // x.style.backgroundColor = "red";
+                //             // x.style.color = "white";
+                //
+                //             // for (let a of day) {
+                //             //     if (event.id === a.getAttribute('id')) {
+                //             //         console.log('000000000000000000', a);
+                //             //         a.style.backgroundColor = "#FED638";
+                //             //         a.style.color = "black";
+                //             //         a.style.border = "1px solid #abab95";
+                //             //     }
+                //             //
+                //             // }
+                //
+                //
+                //         }, 10)
+                //
+                //         // var ssss =  document.querySelector('.fc-time-grid-event');
+                //         //  ssss.style.backgroundColor = "#00d210ba";
+                //     }else{
+                //        // fc-event-container
+                //       //  $("div").append(element[0]);
+                //         //console.log(element[0])
+                //     }},
+
+
+                eventRender: function(event, element,start, end, allDay) {
+
+                    var us_id = "{{Auth::user()->id}}";
+                    if(event['status'] == null) {
+
+                        setTimeout(() => {
+                            element[0].setAttribute('class', 'activeNull  fc-day-grid-event fc-h-event fc-event fc-start fc-end fc-draggable');
+                            let x = document.querySelector('.fc-event-container');
+                            x.removeAttribute('class');
+                        }, 10)
+
                     }else{
-                        alert('You can not make appointments with back date.');
+
+                        if(event['user_id'] == us_id && event['service_id'] == service_id)
+                        {
+
+                            setTimeout(() => {
+                                element[0].setAttribute('class', ' activeUser fc-day-grid-event fc-h-event fc-event fc-start fc-end');
+                                element[0].setAttribute('active', 'activeUser');
+                                let div = document.getElementsByClassName('fc-content-col');
+                                let aArray = div[0].childNodes[1].childNodes;
+                                // console.log('5555555555',aArray[0]?.getAttribute('active'));
+                                for(let key of aArray) {
+                                    if (key.getAttribute('active') === 'activeUser') {
+                                        let aDiv = document.createElement('div');
+                                        aDiv.setAttribute('class', 'fc-event-container');
+                                        aDiv.appendChild(element[0])
+                                        div[0].childNodes[1].appendChild(aDiv)
+                                    }
+                                }
+                            }, 20)
+                        }
+                        if(event['user_id'] != us_id)
+                        {
+                            setTimeout(() => {
+                                element[0].setAttribute('class', 'DeactiveUser fc-day-grid-event fc-h-event fc-event fc-start fc-end fc-draggable');
+                            }, 10)
+                        }
+
+                        if(event['service_id'] != service_id)
+                        {
+                            setTimeout(() => {
+                                element[0].setAttribute('class', 'DeactiveUser fc-day-grid-event fc-h-event fc-event fc-start fc-end fc-draggable');
+                            }, 10)
+                        }
+                        // $($(element[0]).find('.DeactiveUser')).prepend('<div class="kkkkkkkkkkkk">'+element[0]+'</div>');
+                        //
+                        // console.log($(element[0]).find('.DeactiveUser').prepend('<ol>eeeeeee</ol>'))
                     }
 
+                    // Display none booking date
+                    setTimeout(() => {
+                        $(".DeactiveUser" ).css( "display", "none" );
+                        $(".DeactiveUser" ).next().css( "display", "none" );
+                    }, 20);
                 },
 
-                eventClick:function(event)
+                eventClick:function(event,element)
                 {
+                    // Check live DateTime
+                    var today = new Date();
+                    var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
+                    var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+                    var LiveDateTime = date + ' ' + time;
+
+                    var date1 = new Date(event.create);
+                    var date2 = new Date(LiveDateTime);
+
+                    var Difference_In_Time = date2.getTime() - date1.getTime();
+                    let DiffHours = parseInt(Difference_In_Time/36e5);
+
+
+
+
                     var id         = event.id;
                     var user_id    = event.user_id;
                     var meeting_id = event.meeting_id;
 
-
-                        @if(!empty(Auth::user()->id))
+                  @if(!empty(Auth::user()->id))
 
                     var AuthID = {{Auth::user()->id}}
 
-
                 if(AuthID === user_id) {
 
-                    if (confirm("Are you sure you want to remove it?")) {
+                    //Check 12 hours
+                    if(DiffHours <= 12)
+                    {
+                        $("#editHour").modal("show");
+                    }else{
 
+                    if (confirm("Are you sure you want to remove it?")) {
                         $.ajax({
                             url: "{{ route('zoom-delete',app()->getLocale()) }}",
                             type: "POST",
@@ -647,15 +717,14 @@ if(service_id == null)
                             }
                         })
                     }
+                }
                 }else{
                     alert('You can not delete this meeting because you did not add it.')
                 }
                     @endif
                 },
-
-                eventColor: '#378006'
+                eventColor: '#378006',
             });
-
         });
     </script>
 

@@ -373,10 +373,10 @@
                     center:'title',
                     right:'month,agendaWeek,agendaDay'
                 },
-                events:'/en/profile-practitioner/'+ practitionerId+'/'+service_id,
+                //events:'/en/profile-practitioner/'+ practitionerId+'/'+service_id,
+                events:'/en/profile-practitioner/'+ practitionerId,
                 selectable:true,
                 selectHelper: true,
-
                 select:function(start, end, allDay)
                 {
                     // console.log(arrText)
@@ -393,15 +393,10 @@
 
 
                     // compare
-
                     var d1 = new Date(start);
                     var d2 = new Date(LiveDateTime);
 
                     if (d1 >= d2) {
-
-                         // var title       = prompt('Free Date Time Title:');
-                        //
-                        // if(title !== ""){
 
                             $.ajax({
                                 url: "{{ route('add-free-date-practitioner-calendar',app()->getLocale()) }}",
@@ -416,52 +411,40 @@
                                 },
                                 success: function (data) {
                                     calendar.fullCalendar('refetchEvents');
-                                    // alert("Event Created Successfully");
-                                    alert(data.success)
-                                },
-                                error: function(returnval) {
-                                    alert(data.error);
-                                }
-                            });
+                                    if(data.success !== undefined)
+                                    {
+                                        alert(data.success)
+                                        //calendar.fullCalendar('refetchEvents');
+                                    }
 
-                        // }else{
-                        //     alert('Empty');
-                        // }
+                                    if(data.error !== undefined)
+                                    {
+                                        alert(data.error);
+
+                                    }
+                                },
+                            });
                     }else{
                         alert('You can not make appointments with back date.');
                     }
-
                 },
 
-                eventRender: function(event, element,start) {
-// alert(event['user_id'])
-//                     if(event['status'] == null)
-//                     {
-//                         setTimeout(() => {
-//                             // let x = document.querySelector('.fc-event-container');
-//                             // // x.removeAttribute('class')
-//                             // x.style.backgroundColor = "red";
-//                             // x.style.color = "white";
-//                             let day = document.querySelector('.fc-day-grid-event');
-//                             day.style.backgroundColor = "#FED638";
-//                             day.style.color = "black";
-//                             day.style.border = "1px solid #abab95";
-//
-//                         }, 10)
-//
-//                         // var ssss =  document.querySelector('.fc-time-grid-event');
-//                         //  ssss.style.backgroundColor = "#00d210ba";
-//                     }
-//                     element.css({
-//                         'background-color': '#00d210ba',
-//                         "border": "1px solid #826516 !important"
-//                     });
+                eventRender: function(event, element,start, end, allDay) {
 
 
+                    if(event['status'] == null) {
 
+                        setTimeout(() => {
+                            element[0].setAttribute('class', 'activeNull  fc-day-grid-event fc-h-event fc-event fc-start fc-end fc-draggable');
+                        }, 10)
 
+                    }
 
-
+                    // Display none booking date
+                    setTimeout(() => {
+                        $(".DeactiveUser" ).css( "display", "none" );
+                        $(".DeactiveUser" ).next().css( "display", "none" );
+                    }, 20);
                 },
 
                editable:true,
@@ -517,6 +500,9 @@
 
                 eventClick:function(event)
                 {
+                    var start = $.fullCalendar.formatDate(event.start, 'Y-MM-DD HH:mm:ss');
+                    var end = $.fullCalendar.formatDate(event.end, 'Y-MM-DD HH:mm:ss');
+
                     var event_id         = event.id;
                     var user_id  = event.user_id;
 
@@ -534,18 +520,24 @@
                                 url: "{{ route('free-date-time-delete',app()->getLocale()) }}",
                                 type: "POST",
                                 data: {
+                                    start: start,
+                                    end: end,
                                     event_id: event_id,
                                     type: "delete"
                                 },
-                                success: function (response) {
+                                success: function (data) {
                                     calendar.fullCalendar('refetchEvents');
-                                    alert("Event Deleted Successfully");
-                                    alert(responses.success);
+
+                                    if(data.success !== undefined)
+                                    {
+                                        alert(data.success)
+                                    }
+
+                                    if(data.error !== undefined)
+                                    {
+                                        alert(data.error);
+                                    }
                                 },
-                                error: function(returnval) {
-                                    // alert('Your appointment has not been deleted');
-                                    alert(responses.error);
-                                }
                             })
                         }
                     }else{

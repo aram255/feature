@@ -83,7 +83,7 @@ class IndexController extends Controller
 //        }
 
         $Practitioner = DB::table('practitioner')
-                        ->select('practitioner.id','practitioner.first_name','practitioner.phone_number','practitioner.last_name','practitioner.email','practitioner.video','practitioner.description')
+                        ->select('practitioner.id','practitioner.first_name','practitioner.phone_number','practitioner.last_name','practitioner.email','practitioner.video','practitioner.description','practitioner.img')
 
             ->when(isset($_POST['state']), function ($query) {
 
@@ -108,7 +108,7 @@ class IndexController extends Controller
 
                       })
 
-            ->groupBy('practitioner.id', 'practitioner.email', 'practitioner.first_name', 'practitioner.last_name', 'practitioner.phone_number','practitioner.video','practitioner.description')
+            ->groupBy('practitioner.id', 'practitioner.email', 'practitioner.first_name', 'practitioner.last_name', 'practitioner.phone_number','practitioner.video','practitioner.description','practitioner.img')
             ->orderBy('practitioner.first_name',"DESC")
             ->where(function ($query) use($request) {
 
@@ -152,7 +152,7 @@ class IndexController extends Controller
             })
             ->get();
 
-      // dd($Practitioner);
+     //  dd($Practitioner);
 
 
 
@@ -268,7 +268,8 @@ class IndexController extends Controller
 //                return response()->json($data);
 //
 //        }
-
+        $a = 1;
+       $segment = request()->segments();
         if($request->ajax())
         {
 
@@ -278,11 +279,12 @@ class IndexController extends Controller
 
 
             $data = ZoomModel::whereDate('start', '>=', $start)
+
                 ->whereDate('end',   '<=', $end)
                 ->where(function ($query) use($practitioner_id,$service_id) {
                     if(!empty($practitioner_id) and empty($service_id))
                     {
-                        $query ->where('practitioner_id',$practitioner_id);
+                        $query->where('practitioner_id',$practitioner_id);
                     }
 
                     if(!empty($practitioner_id) and !empty($service_id))
@@ -293,10 +295,26 @@ class IndexController extends Controller
                 })
                 //->where('user_id',Auth::id())
                 ->where(function ($query) use($practitioner_id,$service_id) {
-                    $query->where('user_id',Auth::id())
-                        ->where('service_id',$service_id)
-                        ->OrWhere('user_id',null);
+
+                    if(!empty($service_id))
+                    {
+                        $query->where('user_id',Auth::id())
+                            ->where('service_id',$service_id)
+                            ->OrWhere('user_id',null);
+                    }
+
                 })
+
+//                ->when(isset($a), function ($query) {
+//
+//                        $query->addSelect([
+//                            'count_meting' => ZoomModel::select(DB::raw('start'))
+//                                //->whereBetween('start',[Carbon::now()->startOfWeek(), Carbon::now()->endOfWeek()] )
+//                              //  ->whereColumn('practitioner_id', '=', 'practitioner.id')
+//                        ]);
+//
+//
+//                })
                 // where practitioner_id=$practitioner_id and (user_id=$auth_id and service_id=$service_id or ( user_id=null))
                 ->get();
 

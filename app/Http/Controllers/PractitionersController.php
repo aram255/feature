@@ -30,6 +30,7 @@ use GuzzleHttp\Client;
 use GuzzleHttp\RequestOptions;
 use Hash;
 use File;
+use URL;
 
 class PractitionersController extends Controller
 {
@@ -81,6 +82,7 @@ class PractitionersController extends Controller
 
     public function profilePractitioner(Request $request,$lang, $practitioner_id = null, $service_id = null)
     {
+
         $Service  =  ServicesModel::where('practitioner_id',session()->get('UserID'))->get();
 
         $title =[];
@@ -168,21 +170,27 @@ class PractitionersController extends Controller
 
     public function calendarAddFreeDate(request $request)
     {
-//        foreach ($request->service_id as $GetServiceId)
-//        {
 
+        $CheckSelectMeeting = ZoomModel::where('practitioner_id',session()->get('UserID'))
+            ->where('start',$request->start)
+            ->where('end',$request->end)
+            ->first();
+
+        if(empty($CheckSelectMeeting))
+        {
             $Add = new ZoomModel;
-
             $Add->title            = $request->title;
             $Add->start            = $request->start;
             $Add->end              = $request->end;
             $Add->create           = $request->LiveDateTime;
             $Add->practitioner_id  = session()->get('UserID');
-//            $Add->service_id  = $GetServiceId;
             $Add->save();
 
-//        }
-        return response()->json(['success'=> 'Hours that are not convenient for you have been added to the calendar.','error' => 'Hours that are not convenient for you have not been added to the calendar.']);
+            return response()->json(['success'=> 'Hours that are not convenient for you have been added to the calendar.']);
+        }
+        else{
+            return response()->json(['error' => 'Hours that are not convenient for you have not been added to the calendar.']);
+        }
     }
 
     public function calendarEditFreeDate(request $request)
@@ -202,11 +210,31 @@ class PractitionersController extends Controller
 //        $GetList = ZoomModel::where('practitioner_id',$request->practitioner_id)->where('join_url','=',null)->get();
 //        foreach ($GetList as $GetFreeId)
 //        {
+
+        $CheckSelectMeeting = ZoomModel::where('practitioner_id',session()->get('UserID'))
+            ->where('start',$request->start)
+            ->where('end',$request->end)
+            ->where('user_id','!=',null)
+            ->first();
+
+        if(!isset($CheckSelectMeeting->user_id))
+        {
             $Delete = ZoomModel::where('id',$request->event_id)->where('join_url','=',null)->first();
             $Delete->delete();
+
+                return response()->json(['success'=> 'The list of your busy hours has been removed.']);
+        }
+        else{
+                return response()->json(['error' => 'No puedes eliminarlo porque ya está arreglado.']);
+        }
+
+//        if(empty($CheckSelectMeeting))
+//        {
+//            $Delete = ZoomModel::where('id',$request->event_id)->where('join_url','=',null)->first();
+//            $Delete->delete();
 //        }
 
-        return response()->json(['success'=>'The list of your busy hours has been removed.','error'=>'The list of your busy hours has not been removed.']);
+       // return response()->json(['success'=>'The list of your busy hours has been removed.','error'=>'The list of your busy hours has not been removed.']);
     }
 
     public  function addTagMyListManagements(request $request)
@@ -1040,5 +1068,26 @@ class PractitionersController extends Controller
 //        }
 //    }
 
+    public function confirmMeeting($lang,$Code,$Status)
+    {
 
+        $ChangeStatus =  ZoomModel::where('check_code',$Code)->first();
+        if($ChangeStatus != null)
+        {
+            $ChangeStatus->check_code = '?'.$Code;
+            $ChangeStatus->status     = $Status;
+            $ChangeStatus->save();
+            if(isset($ChangeStatus->status) && $ChangeStatus->status == 'Accept')
+            {
+                return redirect()->route('index',[app()->getLocale()])->with('status', 'Your meeting approved.');
+
+            }elseif(isset($ChangeStatus->status) && $ChangeStatus->status == 'Reject'){
+
+                return redirect()->route('index',[app()->getLocale()])->with('status', 'Your meeting rejected.');
+            }
+
+        }else{
+            return redirect()->route('index',[app()->getLocale()])->with('status', 'You can not change the status again.');
+        }
+    }
 }

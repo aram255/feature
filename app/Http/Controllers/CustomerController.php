@@ -247,7 +247,7 @@ class CustomerController extends Controller
         $InProcess = DB::table('practitioner')
             ->join('zoom_meetings_list', 'practitioner.id', 'zoom_meetings_list.practitioner_id')
             ->where('zoom_meetings_list.user_id',Auth::id())
-            ->whereDate("zoom_meetings_list.start", "<=",date('Y-m-d'))
+            ->whereDate("zoom_meetings_list.start", ">=",date('Y-m-d'))
             ->orderBy('zoom_meetings_list.id','DESC')
             ->paginate(5);
 

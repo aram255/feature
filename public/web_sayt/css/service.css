@@ -491,7 +491,43 @@ a .fa-times {
     vertical-align: bottom;
     border-bottom: 1px solid #EAF2FB;
 }
+.activeNull{
+    background: #FED638 !important;
+    color: black !important;
+    border: 1px solid #abab95 !important;
+}
 
+.activeUser{
+    background: red !important;
+    color: white !important;
+    border: 1px solid #abab95 !important;
+
+    /*background-color: rgb(55, 128, 6) !important;*/
+    /*border-color: rgb(55, 128, 6) !important;*/
+    /*inset: 835.5px 0% -879.5px !important; z-index: 1;*/
+    /*margin-right: 20px !important;*/
+}
+/*.fc-time-grid-event.fc-allow-mouse-resize .fc-resizer:after{*/
+/*    content: "=" !important;*/
+/*}*/
+.DeactiveUser{
+    /*background: mediumblue !important;*/
+    /*color: white !important;*/
+    /*border: 1px solid #abab95 !important;*/
+    /*display: none;*/
+}
+/*.fc-time-grid-event.fc-allow-mouse-resize .fc-resizer{*/
+/*    left: 0 !important;*/
+/*    right: 0 !important;*/
+/*    bottom: 0 !important;*/
+/*    height: 8px  !important;*/
+/*    overflow: hidden  !important;*/
+/*    line-height: 8px  !important;*/
+/*    font-size: 11px  !important;*/
+/*    font-family: monospace  !important;*/
+/*    text-align: center  !important;*/
+/*    cursor: s-resize  !important;*/
+/*}*/
 @media (max-width: 768px) {
     .profile-practitioner__consultation {
         padding-left: 0;

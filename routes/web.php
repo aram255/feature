@@ -114,7 +114,7 @@ Route::group(['prefix' => '{locale?}','where' => ['locale' => '[a-zA-Z]{2}']], f
     Route::post('/add-zoom-meeting', [ZoomController::class, 'addZoomMeeting'])->name('add-zoom-meeting');
     Route::post('/delete-zoom-meeting', [ZoomController::class, 'deleteZoomMeeting'])->name('zoom-delete');
     Route::post('/delete-zoom-meeting-table', [ZoomController::class, 'deleteZoomMeetingTable'])->name('zoom-delete-table');
-    Route::get('/confirm-meeting/{Code}/{Status}', [ZoomController::class, 'confirmMeeting'])->name('confirm-meeting');
+    Route::get('/confirm-meeting/{Code}/{Status}', [PractitionersController::class, 'confirmMeeting'])->name('confirm-meeting');
 
     Route::post('/update-zoom-meeting', [ZoomController::class, 'update'])->name('update-zoom-meeting');
 

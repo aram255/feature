@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 
+use http\Env\Response;
 use Illuminate\Http\Request;
 use \Firebase\JWT\JWT;
 use GuzzleHttp\Client;
@@ -57,6 +58,7 @@ class ZoomController extends Controller
 //        $JoinUrl  = $data->meetings;
 //
 //        dd($JoinUrl);
+
 
         $data = ZoomModel::where('user_id',Auth::user()->id)->get();
 
@@ -147,11 +149,10 @@ class ZoomController extends Controller
 
     public function addZoomMeeting(request $request)
     {
-        $CheckService = ZoomModel::where('service_id',$request->service_id)
-            ->where('user_id',Auth::user()->id)
-
+        $CheckService = ZoomModel::where('service_id', $request->service_id)
+            ->where('user_id', Auth::user()->id)
             ->first();
-        if($CheckService==null || !empty($request->too_meet)) {
+        if ($CheckService == null || !empty($request->too_meet)) {
 
 
             $this->jwt();
@@ -164,97 +165,124 @@ class ZoomController extends Controller
             ]);
 
 
-            $client = new \GuzzleHttp\Client(['base_uri' => 'https://api.zoom.us']);
+            $CheckSelectMeeting = ZoomModel::where('practitioner_id',$request->practitionerID)
+                                  ->where('start',$request->start)
+                                  ->where('end',$request->end)
+                                  ->first();
 
-            $response = $client->request('POST', '/v2/users/me/meetings', [
-                "headers" => [
-                    "Authorization" => "Bearer " . $this->jwt
-                ],
-                'json' => [
-                    "topic" => $request->title,
-                    "type" => 2,
-                    //'timezone' => '(GMT+4:00) Baku, Tbilisi, Yerevan',
-                    "start_time" => new Carbon($request->start),
-                    "duration" => "$request->duration", // 30 mins
-                    "password" => $request->password
-                ],
-            ]);
+//            return response()->json(['ok' =>  $request->start .'=>'. $request->end]);
+//          //  dd('d');
+            if($CheckSelectMeeting != null) {
 
 
-            $get = $client->request('GET', '/v2/users/me/meetings', [
-                "headers" => [
-                    "Authorization" => "Bearer " . $this->jwt
-                ]
-            ]);
+                $client = new \GuzzleHttp\Client(['base_uri' => 'https://api.zoom.us']);
 
-            $GetData = json_decode($get->getBody());
-            $JoinUrl = end($GetData->meetings);
+                $response = $client->request('POST', '/v2/users/me/meetings', [
+                    "headers" => [
+                        "Authorization" => "Bearer " . $this->jwt
+                    ],
+                    'json' => [
+                        "topic" => $request->title,
+                        "type" => 2,
+                        //'timezone' => '(GMT+4:00) Baku, Tbilisi, Yerevan',
+                        "start_time" => new Carbon($request->start),
+                        "duration" => "$request->duration", // 30 mins
+                        "password" => $request->password
+                    ],
+                ]);
 
 
-            $code = Str::random(50);
-            $Accept  = 'Accept';
-            $Reject  = 'Reject';
-            $Pending = 'Pending';
+                $get = $client->request('GET', '/v2/users/me/meetings', [
+                    "headers" => [
+                        "Authorization" => "Bearer " . $this->jwt
+                    ]
+                ]);
 
-            $URLAccept = request()->getHttpHost() . '/' . app()->getLocale() . '/confirm-meeting/' . $code . '/' . $Accept;
-            $URLReject = request()->getHttpHost() . '/' . app()->getLocale() . '/confirm-meeting/' . $code . '/' . $Reject;
+                $GetData = json_decode($get->getBody());
+                $JoinUrl = end($GetData->meetings);
 
-            if ($response->getStatusCode() == 201) {
+
                 $code = Str::random(50);
+                $Accept = 'Accept';
+                $Reject = 'Reject';
+                $Pending = 'Pending';
 
-                Mail::send('email.zoom-from-customer',
-                    [
-                        'title' => $request->m_name,
-                        'start_time' => new Carbon($request->birthdaytime),
-                        'duration' => $request->time,
-                        'password' => $request->password,
-                        'JoinUrl' => $JoinUrl->join_url,
-                        'email' => $request->email,
-                        'first_name' => $request->first_name,
-                        'last_name' => $request->last_name,
-                        'phone_number' => $request->phone_number,
-                        'URLAccept' => $URLAccept,
-                        'URLReject' => $URLReject
+                $URLAccept = request()->getHttpHost() . '/' . app()->getLocale() . '/confirm-meeting/' . $code . '/' . $Accept;
+                $URLReject = request()->getHttpHost() . '/' . app()->getLocale() . '/confirm-meeting/' . $code . '/' . $Reject;
 
-                    ], function ($message) use ($request) {
-                        $message->from($request->email);
-                        $message->to($request->email);
-                        $message->subject('Generate Zoom Meeting');
-                    });
+                if ($response->getStatusCode() == 201) {
+                    $code = Str::random(50);
 
-                $Add = new ZoomModel;
-                $Add->title = $request->title;
-                $Add->start = new Carbon($request->start);
-                $Add->end = new Carbon($request->end);
-                $Add->duration = $request->duration;
-                $Add->join_url = $JoinUrl->join_url;
-                $Add->password = $request->password;
-                $Add->meeting_id = $JoinUrl->id;
-                $Add->user_id = Auth::user()->id;
-                $Add->practitioner_id = $request->practitionerID;
-                $Add->check_code = $code;
-                $Add->status = $Pending;
-                $Add->service_id = $request->service_id;
-                $Add->create = $request->LiveDateTime;
-                $Add->save();
 
-                return response()->json($Add);
+
+                    $Add = new ZoomModel;
+                    $Add->title = $request->title;
+                    $Add->start = new Carbon($request->start);
+                    $Add->end = new Carbon($request->end);
+                    $Add->duration = $request->duration;
+                    $Add->join_url = $JoinUrl->join_url;
+                    $Add->password = $request->password;
+                    $Add->meeting_id = $JoinUrl->id;
+                    $Add->user_id = Auth::user()->id;
+                    $Add->practitioner_id = $request->practitionerID;
+                    $Add->check_code = $code;
+                    $Add->status = $Pending;
+                    $Add->service_id = $request->service_id;
+                    $Add->create = $request->LiveDateTime;
+                    $Add->save();
+                    if(!empty($Add->id))
+                    {
+                        $mail = Mail::send('email.zoom-from-customer',
+                            [
+                                'title' => $request->m_name,
+                                'start_time' => new Carbon($request->birthdaytime),
+                                'duration' => $request->time,
+                                'password' => $request->password,
+                                'JoinUrl' => $JoinUrl->join_url,
+                                'email' => $request->email,
+                                'first_name' => $request->first_name,
+                                'last_name' => $request->last_name,
+                                'phone_number' => $request->phone_number,
+                                'URLAccept' => request()->getHttpHost() . '/' . app()->getLocale() . '/confirm-meeting/' . $code . '/' . $Accept,
+                                'URLReject' => request()->getHttpHost() . '/' . app()->getLocale() . '/confirm-meeting/' . $code . '/' . $Reject
+
+                            ], function ($message) use ($request) {
+                                $message->from($request->email);
+                                $message->to($request->email);
+                                $message->subject('Generate Zoom Meeting');
+                            });
+                        return response()->json($mail);
+                    }
+
+
+                } else {
+                    echo 'Zoom No Creat Meetings';
+                }
+                return response()->json($JoinUrl);
             } else {
-                echo 'Zoom No Creat Meetings';
+                return response()->json(['NoRepeatService' => 'You have already fixed it.']);
             }
-            return response()->json($JoinUrl);
         }else{
-            return response()->json(['NoRepeatService'=>'You have already fixed it.']);
+            return  response()->json(['select_error' => 'The date you specified does not match the date provided by your doctor.']);
         }
     }
 
     public function deleteZoomMeeting(request $request)
     {
+        $CheckDelete = ZoomModel::where('meeting_id', $request->delete_meeting_id)
+            ->first();
+        $date1 = $CheckDelete->create;
+        $date2 = now()->toDateTimeString();
+        $timestamp1 = strtotime($date1);
+        $timestamp2 = strtotime($date2);
+        $hour = abs($timestamp2 - $timestamp1) / (60 * 60);
+        $ChekHour = number_format($hour);
 
-        $this->jwt();
+        if ($ChekHour >= 12) {
+            $this->jwt();
 
 
-        $client = new \GuzzleHttp\Client(['base_uri' => 'https://api.zoom.us']);
+            $client = new \GuzzleHttp\Client(['base_uri' => 'https://api.zoom.us']);
 
 //            $response = $client->request("DELETE", "/v2/meetings/".$request->delete_meeting_id, [
 //                "headers" => [
@@ -273,100 +301,103 @@ class ZoomController extends Controller
 //
 //        }
 
-        // Get  Data  zoom meeting
-        $GetData = $client->request('GET', '/v2/users/me/meetings', [
-            "headers" => [
-                "Authorization" => "Bearer ". $this->jwt
-            ]
-        ]);
-        $data = json_decode($GetData->getBody());
-
-
-        // Check Meeting ID zomm Api
-        $ZID = [];
-        foreach ($data->meetings as $ZoomID)
-        {
-            if($ZoomID->id == $request->delete_meeting_id)
-            {
-                $ZID[] = $ZoomID->id;
-            }
-        }
-
-
-        // Delete meeting zoom Api
-        if(!empty($ZID[0]))
-        {
-            $response = $client->request("DELETE", "/v2/meetings/".$ZID[0], [
+            // Get  Data  zoom meeting
+            $GetData = $client->request('GET', '/v2/users/me/meetings', [
                 "headers" => [
                     "Authorization" => "Bearer " . $this->jwt
                 ]
             ]);
+            $data = json_decode($GetData->getBody());
+
+
+            // Check Meeting ID zomm Api
+            $ZID = [];
+            foreach ($data->meetings as $ZoomID) {
+                if ($ZoomID->id == $request->delete_meeting_id) {
+                    $ZID[] = $ZoomID->id;
+                }
+            }
+
+
+            // Delete meeting zoom Api
+            if (!empty($ZID[0])) {
+                $response = $client->request("DELETE", "/v2/meetings/" . $ZID[0], [
+                    "headers" => [
+                        "Authorization" => "Bearer " . $this->jwt
+                    ]
+                ]);
+            }
+
+            // Delete meeting zoom sql
+            // 204 == $response->getStatusCode()
+            if (!empty($request->delete_id)) {
+                $Delete = ZoomModel::where("id", $request->delete_id);
+
+                $Delete->delete();
+                return back()->with('status', 'Delete Zoom Meeting');
+            }
+
+            return response()->json($response);
         }
-
-        // Delete meeting zoom sql
-        // 204 == $response->getStatusCode()
-        if (!empty($request->delete_id))
-        {
-            $Delete = ZoomModel::where("id",$request->delete_id);
-
-            $Delete->delete();
-            return  back()->with('status','Delete Zoom Meeting');
-        }
-
-        return response()->json($response);
     }
 
     public function deleteZoomMeetingTable(request $request)
     {
-        $this->jwt();
+        $CheckDelete = ZoomModel::where('meeting_id', $request->delete_meeting_id)
+            ->first();
+        $date1 = $CheckDelete->create;
+        $date2 = now()->toDateTimeString();
+        $timestamp1 = strtotime($date1);
+        $timestamp2 = strtotime($date2);
+        $hour = abs($timestamp2 - $timestamp1) / (60 * 60);
+        $ChekHour = number_format($hour);
 
-        $client = new \GuzzleHttp\Client(['base_uri' => 'https://api.zoom.us']);
+        if ($ChekHour >= 12) {
 
+            $this->jwt();
 
-        // Get  Data  zoom meeting
-        $GetData = $client->request('GET', '/v2/users/me/meetings', [
-            "headers" => [
-                "Authorization" => "Bearer ". $this->jwt
-            ]
-        ]);
-        $data = json_decode($GetData->getBody());
-
-
-        // Check Meeting ID zomm Api
-        $ZID = [];
-        foreach ($data->meetings as $ZoomID)
-        {
-            if($ZoomID->id == $request->delete_meeting_id)
-            {
-                $ZID[] = $ZoomID->id;
-            }
-        }
+            $client = new \GuzzleHttp\Client(['base_uri' => 'https://api.zoom.us']);
 
 
-        // Delete meeting zoom Api
-        if(!empty($ZID[0]))
-        {
-            $response = $client->request("DELETE", "/v2/meetings/".$ZID[0], [
+            // Get  Data  zoom meeting
+            $GetData = $client->request('GET', '/v2/users/me/meetings', [
                 "headers" => [
                     "Authorization" => "Bearer " . $this->jwt
                 ]
             ]);
+            $data = json_decode($GetData->getBody());
+
+
+            // Check Meeting ID zomm Api
+            $ZID = [];
+            foreach ($data->meetings as $ZoomID) {
+                if ($ZoomID->id == $request->delete_meeting_id) {
+                    $ZID[] = $ZoomID->id;
+                }
+            }
+
+
+            // Delete meeting zoom Api
+            if (!empty($ZID[0])) {
+                $response = $client->request("DELETE", "/v2/meetings/" . $ZID[0], [
+                    "headers" => [
+                        "Authorization" => "Bearer " . $this->jwt
+                    ]
+                ]);
+            }
+
+
+            // Delete meeting zoom sql
+            // 204 == $response->getStatusCode()
+            if (!empty($request->delete_id)) {
+                $Delete = ZoomModel::where("id", $request->delete_id);
+
+                $Delete->delete();
+                return back()->with('status', 'Delete Zoom Meeting');
+            }
+        }else{
+            return back()->with('status', 'You can change the date only 12 hours in advance.');
         }
-
-
-
-
-
-        // Delete meeting zoom sql
-        // 204 == $response->getStatusCode()
-        if (!empty($request->delete_id))
-        {
-            $Delete = ZoomModel::where("id",$request->delete_id);
-
-            $Delete->delete();
-            return  back()->with('status','Delete Zoom Meeting');
-        }
-
     }
 
     public function getData()
@@ -374,113 +405,124 @@ class ZoomController extends Controller
         $GetData = ZoomModel::where('user_id',Auth::user()->id)->get();
     }
 
-    public function confirmMeeting($lang,$Code,$Status)
-    {
-
-        $ChangeStatus =  ZoomModel::where('check_code',$Code)->first();
-        if($ChangeStatus != null)
-        {
-            $ChangeStatus->check_code = '?'.$Code;
-            $ChangeStatus->status     = $Status;
-            $ChangeStatus->save();
-            if(isset($ChangeStatus->status) && $ChangeStatus->status == 'Accept')
-            {
-                return redirect()->route('index',[app()->getLocale()])->with('status', 'Your meeting approved.');
-
-            }elseif(isset($ChangeStatus->status) && $ChangeStatus->status == 'Reject'){
-
-                return redirect()->route('index',[app()->getLocale()])->with('status', 'Your meeting rejected.');
-            }
-
-        }else{
-            return redirect()->route('index',[app()->getLocale()])->with('status', 'You can not change the status again.');
-        }
-
-
-    }
+//    public function confirmMeeting($lang,$Code,$Status)
+//    {
+//
+//        $ChangeStatus =  ZoomModel::where('check_code',$Code)->first();
+//        if($ChangeStatus != null)
+//        {
+//
+//
+//            $ChangeStatus->check_code = '?'.$Code;
+//            $ChangeStatus->status     = $Status;
+//            $ChangeStatus->save();
+//            if(isset($ChangeStatus->status) && $ChangeStatus->status == 'Accept')
+//            {
+//                return redirect()->route('index',[app()->getLocale()])->with('status', 'Your meeting approved.');
+//
+//            }elseif(isset($ChangeStatus->status) && $ChangeStatus->status == 'Reject'){
+//
+//                return redirect()->route('index',[app()->getLocale()])->with('status', 'Your meeting rejected.');
+//            }
+//
+//        }else{
+//            return redirect()->route('index',[app()->getLocale()])->with('status', 'You can not change the status again.');
+//        }
+//
+//
+//    }
 
     public function update(request $request)
     {
-        $this->jwt();
 
-        $client = new \GuzzleHttp\Client(['base_uri' => 'https://api.zoom.us']);
+        $CheckSelectMeeting = ZoomModel::
+             where('start', $request->start)
+            ->where('end', $request->end)
+            ->first();
 
-        $response = $client->request("PATCH", "/v2/meetings/".$request->meeting_id, [
+        if($CheckSelectMeeting != null) {
+
+            $this->jwt();
+
+            $client = new \GuzzleHttp\Client(['base_uri' => 'https://api.zoom.us']);
+
+            $response = $client->request("PATCH", "/v2/meetings/" . $request->meeting_id, [
+                "headers" => [
+                    "Authorization" => "Bearer " . $this->jwt
+                ],
+                'json' => [
+                    "topic" => $request->title,
+                    "type" => 2,
+                    "start_time" => new Carbon($request->start),
+                    "duration" => "$request->duration", // 30 mins
+                    "password" => $request->password
+                ],
+            ]);
+
+            if ($response->getStatusCode() == 204) {
+
+                $code = Str::random(50);
+                $Accept = 'Accept';
+                $Reject = 'Reject';
+                $Pending = 'Pending';
+
+                $URLAccept = request()->getHttpHost() . '/' . app()->getLocale() . '/confirm-meeting/' . $code . '/' . $Accept;
+                $URLReject = request()->getHttpHost() . '/' . app()->getLocale() . '/confirm-meeting/' . $code . '/' . $Reject;
+
+                Mail::send('email.zoom-from-customer',
+                    [
+                        'title' => $request->title,
+                        'start_time' => new Carbon($request->start),
+                        'duration' => $request->duration,
+                        'password' => $request->password,
+                        'JoinUrl' => $request->join_url,
+                        'email' => Auth::user()->email,
+                        'first_name' => $request->first_name,
+                        'last_name' => $request->last_name,
+                        'phone_number' => $request->phone_number,
+                        'URLAccept' => request()->getHttpHost() . '/' . app()->getLocale() . '/confirm-meeting/' . $code . '/' . $Accept,
+                        'URLReject' => request()->getHttpHost() . '/' . app()->getLocale() . '/confirm-meeting/' . $code . '/' . $Reject
+
+                    ], function ($message) use ($request) {
+                        $message->from($request->email);
+                        $message->to($request->email);
+                        $message->subject('Update Zoom Meeting');
+                    });
+
+                $Edit = ZoomModel::where('meeting_id', $request->meeting_id)
+                    ->first();
+                $date1 = $Edit->create;
+                $date2 = now()->toDateTimeString();
+                $timestamp1 = strtotime($date1);
+                $timestamp2 = strtotime($date2);
+                $hour = abs($timestamp2 - $timestamp1) / (60 * 60);
+                $ChekHour = number_format($hour);
+
+                if ($ChekHour >= 12) {
+                    $Edit->title = $request->title;
+                    $Edit->start = new Carbon($request->start);
+                    $Edit->end = new Carbon($request->end);
+                    $Edit->duration = $request->duration;
+                    $Edit->password = $request->password;
+                    $Edit->check_code = $code;
+                    $Edit->status = 'Pending';
+                    $Edit->save();
+
+                    return response()->json($Edit);
+                } else {
+                    return response()->json(['Hour' => 'You can change the date only 12 hours in advance.']);
+                }
+
+
+            }
+        $response = $client->request("DELETE", "/v2/meetings/76795077236", [
             "headers" => [
                 "Authorization" => "Bearer " . $this->jwt
-            ],
-            'json' => [
-                "topic" => $request->title,
-                "type" => 2,
-                "start_time" => new Carbon($request->start),
-                "duration" => "$request->duration", // 30 mins
-                "password" => $request->password
-            ],
+            ]
         ]);
 
-        if($response->getStatusCode() == 204)
-        {
-
-            $code = Str::random(50);
-            $Accept  = 'Accept';
-            $Reject  = 'Reject';
-            $Pending = 'Pending';
-
-            $URLAccept = request()->getHttpHost().'/'.app()->getLocale().'/confirm-meeting/'.$code.'/'.$Accept;
-            $URLReject = request()->getHttpHost().'/'.app()->getLocale().'/confirm-meeting/'.$code.'/'.$Reject;
-
-            Mail::send('email.zoom-from-customer',
-                [
-                    'title'        => $request->title,
-                    'start_time'   => new Carbon($request->start),
-                    'duration'     => $request->duration,
-                    'password'     => $request->password,
-                    'JoinUrl'      => $request->join_url,
-                    'email'        => Auth::user()->email,
-                    'first_name'   => $request->first_name,
-                    'last_name'    => $request->last_name,
-                    'phone_number' => $request->phone_number,
-                    'URLAccept'    => $URLAccept,
-                    'URLReject'    => $URLReject
-
-                ], function($message) use ($request) {
-                    $message->from($request->email);
-                    $message->to($request->email);
-                    $message->subject('Update Zoom Meeting');
-                });
-
-            $Edit =  ZoomModel::where('meeting_id',$request->meeting_id)
-                ->first();
-            $date1 = $Edit->create;
-            $date2 = now()->toDateTimeString();
-            $timestamp1 = strtotime($date1);
-            $timestamp2 = strtotime($date2);
-            $hour = abs($timestamp2 - $timestamp1)/(60*60);
-            $ChekHour = number_format($hour);
-
-            if($ChekHour >= 12)
-            {
-                $Edit->title      = $request->title;
-                $Edit->start      = new Carbon($request->start);
-                $Edit->end        = new Carbon($request->end);
-                $Edit->duration   = $request->duration;
-                $Edit->password   = $request->password;
-                $Edit->check_code     = $code;
-                $Edit->status     = 'Pending';
-                $Edit->save();
-
-                return response()->json($Edit);
-            }else{
-                return response()->json(['Hour' => 'You can change the date only 12 hours in advance.']);
-            }
-
-
+        }else{
+            return  response()->json(['select_error' => 'The date you specified does not match the date provided by your doctor.']);
         }
-//        $response = $client->request("DELETE", "/v2/meetings/76134335318", [
-//            "headers" => [
-//                "Authorization" => "Bearer " . $this->jwt
-//            ]
-//        ]);
-
     }
 }

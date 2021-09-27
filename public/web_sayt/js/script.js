@@ -1,4 +1,3 @@
-// For Sign
 $(".lg-sg-overflow").click(function () {
    $("body").addClass("open")
 });
