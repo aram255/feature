@@ -72,8 +72,13 @@
                 <div class="profile-practitioner__consultation nl">
                     <div class="d-flex flex-md-row flex-column">
                         <div class="profile-practitioner__consultation-video flex-1 mr-md-3">
-                            <input type="file" id="video-file" name="video-file">
-                            <label for="video-file"><img class="upload" src="{{ asset('web_sayt/img/video-file.svg') }}" alt=""></label>
+{{--                            <input type="file" id="video-file" name="video-file">--}}
+{{--                            <label for="video-file"><img class="upload" src="{{ asset('web_sayt/img/video-file.svg') }}" alt=""></label>--}}
+                            <div class="profile-practitioner__consultation-video flex-1 mr-md-3 p-0 overflow-hidden">
+                                <video id="video" src="{{asset('web_sayt/video_practitioners/'.$Practitioner->video)}}" width="100%" height="100%" controls="">
+
+                                </video>
+                            </div>
                         </div>
 
                     </div>
@@ -327,6 +332,13 @@
 {{--     Calendar--}}
 <script>
     $(document).ready(function() {
+
+        // Add Star
+        $('.gl-active').click(function () {
+            var a = $(this).attr('data-value');
+
+        })
+
         $('input[type="radio"],input[type="checkbox"],#state').on('change', function () {
             $(this).closest("form").submit();
         });
@@ -334,6 +346,8 @@
             $(".filter__content").toggleClass("active")
         })
     });
+
+
 
 
 </script>

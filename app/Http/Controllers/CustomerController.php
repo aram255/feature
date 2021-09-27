@@ -400,4 +400,10 @@ class CustomerController extends Controller
 
 
     }
+
+//
+//    public function addStarPractitioner(request $request)
+//    {
+//        $request->star()
+//    }
 }
