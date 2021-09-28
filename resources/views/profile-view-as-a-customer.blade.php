@@ -38,14 +38,18 @@
                                     <span class="person__info-skin-tag">{{$GetTagManagements->name}}</span>
                                 @endforeach
                             </div>
+
                             <input type="hidden" id="practitioner_id" value="{{$Practitioner->id}}">
-                            <div class="person__info-my">
+{{--                            <div class="person__info-my">--}}
+
+{{--                            <div class="person__info-my">--}}
 
 
-                                <a href="{{route('view-type-form-practitioner',[app()->getLocale(),$Practitioner->id])}}" class="mb-4 text-black d-block">My Intake Forms</a>
-                                <div role="button" class="mb-3 cursor-pointer bg-yellow px-3 py-2 br-5 text-center" data-toggle="modal" data-target="#myProtocolsModal">My Protocols</div>
-                                {{$Practitioner->description}}
-                            </div>
+
+{{--                                <a href="{{route('view-type-form-practitioner',[app()->getLocale(),$Practitioner->id])}}" class="mb-4 text-black d-block">My Intake Forms</a>--}}
+{{--                                <div role="button" class="mb-3 cursor-pointer bg-yellow px-3 py-2 br-5 text-center" data-toggle="modal" data-target="#myProtocolsModal">My Protocols</div>--}}
+{{--                                {{$Practitioner->description}}--}}
+{{--                            </div>--}}
                             <div class="person__info-rating qew">
                         <span class="gl-star-rating gl-star-rating--ltr " data-star-rating="">
                            <select class="star-rating">

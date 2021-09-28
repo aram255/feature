@@ -294,6 +294,7 @@
 
 
     </script>
+
     <script>
         $(document).on('click','.detail-btn', function()  {
 
@@ -559,8 +560,10 @@
                 //     }},
 
                 eventRender: function(event, element,start, end, allDay) {
+
+                        @if(isset(Auth::user()->id))
                     var us_id = "{{Auth::user()->id}}";
-                    if(event['status'] == null) {
+                    if (event['status'] == null) {
 
                         setTimeout(() => {
                             element[0].setAttribute('class', 'activeNull  fc-day-grid-event fc-h-event fc-event fc-start fc-end fc-draggable');
@@ -568,10 +571,9 @@
                             x.removeAttribute('class');
                         }, 10)
 
-                    }else{
+                    } else {
 
-                        if(event['user_id'] == us_id && event['service_id'] == service_id)
-                        {
+                        if (event['user_id'] == us_id && event['service_id'] == service_id) {
 
                             setTimeout(() => {
                                 element[0].setAttribute('class', ' activeUser fc-day-grid-event fc-h-event fc-event fc-start fc-end');
@@ -579,7 +581,7 @@
                                 let div = document.getElementsByClassName('fc-content-col');
                                 let aArray = div[0].childNodes[1].childNodes;
                                 // console.log('5555555555',aArray[0]?.getAttribute('active'));
-                                for(let key of aArray) {
+                                for (let key of aArray) {
                                     if (key.getAttribute('active') === 'activeUser') {
                                         let aDiv = document.createElement('div');
                                         aDiv.setAttribute('class', 'fc-event-container');
@@ -589,15 +591,13 @@
                                 }
                             }, 20)
                         }
-                        if(event['user_id'] != us_id)
-                        {
+                        if (event['user_id'] != us_id) {
                             setTimeout(() => {
                                 element[0].setAttribute('class', 'DeactiveUser fc-day-grid-event fc-h-event fc-event fc-start fc-end fc-draggable');
                             }, 10)
                         }
 
-                        if(event['service_id'] != service_id)
-                        {
+                        if (event['service_id'] != service_id) {
                             setTimeout(() => {
                                 element[0].setAttribute('class', 'DeactiveUser fc-day-grid-event fc-h-event fc-event fc-start fc-end fc-draggable');
                             }, 10)
@@ -606,6 +606,9 @@
                         //
                         // console.log($(element[0]).find('.DeactiveUser').prepend('<ol>eeeeeee</ol>'))
                     }
+                    @endif
+
+
 
                     // Display none booking date
                     setTimeout(() => {

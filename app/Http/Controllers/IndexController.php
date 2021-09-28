@@ -424,6 +424,7 @@ class IndexController extends Controller
             ->select('reviews.rate','reviews.description','users.last_name','users.first_name','users.img','reviews.created_at')
             ->join('users', 'users.id', 'reviews.user_id')
             ->where('reviews.practitoner_id',$practitionerID)
+            ->where('reviews.description','!=',null)
             ->get();
 
 
