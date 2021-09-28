@@ -70,24 +70,26 @@
                     </div>
                 </div>
                 <div class="profile-practitioner__consultation nl">
-                    <div class="d-flex flex-md-row flex-column">
-                        <div class="profile-practitioner__consultation-video flex-1 mr-md-3">
-{{--                            <input type="file" id="video-file" name="video-file">--}}
-{{--                            <label for="video-file"><img class="upload" src="{{ asset('web_sayt/img/video-file.svg') }}" alt=""></label>--}}
-                            <div class="profile-practitioner__consultation-video flex-1 mr-md-3 p-0 overflow-hidden">
-                                <video id="video" src="{{asset('web_sayt/video_practitioners/'.$Practitioner->video)}}" width="100%" height="100%" controls="">
+                    <div class="d-flex align-items-start">
+                        <div class="d-flex flex-md-row flex-column">
+                            <div class="profile-practitioner__consultation-video flex-1 mr-md-3">
+                                {{--                            <input type="file" id="video-file" name="video-file">--}}
+                                {{--                            <label for="video-file"><img class="upload" src="{{ asset('web_sayt/img/video-file.svg') }}" alt=""></label>--}}
+                                <div class="profile-practitioner__consultation-video flex-1 mr-md-3 p-0 overflow-hidden">
+                                    <video id="video" src="{{asset('web_sayt/video_practitioners/'.$Practitioner->video)}}" width="100%" height="100%" controls="">
 
-                                </video>
+                                    </video>
+                                </div>
                             </div>
-                        </div>
 
-                    </div>
-                    <div class="profile-practitioner__consultation-time">
-                        <div class="profile-practitioner__consultation-time-content">
-                            <p class="time-content-title">VIDEO CONSULTATION <img src="{{ asset('web_sayt/img/zoom-icon-logo.png') }}" alt=""></p>
-                            @foreach($ThisWeekMeetingsList as $Value)
-                                <button class="btn bg-yellow">{{date('H:i:s', strtotime($Value->start)) }}</button>
-                            @endforeach
+                        </div>
+                        <div class="profile-practitioner__consultation-time m-0">
+                            <div class="profile-practitioner__consultation-time-content">
+                                <p class="time-content-title">VIDEO CONSULTATION <img src="{{ asset('web_sayt/img/zoom-icon-logo.png') }}" alt=""></p>
+                                @foreach($ThisWeekMeetingsList as $Value)
+                                    <button class="btn bg-yellow">{{date('H:i:s', strtotime($Value->start)) }}</button>
+                                @endforeach
+                            </div>
                         </div>
                     </div>
                     <div class="profile__reviews">
