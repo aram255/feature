@@ -9,4 +9,6 @@ class ReviewModel extends Model
 {
     use HasFactory;
     protected $table = 'reviews';
+
+
 }

@@ -38,7 +38,12 @@
                                     <span class="person__info-skin-tag">{{$GetTagManagements->name}}</span>
                                 @endforeach
                             </div>
+
+                            <input type="hidden" id="practitioner_id" value="{{$Practitioner->id}}">
 {{--                            <div class="person__info-my">--}}
+
+{{--                            <div class="person__info-my">--}}
+
 
 
 {{--                                <a href="{{route('view-type-form-practitioner',[app()->getLocale(),$Practitioner->id])}}" class="mb-4 text-black d-block">My Intake Forms</a>--}}
@@ -97,6 +102,9 @@
                         <div class="d-flex flex-lg-row flex-column">
                        @if(count($Review)>0)
                          @foreach($Review as $valR)
+                             @if(!empty($valR->practitoner_id))
+
+                                    @if(!empty($valR->description))
                             <div class="profile__reviews-block">
                                 <div class="profile__reviews-person flex-xl-row flex-column">
                                     <img src="{{ asset('web_sayt/img_customer/'.$valR->img) }}" alt="" srcset="">
@@ -123,11 +131,15 @@
                                             <span class="reviews-clock-data">{{ date('M-d',strtotime($valR->created_at)) }}</span>
                                         </div>
                                         <div class="reviews-cooment">
-                                            {{$valR->description}}
+                                                {{$valR->description}}
                                         </div>
                                     </div>
                                 </div>
                             </div>
+                                @endif
+                                    @else
+                                        No reviews yet
+                                    @endif
                                 @endforeach
                            @endif
                         </div>
@@ -337,8 +349,27 @@
 
         // Add Star
         $('.gl-active').click(function () {
-            var a = $(this).attr('data-value');
 
+            var star = $(this).attr('data-value');
+            var _token = $('input[name="_token"]').val();
+
+
+            $.ajax({
+                url: "{{route('add-star',[app()->getLocale()])}}",
+                type: "POST",
+                data: {
+                    star: star,
+                    practitioner_id: $("#practitioner_id").val(),
+                    _token:_token
+                },
+                success: function (data) {
+                    console.log(data)
+                    // alert("The tag you selected has been added to your list.");
+                },
+                error: function(returnval) {
+                    // alert('The tag you selected has not been added to your list, or it has already been added.');
+                }
+            });
         })
 
         $('input[type="radio"],input[type="checkbox"],#state').on('change', function () {
