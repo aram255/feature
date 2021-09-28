@@ -102,6 +102,8 @@ Route::group(['prefix' => '{locale?}','where' => ['locale' => '[a-zA-Z]{2}']], f
     Route::post('/edit-profile-customer-post', [CustomerController::class, 'editProfileCustmerPost'])->name('edit-profile-customer-post');
     Route::post('/add-favorite', [CustomerController::class, 'addFavorite'])->name('add-favorite');
     Route::post('/edit-response-id', [CustomerController::class, 'editTypeForm'])->name('edit-response-id');
+    // Add Star
+    Route::post('/add-star', [CustomerController::class, 'addStarPractitioner'])->name('add-star');
 
     // Protocol
     Route::get('/my-appointments-customer/{id}', [CustomerController::class, 'myAppointmentsCustomer'])->name('my-appointments-customer');

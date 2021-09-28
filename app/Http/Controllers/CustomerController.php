@@ -16,6 +16,7 @@ use App\Models\TypeFormModel;
 use App\Models\FavoriteModel;
 use App\Models\ProtocolAnotherModel;
 use App\Models\ZoomModel;
+use App\Models\ReviewModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
@@ -402,8 +403,30 @@ class CustomerController extends Controller
     }
 
 //
-//    public function addStarPractitioner(request $request)
-//    {
-//        $request->star()
-//    }
+    public function addStarPractitioner(request $request)
+    {
+
+        $CompleteCount  = DB::table('practitioner')
+            ->join('zoom_meetings_list', 'practitioner.id', 'zoom_meetings_list.practitioner_id')
+            ->where('zoom_meetings_list.user_id',Auth::id())
+            ->whereDate("zoom_meetings_list.start", "<=",date('Y-m-d'))
+            ->orderBy('zoom_meetings_list.id','DESC')
+            ->count();
+
+       $reviewCount = DB::table('reviews')->where('user_id',Auth::id())->where('practitoner_id',$request->practitioner_id)->where('description','=',null)->count();
+
+       if($CompleteCount != $reviewCount)
+       {
+         return DB::table('reviews')->insert(
+            [
+                'rate' => $request->star,
+                'practitoner_id' => $request->practitioner_id,
+                'user_id' => Auth::id()
+            ]
+        );
+       }
+
+
+
+    }
 }
