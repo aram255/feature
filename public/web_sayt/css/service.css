@@ -128,7 +128,7 @@
 .profile-practitioner__consultation-video {
     display: inline-block;
     width: 100%;
-    padding: 0;
+    padding: 0!important;
     text-align: center;
     background-color: #eff4fe;
     border-radius: 10px;
