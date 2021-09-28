@@ -76,7 +76,7 @@
                 </div>
                 <div class="profile-practitioner__consultation nl">
                     <div class="d-flex align-items-start">
-                        <div class="d-flex flex-md-row flex-column">
+                        <div class="d-flex flex-md-row flex-column flex-1">
                             <div class="profile-practitioner__consultation-video flex-1 mr-md-3">
                                 {{--                            <input type="file" id="video-file" name="video-file">--}}
                                 {{--                            <label for="video-file"><img class="upload" src="{{ asset('web_sayt/img/video-file.svg') }}" alt=""></label>--}}
@@ -88,7 +88,7 @@
                             </div>
 
                         </div>
-                        <div class="profile-practitioner__consultation-time m-0">
+                        <div class="profile-practitioner__consultation-time m-0 flex-1">
                             <div class="profile-practitioner__consultation-time-content">
                                 <p class="time-content-title">VIDEO CONSULTATION <img src="{{ asset('web_sayt/img/zoom-icon-logo.png') }}" alt=""></p>
                                 @foreach($ThisWeekMeetingsList as $Value)
