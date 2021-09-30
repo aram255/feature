@@ -25,14 +25,15 @@
                 <div class="find__text">
                     <p>Find health and wellness tools</p>
                 </div>
+
                 <div class="find__form">
                     <div class="input-group mb-3">
                         <div class="input-group-prepend ">
                             <img src="{{ asset('web_sayt/img/Group 1763.svg') }}" alt="" width="24px" height="25px">
                         </div>
-
+{{--                        <form action="">--}}
                         <input type="text" class="find__input" placeholder="Service, Symptom or Practitioners"
-                               aria-label="Service" aria-describedby="basic-addon1">
+                               aria-label="Service" aria-describedby="basic-addon1" name="search_go">
 
                     </div>
                     <div class="find__form-settings">
@@ -42,8 +43,16 @@
 
                 </div>
                 <div class="find__button">
-                    <a href="{{route('search',[app()->getLocale()])}}" class="btn bg-yellow">Lets go</a>
+
+
+                        <button type="submit" class="btn bg-yellow">
+                       Lets go
+                        </button>
+{{--                    </form>--}}
+{{--                    <a href="" class="btn bg-yellow" >--}}
+{{--                        Lets go</a>--}}
                 </div>
+
             </div>
         </div>
         <!-- Login  -->

@@ -64,6 +64,7 @@ class CustomerController extends Controller
             ->select('reviews.rate','reviews.description','practitioner.last_name','practitioner.first_name','practitioner.img','reviews.created_at')
             ->join('practitioner', 'practitioner.id', 'reviews.practitoner_id')
             ->where('reviews.user_id',Auth::id())
+            ->where('reviews.description','!=',null)
             ->get();
 
 

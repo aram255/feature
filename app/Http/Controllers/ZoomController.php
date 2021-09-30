@@ -203,8 +203,8 @@ class ZoomController extends Controller
 
 
                 $code = Str::random(50);
-                $Accept = 'Accept';
-                $Reject = 'Reject';
+                $Accept = 'Accepted';
+                $Reject = 'Rejected';
                 $Pending = 'Pending';
 
                 $URLAccept = request()->getHttpHost() . '/' . app()->getLocale() . '/confirm-meeting/' . $code . '/' . $Accept;
@@ -234,7 +234,7 @@ class ZoomController extends Controller
                     {
                         $mail = Mail::send('email.zoom-from-customer',
                             [
-                                'title' => $request->m_name,
+                                'title' => $request->title,
                                 'start_time' => new Carbon($request->birthdaytime),
                                 'duration' => $request->time,
                                 'password' => $request->password,
@@ -243,8 +243,8 @@ class ZoomController extends Controller
                                 'first_name' => $request->first_name,
                                 'last_name' => $request->last_name,
                                 'phone_number' => $request->phone_number,
-                                'URLAccept' => request()->getHttpHost() . '/' . app()->getLocale() . '/confirm-meeting/' . $code . '/' . $Accept,
-                                'URLReject' => request()->getHttpHost() . '/' . app()->getLocale() . '/confirm-meeting/' . $code . '/' . $Reject
+                                'URLAccept' => request()->getHttpHost() . '/' . app()->getLocale() . '/confirm-meeting/' . $code . '/' . $Accept.'/'.$request->user_email.'/'.str_replace(' ', '_', $request->title).'/'.$request->first_name.'/'.$request->last_name,
+                                'URLReject' => request()->getHttpHost() . '/' . app()->getLocale() . '/confirm-meeting/' . $code . '/' . $Reject.'/'.$request->user_email.'/'.str_replace(' ', '_', $request->title).'/'.$request->first_name.'/'.$request->last_name,
 
                             ], function ($message) use ($request) {
                                 $message->from($request->email);
@@ -462,8 +462,8 @@ class ZoomController extends Controller
             if ($response->getStatusCode() == 204) {
 
                 $code = Str::random(50);
-                $Accept = 'Accept';
-                $Reject = 'Reject';
+                $Accept = 'Accepted';
+                $Reject = 'Rejected';
                 $Pending = 'Pending';
 
                 $URLAccept = request()->getHttpHost() . '/' . app()->getLocale() . '/confirm-meeting/' . $code . '/' . $Accept;
@@ -480,8 +480,8 @@ class ZoomController extends Controller
                         'first_name' => $request->first_name,
                         'last_name' => $request->last_name,
                         'phone_number' => $request->phone_number,
-                        'URLAccept' => request()->getHttpHost() . '/' . app()->getLocale() . '/confirm-meeting/' . $code . '/' . $Accept,
-                        'URLReject' => request()->getHttpHost() . '/' . app()->getLocale() . '/confirm-meeting/' . $code . '/' . $Reject
+                        'URLAccept' => request()->getHttpHost() . '/' . app()->getLocale() . '/confirm-meeting/' . $code . '/' . $Accept.'/'.$request->user_email.'/'.str_replace(' ', '_', $request->title).'/'.$request->first_name.'/'.$request->last_name,
+                        'URLReject' => request()->getHttpHost() . '/' . app()->getLocale() . '/confirm-meeting/' . $code . '/' . $Reject.'/'.$request->user_email.'/'.str_replace(' ', '_', $request->title).'/'.$request->first_name.'/'.$request->last_name,
 
                     ], function ($message) use ($request) {
                         $message->from($request->email);

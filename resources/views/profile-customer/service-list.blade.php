@@ -65,6 +65,7 @@
                                                     @endforeach
                                                 @endforeach
                                             </ul>
+                                            <input type="hidden" name="user_email" value="@if(isset(Auth::user()->email)){{Auth::user()->email}}@endif">
                                             <input type="hidden" name="service_name" class="service_name" value="{{$Value->title}}">
                                             <input type="hidden" name="service_id" value="{{$Value->id}}">
                                             <input type="hidden" name="email" value="{{$PractitionerFavoriteVal->email}}">
@@ -106,8 +107,7 @@
         var email          = $(this).prev().prev().prev().prev().prev().val();
         var service_id     = $(this).prev().prev().prev().prev().prev().prev().val();
         var serviceName    = $(this).prev().prev().prev().prev().prev().prev().prev().val();
-
-
+        var user_email    = $(this).prev().prev().prev().prev().prev().prev().prev().prev().val();
 
         if(service_id == null)
 
@@ -196,6 +196,7 @@
                                     practitionerID: practitionerID,
                                     service_id: service_id,
                                     LiveDateTime:LiveDateTime,
+                                    user_email:user_email,
                                     type: 'add'
                                 },
                                 success: function (data) {

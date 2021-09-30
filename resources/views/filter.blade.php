@@ -309,6 +309,7 @@
             var email          = $(this).prev().prev().prev().prev().prev().val();
             var service_id     = $(this).prev().prev().prev().prev().prev().prev().val();
             var serviceName    = $(this).prev().prev().prev().prev().prev().prev().prev().val();
+            var user_email     = $(this).prev().prev().prev().prev().prev().prev().prev().prev().val();
 
             if(service_id == null)
 
@@ -336,82 +337,6 @@
                 events:'/en/Search/'+ practitionerId,
                 selectable:true,
                 selectHelper: true,
-
-                {{--select:function(start, end, allDay)--}}
-                    {{--{--}}
-
-                    {{--    var start = $.fullCalendar.formatDate(start, 'Y-MM-DD HH:mm:ss');--}}
-
-                    {{--    var end = $.fullCalendar.formatDate(end, 'Y-MM-DD HH:mm:ss');--}}
-
-
-                    {{--    // Check live DateTime--}}
-                    {{--    var today = new Date();--}}
-                    {{--    var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();--}}
-                    {{--    var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();--}}
-                    {{--    var LiveDateTime = date + ' ' + time;--}}
-
-
-                    {{--    // compare--}}
-
-                    {{--    var d1 = new Date(start);--}}
-                    {{--    var d2 = new Date(LiveDateTime);--}}
-
-                    {{--    if (d1 >= d2) {--}}
-
-                    {{--        var title       = prompt('Event Title:');--}}
-                    {{--        var pasword     = prompt('Event password:');--}}
-                    {{--        var duration    = prompt('Event Duration:');--}}
-                    {{--            @if(isset(Auth::user()->id))--}}
-                    {{--        var add_user_id = "{{Auth::user()->id}}";--}}
-                    {{--            @endif--}}
-
-
-
-
-
-                    {{--        if(title !== "" && pasword !== "" && duration !== ""){--}}
-
-                    {{--            $.ajax({--}}
-                    {{--                url: "{{ route('add-zoom-meeting',app()->getLocale()) }}",--}}
-                    {{--                type: "POST",--}}
-                    {{--                data: {--}}
-                    {{--                    title: title,--}}
-                    {{--                    start: start,--}}
-                    {{--                    end: end,--}}
-                    {{--                    practitionerId: practitionerId,--}}
-                    {{--                    add_user_id: add_user_id,--}}
-                    {{--                    phone_number: phone_number,--}}
-                    {{--                    last_name: last_name,--}}
-                    {{--                    first_name: first_name,--}}
-                    {{--                    email: email,--}}
-                    {{--                    duration: duration,--}}
-                    {{--                    password: pasword,--}}
-                    {{--                    practitionerID: practitionerID,--}}
-                    {{--                    service_id: service_id,--}}
-                    {{--                    LiveDateTime:LiveDateTime,--}}
-                    {{--                    type: 'add'--}}
-                    {{--                },--}}
-                    {{--                success: function (data) {--}}
-                    {{--                    calendar.fullCalendar('refetchEvents');--}}
-                    {{--                    alert("Event Created Successfully");--}}
-                    {{--                    console.log(data)--}}
-                    {{--                },--}}
-                    {{--                error: function(returnval) {--}}
-                    {{--                    console.log(returnval.pp)--}}
-                    {{--                    alert('Your appointment has not been created');--}}
-                    {{--                }--}}
-                    {{--            });--}}
-
-                    {{--        }else{--}}
-                    {{--            alert('Empty');--}}
-                    {{--        }--}}
-                    {{--    }else{--}}
-                    {{--        alert('You can not make appointments with back date.');--}}
-                    {{--    }--}}
-
-                    {{--},--}}
-
                 select:function(start, end, allDay,event,element,view)
                 {
 
@@ -454,18 +379,6 @@
                             var add_user_id = "{{Auth::user()->id}}";
                             @endif
 
-                            // alert('practitionerID => '+practitionerId);
-                            // alert('add_user_id => '+add_user_id);
-                            // alert('phone_number => '+phone_number);
-                            // alert('last_name => '+last_name);
-                            // alert('first_name => '+first_name);
-                            // alert('email => '+email);
-                            //  alert('service_id => '+service_id);
-                            // alert('durationn => '+duration);
-                            // alert('password => '+password);
-                            // alert('service Name => '+serviceName);
-                            // alert('practitionerID => '+practitionerID);
-                            // alert('LiveDateTime => '+LiveDateTime);
                             $.ajax({
                                 url: "{{ route('add-zoom-meeting',app()->getLocale()) }}",
                                 type: "POST",
@@ -484,6 +397,7 @@
                                     practitionerID: practitionerID,
                                     service_id: service_id,
                                     LiveDateTime:LiveDateTime,
+                                    user_email:user_email,
                                     type: 'add'
                                 },
                                 success: function (data) {
@@ -513,52 +427,6 @@
                         alert('You can not make appointments with back date.');
                     }
                 },
-                // eventRender: function(event, element,start) {
-                //
-                //     if(event['status'] == null) {
-                //
-                //         setTimeout(() => {
-                //
-                //             element[0].setAttribute('class', 'activeNull  fc-day-grid-event fc-h-event fc-event fc-start fc-end fc-draggable');
-                //
-                //             // let day = document.getElementsByClassName('fc-day-grid-event');
-                //             //
-                //             // for (let a of day) {
-                //             //     a.setAttribute('izNull', `${event.id}`)
-                //             //     console.log(a);
-                //             // }
-                //
-                //             let x = document.querySelector('.fc-event-container');
-                //             x.removeAttribute('class');
-                //
-                //
-                //             // let y = document.querySelector('div .fc-event-container');
-                //             // y.removeAttribute('class');
-                //             // alert('edede')
-                //             // x.style.backgroundColor = "red";
-                //             // x.style.color = "white";
-                //
-                //             // for (let a of day) {
-                //             //     if (event.id === a.getAttribute('id')) {
-                //             //         console.log('000000000000000000', a);
-                //             //         a.style.backgroundColor = "#FED638";
-                //             //         a.style.color = "black";
-                //             //         a.style.border = "1px solid #abab95";
-                //             //     }
-                //             //
-                //             // }
-                //
-                //
-                //         }, 10)
-                //
-                //         // var ssss =  document.querySelector('.fc-time-grid-event');
-                //         //  ssss.style.backgroundColor = "#00d210ba";
-                //     }else{
-                //         // fc-event-container
-                //         //  $("div").append(element[0]);
-                //         //console.log(element[0])
-                //     }},
-
                 eventRender: function(event, element,start, end, allDay) {
 
                         @if(isset(Auth::user()->id))
@@ -602,9 +470,6 @@
                                 element[0].setAttribute('class', 'DeactiveUser fc-day-grid-event fc-h-event fc-event fc-start fc-end fc-draggable');
                             }, 10)
                         }
-                        // $($(element[0]).find('.DeactiveUser')).prepend('<div class="kkkkkkkkkkkk">'+element[0]+'</div>');
-                        //
-                        // console.log($(element[0]).find('.DeactiveUser').prepend('<ol>eeeeeee</ol>'))
                     }
                     @endif
 

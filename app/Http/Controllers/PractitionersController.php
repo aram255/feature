@@ -31,6 +31,7 @@ use GuzzleHttp\RequestOptions;
 use Hash;
 use File;
 use URL;
+use Mail;
 
 class PractitionersController extends Controller
 {
@@ -132,6 +133,7 @@ class PractitionersController extends Controller
             ->select('reviews.rate','reviews.description','users.last_name','users.first_name','users.img','reviews.created_at')
             ->join('users', 'users.id', 'reviews.user_id')
             ->where('reviews.practitoner_id',session()->get('UserID'))
+            ->where('reviews.description','!=',null)
             ->get();
 
         // Calendar
@@ -1068,7 +1070,7 @@ class PractitionersController extends Controller
 //        }
 //    }
 
-    public function confirmMeeting($lang,$Code,$Status)
+    public function confirmMeeting(request $request,$lang,$Code,$Status)
     {
 
         $ChangeStatus =  ZoomModel::where('check_code',$Code)->first();
@@ -1077,12 +1079,51 @@ class PractitionersController extends Controller
             $ChangeStatus->check_code = '?'.$Code;
             $ChangeStatus->status     = $Status;
             $ChangeStatus->save();
-            if(isset($ChangeStatus->status) && $ChangeStatus->status == 'Accept')
+
+            if(isset($ChangeStatus->status) && $ChangeStatus->status == 'Accepted')
             {
-                return redirect()->route('index',[app()->getLocale()])->with('status', 'Your meeting approved.');
 
-            }elseif(isset($ChangeStatus->status) && $ChangeStatus->status == 'Reject'){
+                   $email = $request->segment(5);
+                   $service_name = $request->segment(6);
+                   $first_name = $request->segment(7);
+                   $last_name = $request->segment(8);
 
+                    $mail = Mail::send('email.confirm-meeting',
+                        [
+                            'service_name' => $service_name,
+                            'email' => $email,
+                            'first_name' => $first_name,
+                            'last_name' => $last_name,
+                            'status' => 'Accepted',
+
+                        ], function ($message) use ($email) {
+                            $message->from($email);
+                            $message->to($email);
+                            $message->subject('Status Zoom Meeting');
+                        });
+                    return redirect()->route('index',[app()->getLocale()])->with('status', 'Your meeting approved.');
+
+
+
+            }elseif(isset($ChangeStatus->status) && $ChangeStatus->status == 'Rejected'){
+                $email = $request->segment(5);
+                $service_name = $request->segment(6);
+                $first_name = $request->segment(7);
+                $last_name = $request->segment(8);
+
+                $mail = Mail::send('email.confirm-meeting',
+                    [
+                        'service_name' => $service_name,
+                        'email' => $email,
+                        'first_name' => $first_name,
+                        'last_name' => $last_name,
+                        'status' => 'Rejected',
+
+                    ], function ($message) use ($email) {
+                        $message->from($email);
+                        $message->to($email);
+                        $message->subject('Status Zoom Meeting');
+                    });
                 return redirect()->route('index',[app()->getLocale()])->with('status', 'Your meeting rejected.');
             }
 

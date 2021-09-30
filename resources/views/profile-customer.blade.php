@@ -152,6 +152,7 @@
                                             </div>
 
                                             <div class="profile-customer__my-appointments-button-fill">
+                                                <input type="hidden"  class="user_email" value="@if(isset(Auth::user()->email)){{Auth::user()->email}}@endif">
                                                 <input type="hidden" name="service_name_myapp" class="service_name_appointments" value="{{$InProcessVal->service_name}}">
                                                 <input type="hidden" name="join_url" value="{{$InProcessVal->create}}">
                                                 <input type="hidden" name="join_url" value="{{$InProcessVal->join_url}}">
@@ -443,7 +444,7 @@
           //  var password       = $(this).prev().prev().prev().prev().prev().prev().prev().prev().val();
             var join_url       = $(this).prev().prev().prev().prev().prev().prev().prev().prev().prev().val();
             var serviceName    = $(this).prev().prev().prev().prev().prev().prev().prev().prev().prev().prev().prev().val();
-
+            var user_email     =  $(this).prev().prev().prev().prev().prev().prev().prev().prev().prev().prev().prev().prev().val();
 
 
 
@@ -526,6 +527,7 @@ if(service_id == null)
                                     first_name: first_name,
                                     email:email,
                                     join_url:join_url,
+                                    user_email:user_email,
                                     type: 'update'
                                 },
                                 success: function (response) {
@@ -562,53 +564,6 @@ if(service_id == null)
                             })
                         }
                 },
-                // eventRender: function(event, element,start) {
-                //
-                //     if(event['status'] == null) {
-                //
-                //         setTimeout(() => {
-                //
-                //             element[0].setAttribute('class', 'activeNull  fc-day-grid-event fc-h-event fc-event fc-start fc-end fc-draggable');
-                //
-                //             // let day = document.getElementsByClassName('fc-day-grid-event');
-                //             //
-                //             // for (let a of day) {
-                //             //     a.setAttribute('izNull', `${event.id}`)
-                //             //     console.log(a);
-                //             // }
-                //
-                //             let x = document.querySelector('.fc-event-container');
-                //              x.removeAttribute('class');
-                //
-                //
-                //             // let y = document.querySelector('div .fc-event-container');
-                //             // y.removeAttribute('class');
-                //              // alert('edede')
-                //             // x.style.backgroundColor = "red";
-                //             // x.style.color = "white";
-                //
-                //             // for (let a of day) {
-                //             //     if (event.id === a.getAttribute('id')) {
-                //             //         console.log('000000000000000000', a);
-                //             //         a.style.backgroundColor = "#FED638";
-                //             //         a.style.color = "black";
-                //             //         a.style.border = "1px solid #abab95";
-                //             //     }
-                //             //
-                //             // }
-                //
-                //
-                //         }, 10)
-                //
-                //         // var ssss =  document.querySelector('.fc-time-grid-event');
-                //         //  ssss.style.backgroundColor = "#00d210ba";
-                //     }else{
-                //        // fc-event-container
-                //       //  $("div").append(element[0]);
-                //         //console.log(element[0])
-                //     }},
-
-
                 eventRender: function(event, element,start, end, allDay) {
 
                     var us_id = "{{Auth::user()->id}}";
@@ -654,9 +609,6 @@ if(service_id == null)
                                 element[0].setAttribute('class', 'DeactiveUser fc-day-grid-event fc-h-event fc-event fc-start fc-end fc-draggable');
                             }, 10)
                         }
-                        // $($(element[0]).find('.DeactiveUser')).prepend('<div class="kkkkkkkkkkkk">'+element[0]+'</div>');
-                        //
-                        // console.log($(element[0]).find('.DeactiveUser').prepend('<ol>eeeeeee</ol>'))
                     }
 
                     // Display none booking date

@@ -70,6 +70,7 @@
 {{--                                            <input type="hidden" name="join_url" value="{{$Result->join_url}}">--}}
 {{--                                            <input type="hidden" name="password" value="{{$Result->password}}">--}}
 {{--                                            <input type="hidden" name="duration" value="{{$Result->duration}}">--}}
+                                            <input type="hidden" name="user_email" value="@if(isset(Auth::user()->email)){{Auth::user()->email}}@endif">
                                             <input type="hidden" name="service_name" value="{{$Value->title}}">
                                             <input type="hidden" name="service_id" value="{{$Value->id}}">
                                             <input type="hidden" name="email" value="{{$Result->email}}">

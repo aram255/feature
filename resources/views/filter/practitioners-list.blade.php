@@ -61,6 +61,7 @@
 {{--                <form method="post" action="{{route('add-zoom-meeting',[app()->getLocale()])}}">--}}
 {{--                    {{csrf_field()}}--}}
 
+
                     <input type="hidden" name="email" value="{{$Result->email}}">
                     <input type="hidden" name="first_name" value="{{$Result->first_name}}">
                     <input type="hidden" name="last_name" value="{{$Result->last_name}}">

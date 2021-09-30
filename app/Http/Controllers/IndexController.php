@@ -74,6 +74,7 @@ class IndexController extends Controller
 
     public function search(Request $request,$lang, $practitioner_id = null, $service_id = null)
     {
+//        dd($request->search_go);
 
 //        $tags=null;
 //

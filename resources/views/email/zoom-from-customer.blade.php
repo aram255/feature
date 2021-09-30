@@ -11,7 +11,7 @@
                     @if(isset($first_name)) <p>Fisrt Name: <span style="red">{{$first_name}}</span></p>@endif
                     @if(isset($last_name))<p>Last Name: <span style="red">{{$last_name}}</span></p>@endif
                     @if(isset($email))<p>Email: <span style="red">{{$email}}</span></p>@endif
-                    @if(isset($email))<p>Phone number: <span style="red">{{$email}}</span></p>@endif
+                    @if(isset($phone_number))<p>Phone number: <span style="red">{{$phone_number}}</span></p>@endif
 
                     <h1><p><span style="color: red">Customer meeting Info</span></p></h1>
 
