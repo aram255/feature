@@ -1,5 +1,5 @@
 
-<div class="modal fade" id="service-modal{{$Result->id}}">
+<div class="modal fade modal-service" id="service-modal{{$Result->id}}">
     <div class="modal-dialog mx-auto " style="max-width: max-content; width: 100%">
         <div class="modal-content">
 
