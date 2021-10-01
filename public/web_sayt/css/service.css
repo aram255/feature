@@ -576,7 +576,39 @@ a .fa-times {
 .max-dialog .fc-unthemed td.fc-today {
     background: #8BA9EE;
 }
-
+#myModal2 .modal-body a{
+    width: 330px;
+    height: 80px;
+    background: #D9EAFD 0 0 no-repeat padding-box;
+    border: 1px solid #8BA9EE;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    font: normal normal 500 25px/11px Montserrat;
+    color: #462847;
+    text-transform: capitalize;
+}
+#myModal2 .modal-lg {
+    max-width: 950px;
+}
+#myModal2 .back-btn {
+    font: normal normal normal 16px/25px Montserrat;
+    color: #8BA9EE;
+    background-color: transparent;
+}
+#myModal2 .modal-body a img{
+ margin-right: 16px;
+}
+#myModal2 .title{
+    font: normal normal 600 30px/37px Montserrat;
+    color: #00309E;
+}
+#myModal2 .info-text{
+    font: normal normal 500 18px/11px Montserrat;
+    color: #462847;
+}
 @media (max-width: 768px) {
     .profile-practitioner__consultation {
         padding-left: 0;

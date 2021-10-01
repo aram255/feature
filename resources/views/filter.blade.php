@@ -240,21 +240,34 @@
             </div>
         </div>
     </div>
-    <div id="myModal2" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
+    <div id="myModal2" class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
             <div class="modal-content">
-                <div class="modal-header">
-                    <h3 id="myModalLabel">Modal 2</h3>
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <div class="modal-header border-bottom-0">
+                    <button type="button" class="position-absolute back-btn" data-dismiss="modal" aria-hidden="true" style="left: 20px; top: 16px">
+                        <i class="fa fa-angle-left"></i> Back
+                    </button>
+                    <button type="button" class="close position-absolute" data-dismiss="modal" aria-hidden="true" style="right: 20px; top: 16px">×</button>
+                    <div class="w-100 text-center mt-4">
+                        <h3 id="myModalLabel" class="text-center title">Communication Tool</h3>
+                        <div class="info-text text-center">
+                            Please choose your preferred communication tool.
+                        </div>
+                    </div>
                 </div>
-                <div id="zoom" class="modal-body">
-                    <a href="#">Zoom</a>
-                </div>
-                <div id="offline" class="modal-body">
-                    <a href="#">Offline</a>
-                </div>
-                <div class="modal-footer">
-                    <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+                <div class="d-flex justify-content-center my-5">
+                    <div id="zoom" class="modal-body mx-4 flex-1">
+                        <a href="#">
+                            <img src="{{ asset('web_sayt/img/zoom-icon-logo.png') }}" alt="">
+                            zoom
+                        </a>
+                    </div>
+                    <div id="offline" class="modal-body mx-4 flex-1">
+                        <a href="#">
+                            <img src="{{ asset('web_sayt/img/Group 2013.svg') }}" alt="" style="width: 32px; height: 32px">
+                            Offline Meeting
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
