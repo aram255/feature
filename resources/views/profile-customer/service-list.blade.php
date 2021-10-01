@@ -1,5 +1,5 @@
 
-<div class="modal fade" id="service-modal{{$PractitionerFavoriteVal->partit_id}}">
+<div class="modal fade modal-service" id="service-modal{{$PractitionerFavoriteVal->partit_id}}">
     <div class="modal-dialog mx-auto " style="max-width: max-content; width: 100%">
         <div class="modal-content">
 
@@ -95,6 +95,8 @@
 <script>
     $(document).on('click','.detail-btn-favorite', function()  {
 
+        // Hidden service modal
+        $(".modal-service").modal('hide');
 
 
         var practitionerId = $(this).attr('data-id');
@@ -170,6 +172,10 @@
                 if (d1 >= d2) {
 
                     $("#myModal2").modal("show");
+
+                    // Close Calendar
+                    $("#myModal").modal('hide');
+
                     $("#zoom").click(function () {
 
                         var  duration = diff_time/(60000);
@@ -207,145 +213,131 @@
                                     {
                                         if(data.NoRepeatService != null)
                                         {
-                                            alert(data.NoRepeatService)
+                                            //alert(data.NoRepeatService)
+
+                                            // Show Error No Repeat Service
+                                            $("#error-NoRepeatService").modal('hide');
+
+                                            // Close Select Meeting
+                                            $("#myModal2").modal('hide');
                                         }else{
-                                            alert("Event Created Successfully");
+                                            //alert("Event Created Successfully");
+
+                                            // Show Success Meeting
+                                            $('#succes-meeting').modal('show');
+
+                                            // Close Select Meeting
+                                            $("#myModal2").modal('hide');
                                         }
                                     }else{
-                                        alert(data.select_error);
+                                       // alert(data.select_error);
+
+                                        // Show Error No Repeat Service
+                                        $("#select_error").modal('show');
+
+                                        // Close Select Meeting
+                                        $("#myModal2").modal('hide');
                                     }
 
                                 },
                                 error: function(data) {
-                                    console.log(data)
-                                    alert('Your appointment has not been created');
+                                    //alert('Your appointment has not been created');
+
+                                    // Show Error No not been created
+                                    $("#not-been-created").modal('show');
+
+                                    // Close Select Meeting
+                                    $("#myModal2").modal('hide');
                                 }
                             });
                     });
                 }else{
-                    alert('You can not make appointments with back date.');
+                  //  alert('You can not make appointments with back date.');
+
+                    // Show Error with back date
+                    $("#with-back-date").modal('show');
+
+                    // Close Select Meeting
+                    $("#myModal2").modal('hide');
                 }
             },
 
             editable:true,
-            eventDrop: function(event) {
-                var start = $.fullCalendar.formatDate(event.start, 'Y-MM-DD HH:mm:ss');
-                var end = $.fullCalendar.formatDate(event.end, 'Y-MM-DD HH:mm:ss');
 
-                // Check live DateTime
-                var today = new Date();
-                var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
-                var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
-                var LiveDateTime = date + ' ' + time;
-
-
-                // compare
-
-                var d1 = new Date(start);
-                var d2 = new Date(LiveDateTime);
-
-                if (d1 >= d2) {
-
-                    var id = event.id;
-                    var user_id = event.user_id;
-                    var meeting_id = event.meeting_id;
-                    var duration = event.duration;
-                    var password = event.password;
-                    var title = event.title;
-
-
-
-                     if (confirm("Do you want to change your meeting details?")) {
-
-
-
-                        // submitTimeChanges(event.id);
-                        $.ajax({
-                            url: "/en/update-zoom-meeting",
-                            type: "POST",
-                            data: {
-                                title: title,
-                                start: start,
-                                end: end,
-                                meeting_id: meeting_id,
-                                password: password,
-                                duration: duration,
-                                phone_number: phone_number,
-                                last_name: last_name,
-                                first_name: first_name,
-                                email:email,
-                                join_url:join_url,
-                                type: 'update'
-                            },
-                            success: function (response) {
-                                calendar.fullCalendar('refetchEvents');
-                                //alert("Event Updated Successfully");
-
-                                if(response.Hour != null)
-                                {
-                                    alert(response.Hour)
-                                }else{
-                                    alert("Event Updated Successfully");
-                                }
-                            }
-                        })
-                    }
-                }else{
-                    alert('You can not make appointments with back date.');
-                }
-
-            },
-            // eventRender: function(event, element,start) {
+            // eventDrop: function(event) {
+            //     var start = $.fullCalendar.formatDate(event.start, 'Y-MM-DD HH:mm:ss');
+            //     var end = $.fullCalendar.formatDate(event.end, 'Y-MM-DD HH:mm:ss');
             //
-            //     if(event['status'] == null) {
-            //
-            //         setTimeout(() => {
-            //
-            //             element[0].setAttribute('class', 'activeNull  fc-day-grid-event fc-h-event fc-event fc-start fc-end fc-draggable');
-            //
-            //             // let day = document.getElementsByClassName('fc-day-grid-event');
-            //             //
-            //             // for (let a of day) {
-            //             //     a.setAttribute('izNull', `${event.id}`)
-            //             //     console.log(a);
-            //             // }
-            //
-            //             let x = document.querySelector('.fc-event-container');
-            //             x.removeAttribute('class');
+            //     // Check live DateTime
+            //     var today = new Date();
+            //     var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
+            //     var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+            //     var LiveDateTime = date + ' ' + time;
             //
             //
-            //             // let y = document.querySelector('div .fc-event-container');
-            //             // y.removeAttribute('class');
-            //             // alert('edede')
-            //             // x.style.backgroundColor = "red";
-            //             // x.style.color = "white";
+            //     // compare
             //
-            //             // for (let a of day) {
-            //             //     if (event.id === a.getAttribute('id')) {
-            //             //         console.log('000000000000000000', a);
-            //             //         a.style.backgroundColor = "#FED638";
-            //             //         a.style.color = "black";
-            //             //         a.style.border = "1px solid #abab95";
-            //             //     }
-            //             //
-            //             // }
+            //     var d1 = new Date(start);
+            //     var d2 = new Date(LiveDateTime);
+            //
+            //     if (d1 >= d2) {
+            //
+            //         var id = event.id;
+            //         var user_id = event.user_id;
+            //         var meeting_id = event.meeting_id;
+            //         var duration = event.duration;
+            //         var password = event.password;
+            //         var title = event.title;
             //
             //
-            //         }, 10)
             //
-            //         // var ssss =  document.querySelector('.fc-time-grid-event');
-            //         //  ssss.style.backgroundColor = "#00d210ba";
+            //          if (confirm("Do you want to change your meeting details?")) {
+            //
+            //
+            //
+            //             // submitTimeChanges(event.id);
+            //             $.ajax({
+            //                 url: "/en/update-zoom-meeting",
+            //                 type: "POST",
+            //                 data: {
+            //                     title: title,
+            //                     start: start,
+            //                     end: end,
+            //                     meeting_id: meeting_id,
+            //                     password: password,
+            //                     duration: duration,
+            //                     phone_number: phone_number,
+            //                     last_name: last_name,
+            //                     first_name: first_name,
+            //                     email:email,
+            //                     join_url:join_url,
+            //                     type: 'update'
+            //                 },
+            //                 success: function (response) {
+            //                     calendar.fullCalendar('refetchEvents');
+            //                     //alert("Event Updated Successfully");
+            //
+            //                     if(response.Hour != null)
+            //                     {
+            //                         alert(response.Hour)
+            //                     }else{
+            //                         alert("Event Updated Successfully");
+            //                     }
+            //                 }
+            //             })
+            //         }
             //     }else{
-            //         // fc-event-container
-            //         //  $("div").append(element[0]);
-            //         //console.log(element[0])
-            //     }},
+            //         alert('You can not make appointments with back date.');
+            //     }
+            //
+            // },
+
             eventRender: function(event, element,start, end, allDay) {
 
               //   uniqueCount = [event.start];
               //   var count = {};
               //   uniqueCount.forEach(function(i) { count[i] = (count[i]||0) + 1;});
-                 console.log(event);
+               //  console.log(event);
 
                 var us_id = "{{Auth::user()->id}}";
                 if(event['status'] == null) {
@@ -446,16 +438,34 @@
                             },
                             success: function (response) {
                                 calendar.fullCalendar('refetchEvents');
-                                alert("Event Deleted Successfully");
+                                //alert("Event Deleted Successfully");
+
+                                // Show Success Delete
+                                $("#delete-success").modal('show');
+
+                                // Close Select Meeting
+                                $("#myModal").modal('hide');
                             },
                             error: function (returnval) {
-                                alert('Your appointment has not been deleted');
+                                //alert('Your appointment has not been deleted');
+
+                                // Show Error Delete
+                                $("#delete-error").modal('show');
+
+                                // Close Select Meeting
+                                $("#myModal").modal('hide');
                             }
                         })
                     }
                 }
             }else{
-                alert('You can not delete this meeting because you did not add it.')
+               // alert('You can not delete this meeting because you did not add it.')
+
+                // Show Error Delete
+                $("#delete-did-not-add-it").modal('show');
+
+                // Close Select Meeting
+                $("#myModal").modal('hide');
             }
                 @endif
             },

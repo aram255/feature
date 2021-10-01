@@ -297,6 +297,9 @@
             </div>
         </div>
     </div>
+
+    @include('modal-list')
+
 @endsection
 
 @section('style')
@@ -492,6 +495,10 @@
 
                 if (d1 >= d2) {
                     $("#myModal2").modal("show");
+
+                    // Close Calendar
+                    $("#myModal").modal('hide');
+
                     $("#zoom").click(function () {
 
                         var  duration = diff_time/(60000);
@@ -528,23 +535,51 @@
                                 {
                                     if(data.NoRepeatService != null)
                                     {
-                                        alert(data.NoRepeatService)
+                                        //alert(data.NoRepeatService)
+                                        // Show Error No Repeat Service
+                                        $("#error-NoRepeatService").modal('hide');
+
+                                        // Close Select Meeting
+                                        $("#myModal2").modal('hide');
                                     }else{
-                                        alert("Event Created Successfully");
+                                        //alert("Event Created Successfully");
+
+                                        // Show Success Meeting
+                                        $('#succes-meeting').modal('show');
+
+                                        // Close Select Meeting
+                                        $("#myModal2").modal('hide');
                                     }
                                 }else{
-                                    alert(data.select_error);
+                                   // alert(data.select_error);
+
+                                    // Show Error No Repeat Service
+                                    $("#select_error").modal('show');
+
+                                    // Close Select Meeting
+                                    $("#myModal2").modal('hide');
                                 }
 
                             },
                             error: function(data) {
-                                console.log(data)
-                                alert('Your appointment has not been created');
+                               // alert('Your appointment has not been created');
+
+                                // Show Error No not been created
+                                $("#not-been-created").modal('show');
+
+                                // Close Select Meeting
+                                $("#myModal2").modal('hide');
                             }
                         });
                     });
                 }else{
-                    alert('You can not make appointments with back date.');
+                  //  alert('You can not make appointments with back date.');
+
+                    // Show Error with back date
+                    $("#with-back-date").modal('show');
+
+                    // Close Select Meeting
+                    $("#myModal2").modal('hide');
                 }
 
             },
@@ -645,16 +680,34 @@
                             },
                             success: function (response) {
                                 calendar.fullCalendar('refetchEvents');
-                                alert("Event Deleted Successfully");
+                                //alert("Event Deleted Successfully");
+
+                                // Show Success Delete
+                                $("#delete-success").modal('show');
+
+                                // Close Select Meeting
+                                $("#myModal").modal('hide');
                             },
                             error: function (returnval) {
-                                alert('Your appointment has not been deleted');
+                                //alert('Your appointment has not been deleted');
+
+                                // Show Error Delete
+                                $("#delete-error").modal('show');
+
+                                // Close Select Meeting
+                                $("#myModal").modal('hide');
                             }
                         })
                     }
                 }
             }else{
-                alert('You can not delete this meeting because you did not add it.')
+                //alert('You can not delete this meeting because you did not add it.')
+
+                // Show Error Delete
+                $("#delete-did-not-add-it").modal('show');
+
+                // Close Select Meeting
+                $("#myModal").modal('hide');
             }
                 @endif
             }

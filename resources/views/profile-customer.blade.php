@@ -424,6 +424,8 @@
             </div>
         </div>
     </div>
+
+    @include('modal-list')
 @endsection
 
 @section('style')
@@ -549,16 +551,34 @@ if(service_id == null)
                                         {
                                             alert(response.Hour)
                                         }else{
-                                            alert("Event Updated Successfully");
+                                           // alert("Event Updated Successfully");
+
+                                            // Show Success Delete
+                                            $("#update-success").modal('show');
+
+                                            // Close Select Meeting
+                                            $("#myModal").modal('hide');
                                         }
                                     }else{
-                                        alert(response.select_error);
+
+                                        //alert(response.select_error);
+                                        // Show Error No Repeat Service
+                                        $("#select_error").modal('show');
+
+                                        // Close Select Meeting
+                                        $("#myModal2").modal('hide');
+                                        //  alert(data.select_error);
                                     }
 
                                 },
                                 error: function(data) {
                                     console.log(data)
-                                    alert('Your appointment has not been created');
+                                   // alert('Your appointment has not been created');
+                                    // Show Error No not been created
+                                    $("#not-been-created").modal('show');
+
+                                    // Close Select Meeting
+                                    $("#myModal2").modal('hide');
                                 }
 
                             })
@@ -662,16 +682,34 @@ if(service_id == null)
                             },
                             success: function (response) {
                                 calendar.fullCalendar('refetchEvents');
-                                alert("Event Deleted Successfully");
+                                //alert("Event Deleted Successfully");
+
+                                // Show Success Delete
+                                $("#delete-success").modal('show');
+
+                                // Close Select Meeting
+                                $("#myModal").modal('hide');
                             },
                             error: function(returnval) {
-                                alert('Your appointment has not been deleted');
+                               // alert('Your appointment has not been deleted');
+
+                                // Show Error Delete
+                                $("#delete-error").modal('show');
+
+                                // Close Select Meeting
+                                $("#myModal").modal('hide');
                             }
                         })
                     }
                 }
                 }else{
-                    alert('You can not delete this meeting because you did not add it.')
+                    //alert('You can not delete this meeting because you did not add it.')
+
+                    // Show Error Delete
+                    $("#delete-did-not-add-it").modal('show');
+
+                    // Close Select Meeting
+                    $("#myModal").modal('hide');
                 }
                     @endif
                 },
