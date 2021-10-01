@@ -14,8 +14,7 @@
 
                     if(!empty(count($Service->where('practitioner_id',$Result->id))))
                     {
-                        echo   '<h2 class="text-center" >My Services</h2>
-                            <h4 class="text-uppercase text-center" >ONE ON ONE PROGRAMS</h4>';
+                        echo   '<h2 class="text-center mb-5" >Select Services</h2>';
                     }
                     else{
                         echo '<h2 class="text-center" >No services yet</h2>';

@@ -226,9 +226,10 @@
 
     {{--    full calendar modal--}}
     <div class="modal" tabindex="-1" id="myModal">
-        <div class="modal-dialog">
+        <div class="modal-dialog max-dialog">
             <div class="modal-content">
-                <div class="modal-header">
+                <div class="modal-header border-bottom-0">
+                    <h2 class="text-center w-100 title">Service Name</h2>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>

@@ -239,7 +239,8 @@
     bottom: 40px;
     left: 0;
     right: 0;
-    min-width: 100px;
+    min-width: 190px;
+    height: 41px;
 }
 .item button.save {
     margin: 0 auto;
@@ -247,7 +248,7 @@
 }
 .service h2 {
     font: normal normal 600 24px/28px Montserrat;
-    color: #462847;
+    color: #00309E;
 }
 .service h4 {
     font: normal normal 500 21px/28px Montserrat;
@@ -501,33 +502,81 @@ a .fa-times {
     background: red !important;
     color: white !important;
     border: 1px solid #abab95 !important;
+}
 
-    /*background-color: rgb(55, 128, 6) !important;*/
-    /*border-color: rgb(55, 128, 6) !important;*/
-    /*inset: 835.5px 0% -879.5px !important; z-index: 1;*/
-    /*margin-right: 20px !important;*/
+.max-dialog .fc-unthemed th,
+.max-dialog .fc-unthemed td,
+.max-dialog .fc-unthemed thead,
+.max-dialog .fc-unthemed tbody,
+.max-dialog .fc-unthemed .fc-divider,
+.max-dialog .fc-unthemed .fc-row,
+.max-dialog .fc-unthemed .fc-content,
+.max-dialog .fc-unthemed .fc-popover,
+.max-dialog .fc-unthemed .fc-list-view,
+.max-dialog .fc-unthemed .fc-list-heading td {
+    border-color: #8BA9EE;
 }
-/*.fc-time-grid-event.fc-allow-mouse-resize .fc-resizer:after{*/
-/*    content: "=" !important;*/
-/*}*/
-.DeactiveUser{
-    /*background: mediumblue !important;*/
-    /*color: white !important;*/
-    /*border: 1px solid #abab95 !important;*/
-    /*display: none;*/
+.max-dialog .fc-unthemed th {
+    background-color: #F5F9FE;
+    color: #00309E!important;
+    text-align: left;
+    padding-left: 25px;
+    font-size: 16px;
 }
-/*.fc-time-grid-event.fc-allow-mouse-resize .fc-resizer{*/
-/*    left: 0 !important;*/
-/*    right: 0 !important;*/
-/*    bottom: 0 !important;*/
-/*    height: 8px  !important;*/
-/*    overflow: hidden  !important;*/
-/*    line-height: 8px  !important;*/
-/*    font-size: 11px  !important;*/
-/*    font-family: monospace  !important;*/
-/*    text-align: center  !important;*/
-/*    cursor: s-resize  !important;*/
-/*}*/
+.max-dialog .fc table {
+    font-size: 22px;
+    line-height: 46px;
+    color: #000;
+    font-weight: bold;
+}
+
+.max-dialog {
+    max-width: 1670px!important;
+}
+.max-dialog .fc-center h2{
+    font: normal normal 400 16px/25px "Montserrat";
+    color: #00309E;
+}
+.max-dialog .fc-state-disabled {
+    opacity: 1;
+    color: #00309E;
+    border: 0;
+}
+.max-dialog .title{
+    font: normal normal 600 30px/37px Montserrat;
+    color: #00309E;
+}
+.max-dialog .modal-body {
+    max-height: 90vh;
+    overflow: auto;
+    padding: 0 60px;
+}
+.max-dialog .fc .fc-button-group > * {
+    float: left;
+    margin: 0 0 0 11px;
+    border: 0;
+    color: #00309E;
+    box-shadow: none!important;
+}
+.max-dialog .fc-state-default {
+    background-color: #E4E6E8;
+    background-image: none;
+    text-shadow: none;
+    font-weight: 500;
+    text-transform: capitalize;
+    border-radius: 5px;
+    min-width: 100px;
+    height: 40px;
+}
+.max-dialog .fc-state-down,
+.max-dialog .fc-state-active {
+    background-color: #8BA9EE;
+    color: #fff!important;
+}
+.max-dialog .fc-unthemed td.fc-today {
+    background: #8BA9EE;
+}
+
 @media (max-width: 768px) {
     .profile-practitioner__consultation {
         padding-left: 0;
