@@ -124,7 +124,7 @@
                     </div>
                     <div class="create__checkbox">
                         <p>
-                            <input  type="checkbox" name="check" value="check" id="check" class="lg-sg__checkin delivery" />
+                            <input  type="checkbox" name="yesNo" value="No" id="check" @if(!empty($Week)) @if($Week == 'No') checked="checked"  @endif @endif class="lg-sg__checkin delivery" />
                             <label for="check">Available appointments this week</label>
                         </p>
 
