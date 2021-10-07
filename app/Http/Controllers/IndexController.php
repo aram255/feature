@@ -84,7 +84,8 @@ class IndexController extends Controller
 //        }
 
         $Practitioner = DB::table('practitioner')
-                        ->select('practitioner.id','practitioner.first_name','practitioner.phone_number','practitioner.last_name','practitioner.email','practitioner.video','practitioner.description','practitioner.img')
+                        ->select('practitioner.id','practitioner.first_name','practitioner.phone_number','practitioner.last_name','practitioner.email','practitioner.video','practitioner.description','practitioner.img',
+                            DB::raw("(SELECT avg(rate) FROM reviews) as rate "))
 
             ->when(isset($_POST['state']), function ($query) {
 
@@ -94,7 +95,6 @@ class IndexController extends Controller
             ->when(isset($_POST['yesNo']), function ($query) {
                 $query->leftJoin('zoom_meetings_list', 'zoom_meetings_list.practitioner_id', '=', 'practitioner.id');
             })
-
 
             ->when(isset($_POST['yesNo']), function ($query) {
 
@@ -106,7 +106,6 @@ class IndexController extends Controller
                             ->whereColumn('practitioner_id', '=', 'practitioner.id')
                     ]);
                 }
-
                       })
 
             ->groupBy('practitioner.id', 'practitioner.email', 'practitioner.first_name', 'practitioner.last_name', 'practitioner.phone_number','practitioner.video','practitioner.description','practitioner.img')
@@ -153,7 +152,21 @@ class IndexController extends Controller
             })
             ->get();
 
-     //  dd($Practitioner);
+
+        // Show Rate
+        $Rate = [];
+
+        foreach ($Practitioner as $valRate)
+        {
+            $Rate[] =  DB::table('reviews')
+                ->select('reviews.rate','reviews.description','users.last_name','users.first_name','users.img','reviews.created_at')
+                ->join('users', 'users.id', 'reviews.user_id')
+                ->where('reviews.practitoner_id',$valRate->id)
+                ->avg('rate');
+        }
+
+
+
 
 
 
@@ -269,14 +282,14 @@ class IndexController extends Controller
 //                return response()->json($data);
 //
 //        }
-        $a = 1;
+
+       $a = 1;
        $segment = request()->segments();
         if($request->ajax())
         {
 
             $start = (!empty($_GET["start"])) ? ($_GET["start"]) : ('');
             $end = (!empty($_GET["end"])) ? ($_GET["end"]) : ('');
-
 
 
             $data = ZoomModel::whereDate('start', '>=', $start)
@@ -327,7 +340,8 @@ class IndexController extends Controller
        $ZommInfo = ZoomModel::first();
 
 
-        return view('filter',compact('ZommInfo','Practitioners','Languages','TegManagements','Tag','Virtual','Person','Gender','Lang','Service','ServiceSession','ServiceDescription','Week','Favorite'));
+
+        return view('filter',compact('ZommInfo','Practitioners','Languages','TegManagements','Tag','Virtual','Person','Gender','Lang','Service','ServiceSession','ServiceDescription','Week','Favorite','Rate'));
 
     }
 
@@ -428,10 +442,36 @@ class IndexController extends Controller
             ->where('reviews.description','!=',null)
             ->get();
 
+        $ReviewRate = DB::table('reviews')
+            ->select('reviews.rate','reviews.description','users.last_name','users.first_name','users.img','reviews.created_at')
+            ->join('users', 'users.id', 'reviews.user_id')
+            ->where('reviews.practitoner_id',$practitionerID)
+            ->where('reviews.user_id',Auth::id())
+            ->avg('rate');
 
-        $ThisWeekMeetingsList = ZoomModel::whereBetween('start', [Carbon::now()->startOfWeek(), Carbon::now()->endOfWeek()])->where('practitioner_id',$practitionerID)->get();
+        $Rate = floor($ReviewRate);
 
-        return view('profile-view-as-a-customer',compact('Practitioner','Service','ServiceSession','ServiceDescription','TagManagements','MyTagManagements','ThisWeekMeetingsList','Review','ServizeID'));
+        // CheckAddReviews
+        $CompleteCountCheckAddReviews  = DB::table('practitioner')
+            ->join('zoom_meetings_list', 'practitioner.id', 'zoom_meetings_list.practitioner_id')
+            ->where('zoom_meetings_list.user_id',Auth::id())
+            ->whereDate("zoom_meetings_list.start", "<=",date('Y-m-d'))
+            ->orderBy('zoom_meetings_list.id','DESC')
+            ->count();
+
+        $CompleteCountCheckAdd  = DB::table('practitioner')
+            ->join('zoom_meetings_list', 'practitioner.id', 'zoom_meetings_list.practitioner_id')
+            ->where('zoom_meetings_list.user_id',Auth::id())
+            ->whereDate("zoom_meetings_list.start", "<=",date('Y-m-d'))
+            ->orderBy('zoom_meetings_list.id','DESC')
+            ->get();
+
+
+        $ReviewCheckMeetingId = ReviewModel::where('practitoner_id', $practitionerID)->count();
+
+        $ThisWeekMeetingsList = ZoomModel::whereBetween('start', [Carbon::now()->startOfWeek(), Carbon::now()->endOfWeek()])->where('practitioner_id',$practitionerID)->where('user_id','!=',null)->get();
+
+        return view('profile-view-as-a-customer',compact('Practitioner','Service','ServiceSession','ServiceDescription','TagManagements','MyTagManagements','ThisWeekMeetingsList','Review','ServizeID','Rate','ReviewCheckMeetingId'));
     }
 
     public function typeFormPractitioner($lang,$practitionerID)
@@ -456,6 +496,34 @@ class IndexController extends Controller
         return view('balance', compact('cards','balance'));
     }
 
+
+    public function searchHome(request $request)
+    {
+
+       $SearchGo =  DB::table('practitioner')
+           ->select('practitioner.id','practitioner.first_name','practitioner.phone_number','practitioner.last_name','practitioner.email','practitioner.video','practitioner.description','practitioner.img')
+             ->join('services','services.practitioner_id','practitioner.id')
+             ->join('practitioner_teg_managements','practitioner_teg_managements.practitioner_id','practitioner.id')
+             ->join('teg_managements','teg_managements.id','practitioner_teg_managements.teg_managements_id')
+             ->where('practitioner.first_name','LIKE', '%' . $request->search_go . '%')
+             ->orWhere('practitioner.last_name','LIKE', '%' . $request->search_go . '%')
+             ->orWhere('services.title','LIKE', '%' . $request->search_go . '%')
+             ->orWhere('teg_managements.name','LIKE', '%' . $request->search_go . '%')
+             ->groupBy('practitioner.id','practitioner.first_name','practitioner.phone_number','practitioner.last_name','practitioner.email','practitioner.video','practitioner.description','practitioner.img')
+             ->get();
+
+        $output = '<ul class="dropdown-menu" style="display:block; position:relative">';
+
+        foreach($SearchGo as $row)
+        {
+            $url =  url(app()->getLocale().'/profile-view-customer/'.$row->id);
+
+         $output .= '<li><a href="'.$url.'">'.$row->first_name.' '.$row->first_name.'</a></li>';
+        }
+        $output .= '</ul>';
+        echo $output;
+
+    }
 
 
 }

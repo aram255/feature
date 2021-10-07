@@ -26,6 +26,8 @@ use Hash;
 use DB;
 
 use Validator,Redirect,Response;
+//use DateTime;
+use DateTimeZone;
 
 
 
@@ -57,7 +59,7 @@ class CustomerController extends Controller
             ->orderBy('zoom_meetings_list.id','DESC')
             ->paginate(5);
 
-//       dd($InProcess);
+      // dd($InProcess);
 
 
         $Review = DB::table('reviews')
@@ -79,6 +81,22 @@ class CustomerController extends Controller
             ->join('favorite', 'practitioner.id', 'favorite.practitioner_id')
             ->where('favorite.user_id',Auth::id())
             ->get();
+
+
+
+        $Rate = [];
+        foreach ($PractitionerFavorite as $ValRate)
+        {
+            $Rate[] = DB::table('reviews')
+                ->select('reviews.rate','reviews.description','users.last_name','users.first_name','users.img','reviews.created_at')
+                ->join('users', 'users.id', 'reviews.user_id')
+                ->where('reviews.practitoner_id',$ValRate->practitioner_id)
+                ->where('reviews.user_id',Auth::id())
+                ->avg('rate');
+        }
+
+
+
 
 //       dd($PractitionerFavorite);
 
@@ -116,7 +134,7 @@ class CustomerController extends Controller
         }
 
 
-        return view('profile-customer',compact('InProcess','Review','PractitionerFavorite','Teg','Service','ServiceSession','ServiceDescription'));
+        return view('profile-customer',compact('InProcess','Review','PractitionerFavorite','Teg','Service','ServiceSession','ServiceDescription','Rate'));
     }
 
 
@@ -246,12 +264,21 @@ class CustomerController extends Controller
 
         //  dd(date('Y-m-d H:i:s'));
 
+//        $tz = 'Asia/Russian';
+//        $timestamp = time();
+//        $dt = new DateTime("now", new DateTimeZone($tz)); //first argument "must" be a string
+//        $dt->setTimestamp($timestamp); //adjust the object to correct timestamp
+//        echo $dt->format('Y-m-d H:i:s');
+
         $InProcess = DB::table('practitioner')
             ->join('zoom_meetings_list', 'practitioner.id', 'zoom_meetings_list.practitioner_id')
             ->where('zoom_meetings_list.user_id',Auth::id())
-            ->whereDate("zoom_meetings_list.start", ">=",date('Y-m-d'))
+            //  ->whereDate("zoom_meetings_list.start", ">=",$dt->format('Y-m-d H:i:s'))
+            ->whereDate("zoom_meetings_list.start", ">=",date('Y-m-d H:i:s'))
             ->orderBy('zoom_meetings_list.id','DESC')
             ->paginate(5);
+
+
 
         $TypeForm = DB::table('type_form_practitioner')->where('defaultt',1)->get();
 
@@ -292,12 +319,25 @@ class CustomerController extends Controller
 
 
         $Complete  = DB::table('practitioner')
-            ->join('zoom_meetings_list', 'practitioner.id', 'zoom_meetings_list.practitioner_id')
-            ->where('zoom_meetings_list.user_id',Auth::id())
-            ->whereDate("zoom_meetings_list.start", "<=",date('Y-m-d'))
-            ->orderBy('zoom_meetings_list.id','DESC')
-            ->paginate(5);
+                    ->join('zoom_meetings_list', 'practitioner.id', 'zoom_meetings_list.practitioner_id')
+                    ->where('zoom_meetings_list.user_id',Auth::id())
+                    // ->whereDate("zoom_meetings_list.start", "<=",$dt->format('Y-m-d H:i:s'))
+                    ->whereDate("zoom_meetings_list.start", "<=",date('Y-m-d H:i:s'))
+                    ->orderBy('zoom_meetings_list.id','DESC')
+                    ->paginate(5);
 
+        $ReviewRate = [];
+
+        foreach ($Complete as $CompleteVal)
+        {
+
+            $ReviewRate = DB::table('reviews')
+
+                ->where('user_id',Auth::id())
+                ->where('practitoner_id',$CompleteVal->practitioner_id)
+                ->where('meeting_id',$CompleteVal->id)
+                ->first();
+        }
 
 
         $StatusProtocol = DB::table('protocol_heading')->where('user_id',Auth::id())->get();
@@ -337,7 +377,7 @@ class CustomerController extends Controller
 
 
 
-        return view('my-appointments-customer',compact('InProcess','Complete','id','StatusProtocol','TypeForm','CheckTypeForm'));
+        return view('my-appointments-customer',compact('InProcess','Complete','id','StatusProtocol','TypeForm','CheckTypeForm','ReviewRate'));
     }
 
     public  function week_between_two_dates($date1, $date2)
@@ -406,7 +446,6 @@ class CustomerController extends Controller
 //
     public function addStarPractitioner(request $request)
     {
-
         $CompleteCount  = DB::table('practitioner')
             ->join('zoom_meetings_list', 'practitioner.id', 'zoom_meetings_list.practitioner_id')
             ->where('zoom_meetings_list.user_id',Auth::id())
@@ -414,18 +453,56 @@ class CustomerController extends Controller
             ->orderBy('zoom_meetings_list.id','DESC')
             ->count();
 
+
+        $CompleteCountCheckAdd  = DB::table('practitioner')
+            ->join('zoom_meetings_list', 'practitioner.id', 'zoom_meetings_list.practitioner_id')
+            ->where('zoom_meetings_list.user_id',Auth::id())
+            ->whereDate("zoom_meetings_list.start", "<=",date('Y-m-d'))
+            ->orderBy('zoom_meetings_list.id','DESC')
+            ->get();
+
+
+
+
        $reviewCount = DB::table('reviews')->where('user_id',Auth::id())->where('practitoner_id',$request->practitioner_id)->where('description','=',null)->count();
 
-       if($CompleteCount != $reviewCount)
-       {
-         return DB::table('reviews')->insert(
-            [
-                'rate' => $request->star,
-                'practitoner_id' => $request->practitioner_id,
-                'user_id' => Auth::id()
-            ]
-        );
-       }
+
+//        return $request->practitioner_id;
+
+//       if($CompleteCount != $reviewCount)
+//       {
+
+          $reviewCheckMeetingId = ReviewModel::where('user_id',Auth::id())->where('practitoner_id',$request->practitioner_id)->where('description','=',null)->where('meeting_id',$request->practitioner_id)->first();
+
+            if(empty($reviewCheckMeetingId))
+            {
+                $AddStar =  DB::table('reviews')->insert(
+                    [
+                        'rate' => $request->star,
+                        'practitoner_id' => $request->practitioner_id,
+                        'user_id' => Auth::id(),
+                        'meeting_id' => $request->meeting_id
+                    ]
+                );
+
+                if(!empty($AddStar))
+                {
+                    return response()->json(['success' => 'Yes']);
+                }else{
+                    return response()->json(['error' => 'No']);
+                }
+
+
+            }else{
+                return response()->json(['error' => 'No']);
+            }
+//        }
+
+
+//           return response()->json(['success' => 'Yes']);
+//       }else{
+//           return response()->json(['error' => 'No']);
+//       }
 
 
 

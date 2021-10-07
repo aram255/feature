@@ -192,7 +192,8 @@ Route::group(['prefix' => '{locale?}','where' => ['locale' => '[a-zA-Z]{2}']], f
 
 
 
-
+//    Route::get('/search-go/', [IndexController::class, 'searchHome'])->name('search-go');
+    Route::post('/search-go/', [IndexController::class, 'searchHome'])->name('search-go');
 
 
 });

@@ -31,10 +31,8 @@
                         <div class="input-group-prepend ">
                             <img src="{{ asset('web_sayt/img/Group 1763.svg') }}" alt="" width="24px" height="25px">
                         </div>
-{{--                        <form action="">--}}
-                        <input type="text" class="find__input" placeholder="Service, Symptom or Practitioners"
+                        <input type="text" id="search_go" class="find__input" placeholder="Service, Symptom or Practitioners"
                                aria-label="Service" aria-describedby="basic-addon1" name="search_go">
-
                     </div>
                     <div class="find__form-settings">
                         <button class="settings-button" ml-3="" data-toggle="modal" data-target="#find__filter"><i
@@ -42,19 +40,17 @@
                     </div>
 
                 </div>
+                                                    <div id="countryList"></div>
                 <div class="find__button">
+                    {{ csrf_field() }}
 
-
-                        <button type="submit" class="btn bg-yellow">
-                       Lets go
-                        </button>
-{{--                    </form>--}}
-{{--                    <a href="" class="btn bg-yellow" >--}}
-{{--                        Lets go</a>--}}
+                    <a href="" class="btn bg-yellow" id="" >
+                        Lets go</a>
                 </div>
 
             </div>
         </div>
+
         <!-- Login  -->
         <div class="modal fade show" id="login" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
              aria-hidden="true">
@@ -98,6 +94,7 @@
                 </div>
             </div>
         </div>
+
         <!-- Sign Up -->
         <div class="modal fade show" id="sign-up" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
              aria-hidden="true">
@@ -223,10 +220,43 @@
             </div>
         </div>
     </section>
+
 @endsection
 
 @section('style')
 <script type="text/javascript" src="{{ asset('web_sayt/js/jquery.js') }}"></script>
 <script type="text/javascript" src="{{ asset('web_sayt/js/bootstrap/bootstrap.min.js') }}"></script>
 <script type="text/javascript" src="{{ asset('web_sayt/js/script.js') }}"></script>
+
+{{--    Search Autocomplete--}}
+<script>
+    $(document).ready(function(){
+
+        $('#search_go').keyup(function(){
+
+            var search_go = $(this).val();
+
+            if(search_go != '')
+            {
+                var _token = $('input[name="_token"]').val();
+                $.ajax({
+                    url:"{{ route('search-go',[app()->getLocale()]) }}",
+                    method:"POST",
+                    data:{search_go:search_go, _token:_token},
+                    success:function(data){
+
+                        $('#countryList').fadeIn();
+                        $('#countryList').html(data);
+                    }
+                });
+            }
+        });
+
+        $(document).on('click', 'li', function(){
+            $('#search_go').val($(this).text());
+            $('#countryList').fadeOut();
+        });
+
+    });
+</script>
 @endsection

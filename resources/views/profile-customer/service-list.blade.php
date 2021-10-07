@@ -111,6 +111,7 @@
         var serviceName    = $(this).prev().prev().prev().prev().prev().prev().prev().val();
         var user_email    = $(this).prev().prev().prev().prev().prev().prev().prev().prev().val();
 
+        $('#titlee').text(serviceName);
         if(service_id == null)
 
             service_id = '';
@@ -426,7 +427,7 @@
                 }else {
 
 
-                    if (confirm("Are you sure you want to remove it?")) {
+                    // if (confirm("Are you sure you want to remove it?")) {
 
                         $.ajax({
                             url: "{{ route('zoom-delete',app()->getLocale()) }}",
@@ -456,7 +457,7 @@
                                 $("#myModal").modal('hide');
                             }
                         })
-                    }
+                    // }
                 }
             }else{
                // alert('You can not delete this meeting because you did not add it.')

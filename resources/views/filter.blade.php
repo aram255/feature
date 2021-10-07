@@ -152,7 +152,7 @@
 
             <!-- filetr data -->
 
-        @foreach($Practitioners as $Result)
+        @foreach($Practitioners as $k => $Result)
 
             @if(!empty($Result->count_meting)  and $Result->count_meting <= 7 and $Result->count_meting >= 1 and  $Week=='Yes' )
                 @include('filter.practitioners-list')
@@ -229,7 +229,7 @@
         <div class="modal-dialog max-dialog">
             <div class="modal-content">
                 <div class="modal-header border-bottom-0">
-                    <h2 class="text-center w-100 title">Service Name</h2>
+                    <h2 class="text-center w-100 title" id="titlee">Service Name</h2>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -265,7 +265,7 @@
                     <div id="offline" class="modal-body mx-4 flex-1">
                         <a href="#">
                             <img src="{{ asset('web_sayt/img/Group 2013.svg') }}" alt="" style="width: 32px; height: 32px">
-                            Offline Meeting
+                            In-person visit
                         </a>
                     </div>
                 </div>
@@ -330,6 +330,7 @@
             var serviceName    = $(this).prev().prev().prev().prev().prev().prev().prev().val();
             var user_email     = $(this).prev().prev().prev().prev().prev().prev().prev().prev().val();
 
+            $('#titlee').text(serviceName);
             if(service_id == null)
 
                 service_id = '';
@@ -488,6 +489,7 @@
                             element[0].setAttribute('class', 'activeNull  fc-day-grid-event fc-h-event fc-event fc-start fc-end fc-draggable');
                             let x = document.querySelector('.fc-event-container');
                             x.removeAttribute('class');
+
                         }, 10)
 
                     } else {
@@ -565,7 +567,7 @@
                             $("#editHour").modal("show");
                         }else {
 
-                            if (confirm("Are you sure you want to remove it?")) {
+                            // if (confirm("Are you sure you want to remove it?")) {
 
                                 $.ajax({
                                     url: "{{ route('zoom-delete',app()->getLocale()) }}",
@@ -595,7 +597,7 @@
                                         $("#myModal").modal('hide');
                                     }
                                 })
-                            }
+                          //  }
                         }
                     }else{
                        // alert('You can not delete this meeting because you did not add it.')

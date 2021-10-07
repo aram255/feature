@@ -13,8 +13,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/fullcalendar.css" />
 
     <meta name="csrf-token" content="{{ csrf_token() }}">
-
-
+    <link rel="stylesheet" href="{{ asset('web_sayt/css/calendar2_parctitioner/calendar.css') }}">
 
 @endsection
 
@@ -57,25 +56,27 @@
                                 </a>
 
                             </div>
-                            <div class="person__info-rating qew">
-                        <span class="gl-star-rating gl-star-rating--ltr " data-star-rating="">
-                           <select class="star-rating">
 
-                              <option value="5">5.0</option>
-                              <option value="4">4.0</option>
-                              <option value="3">3.0</option>
-                              <option value="2">2.0</option>
-                              <option value="1">1.0</option>
-                           </select>
-                           <span class="gl-star-rating--stars s50" role="tooltip" aria-label="5.0">
-                              <span data-index="0" data-value="1" class="" style="font-size: 28px;"></span>
-                              <span data-index="1" data-value="2" class=""></span>
-                              <span data-index="2" data-value="3" class=""></span>
-                              <span data-index="3" data-value="4" class=""></span>
-                              <span data-index="4" data-value="5" class="gl-selected gl-active"></span>
-                           </span>
-                        </span>
+
+                            @if(isset($Rate) and $Rate>0 )
+                                @php $Rt =  $Rate; @endphp
+                            <div class="person__info-rating qew">
+
+                               <span class="gl-star-rating gl-star-rating--ltr " data-star-rating="">
+                                   <select class="star-rating">
+                                   @for($Rate; $Rate >=1 ; $Rate--)
+                                           <option value="{{$Rate}}">{{$Rate}}.0</option>
+                                       @endfor
+                                   </select>
+
+                                   <span class="gl-star-rating--stars s{{$Rt}}0" role="tooltip" aria-label="{{$Rt}}.0">
+                                         @for($r = 1; $r <= $Rt; $r++)
+                                           <span  data-value="{{$r}}" class="gl-selected"></span>
+                                       @endfor
+                                   </span>
+                                </span>
                             </div>
+                            @endif
                             <p class="perion__info-session">256<span> Sessions</span></p>
                         </div>
 
@@ -84,33 +85,77 @@
                 <div class="profile-practitioner__consultation nl">
                     <div class="d-flex flex-md-row flex-column align-items-center">
 
-                            @if($PractitionerInfo->video != null)
-                                <div class="profile-practitioner__consultation-video flex-1 mr-md-3 p-0 overflow-hidden">
-                                    <video id="video" src="{{ asset('web_sayt/video_practitioners/'.$PractitionerInfo->video) }}"  width="100%" height="100%" controls>
+{{--                            @if($PractitionerInfo->video != null)--}}
+{{--                                <div class="profile-practitioner__consultation-video flex-1 mr-md-3 p-0 overflow-hidden">--}}
+{{--                                    <video id="video" src="{{ asset('web_sayt/video_practitioners/'.$PractitionerInfo->video) }}"  width="100%" height="100%" controls>--}}
 
-                                    </video>
-                                </div>
-                            @else
-                                <div class="profile-practitioner__consultation-video flex-1 mr-md-3">
-                                    <label for="file-input">
-                                        <img  class="upload" width="100%" height="100%" src="{{ asset('web_sayt/img/video-file.svg') }}" alt="">
-                                    </label>
-                                </div>
-                            @endif
+{{--                                    </video>--}}
+{{--                                </div>--}}
+{{--                            @else--}}
+{{--                                <div class="profile-practitioner__consultation-video flex-1 mr-md-3">--}}
+{{--                                    <label for="file-input">--}}
+{{--                                        <img  class="upload" width="100%" height="100%" src="{{ asset('web_sayt/img/video-file.svg') }}" alt="">--}}
+{{--                                    </label>--}}
+{{--                                </div>--}}
+{{--                            @endif--}}
 
 
-                        <div class="person__content-calendar ds-none flex-1">
+{{--                        <div class="person__content-calendar ds-none flex-1">--}}
 
 {{--                            <div  class="jquery-calendar bg-yellow br-10 px-4 py-2 mt-4 fs-16 view-more detail-btn" data-toggle="modal" data-target="#myModal"  >fff</div>--}}
 {{--                            @foreach($GetServiceID as $ServiceId)--}}
-                            <input type="hidden" class="serviceid" >
+{{--                            <input type="hidden" class="serviceid" >--}}
 {{--                            @endforeach--}}
-                            <div class="calendar-wrapper">
-                                <button id="btnPrev" type="button">Prev</button>
-                                <button id="btnNext" type="button">Next</button>
-                                <div id="divCal" ></div>
-                            </div>
-                        </div>
+{{--                            <div class="calendar-wrapper">--}}
+{{--                                <button id="btnPrev" type="button">Prev</button>--}}
+{{--                                <button id="btnNext" type="button">Next</button>--}}
+{{--                                <div id="divCal" ></div>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+
+                        <div class="container"  >
+                            <div class="calendar-section" >
+                                <div class="row" >
+
+                                    <div class="col-sm-6 detail-btn" data-toggle="modal" data-target="#myModal">
+
+                                        <div class="calendar calendar-first " id="calendar_first">
+                                            <div class="calendar_header ">
+                                                <button class="switch-month switch-left">
+                                                    <i class="glyphicon glyphicon-chevron-left"></i>
+                                                </button>
+                                                <h2></h2>
+                                                <button class="switch-month switch-right">
+                                                    <i class="glyphicon glyphicon-chevron-right"></i>
+                                                </button>
+                                            </div>
+                                            <div class="calendar_weekdays"></div>
+                                            <div class="calendar_content"></div>
+                                        </div>
+
+                                    </div>
+                                    <div class="col-sm-6 detail-btn" data-toggle="modal" data-target="#myModal">
+
+                                        <div class="calendar calendar-second " id="calendar_second">
+                                            <div class="calendar_header">
+                                                <button class="switch-month switch-left">
+                                                    <i class="glyphicon glyphicon-chevron-left"></i>
+                                                </button>
+                                                <h2></h2>
+                                                <button class="switch-month switch-right">
+                                                    <i class="glyphicon glyphicon-chevron-right"></i>
+                                                </button>
+                                            </div>
+                                            <div class="calendar_weekdays"></div>
+                                            <div class="calendar_content"></div>
+                                        </div>
+
+                                    </div>
+
+                                </div> <!-- End Row -->
+
+                            </div> <!-- End Calendar -->
+                        </div> <!-- End Container -->
                     </div>
                     <div class="profile-practitioner__consultation-time">
                         <div class="profile-practitioner__consultation-time-content">
@@ -317,9 +362,10 @@
 
     <!---  0000000 ----->
     <div class="modal" tabindex="-1" id="myModal">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
+        <div class="modal-dialog max-dialog">
+            <div class="modal-content ">
+                <div class="modal-header border-bottom-0">
+                    <h2 class="text-center w-100 title">Service Name</h2>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -331,7 +377,7 @@
         </div>
     </div>
 
-
+@include('modal-list')
 @endsection
 
 @section('style')
@@ -413,19 +459,35 @@
                                     calendar.fullCalendar('refetchEvents');
                                     if(data.success !== undefined)
                                     {
-                                        alert(data.success)
+                                     //   alert(data.success)
                                         //calendar.fullCalendar('refetchEvents');
+                                        // Show Success Meeting
+                                        $('#succes-meeting-free').modal('show');
+
+                                        // Close Select Meeting
+                                        $("#myModal-free").modal('hide');
                                     }
 
                                     if(data.error !== undefined)
                                     {
-                                        alert(data.error);
+                                        //alert(data.error);
+                                        // Show Error No Repeat Service
+                                        $("#select_error").modal('show');
+
+                                        // Close Select Meeting
+                                        $("#myModal2").modal('hide');
 
                                     }
                                 },
                             });
                     }else{
-                        alert('You can not make appointments with back date.');
+                        //alert('You can not make appointments with back date.');
+
+                        // Show Error with back date
+                        $("#with-back-date").modal('show');
+
+                        // Close Select Meeting
+                        $("#myModal2").modal('hide');
                     }
                 },
 
@@ -484,16 +546,34 @@
                                 success: function (response) {
                                     console.log(response)
                                     calendar.fullCalendar('refetchEvents');
-                                    alert("Event Updated Successfully");
+                                    //alert("Event Updated Successfully");
+
+                                    // Show Success Delete
+                                    $("#update-success").modal('show');
+
+                                    // Close Select Meeting
+                                    $("#myModal").modal('hide');
                                 },
                                 error: function(response) {
                                     console.log(response)
-                                    alert("The event has not been updated.");
+                                    // alert("The event has not been updated.");
+
+                                    // Show Error No not been created
+                                    $("#not-been-created").modal('show');
+
+                                    // Close Select Meeting
+                                    $("#myModal2").modal('hide');
                                 }
                             })
                         }
                     }else{
-                        alert('You can not make appointments with back date.');
+                       // alert('You can not make appointments with back date.');
+
+                        // Show Error with back date
+                        $("#with-back-date").modal('show');
+
+                        // Close Select Meeting
+                        $("#myModal2").modal('hide');
                     }
 
                 },
@@ -514,7 +594,7 @@
 
                     if((AuthID === event.practitioner_id) &&  (user_id == null)) {
 
-                        if (confirm("Are you sure you want to remove it?")) {
+                        // if (confirm("Are you sure you want to remove it?")) {
 
                             $.ajax({
                                 url: "{{ route('free-date-time-delete',app()->getLocale()) }}",
@@ -530,18 +610,35 @@
 
                                     if(data.success !== undefined)
                                     {
-                                        alert(data.success)
+                                        //alert(data.success)
+                                        // Show Success Delete
+                                        $("#delete-success-free").modal('show');
+
+                                        // Close Select Meeting
+                                        $("#myModal").modal('hide');
                                     }
 
                                     if(data.error !== undefined)
                                     {
-                                        alert(data.error);
+                                       // alert(data.error);
+
+                                        // Show Error Delete
+                                        $("#delete-error").modal('show');
+
+                                        // Close Select Meeting
+                                        $("#myModal").modal('hide');
                                     }
                                 },
                             })
-                        }
+                        // }
                     }else{
-                        alert('You can not delete this meeting because you did not add it.')
+                       // alert('You can not delete this meeting because you did not add it.')
+
+                    // Show Error Delete
+                    $("#delete-did-not-add-it").modal('show');
+
+                    // Close Select Meeting
+                    $("#myModal").modal('hide');
                     }
                     @endif
                 }
@@ -674,9 +771,7 @@
 
         })
 
-
-    </script>
     </script>
 
-
+    <script src="{{ asset('web_sayt/js/calendar2_practition/calendar.js') }}"></script>
 @endsection

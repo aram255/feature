@@ -78,7 +78,7 @@
                                         <input type="hidden"  value="{{$Practitioner->id}}">
                                         <input type="hidden"  value="{{auth()->user()->id}}">
                                         <input type="hidden"  value="{{$Practitioner->email}}">
-                                        <button type="button" class="follow-up-btn detail-btn" data-toggle="modal" data-target="#service-modal" data-id="ff">Book follow-up appointment Calendar</button>
+                                        <button type="button" class="follow-up-btn detail-btn" data-toggle="modal" data-target="#myModal" data-id="ff">Book follow-up appointment Calendar</button>
                                     </div>
                               @else
                                 <div class="d-flex justify-content-center mt-5">
@@ -157,10 +157,10 @@
 
 
     {{--    full calendar modal--}}
-    <div class="modal" tabindex="-1" id="service-modal">
-        <div class="modal-dialog">
+    <div class="modal" tabindex="-1" id="myModal">
+        <div class="modal-dialog max-dialog">
             <div class="modal-content">
-                <div class="modal-header">
+                <div class="modal-header border-bottom-0">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -173,24 +173,53 @@
     </div>
 
     <div id="myModal2" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
+        <div class="modal-dialog modal-lg">
             <div class="modal-content">
-                <div class="modal-header">
-                    <h3 id="myModalLabel">Modal 2</h3>
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <div class="modal-header border-bottom-0">
+                    <button type="button" class="position-absolute back-btn" data-dismiss="modal" aria-hidden="true" style="left: 20px; top: 16px">
+                        <i class="fa fa-angle-left"></i> Back
+                    </button>
+                    <button type="button" class="close position-absolute" data-dismiss="modal" aria-hidden="true" style="right: 20px; top: 16px">×</button>
+                    <div class="w-100 text-center mt-4">
+                        <h3 id="myModalLabel" class="text-center title">Communication Tool</h3>
+                        <div class="info-text text-center">
+                            Please choose your preferred communication tool.
+                        </div>
+                    </div>
                 </div>
-                <div id="zoom" class="modal-body">
-                    <a href="#">Zoom</a>
-                </div>
-                <div id="offline" class="modal-body">
-                    <a href="#">Offline</a>
-                </div>
-                <div class="modal-footer">
-                    <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+                <div class="d-flex justify-content-center my-5">
+                    <div id="zoom" class="modal-body mx-4 flex-1">
+                        <a href="#">
+                            <img src="{{ asset('web_sayt/img/zoom-icon-logo.png') }}" alt="">
+                            zoom
+                        </a>
+                    </div>
+                    <div id="offline" class="modal-body mx-4 flex-1">
+                        <a href="#">
+                            <img src="{{ asset('web_sayt/img/Group 2013.svg') }}" alt="" style="width: 32px; height: 32px">
+                            In-person visit
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
+
+    <div class="modal fade show" id="editHour" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-modal="true" >
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal__form lg-header-form">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span class="x" aria-hidden="true">×</span>
+                    </button>
+                    <div class="lg-sg__form">
+                        <div class="lg-sg__form-text">You can change the date only <span style="color: red;">12 hours in advance.</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    @include('modal-list')
 @endsection
 
 @section('style')
@@ -206,7 +235,7 @@
 
             var calendar = null;
 
-            var email = $(this).prev().val();
+            var user_email = $(this).prev().val();
             var practitionerID = $(this).prev().prev().prev().val();
             var phone_number = $(this).prev().prev().prev().prev().val();
             var last_name =    $(this).prev().prev().prev().prev().prev().val();
@@ -216,6 +245,8 @@
 
             var  service_id = $(this).parent().prev().children().children().val();
             var  serviceName =    $("#service_name").val();
+
+
 
             if(service_id == null)
 
@@ -277,10 +308,14 @@
                     if (d1 >= d2) {
 
                         $("#myModal2").modal("show");
+
+                        // Close Calendar
+                        $("#myModal").modal('hide');
+
                         $("#zoom").click(function () {
 
                          var  duration = diff_time/(60000);
-                         alert(password)
+                         //alert(password)
 
                        // var title       = prompt('Event Title:');
                       //  var pasword     = prompt('Event password:');
@@ -320,15 +355,17 @@
                                     phone_number: phone_number,
                                     last_name: last_name,
                                     first_name: first_name,
-                                    email: email,
+                                    user_email: user_email,
+                                    email: "{{Auth::user()->email}}",
                                     duration: duration,
                                     password: password,
                                     service_id: service_id,
                                     LiveDateTime:LiveDateTime,
-                                    type: 'add',
+                                    type: 'add-add',
                                     too_meet: 'yes'
                                 },
                                 success: function (data) {
+                                    console.log(data)
                                 //     calendar.fullCalendar('refetchEvents');
                                 //     alert("Event Created Successfully");
                                 //     console.log(data)
@@ -343,17 +380,40 @@
                                     {
                                         if(data.NoRepeatService != null)
                                         {
-                                            alert(data.NoRepeatService)
+                                            //alert(data.NoRepeatService)
+                                            // Show Error No Repeat Service
+                                            $("#error-NoRepeatService").modal('hide');
+
+                                            // Close Select Meeting
+                                            $("#myModal2").modal('hide');
                                         }else{
-                                            alert("Event Created Successfully");
+                                           // alert("Event Created Successfully");
+                                            // Show Success Meeting
+                                            $('#succes-meeting').modal('show');
+
+                                            // Close Select Meeting
+                                            $("#myModal2").modal('hide');
+
                                         }
                                     }else{
-                                        alert(data.select_error);
+                                       // alert(data.select_error);
+
+                                        // Show Error No Repeat Service
+                                        $("#select_error").modal('show');
+
+                                        // Close Select Meeting
+                                        $("#myModal2").modal('hide');
                                     }
 
                                 },
                                 error: function(data) {
-                                    alert('Your appointment has not been created');
+                                    //alert('Your appointment has not been created');
+
+                                    // Show Error No not been created
+                                    $("#not-been-created").modal('show');
+
+                                    // Close Select Meeting
+                                    $("#myModal2").modal('hide');
                                 }
                             });
 
@@ -362,7 +422,13 @@
                         // }
                         });
                     }else{
-                        alert('You can not make appointments with back date.');
+                        // alert('You can not make appointments with back date.');
+
+                        // Show Error with back date
+                        $("#with-back-date").modal('show');
+
+                        // Close Select Meeting
+                        $("#myModal2").modal('hide');
                     }
 
                 },
@@ -462,6 +528,18 @@
 
                     eventClick:function(event)
                     {
+                        // Check live DateTime
+                        var today = new Date();
+                        var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
+                        var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+                        var LiveDateTime = date + ' ' + time;
+
+                        var date1 = new Date(event.create);
+                        var date2 = new Date(LiveDateTime);
+
+                        var Difference_In_Time = date2.getTime() - date1.getTime();
+                        let DiffHours = parseInt(Difference_In_Time/36e5);
+
                         var id         = event.id;
                         var user_id    = event.user_id;
                         var meeting_id = event.meeting_id;
@@ -476,7 +554,12 @@
 
                     if(AuthID === user_id) {
 
-                        if (confirm("Are you sure you want to remove it?")) {
+                        if(DiffHours <= 12)
+                        {
+                            $("#editHour").modal("show");
+                        }else {
+
+                        // if (confirm("Are you sure you want to remove it?")) {
 
                             $.ajax({
                                 url: "{{ route('zoom-delete',app()->getLocale()) }}",
@@ -488,15 +571,33 @@
                                 },
                                 success: function (response) {
                                     calendar.fullCalendar('refetchEvents');
-                                    alert("Event Deleted Successfully");
+                                   // alert("Event Deleted Successfully");
+
+                                    // Show Success Delete
+                                    $("#delete-success").modal('show');
+
+                                    // Close Select Meeting
+                                    $("#myModal").modal('hide');
                                 },
                                 error: function(returnval) {
-                                    alert('Your appointment has not been deleted');
+                                    //alert('Your appointment has not been deleted');
+
+                                    // Show Error Delete
+                                    $("#delete-error").modal('show');
+
+                                    // Close Select Meeting
+                                    $("#myModal").modal('hide');
                                 }
                             })
-                        }
+                         }
                     }else{
-                        alert('You can not delete this meeting because you did not add it.')
+                        //alert('You can not delete this meeting because you did not add it.')
+
+                        // Show Error Delete
+                        $("#delete-did-not-add-it").modal('show');
+
+                        // Close Select Meeting
+                        $("#myModal").modal('hide');
                     }
                     @endif
                 }

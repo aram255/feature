@@ -31,7 +31,8 @@ use GuzzleHttp\RequestOptions;
 use Hash;
 use File;
 use URL;
-use Mail;
+use DateTime;
+use DateTimeZone;
 
 class PractitionersController extends Controller
 {
@@ -166,8 +167,16 @@ class PractitionersController extends Controller
             //->orderBy('zoom_meetings_list.id','DESC')
            ->get();
 
+        $ReviewRate = DB::table('reviews')
+            ->where('reviews.practitoner_id',$request->session()->get('UserID'))
+            ->avg('rate');
 
-        return view('profile-practitioner',compact('Complete','GetServiceID','Review','TagManagements','MyTagManagements','PractitionerInfo','ThisWeekMeetingsList','Service','ServiceSession','ServiceDescription'));
+        $Rate = floor($ReviewRate);
+
+
+
+
+        return view('profile-practitioner',compact('Complete','GetServiceID','Review','TagManagements','MyTagManagements','PractitionerInfo','ThisWeekMeetingsList','Service','ServiceSession','ServiceDescription','Rate'));
     }
 
     public function calendarAddFreeDate(request $request)
@@ -181,7 +190,7 @@ class PractitionersController extends Controller
         if(empty($CheckSelectMeeting))
         {
             $Add = new ZoomModel;
-            $Add->title            = $request->title;
+           // $Add->title            = $request->title;
             $Add->start            = $request->start;
             $Add->end              = $request->end;
             $Add->create           = $request->LiveDateTime;
@@ -340,10 +349,18 @@ class PractitionersController extends Controller
 
      //  dd(date('Y-m-d H:i:s'));
 
+        //$tz = 'Asia/Russian';
+//        $timestamp = time();
+//        $dt = new DateTime("now", new DateTimeZone($tz)); //first argument "must" be a string
+//        $dt->setTimestamp($timestamp); //adjust the object to correct timestamp
+//        echo $dt->format('Y-m-d H:i:s');
+
+
         $InProcess = DB::table('users')
                      ->join('zoom_meetings_list', 'users.id', 'zoom_meetings_list.user_id')
                      ->where('zoom_meetings_list.practitioner_id',$request->session()->get('UserID'))
-                     ->whereDate("zoom_meetings_list.start", ">=",date('Y-m-d'))
+                     //->whereDate("zoom_meetings_list.start", ">=",$dt->format('Y-m-d H:i:s'))
+                     ->whereDate("zoom_meetings_list.start", ">=",date('Y-m-d H:i:s'))
                      ->orderBy('zoom_meetings_list.id','DESC')
                      ->paginate(5);
 
@@ -353,7 +370,8 @@ class PractitionersController extends Controller
                      ->join('zoom_meetings_list', 'users.id', 'zoom_meetings_list.user_id')
                      ->where('zoom_meetings_list.practitioner_id',$request->session()->get('UserID'))
           //  ->join('protocol_heading','protocol_heading.meeting_id','zoom_meetings_list.id')
-                     ->whereDate("zoom_meetings_list.start", "<=",date('Y-m-d'))
+                    // ->whereDate("zoom_meetings_list.start", "<=",$dt->format('Y-m-d H:i:s'))
+                     ->whereDate("zoom_meetings_list.start", "<=",date('Y-m-d H:i:s'))
             //->GroupBy('user_id','practitioner_idd','user_img','service_id','users.first_name','users.last_name','services.title','zoom_meetings_list.title','zoom_meetings_list.meeting_id')
                      ->orderBy('zoom_meetings_list.id','DESC')
                      ->paginate(5);

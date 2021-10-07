@@ -40,6 +40,24 @@
             vertical-align: top;
             line-height: 0px;
         }
+        /*.activeNull{*/
+        /*    background-color: #569e66;*/
+        /*    border: 1px solid #35e74d !important;*/
+        /*}*/
+
+        /*div > .activeNull .fc-content{*/
+        /*    color:#80b68c  !important;*/
+        /*}*/
+
+        /*td  .activeNull{*/
+        /*    color: red !important;*/
+        /*}*/
+
+        .activeNull{
+            background-color: #569e66 !important;
+        }
+
+
     </style>
 @endsection
 
@@ -49,6 +67,8 @@
 
 @section('content')
     <script>var body = document.body; body.classList.add("body");</script>
+
+
 
     <section>
         <div class="container">
@@ -220,12 +240,12 @@
                         <div class="profile-customer-favorites__title">
                             <p>Favorites</p>
                         </div>
-                        @foreach($PractitionerFavorite as $PractitionerFavoriteVal)
+                        @foreach($PractitionerFavorite as $key => $PractitionerFavoriteVal)
                            <div class="find-result">
                             <div class="person">
                                 <div class="person__info">
                                     <div class=" d-flex flex-column">
-
+                                        @php $rt = floor($Rate[$key]);  @endphp
                                         <div class="person__info-cont1" style="width: 150px; height: 150px; overflow: hidden;border-radius: 10px">
                                             <img class="my-appointments-person__info-img w-100" src="{{ asset('web_sayt/img_practitioners/'.$PractitionerFavoriteVal->img) }}" alt="">
                                         </div>
@@ -233,21 +253,16 @@
                                             <div class="person__info-rating">
                               <span class="gl-star-rating gl-star-rating--ltr" data-star-rating="">
                                   <select class="star-rating">
-
-                                    <option value="5">5.0</option>
-                                    <option value="4">4.0</option>
-                                    <option value="3">3.0</option>
-                                    <option value="2">2.0</option>
-                                    <option value="1">1.0</option>
+                                       @for($rt; $rt >=1 ; $rt--)
+                                          <option value="{{$rt}}">{{$rt}}.0</option>
+                                      @endfor
                                  </select>
                                   <span class="gl-star-rating--stars s50" role="tooltip" aria-label="5.0">
-                                      <span data-index="0"
-                                            data-value="1" class="gl-active"></span>
-                                      <span data-index="1" data-value="2"
-                                            class="gl-active"></span>
-                                      <span data-index="2" data-value="3" class="gl-active"></span><span
-                                          data-index="3" data-value="4" class="gl-active"></span><span data-index="4" data-value="5"
-                                                                                                       class="gl-active gl-selected"></span></span></span>
+                                        @for($r = 1; $r <= $rt; $r++)
+                                          <span  data-value="{{$r}}" class="gl-selected"></span>
+                                      @endfor
+                                   </span>
+                              </span>
                                             </div>
                                             <p class="perion__info-session">256<span>Sessions</span></p>
                                             <a href=""   class="btn bg-yellow" data-toggle="modal" data-target="#service-modal{{$PractitionerFavoriteVal->partit_id}}">Book</a>
@@ -373,9 +388,11 @@
     </section>
 
     <div class="modal" tabindex="-1" id="myModal">
-        <div class="modal-dialog">
+        <div class="modal-dialog max-dialog">
+
             <div class="modal-content">
-                <div class="modal-header">
+                <div class="modal-header border-bottom-0">
+                    <h2 class="text-center w-100 title" id="titlee"></h2>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -406,20 +423,33 @@
 
 
     <div id="myModal2" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
+        <div class="modal-dialog modal-lg">
             <div class="modal-content">
-                <div class="modal-header">
-                    <h3 id="myModalLabel">Modal 2</h3>
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <div class="modal-header border-bottom-0">
+                    <button type="button" class="position-absolute back-btn" data-dismiss="modal" aria-hidden="true" style="left: 20px; top: 16px">
+                        <i class="fa fa-angle-left"></i> Back
+                    </button>
+                    <button type="button" class="close position-absolute" data-dismiss="modal" aria-hidden="true" style="right: 20px; top: 16px">×</button>
+                    <div class="w-100 text-center mt-4">
+                        <h3 id="myModalLabel" class="text-center title">Communication Tool</h3>
+                        <div class="info-text text-center">
+                            Please choose your preferred communication tool.
+                        </div>
+                    </div>
                 </div>
-                <div id="zoom" class="modal-body">
-                    <a href="#">Zoom</a>
-                </div>
-                <div id="offline" class="modal-body">
-                    <a href="#">Offline</a>
-                </div>
-                <div class="modal-footer">
-                    <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+                <div class="d-flex justify-content-center my-5">
+                    <div id="zoom" class="modal-body mx-4 flex-1">
+                        <a href="#">
+                            <img src="{{ asset('web_sayt/img/zoom-icon-logo.png') }}" alt="">
+                            zoom
+                        </a>
+                    </div>
+                    <div id="offline" class="modal-body mx-4 flex-1">
+                        <a href="#">
+                            <img src="{{ asset('web_sayt/img/Group 2013.svg') }}" alt="" style="width: 32px; height: 32px">
+                            In-person visit
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -448,7 +478,7 @@
             var serviceName    = $(this).prev().prev().prev().prev().prev().prev().prev().prev().prev().prev().prev().val();
             var user_email     =  $(this).prev().prev().prev().prev().prev().prev().prev().prev().prev().prev().prev().prev().val();
 
-
+            $('#titlee').text(serviceName);
 
 if(service_id == null)
 
@@ -671,7 +701,7 @@ if(service_id == null)
                         $("#editHour").modal("show");
                     }else{
 
-                    if (confirm("Are you sure you want to remove it?")) {
+                    // if (confirm("Are you sure you want to remove it?")) {
                         $.ajax({
                             url: "{{ route('zoom-delete',app()->getLocale()) }}",
                             type: "POST",
@@ -700,7 +730,7 @@ if(service_id == null)
                                 $("#myModal").modal('hide');
                             }
                         })
-                    }
+                    // }
                 }
                 }else{
                     //alert('You can not delete this meeting because you did not add it.')

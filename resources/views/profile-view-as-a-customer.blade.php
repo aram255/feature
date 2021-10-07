@@ -39,7 +39,7 @@
                                 @endforeach
                             </div>
 
-                            <input type="hidden" id="practitioner_id" value="{{$Practitioner->id}}">
+                            <input type="hidden" id="practitioner_id" value="{{$Practitioner->id}}"><br>
 {{--                            <div class="person__info-my">--}}
 
 {{--                            <div class="person__info-my">--}}
@@ -50,25 +50,25 @@
 {{--                                <div role="button" class="mb-3 cursor-pointer bg-yellow px-3 py-2 br-5 text-center" data-toggle="modal" data-target="#myProtocolsModal">My Protocols</div>--}}
 {{--                                {{$Practitioner->description}}--}}
 {{--                            </div>--}}
-                            <div class="person__info-rating qew">
-                        <span class="gl-star-rating gl-star-rating--ltr " data-star-rating="">
-                           <select class="star-rating">
 
-                              <option value="5">5.0</option>
-                              <option value="4">4.0</option>
-                              <option value="3">3.0</option>
-                              <option value="2">2.0</option>
-                              <option value="1">1.0</option>
-                           </select>
-                           <span class="gl-star-rating--stars s50" role="tooltip" aria-label="5.0">
-                              <span data-index="0" data-value="1" class="" style="font-size: 28px;"></span>
-                              <span data-index="1" data-value="2" class=""></span>
-                              <span data-index="2" data-value="3" class=""></span>
-                              <span data-index="3" data-value="4" class=""></span>
-                              <span data-index="4" data-value="5" class="gl-selected gl-active"></span>
-                           </span>
-                        </span>
-                            </div>
+
+
+                         @if(isset($ReviewCheckMeetingId) and $ReviewCheckMeetingId>0)
+                                <div class="person__info-rating qew">
+                                <span class="gl-star-rating gl-star-rating--ltr " data-star-rating="">
+                                   <select class="star-rating">
+                                   @for($ReviewCheckMeetingId; $ReviewCheckMeetingId >=1 ; $ReviewCheckMeetingId--)
+                                       <option value="{{$ReviewCheckMeetingId}}">{{$ReviewCheckMeetingId}}.0</option>
+                                    @endfor
+                                   </select>
+                                   <span class="gl-star-rating--stars s{{$ReviewCheckMeetingId}}0" role="tooltip" aria-label="{{$ReviewCheckMeetingId}}">
+                                         @for($r = 1; $r <= $ReviewCheckMeetingId; $r++)
+                                           <span  data-value="{{$r}}" class="gl-selected"></span>
+                                       @endfor
+                                   </span>
+                                </span>
+                         </div>
+                            @endif
                             <p class="perion__info-session">256<span> Sessions</span></p>
                         </div>
 
@@ -249,9 +249,11 @@
 
 
     <div class="modal" tabindex="-1" id="myModal">
-        <div class="modal-dialog">
+
+        <div class="modal-dialog max-dialog">
             <div class="modal-content">
-                <div class="modal-header">
+                <div class="modal-header border-bottom-0">
+                    <h2 class="text-center w-100 title" id="titlee">Service Name</h2>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -264,20 +266,33 @@
     </div>
 
     <div id="myModal2" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
+        <div class="modal-dialog modal-lg">
             <div class="modal-content">
-                <div class="modal-header">
-                    <h3 id="myModalLabel">Modal 2</h3>
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <div class="modal-header border-bottom-0">
+                    <button type="button" class="position-absolute back-btn" data-dismiss="modal" aria-hidden="true" style="left: 20px; top: 16px">
+                        <i class="fa fa-angle-left"></i> Back
+                    </button>
+                    <button type="button" class="close position-absolute" data-dismiss="modal" aria-hidden="true" style="right: 20px; top: 16px">×</button>
+                    <div class="w-100 text-center mt-4">
+                        <h3 id="myModalLabel" class="text-center title">Communication Tool</h3>
+                        <div class="info-text text-center">
+                            Please choose your preferred communication tool.
+                        </div>
+                    </div>
                 </div>
-                <div id="zoom" class="modal-body">
-                    <a href="#">Zoom</a>
-                </div>
-                <div id="offline" class="modal-body">
-                    <a href="#">Offline</a>
-                </div>
-                <div class="modal-footer">
-                    <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+                <div class="d-flex justify-content-center my-5">
+                    <div id="zoom" class="modal-body mx-4 flex-1">
+                        <a href="#">
+                            <img src="{{ asset('web_sayt/img/zoom-icon-logo.png') }}" alt="">
+                            zoom
+                        </a>
+                    </div>
+                    <div id="offline" class="modal-body mx-4 flex-1">
+                        <a href="#">
+                            <img src="{{ asset('web_sayt/img/Group 2013.svg') }}" alt="" style="width: 32px; height: 32px">
+                            In-person visit
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -386,29 +401,38 @@
     $(document).ready(function() {
 
         // Add Star
-        $('.gl-active').click(function () {
+        {{--$('.gl-active').click(function () {--}}
 
-            var star = $(this).attr('data-value');
-            var _token = $('input[name="_token"]').val();
+        {{--    var star = $(this).attr('data-value');--}}
+        {{--    var _token = $('input[name="_token"]').val();--}}
+        {{--    alert($("#practitioner_id").val())--}}
+        {{--    $.ajax({--}}
+        {{--        url: "{{route('add-star',[app()->getLocale()])}}",--}}
+        {{--        type: "POST",--}}
+        {{--        data: {--}}
+        {{--            star: star,--}}
+        {{--            practitioner_id: $("#practitioner_id").val(),--}}
+        {{--            _token:_token--}}
+        {{--        },--}}
+        {{--        success: function (data) {--}}
+        {{--             console.log(data)--}}
+        {{--           //  alert("The tag you selected has been added to your list.");--}}
+        {{--            if(data.success)--}}
+        {{--            {--}}
+        {{--                $("#add_star").modal("show");--}}
+        {{--            }--}}
 
+        {{--            if(data.error)--}}
+        {{--            {--}}
+        {{--                $("#no_add_star").modal("show");--}}
+        {{--            }--}}
 
-            $.ajax({
-                url: "{{route('add-star',[app()->getLocale()])}}",
-                type: "POST",
-                data: {
-                    star: star,
-                    practitioner_id: $("#practitioner_id").val(),
-                    _token:_token
-                },
-                success: function (data) {
-                    console.log(data)
-                    // alert("The tag you selected has been added to your list.");
-                },
-                error: function(returnval) {
-                    // alert('The tag you selected has not been added to your list, or it has already been added.');
-                }
-            });
-        })
+        {{--        },--}}
+        {{--        error: function(returnval) {--}}
+        {{--             alert('The tag you selected has not been added to your list, or it has already been added.');--}}
+        {{--        }--}}
+        {{--    });--}}
+        {{--})--}}
 
         $('input[type="radio"],input[type="checkbox"],#state').on('change', function () {
             $(this).closest("form").submit();
@@ -436,7 +460,7 @@
         var service_id     = $(this).prev().prev().prev().prev().prev().prev().val();
         var service_name   = $(this).prev().prev().prev().prev().prev().prev().prev().val();
         var user_email     = $(this).prev().prev().prev().prev().prev().prev().prev().prev().val();
-
+        $('#titlee').text(service_name);
         if(service_id == null)
 
             service_id = '';
@@ -464,7 +488,7 @@
             selectHelper: true,
             select:function(start, end, allDay,event,element,view)
             {
-
+// alert(service_id)
                 // Generate password zoom
                 const characters =
                     "abcdefghijklmnopqrstuvwxyz0123456789";
@@ -668,7 +692,7 @@
                     $("#editHour").modal("show");
                 }else {
 
-                    if (confirm("Are you sure you want to remove it?")) {
+                    // if (confirm("Are you sure you want to remove it?")) {
 
                         $.ajax({
                             url: "{{ route('zoom-delete',app()->getLocale()) }}",
@@ -698,7 +722,7 @@
                                 $("#myModal").modal('hide');
                             }
                         })
-                    }
+                    // }
                 }
             }else{
                 //alert('You can not delete this meeting because you did not add it.')

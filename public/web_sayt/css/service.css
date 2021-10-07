@@ -492,10 +492,19 @@ a .fa-times {
     vertical-align: bottom;
     border-bottom: 1px solid #EAF2FB;
 }
+
+
 .activeNull{
-    background: #FED638 !important;
-    color: black !important;
-    border: 1px solid #abab95 !important;
+    background-color: #569e66;
+    border: 1px solid #35e74d !important;
+}
+
+ div > .activeNull .fc-content{
+    color:#80b68c  !important;
+}
+
+td  .activeNull{
+    color: #569e66 !important;
 }
 
 .activeUser{
@@ -609,6 +618,18 @@ a .fa-times {
     font: normal normal 500 18px/11px Montserrat;
     color: #462847;
 }
+
+/*.activeNull div span{*/
+/*    color: rgb(86 158 102) !important;*/
+/*    background-color: rgb(86 158 102) !important;*/
+/*}*/
+
+/*.activeNull div{*/
+/*    color: rgb(86 158 102) !important;*/
+/*    background-color: rgb(86 158 102) !important;*/
+/*}*/
+
+
 @media (max-width: 768px) {
     .profile-practitioner__consultation {
         padding-left: 0;

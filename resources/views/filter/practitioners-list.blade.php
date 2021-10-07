@@ -3,24 +3,24 @@
         <div class="person__info">
             <div class="person__info-cont1">
                 <img class="person__info-img" style="width: 150px;" src="{{ asset('web_sayt/img_practitioners/'.$Result->img) }}" alt="">
+                @php $rt = floor($Rate[$k]);  @endphp
+                @if(isset($rt) and $rt>0)
                 <div class="person__info-rating">
+
                         <span class="gl-star-rating gl-star-rating--ltr" data-star-rating="">
                             <select class="star-rating">
-                              <option value="5">5.0</option>
-                              <option value="4">4.0</option>
-                              <option value="3">3.0</option>
-                              <option value="2">2.0</option>
-                              <option value="1">1.0</option>
+                                @for($rt; $rt >=1 ; $rt--)
+                                    <option value="{{$rt}}">{{$rt}}.0</option>
+                                @endfor
                            </select>
-                            <span class="gl-star-rating--stars s50" role="tooltip" aria-label="5.0">
-                                <span data-index="0" data-value="1" class="gl-active"></span>
-                                <span data-index="1" data-value="2" class="gl-active"></span>
-                                <span data-index="2" data-value="3" class="gl-active"></span>
-                                <span data-index="3" data-value="4" class="gl-active"></span>
-                                <span data-index="4" data-value="5" class="gl-active gl-selected"></span>
+                            <span class="gl-star-rating--stars s{{$rt}}0" role="tooltip" aria-label="{{$rt}}.0">
+                               @for($r = 1; $r <= $rt; $r++)
+                                    <span  data-value="{{$r}}" class="gl-selected"></span>
+                               @endfor
                             </span>
                         </span>
                 </div>
+                @endif
                 <p class="perion__info-session">256<span> Sessions</span></p>
                 <a href="" class="btn bg-yellow" data-toggle="modal" data-target="#service-modal{{$Result->id}}">Book</a>
             </div>

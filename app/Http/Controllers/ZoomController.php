@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Session;
 use Auth;
 use App\Models\ZoomModel;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\DB;
 
 class ZoomController extends Controller
 {
@@ -60,10 +61,8 @@ class ZoomController extends Controller
 //        dd($JoinUrl);
 
 
-        $data = ZoomModel::where('user_id',Auth::user()->id)->get();
-
-
-
+       // $data = ZoomModel::where('user_id',Auth::user()->id)->get();
+        $data = DB::table('practitioner')->join('zoom_meetings_list', 'practitioner.id', '=', 'zoom_meetings_list.practitioner_id')->where('zoom_meetings_list.user_id',Auth::user()->id)->get();
 
         return view('customer-meetings-list',compact('data'));
 
@@ -152,6 +151,7 @@ class ZoomController extends Controller
         $CheckService = ZoomModel::where('service_id', $request->service_id)
             ->where('user_id', Auth::user()->id)
             ->first();
+
         if ($CheckService == null || !empty($request->too_meet)) {
 
 
@@ -165,6 +165,17 @@ class ZoomController extends Controller
             ]);
 
 
+            // kisata
+//            $CheckSelectMeetingProtocol = ZoomModel::where('practitioner_id',$request->practitionerID)
+//                ->where('start',$request->start)
+//                ->where('end',$request->end)
+//                ->where('service_id',$request->service_id)
+//                ->where('user_id','=',null)
+//                ->first();
+//
+//            return $request->service_id;
+
+
             $CheckSelectMeeting = ZoomModel::where('practitioner_id',$request->practitionerID)
                                   ->where('start',$request->start)
                                   ->where('end',$request->end)
@@ -172,7 +183,7 @@ class ZoomController extends Controller
 
 //            return response()->json(['ok' =>  $request->start .'=>'. $request->end]);
 //          //  dd('d');
-            if($CheckSelectMeeting != null) {
+            if($CheckSelectMeeting != null ) {
 
 
                 $client = new \GuzzleHttp\Client(['base_uri' => 'https://api.zoom.us']);
@@ -402,7 +413,8 @@ class ZoomController extends Controller
 
     public function getData()
     {
-        $GetData = ZoomModel::where('user_id',Auth::user()->id)->get();
+        $GetData = DB::table('zoom_meetings_list')->join('practitioner', 'practitioner.id', '=', 'zoom_meetings_list.practitioner_id')->where('zoom_meetings_list.user_id',Auth::user()->id)->get();
+
     }
 
 //    public function confirmMeeting($lang,$Code,$Status)
@@ -515,11 +527,11 @@ class ZoomController extends Controller
 
 
             }
-        $response = $client->request("DELETE", "/v2/meetings/76795077236", [
-            "headers" => [
-                "Authorization" => "Bearer " . $this->jwt
-            ]
-        ]);
+//        $response = $client->request("DELETE", "/v2/meetings/72358533771", [
+//            "headers" => [
+//                "Authorization" => "Bearer " . $this->jwt
+//            ]
+//        ]);
 
         }else{
             return  response()->json(['select_error' => 'The date you specified does not match the date provided by your doctor.']);
