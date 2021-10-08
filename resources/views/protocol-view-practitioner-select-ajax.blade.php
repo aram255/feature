@@ -75,10 +75,10 @@
                     <div>
                         <i class="fas fa-chevron-right mt-2"></i>
                     </div>
-                    <div class="form-group select">
+                    <div class="form-group ml-3">
                         <div class="dropdown">
                             <button type="button" class="form-control select-acne-box dropdown-item" id="exampleFormControlSelect1" data-toggle="dropdown">
-                                Dropdown button
+                                Dropdown button <i class="fas fa-chevron-down ml-2"></i>
                             </button>
                             <div class="dropdown-menu">
 {{--                                {{dd($GetProtocol)}}--}}
@@ -144,8 +144,8 @@
                                 </div>
                             </div>
 
-                            <div class="d-flex mt-5" id="add-text-another">
-                                <p class="add-section">Add Another Section</p>
+                            <div class="d-flex mt-5" id="add-text-another" style="cursor: pointer">
+                                <p class="add-section mb-3">Add Another Section</p>
                                 <i class="fas fa-plus-circle ml-4 mt-2 add-icon"></i>
                             </div>
                         </div>

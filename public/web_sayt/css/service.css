@@ -619,15 +619,31 @@ td  .activeNull{
     color: #462847;
 }
 
-/*.activeNull div span{*/
-/*    color: rgb(86 158 102) !important;*/
-/*    background-color: rgb(86 158 102) !important;*/
-/*}*/
-
-/*.activeNull div{*/
-/*    color: rgb(86 158 102) !important;*/
-/*    background-color: rgb(86 158 102) !important;*/
-/*}*/
+#countryList {
+    overflow: auto;
+    max-height: 300px;
+    max-width: 500px;
+    margin-top: -15px;
+}
+#countryList ul {
+    padding: 0!important;
+    width: 100%;
+}
+#countryList ul li {
+    padding: 10px 20px;
+    background-color: #fff;
+    border-bottom: 1px solid #ddd;
+}
+#countryList ul li:last-child {
+    border-bottom: 0;
+}
+#countryList ul li a {
+    color: #0a0a14;
+    font-weight: 600;
+}
+#countryList ul li:hover {
+    background-color: #eee;
+}
 
 
 @media (max-width: 768px) {

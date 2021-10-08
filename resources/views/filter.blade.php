@@ -288,7 +288,6 @@
             </div>
         </div>
     </div>
-
   @include('modal-list')
 
 

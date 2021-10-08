@@ -283,7 +283,6 @@ select {
     color: #00309E;
 }
 .product-item1 {
-    margin-bottom: 15px;
     padding: 7px;
     width: 100%;
     max-width: 470px;
@@ -291,6 +290,7 @@ select {
     background: #FBDE75 0 0 no-repeat padding-box;
     border-radius: 18px;
     box-shadow: 0 2px 0 #8ba9ee;
+    margin: 5px 5px 15px;
 }
 .product-items{
     position: relative;
