@@ -244,3 +244,34 @@
         </div>
     </div>
 </div>
+
+<div class="modal fade show" id="add_favorite" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-modal="true" >
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal__form lg-header-form">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span class="x" aria-hidden="true">×</span>
+                </button>
+                <div class="lg-sg__form">
+                    <div class="lg-sg__form-text">Added to favorites list.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade show" id="remove_favorite" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-modal="true" >
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal__form lg-header-form">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span class="x" aria-hidden="true">×</span>
+                </button>
+                <div class="lg-sg__form">
+                    <div class="lg-sg__form-text">Removed from favorites list.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

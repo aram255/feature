@@ -265,6 +265,7 @@
                         $(".product_remove").remove();
                         $(".remove_link").remove();
                         $(".remove_another").remove();
+                      //  $('.diet-content-container').remove();
 
                         $.each(data.ProtocolAnother, function(k_another, v_another) {
 
@@ -280,7 +281,7 @@
                         $.each(data.ProtocolHeading, function(k_heading, v_heading) {
 
                             $('.diet-content-container').append(
-                            "<div class='d-block diet-content mt-5' id='protocol__section-heading-text0' >"+
+                            "<div class='d-block diet-content mt-5 text_heading' id='protocol__section-heading-text0' >"+
                                 "<textarea class='diet-content-paragraph' required name='text_heading[]' rows='6' cols='100' style='resize: none;' placeholder='Pinch of Himalayan salt first thing in the morning (appetite and energy) and before and directly after EVERY meal.'>"+v_heading.text_heading+"</textarea>"+
                                 "</div>"
                             )
@@ -345,7 +346,7 @@
                         $.each(data.ProtocolLink, function(k_link, v_link) {
 
                             $('.link-container').append(
-                            "<div class='link-name d-md-flex justify-content-md-between justify-content-center align-items-center' id='protocol__section-link-cont"+k_link+"'>"+
+                            "<div class='link-name d-md-flex justify-content-md-between justify-content-center align-items-center remove_link' id='protocol__section-link-cont"+k_link+"'>"+
                                " <div class='mb-3 col-md-5'>"+
                                " <label for='formGroupExampleInput' class='form-label link-name-label'>Name:</label>"+
                            "<input type='text' class='form-control link-name-form' id='formGroupExampleInput' name='link_title[]' value='"+v_link.link_title+"' required>"+

@@ -2,6 +2,7 @@ let addTextButton = document.getElementById("add-text");
 addTextButton.addEventListener('click', addText)
 let i = 0
 function addText() {
+
    let addText = document.getElementById('protocol__section-heading-text' + i);
    let textClone = addText.cloneNode(true);
    textClone.id = "protocol__section-heading-text" + ++i;
@@ -22,7 +23,7 @@ function addProduct() {
     // alert($('#add-product').attr('data-id'))
     $('#add-product').attr('data-id', ++dataId);
    let addProduct = document.getElementById('protocol__section-product-cont' + j);
-   console.log(addProduct)
+
    let productClone = addProduct.cloneNode(true);
    productClone.id = "protocol__section-product-cont" + ++j;
    addProduct.parentNode.appendChild(productClone);
@@ -56,6 +57,7 @@ addAnotherButton.addEventListener('click', addTextAnother)
 let c = 0
 
 function addTextAnother() {
+
     let main = document.getElementsByClassName('content-background-child')[0];
     let addTextAnother = document.getElementById('protocol__section-heading-text-another' + c);
     let textCloneAnother = addTextAnother.cloneNode(true);

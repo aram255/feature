@@ -631,7 +631,7 @@
     <script src="{{ asset('web_sayt/js/star-run.js') }}"></script>
     <script type="text/javascript" src="{{ asset('web_sayt/js/owl.carousel.min.js') }}"></script>
     <script src="{{ asset('web_sayt/js/carusel.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('web_sayt/js/script.js') }}"></script>
+{{--    <script type="text/javascript" src="{{ asset('web_sayt/js/script.js') }}"></script>--}}
     <script type="text/javascript" src="{{ asset('web_sayt/js/readMoreJS.min.js') }}"></script>
     <!-- Async script executes immediately and must be after any DOM elements used in callback. -->
     <script

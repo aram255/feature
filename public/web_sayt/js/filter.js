@@ -21,10 +21,11 @@ $('.favorit').click(function () {
                 type: "delete"
             },
             success: function (response) {
-                alert("Removed from favorites list.");
+                $("#remove_favorite").modal('show');
+               // alert("Removed from favorites list.");
             },
             error: function(returnval) {
-                alert('Not removed from favorites list.');
+               // alert('Not removed from favorites list.');
             }
         })
     }
@@ -42,10 +43,11 @@ $('.favorit').click(function () {
                 type: "add"
             },
             success: function (response) {
-                alert("Added to favorites list");
+                //alert("Added to favorites list");
+                $("#add_favorite").modal('show');
             },
             error: function(returnval) {
-                alert('No favorites added to list of favorites');
+               // alert('No favorites added to list of favorites');
             }
         })
     }
