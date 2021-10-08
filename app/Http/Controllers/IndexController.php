@@ -366,6 +366,8 @@ class IndexController extends Controller
               ]
           );
 
+
+
         $BlogFirst = BlogModel::join('images','images.id', '=', 'blog.image_id')->where('blog.published',1)->orderBy('id', 'desc')
             ->first(
             [

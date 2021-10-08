@@ -742,95 +742,105 @@ class PractitionersController extends Controller
 
         foreach ($request->another as $ValAnother)
         {
-            $Add = new ProtocolAnotherModel;
-            $Add->name = $ValAnother;
-            $Add->user_id = $request->user_id;
-            $Add->service_id = $request->service_id;
-            $Add->practitioner_id = session()->get('UserID');
-            $Add->meeting_id = $request->meeting_id;
-            $Add->save();
+            if(!empty($ValAnother))
+            {
+                $Add = new ProtocolAnotherModel;
+                $Add->name = $ValAnother;
+                $Add->user_id = $request->user_id;
+                $Add->service_id = $request->service_id;
+                $Add->practitioner_id = session()->get('UserID');
+                $Add->meeting_id = $request->meeting_id;
+                $Add->save();
+            }
         }
 
         foreach ($request->text_heading as $ValHeading)
         {
-            $Add = new ProtocolHeading;
-            $Add->text_heading = $ValHeading;
-            $Add->user_id = $request->user_id;
-            $Add->service_id = $request->service_id;
-            $Add->practitioner_id = session()->get('UserID');
-            $Add->meeting_id = $request->meeting_id;
-            $Add->save();
+            if(!empty($ValHeading))
+            {
+                $Add = new ProtocolHeading;
+                $Add->text_heading = $ValHeading;
+                $Add->user_id = $request->user_id;
+                $Add->service_id = $request->service_id;
+                $Add->practitioner_id = session()->get('UserID');
+                $Add->meeting_id = $request->meeting_id;
+                $Add->save();
+            }
         }
 
-        foreach ($request->title_product as $keyProduct => $valProduct)
-        {
+        foreach ($request->title_product as $keyProduct => $valProduct) {
 
-        if(empty($request->file('img')[$keyProduct]))
-        {
-            $input['title_product'] = $valProduct;
-           // $input['brand']  = $request->brand[$keyProduct];
-           // $input['dosage'] = $request->dosage[$keyProduct];
-           // $input['instructions'] = $request->instructions[$keyProduct];
-            $input['product_link'] = $request->product_link[$keyProduct];
+            if (!empty($valProduct)) {
 
-            $input['user_id']      = $request->user_id;
-            $input['service_id']   = $request->service_id;
-            $input['practitioner_id'] = session()->get('UserID');
-            $input['meeting_id'] = $request->meeting_id;
-            ProtocolProduct::create($input);
+                if (empty($request->file('img')[$keyProduct])) {
+                    $input['title_product'] = $valProduct;
+                    // $input['brand']  = $request->brand[$keyProduct];
+                    // $input['dosage'] = $request->dosage[$keyProduct];
+                    // $input['instructions'] = $request->instructions[$keyProduct];
+                    $input['product_link'] = $request->product_link[$keyProduct];
 
-        }else{
+                    $input['user_id'] = $request->user_id;
+                    $input['service_id'] = $request->service_id;
+                    $input['practitioner_id'] = session()->get('UserID');
+                    $input['meeting_id'] = $request->meeting_id;
+                    ProtocolProduct::create($input);
+
+                } else {
 //            $request->validate([
 //                'img' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
 //            ]);
 
-            $ImgName[$keyProduct] = rand() . '.' . $request->file('img')[$keyProduct]->getClientOriginalExtension();
-            $request->file('img')[$keyProduct]->move(public_path('web_sayt/img_protocol/'), $ImgName[$keyProduct]);
+                    $ImgName[$keyProduct] = rand() . '.' . $request->file('img')[$keyProduct]->getClientOriginalExtension();
+                    $request->file('img')[$keyProduct]->move(public_path('web_sayt/img_protocol/'), $ImgName[$keyProduct]);
 
-            $input['title_product'] = $valProduct;
-           // $input['brand']  = $request->brand[$keyProduct];
-           // $input['dosage'] = $request->dosage[$keyProduct];
-          //  $input['instructions'] = $request->instructions[$keyProduct];
-            $input['product_link'] = $request->product_link[$keyProduct];
-            $input['user_id']      = $request->user_id;
-            $input['service_id']   = $request->service_id;
-            $input['practitioner_id'] = session()->get('UserID');
-            $input['meeting_id'] = $request->meeting_id;
-            $input['img'] = $ImgName[$keyProduct];
+                    $input['title_product'] = $valProduct;
+                    // $input['brand']  = $request->brand[$keyProduct];
+                    // $input['dosage'] = $request->dosage[$keyProduct];
+                    //  $input['instructions'] = $request->instructions[$keyProduct];
+                    $input['product_link'] = $request->product_link[$keyProduct];
+                    $input['user_id'] = $request->user_id;
+                    $input['service_id'] = $request->service_id;
+                    $input['practitioner_id'] = session()->get('UserID');
+                    $input['meeting_id'] = $request->meeting_id;
+                    $input['img'] = $ImgName[$keyProduct];
 
-            ProtocolProduct::create($input);
-        }
+                    ProtocolProduct::create($input);
+                }
+
+               }
+            }
+
+            foreach ($request->link_title as $keyVal => $valLink) {
+                if (!empty($valLink)) {
+                    $inp['link_title'] = $valLink;
+                    $inp['link_link'] = $request->link_link[$keyVal];
+                    // $inp['iframe']    = $request->iframe[$keyVal];
+                    $inp['user_id'] = $request->user_id;
+                    $inp['service_id'] = $request->service_id;
+                    $inp['practitioner_id'] = session()->get('UserID');
+                    $inp['meeting_id'] = $request->meeting_id;
+
+                    ProtocolLink::create($inp);
+                }
+
+            }
 
 
-        }
-
-        foreach ($request->link_title as $keyVal => $valLink)
-        {
-            $inp['link_title']   = $valLink;
-            $inp['link_link']    = $request->link_link[$keyVal];
-           // $inp['iframe']    = $request->iframe[$keyVal];
-            $inp['user_id']      = $request->user_id;
-            $inp['service_id']   = $request->service_id;
-            $inp['practitioner_id'] = session()->get('UserID');
-            $inp['meeting_id'] = $request->meeting_id;
-
-
-            ProtocolLink::create($inp);
-        }
-
-        return  back()->with('status','Add');
+        return redirect(app()->getLocale().'/my-appointments-practitioners/2')->with('status','Add');
     }
 
 
     public function deleteProtocol(request $request)
     {
 
-        $ProtocolHeading = DB::table('protocol_heading')->where('service_id',$request->service_id)->where('user_id',$request->user_id)->where('practitioner_id',$request->practitioner_id)->delete();
+        $ProtocolAnother = DB::table('protocol_another')->where('service_id',$request->service_id)->where('user_id',$request->user_id)->where('practitioner_id',$request->practitioner_id)->where('meeting_id',$request->meeting_id)->delete();
 
-        $ProtocolProduct = DB::table('protocol_product')->where('service_id',$request->service_id)->where('user_id',$request->user_id)->where('practitioner_id',$request->practitioner_id)->delete();
+        $ProtocolHeading = DB::table('protocol_heading')->where('service_id',$request->service_id)->where('user_id',$request->user_id)->where('practitioner_id',$request->practitioner_id)->where('meeting_id',$request->meeting_id)->delete();
+
+        $ProtocolProduct = DB::table('protocol_product')->where('service_id',$request->service_id)->where('user_id',$request->user_id)->where('practitioner_id',$request->practitioner_id)->where('meeting_id',$request->meeting_id)->delete();
 
 
-        $ProtocolLink = DB::table('protocol_link')->where('service_id',$request->service_id)->where('user_id',$request->user_id)->where('practitioner_id',$request->practitioner_id)->delete();
+        $ProtocolLink = DB::table('protocol_link')->where('service_id',$request->service_id)->where('user_id',$request->user_id)->where('practitioner_id',$request->practitioner_id)->where('meeting_id',$request->meeting_id)->delete();
 
         return response()->json($ProtocolHeading);
     }
@@ -855,20 +865,26 @@ class PractitionersController extends Controller
     public function addEditProtocol($lang,$serviceID,$userID,$practitionerID,$meetingID)
     {
 
+
         $ProtocolHeading = DB::table('protocol_heading')->where('service_id',$serviceID)->where('practitioner_id',$practitionerID)->where('meeting_id',$meetingID)->get();
         $ProtocolProduct = DB::table('protocol_product')->where('service_id',$serviceID)->where('practitioner_id',$practitionerID)->where('meeting_id',$meetingID)->get();
         $ProtocolLink    = DB::table('protocol_link')->where('service_id',$serviceID)->where('practitioner_id',$practitionerID)->where('meeting_id',$meetingID)->get();
 
 
         $GetProtocol   = DB::table('protocol_heading')
-            ->select('service_id','user_id')
+            ->select('service_id','user_id','meeting_id')
             ->where('practitioner_id',$practitionerID)
             ->where('meeting_id',$meetingID)
             ->groupBy('service_id','user_id')
             ->get();
 
+        $ShowProtocol= DB::table('protocol_heading')
+                                   ->select('service_id','user_id','meeting_id')
+                                   ->groupBy('service_id','user_id')
+                                   ->get();
 
-        return view('protocol-view-practitioner-select-ajax',compact('ProtocolHeading','ProtocolProduct','ProtocolLink','GetProtocol'));
+
+        return view('protocol-view-practitioner-select-ajax',compact('ProtocolHeading','ProtocolProduct','ProtocolLink','GetProtocol','ShowProtocol'));
     }
 
     public function EditProtocolView($lang,$serviceID,$userID,$practitionerID,$meetingID)
@@ -958,23 +974,21 @@ class PractitionersController extends Controller
                 ]);
         }
 
-
+;
 
         // Insert
-
-        foreach ($request->another as $keyA => $ValAnother)
-        {
-            if(empty($request->id_another[$keyA]))
-            {
-                $Add = new ProtocolAnotherModel;
-                $Add->name = $ValAnother;
-                $Add->user_id = $request->user_id;
-                $Add->service_id = $request->service_id;
-                $Add->practitioner_id = session()->get('UserID');
-                $Add->meeting_id = $request->meeting_id;
-                $Add->save();
+            foreach ($request->another as $keyA => $ValAnother) {
+                if (empty($request->id_another[$keyA])) {
+                    $Add = new ProtocolAnotherModel;
+                    $Add->name = $ValAnother;
+                    $Add->user_id = $request->user_id;
+                    $Add->service_id = $request->service_id;
+                    $Add->practitioner_id = session()->get('UserID');
+                    $Add->meeting_id = $request->meeting_id;
+                    $Add->save();
+                }
             }
-        }
+
 
         foreach ($request->text_heading as $keyH => $ValHeading)
         {
@@ -1057,10 +1071,10 @@ class PractitionersController extends Controller
     public function getDataProtocolAjax(request $request)
     {
 
-        $ProtocolHeading = DB::table('protocol_heading')->where('service_id',$request->service_id)->where('practitioner_id',session()->get('UserID'))->get();
-        $ProtocolProduct = DB::table('protocol_product')->where('service_id',$request->service_id)->where('practitioner_id',session()->get('UserID'))->get();
-        $ProtocolLink    = DB::table('protocol_link')->where('service_id',$request->service_id)->where('practitioner_id',session()->get('UserID'))->get();
-        $ProtocolAnother = DB::table('protocol_another')->where('service_id',$request->service_id)->where('practitioner_id',session()->get('UserID'))->get();
+        $ProtocolHeading = DB::table('protocol_heading')->where('service_id',$request->service_id)->where('practitioner_id',session()->get('UserID'))->where('meeting_id',$request->meeting_id)->get();
+        $ProtocolProduct = DB::table('protocol_product')->where('service_id',$request->service_id)->where('practitioner_id',session()->get('UserID'))->where('meeting_id',$request->meeting_id)->get();
+        $ProtocolLink    = DB::table('protocol_link')->where('service_id',$request->service_id)->where('practitioner_id',session()->get('UserID'))->where('meeting_id',$request->meeting_id)->get();
+        $ProtocolAnother = DB::table('protocol_another')->where('service_id',$request->service_id)->where('practitioner_id',session()->get('UserID'))->where('meeting_id',$request->meeting_id)->get();
 
         return response()->json(['ProtocolHeading' => $ProtocolHeading, 'ProtocolProduct' => $ProtocolProduct, 'ProtocolLink' => $ProtocolLink, 'ProtocolAnother' => $ProtocolAnother]);
     }

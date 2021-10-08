@@ -144,6 +144,7 @@
         <div class="card-carousel container container-1640 mt-5">
             <div class="owl-carousel owl-theme">
 
+      @if(!empty($Blog) and isset($Blog))
          @foreach($Blog as $BlogInfo)
 
                 @php
@@ -165,6 +166,7 @@
                     </div>
                 </div>
            @endforeach
+       @endif
             </div>
         </div>
         <div class="bottom-side  container container-1640  d-flex flex-column flex-lg-row justify-content-start mt-5 p-5">

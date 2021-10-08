@@ -306,6 +306,7 @@
                             <input  type="hidden" value="{{$GetVal->user_id}}">
                             <input  type="hidden" value="{{$GetVal->practitioner_idd}}">
                             <input  type="hidden" value="{{$GetVal->service_id}}">
+                            <input  type="hidden" value="{{$GetVal->meeting_id}}">
                         </div>
                         @endforeach
                     </div>
@@ -750,13 +751,14 @@
 
             var user_id         = $(this).next().val();
             var practitioner_id = $(this).next().next().val();
-            var service_id         = $(this).next().next().next().val();
+            var service_id      = $(this).next().next().next().val();
+            var meeting_id      = $(this).next().next().next().next().val();
 
             var _token = $('input[name="_token"]').val();
             $.ajax({
                 url:"{{route('delete-protocol',[app()->getLocale()])}}",
                 method:"POST",
-                data:{user_id:user_id,practitioner_id:practitioner_id,service_id:service_id, _token:_token},
+                data:{user_id:user_id,practitioner_id:practitioner_id,service_id:service_id,meeting_id:meeting_id, _token:_token},
                 success:function(data){
                     console.log(data)
 

@@ -81,8 +81,10 @@
                                 Dropdown button
                             </button>
                             <div class="dropdown-menu">
-                                @foreach($GetProtocol as $key => $ValProtocol)
-                                    <a class="dropdown-item"  title="{{$ValProtocol->user_id}}" data-toggle="{{$ValProtocol->service_id}}">Protocol {{$key}}</a>
+{{--                                {{dd($GetProtocol)}}--}}
+                                @foreach($ShowProtocol as $key => $ValProtocol)
+
+                                    <a id="{{$ValProtocol->meeting_id}}" class="dropdown-item click_a"  title="{{$ValProtocol->user_id}}" data-toggle="{{$ValProtocol->service_id}}">Protocol {{$key}}</a>
                                 @endforeach
                             </div>
                         </div>
@@ -108,24 +110,48 @@
 
             </div>
         </div>
-        <div class="my-plan-background">
-            <img class="load img-fluid" src="{{ asset('web_sayt/img/protocol-img/Group 2004.svg') }}" alt="img" >
-            <div class="d-flex justify-content-center align-items-center mt-5">
-                <div class="content mt-5">
-                    <div class="content-background">
-                        <div class="d-block content-input remove_another" id="protocol__section-heading-text-another0">
-                            <div class="input-group content-input-group ml-4 mb-3">
-                                <input type="text" class="form-control form-input ml-4" name="another[]" aria-label="Text input with checkbox">
+{{--        <div class="my-plan-background">--}}
+{{--            <img class="load img-fluid" src="{{ asset('web_sayt/img/protocol-img/Group 2004.svg') }}" alt="img" >--}}
+{{--            <div class="d-flex justify-content-center align-items-center mt-5">--}}
+{{--                <div class="content mt-5">--}}
+{{--                    <div class="content-background">--}}
+
+{{--                        <div class="d-block content-input remove_another" id="protocol__section-heading-text-another0">--}}
+{{--                            <div class="input-group content-input-group ml-4 mb-3">--}}
+{{--                                <input type="text" class="form-control form-input ml-4" name="another[]" aria-label="Text input with checkbox">--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+{{--                        <div class="d-flex mt-5" id="add-text-another">--}}
+{{--                            <p class="add-section" >Add Another Section</p>--}}
+{{--                            <i class="fas fa-plus-circle ml-4 mt-2 add-icon"></i>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
+{{--                </div>--}}
+{{--            </div>--}}
+{{--        </div>--}}
+
+            <div class="my-plan-background">
+                <img class="load img-fluid" src="http://new-feature/web_sayt/img/protocol-img/Group 2004.svg" alt="img">
+                <div class="d-flex justify-content-center align-items-center mt-5">
+                    <div class="content mt-5">
+                        <div class="content-background">
+                            <div class="content-background-child">
+                                <input type="hidden" name="id_another[]" >
+                                <div class="d-block content-input remove_another" id="protocol__section-heading-text-another0">
+                                    <div class="input-group content-input-group ml-4 mb-3">
+                                        <input type="text" class="form-control form-input ml-4" name="another[]"  aria-label="Text input with checkbox">
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                        <div class="d-flex mt-5" id="add-text-another">
-                            <p class="add-section" >Add Another Section</p>
-                            <i class="fas fa-plus-circle ml-4 mt-2 add-icon"></i>
+
+                            <div class="d-flex mt-5" id="add-text-another">
+                                <p class="add-section">Add Another Section</p>
+                                <i class="fas fa-plus-circle ml-4 mt-2 add-icon"></i>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
         <div class="container">
             <h6 class="heading ml-5">Heading</h6>
             <h3 class="diet ml-5 mt-5">Diet:</h3>
@@ -216,20 +242,19 @@
                 g  = (Math.floor(Math.random() * (9999)))
 
             })
-            $(".dropdown-item").click(function(){
+            $(".click_a").click(function(){
 
-
-                 var user_id = $(this).attr("title");
+                 var user_id    = $(this).attr("title");
                  var service_id = $(this).attr("data-toggle");
-
-
+                 var meeting_id = $(this).attr("id");
 
                 $.ajax({
                     url : '{{ route( 'view-protocol-practitioner-ajax',[app()->getLocale()] ) }}',
                     data: {
                         "_token": "{{ csrf_token() }}",
                         "user_id": user_id,
-                        "service_id": service_id
+                        "service_id": service_id,
+                        "meeting_id": meeting_id
                     },
                     type: 'post',
                     dataType: 'json',
