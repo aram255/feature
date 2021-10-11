@@ -385,7 +385,7 @@
                     }
                     $($(element[0]).find('.DeactiveUser')).prepend('<div class="kkkkkkkkkkkk">'+element[0]+'</div>');
 
-                    console.log($(element[0]).find('.DeactiveUser').prepend('<ol>eeeeeee</ol>'))
+                    //console.log($(element[0]).find('.DeactiveUser').prepend('<ol>eeeeeee</ol>'))
                 }
                 // Display none booking date
                 setTimeout(() => {

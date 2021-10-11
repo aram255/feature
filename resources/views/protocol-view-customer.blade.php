@@ -183,7 +183,7 @@
                     <div class="w-100 text-center mt-4">
                         <h3 id="myModalLabel" class="text-center title">Communication Tool</h3>
                         <div class="info-text text-center">
-                            Please choose your preferred communication tool.
+                            Please choose your preferred communication tool
                         </div>
                     </div>
                 </div>
@@ -213,7 +213,7 @@
                         <span class="x" aria-hidden="true">×</span>
                     </button>
                     <div class="lg-sg__form">
-                        <div class="lg-sg__form-text">You can change the date only <span style="color: red;">12 hours in advance.</span></div>
+                        <div class="lg-sg__form-text">You can change the date only <span style="color: red;">12 hours in advance</span></div>
                     </div>
                 </div>
             </div>
@@ -491,7 +491,7 @@
                                         div[0].childNodes[1].appendChild(aDiv)
                                     }
                                 }
-                                console.log( '***************************************', aArray)
+                               // console.log( '***************************************', aArray)
 
                             }, 20)
                         }
@@ -513,7 +513,7 @@
                         }
                         $($(element[0]).find('.DeactiveUser')).prepend('<div class="kkkkkkkkkkkk">'+element[0]+'</div>');
 
-                        console.log($(element[0]).find('.DeactiveUser').prepend('<ol>eeeeeee</ol>'))
+                        //console.log($(element[0]).find('.DeactiveUser').prepend('<ol>eeeeeee</ol>'))
 
                         // Display none booking date
                         setTimeout(() => {

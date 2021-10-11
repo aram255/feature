@@ -80,7 +80,7 @@
                             <button type="button" class="form-control select-acne-box dropdown-item" id="exampleFormControlSelect1" data-toggle="dropdown">
                                 Dropdown button <i class="fas fa-chevron-down ml-2"></i>
                             </button>
-                            <div class="dropdown-menu">
+                            <div class="dropdown-menu w-100">
 {{--                                {{dd($GetProtocol)}}--}}
                                 @foreach($ShowProtocol as $key => $ValProtocol)
 

@@ -109,7 +109,7 @@
                 {{--                <div class="my-appointments__complete-process d-none">--}}
                 @if($id == 2  and count($Complete)>0)
 
-                    @foreach($Complete as $InCompleteVal)
+                    @foreach($Complete as $keyInComplete => $InCompleteVal)
 
                         <div class="my-appointments__complete-process">
                             <div class="my-appointments__complete-process-content">
@@ -155,15 +155,16 @@
 {{--                                      <span data-index="4" data-value="5" class="gl-selected gl-active"></span>--}}
 {{--                                   </span>--}}
 {{--                                </span>--}}
-                                 @if(isset($ReviewRate->rate))
+
+                                 @if(isset($ReviewRate[$keyInComplete]->rate))
                                     <span class="gl-star-rating gl-star-rating--ltr " data-star-rating="">
                                        <select class="star-rating">
-                                       @for($ReviewRate->rate; $ReviewRate->rate >=1 ; $ReviewRate->rate--)
-                                               <option value="{{$ReviewRate->rate}}">{{$ReviewRate->rate}}.0</option>
+                                       @for($ReviewRate[$keyInComplete]->rate; $ReviewRate[$keyInComplete]->rate >=1 ; $ReviewRate[$keyInComplete]->rate--)
+                                               <option value="{{$ReviewRate[$keyInComplete]->rate}}">{{$ReviewRate[$keyInComplete]->rate}}.0</option>
                                            @endfor
                                        </select>
-                                       <span class="gl-star-rating--stars s{{$ReviewRate->rate}}0" role="tooltip" aria-label="{{$ReviewRate->rate}}">
-                                             @for($r = 1; $r <= $ReviewRate->rate; $r++)
+                                       <span class="gl-star-rating--stars s{{$ReviewRate[$keyInComplete]->rate}}0" role="tooltip" aria-label="{{$ReviewRate[$keyInComplete]->rate}}">
+                                             @for($r = 1; $r <= $ReviewRate[$keyInComplete]->rate; $r++)
                                                <span  data-value="{{$r}}" class="gl-selected"></span>
                                            @endfor
                                        </span>

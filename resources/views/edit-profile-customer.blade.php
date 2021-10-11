@@ -156,7 +156,7 @@
 
                                 <div class='form-row row pl-5 pt-4 '>
                                     <div class='col-md-8 hide error form-group'>
-                                        <div class='alert-danger alert'>Fix the errors before you begin.</div>
+                                        <div class='alert-danger alert'>Fix the errors before you begin</div>
                                     </div>
                                 </div>
 

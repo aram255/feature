@@ -15,6 +15,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="stylesheet" href="{{ asset('web_sayt/css/calendar2_parctitioner/calendar.css') }}">
 
+
 @endsection
 
 @section('title', __('site.Home') )
@@ -366,7 +367,7 @@
         <div class="modal-dialog max-dialog">
             <div class="modal-content ">
                 <div class="modal-header border-bottom-0">
-                    <h2 class="text-center w-100 title">Service Name</h2>
+                    <h2 class="text-center w-100 title">List of available periods</h2>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -503,6 +504,14 @@
 
                     }
 
+                    if(event['status'] != null) {
+
+                        setTimeout(() => {
+                            element[0].setAttribute('class', 'activeUser  fc-day-grid-event fc-h-event fc-event fc-start fc-end fc-draggable');
+                        }, 10)
+
+                    }
+
                     // Display none booking date
                     setTimeout(() => {
                         $(".DeactiveUser" ).css( "display", "none" );
@@ -532,7 +541,7 @@
 
                         var event_id = event.id;
 
-                        if (confirm("Do you want to change your meeting details?")) {
+                        // if (confirm("Do you want to change your meeting details?")) {
 
                             // submitTimeChanges(event.id);
                             $.ajax({
@@ -566,7 +575,7 @@
                                     $("#myModal2").modal('hide');
                                 }
                             })
-                        }
+                        // }
                     }else{
                        // alert('You can not make appointments with back date.');
 

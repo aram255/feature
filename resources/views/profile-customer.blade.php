@@ -331,6 +331,7 @@
 
                @if(count($Review)>0)
                     @foreach($Review as $ReviewVal)
+
                         <div class="profile-customer-reviews-cont">
                             <div class="profile-customer-reviews-cont__info">
                                 <div class="profile-customer-reviews-cont__info-cont1">
@@ -338,6 +339,7 @@
                                         <img class="profile-customer-reviews-cont__info-img w-100" src="{{asset('web_sayt/img_practitioners/'.$ReviewVal->img)}}" alt="">
                                     </div>
                                 </div>
+
                                 <div class="profile-customer-reviews-cont__info-cont2">
                                     <div class="profile-customer-reviews-cont__info-name">
                                         <p>{{$ReviewVal->first_name}} {{$ReviewVal->last_name}}</p>
@@ -346,17 +348,15 @@
                                  <span class="gl-star-rating gl-star-rating--ltr " data-star-rating="">
                                     <select class="star-rating">
 
-                                       <option value="5"></option>
-                                       <option value="4"></option>
-                                       <option value="3"></option>
-                                       <option value="2"></option>
-                                       <option value="1"></option>
+                                     @for($ReviewVal->rate; $ReviewVal->rate >=1 ; $ReviewVal->rate--)
+                                            <option value="{{$ReviewVal->rate}}">{{$ReviewVal->rate}}.0</option>
+                                        @endfor
                                     </select>
                                     <span class="gl-star-rating--stars s50" role="tooltip" aria-label="">
                                        @for ($i = 0; $i < $ReviewVal->rate; $i++)
                                             <span data-index="{{$i}}" data-value="{{$i}}" class="gl-active"
                                                   style="font-size: 28px;"></span>
-                                        @endfor
+                                       @endfor
                                     </span>
                                  </span>
                                             </div>
@@ -413,7 +413,7 @@
                         <span class="x" aria-hidden="true">×</span>
                     </button>
                     <div class="lg-sg__form">
-                        <div class="lg-sg__form-text">You can change the date only <span style="color: red;">12 hours in advance.</span></div>
+                        <div class="lg-sg__form-text">You can change the date only <span style="color: red;">12 hours in advance</span></div>
                     </div>
                 </div>
             </div>
@@ -433,7 +433,7 @@
                     <div class="w-100 text-center mt-4">
                         <h3 id="myModalLabel" class="text-center title">Communication Tool</h3>
                         <div class="info-text text-center">
-                            Please choose your preferred communication tool.
+                            Please choose your preferred communication tool
                         </div>
                     </div>
                 </div>

@@ -176,7 +176,7 @@
                         <span class="x" aria-hidden="true">×</span>
                     </button>
                     <div class="lg-sg__form">
-                        <div class="lg-sg__form-text">You can change the date only <span style="color: red;">12 hours in advance.</span></div>
+                        <div class="lg-sg__form-text">You can change the date only <span style="color: red;">12 hours in advance</span></div>
                     </div>
                 </div>
             </div>
@@ -196,7 +196,7 @@
                     <div class="w-100 text-center mt-4">
                         <h3 id="myModalLabel" class="text-center title">Communication Tool</h3>
                         <div class="info-text text-center">
-                            Please choose your preferred communication tool.
+                            Please choose your preferred communication tool
                         </div>
                     </div>
                 </div>
@@ -226,7 +226,7 @@
                         <span class="x" aria-hidden="true">×</span>
                     </button>
                     <div class="lg-sg__form">
-                        <div class="lg-sg__form-text">You can change the date only <span style="color: red;">12 hours in advance.</span></div>
+                        <div class="lg-sg__form-text">You can change the date only <span style="color: red;">12 hours in advance</span></div>
                     </div>
                 </div>
             </div>

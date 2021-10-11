@@ -33,6 +33,7 @@ use File;
 use URL;
 use DateTime;
 use DateTimeZone;
+use Illuminate\Support\Facades\Mail;
 
 class PractitionersController extends Controller
 {

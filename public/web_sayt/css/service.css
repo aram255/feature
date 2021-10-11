@@ -511,6 +511,15 @@ td  .activeNull{
     background: red !important;
     color: white !important;
     border: 1px solid #abab95 !important;
+
+}
+
+.activeUser .fc-content {
+   display:  flex;
+}
+
+.activeUser .fc-content .fc-time {
+   margin-right: 16px;
 }
 
 .max-dialog .fc-unthemed th,
@@ -622,8 +631,8 @@ td  .activeNull{
 #countryList {
     overflow: auto;
     max-height: 300px;
-    max-width: 500px;
     margin-top: -15px;
+    width: calc(100% - 87px);
 }
 #countryList ul {
     padding: 0!important;
@@ -645,6 +654,31 @@ td  .activeNull{
     background-color: #eee;
 }
 
+#exampleFormControlSelect1.active,
+#exampleFormControlSelect1:active {
+    color: #000;
+    text-decoration: none;
+    background-color: transparent;
+}
+
+.dropdown-item:focus,
+.dropdown-item:hover {
+    color: #16181b;
+    text-decoration: none;
+    background-color: #f8f9fa;
+}
+
+.modal__formm.lg-header-formm {
+    min-width: 300px;
+    max-width: 600px;
+    padding: 0 20px;
+    height: 250px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+    text-align: center;
+}
 
 @media (max-width: 768px) {
     .profile-practitioner__consultation {

@@ -331,13 +331,16 @@ class CustomerController extends Controller
         foreach ($Complete as $CompleteVal)
         {
 
-            $ReviewRate = DB::table('reviews')
+            $ReviewRate[] = DB::table('reviews')
 
                 ->where('user_id',Auth::id())
                 ->where('practitoner_id',$CompleteVal->practitioner_id)
                 ->where('meeting_id',$CompleteVal->id)
                 ->first();
+           // print_r($ReviewRate);
         }
+
+      //  dd($ReviewRate);
 
 
         $StatusProtocol = DB::table('protocol_heading')->where('user_id',Auth::id())->get();
@@ -472,7 +475,7 @@ class CustomerController extends Controller
 //       if($CompleteCount != $reviewCount)
 //       {
 
-          $reviewCheckMeetingId = ReviewModel::where('user_id',Auth::id())->where('practitoner_id',$request->practitioner_id)->where('description','=',null)->where('meeting_id',$request->practitioner_id)->first();
+          $reviewCheckMeetingId = ReviewModel::where('user_id',Auth::id())->where('practitoner_id',$request->practitioner_id)->where('description','=',null)->where('meeting_id',$request->meeting_id)->first();
 
             if(empty($reviewCheckMeetingId))
             {
