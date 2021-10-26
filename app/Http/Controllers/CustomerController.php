@@ -63,11 +63,23 @@ class CustomerController extends Controller
 
 
         $Review = DB::table('reviews')
-            ->select('reviews.rate','reviews.description','practitioner.last_name','practitioner.first_name','practitioner.img','reviews.created_at')
+            ->select('reviews.rate','reviews.description','practitioner.last_name','practitioner.first_name','practitioner.img','reviews.created_at','reviews.practitoner_id')
             ->join('practitioner', 'practitioner.id', 'reviews.practitoner_id')
             ->where('reviews.user_id',Auth::id())
             ->where('reviews.description','!=',null)
             ->get();
+
+        $SpecialitiesReview = [];
+        foreach ($Review as $ReviewVal)
+        {
+            $SpecialitiesReview[] = DB::table('specialities')
+                                      ->join('practitioner_specialities','practitioner_specialities.specialities_id', 'specialities.id')
+                                      ->where('specialities.published', '=', 1)
+                                      ->where('practitioner_specialities.practitioner_id','=', $ReviewVal->practitoner_id)
+                                      ->get();
+        }
+
+
 
 
 //        $PractitionerFavorite =  DB::table('practitioner')
@@ -83,8 +95,10 @@ class CustomerController extends Controller
             ->get();
 
 
-
+        $SpecialitiesFavorite = [];
         $Rate = [];
+        $SessionCountFavorite = [];
+
         foreach ($PractitionerFavorite as $ValRate)
         {
             $Rate[] = DB::table('reviews')
@@ -93,6 +107,18 @@ class CustomerController extends Controller
                 ->where('reviews.practitoner_id',$ValRate->practitioner_id)
                 ->where('reviews.user_id',Auth::id())
                 ->avg('rate');
+
+            $SpecialitiesFavorite[] = DB::table('specialities')
+                                      ->join('practitioner_specialities','practitioner_specialities.specialities_id', 'specialities.id')
+                                      ->where('specialities.published', '=', 1)
+                                      ->where('practitioner_specialities.practitioner_id','=', $ValRate->practitioner_id)
+                                      ->get();
+
+            $SessionCountFavorite[]  = DB::table('users')
+                                     ->join('zoom_meetings_list', 'users.id', 'zoom_meetings_list.user_id')
+                                     ->where('zoom_meetings_list.practitioner_id',$ValRate->practitioner_id)
+                                     ->whereDate("zoom_meetings_list.start", "<=",date('Y-m-d H:i:s'))
+                                     ->count();
         }
 
 
@@ -134,7 +160,7 @@ class CustomerController extends Controller
         }
 
 
-        return view('profile-customer',compact('InProcess','Review','PractitionerFavorite','Teg','Service','ServiceSession','ServiceDescription','Rate'));
+        return view('profile-customer',compact('InProcess','Review','PractitionerFavorite','Teg','Service','ServiceSession','ServiceDescription','Rate','SpecialitiesFavorite','SpecialitiesReview','SessionCountFavorite'));
     }
 
 
@@ -183,6 +209,8 @@ class CustomerController extends Controller
             $EditCustomer->last_name = $request->last_name;
             $EditCustomer->phone_number = $request->phone_number;
             $EditCustomer->email = $request->email;
+            $EditCustomer->api_key = $request->api_key;
+            $EditCustomer->api_secret = $request->secret_key;
             if($EditCustomer && in_array($request->gender,array('Male','Famale','Other'))) {
                 $EditCustomer->gender = $request->gender;
             }
@@ -194,6 +222,8 @@ class CustomerController extends Controller
             if($EditCustomer && in_array($request->gender,array('Male','Famale','Other'))) {
                 $EditCustomer->gender = $request->gender;
             }
+            $EditCustomer->api_key = $request->api_key;
+            $EditCustomer->api_secret = $request->secret_key;
         }
 
         $EditCustomer->save();
@@ -259,7 +289,9 @@ class CustomerController extends Controller
 
     }
 
-    public function myAppointmentsCustomer(request $request,$lang,$id)
+
+
+    public function myAppointmentsCustomer(request $request,$lang,$id,$practitionrers = null,$service_name = null,$date_time = null,$price = null)
     {
 
         //  dd(date('Y-m-d H:i:s'));
@@ -278,6 +310,17 @@ class CustomerController extends Controller
             ->orderBy('zoom_meetings_list.id','DESC')
             ->paginate(5);
 
+        $SpecialitiesInProcess = [];
+
+        foreach ($InProcess as $InProcessVal)
+        {
+            $SpecialitiesInProcess[] = DB::table('specialities')
+                                       ->join('practitioner_specialities','practitioner_specialities.specialities_id', 'specialities.id')
+                                       ->where('specialities.published', '=', 1)
+                                       ->where('practitioner_specialities.practitioner_id','=', $InProcessVal->practitioner_id)
+                                       ->get();
+        }
+
 
 
         $TypeForm = DB::table('type_form_practitioner')->where('defaultt',1)->get();
@@ -287,7 +330,9 @@ class CustomerController extends Controller
         if (count($InProcess)!=0) {
 
             $client = new \GuzzleHttp\Client();
+
             foreach ($InProcess as $valP) {
+
                 $TypeFormm = DB::table('type_form_practitioner')->where('defaultt', 1)->where('practitioner_id', $valP->practitioner_id)->first();
 
                 $response = $client->request('GET', 'https://api.typeform.com/forms/' . $TypeFormm->url . '/responses', [
@@ -327,6 +372,7 @@ class CustomerController extends Controller
                     ->paginate(5);
 
         $ReviewRate = [];
+        $SpecialitiesComplete = [];
 
         foreach ($Complete as $CompleteVal)
         {
@@ -337,10 +383,14 @@ class CustomerController extends Controller
                 ->where('practitoner_id',$CompleteVal->practitioner_id)
                 ->where('meeting_id',$CompleteVal->id)
                 ->first();
-           // print_r($ReviewRate);
+
+            $SpecialitiesComplete[] = DB::table('specialities')
+                                      ->join('practitioner_specialities','practitioner_specialities.specialities_id', 'specialities.id')
+                                      ->where('specialities.published', '=', 1)
+                                      ->where('practitioner_specialities.practitioner_id','=', $CompleteVal->practitioner_id)
+                                      ->get();
         }
 
-      //  dd($ReviewRate);
 
 
         $StatusProtocol = DB::table('protocol_heading')->where('user_id',Auth::id())->get();
@@ -375,12 +425,10 @@ class CustomerController extends Controller
         $StartDate = Carbon::createFromFormat('m/d/Y', '08/31/2021')->format('m/d/Y');
         $LiveDate = Carbon::now()->format('m/d/Y');
        // week_between_two_dates($StartDate, $LiveDate);
-
-
-
-
-
-        return view('my-appointments-customer',compact('InProcess','Complete','id','StatusProtocol','TypeForm','CheckTypeForm','ReviewRate'));
+//        $a = $request->user;
+//        $b = $request->passwd;
+//       dd($request->all());
+        return view('my-appointments-customer',compact('InProcess','Complete','id','StatusProtocol','TypeForm','CheckTypeForm','ReviewRate','SpecialitiesComplete','SpecialitiesInProcess'));
     }
 
     public  function week_between_two_dates($date1, $date2)
@@ -423,9 +471,21 @@ class CustomerController extends Controller
 
         $Practitioner = DB::table('practitioner')->where('id',$practitionerID)->first();
 
+       $StartDateTime = Carbon::createFromFormat('Y-m-d H:i:s', $CheckWeek->start)->format('Y-m-d H:i:s');
+        $LiveDateTime = Carbon::now()->format('Y-m-d H:i:s');
+
+        if($StartDateTime > $LiveDateTime)
+        {
+            return Redirect::to('en/my-appointments-customer/2');
+        }
+
+        if(count($ProtocolAnother) === 0 )
+        {
+            return back()->with('status','The doctor has not added a protocol yet.');
+        }
 
 
-        return view('protocol-view-customer',compact('ProtocolHeading','ProtocolProduct','ProtocolLink','GetProtocol','ProtocolAnother','Services','Week','CheckCountSelected','Practitioner'));
+        return view('protocol-view-customer',compact('ProtocolHeading','ProtocolProduct','ProtocolLink','GetProtocol','ProtocolAnother','Services','Week','CheckCountSelected','Practitioner','meetingID'));
     }
 
     public function addSelectProtocol(request $request, $lang,$practitionerID,$serviceID)

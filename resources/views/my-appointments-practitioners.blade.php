@@ -9,7 +9,7 @@
         .my-appointments-person-img{
             display: flex;
             align-items: center;
-            border-radius: 10px;
+            border-radius: 0;
             width: 150px;
             height: 150px;
             overflow: hidden;
@@ -17,6 +17,7 @@
         }
         .info_imgg{
             width: 100%;
+            height: 128px;
         }
     </style>
 @endsection
@@ -29,6 +30,7 @@
 @section('content')
 
     <script>var body = document.body; body.classList.add("body");</script>
+
     <section>
         <div class="container">
             <div class="my-appointments">
@@ -48,13 +50,12 @@
                         <div class="my-appointments__complete-process-content-flex">
                             <div class="my-appointments-person__info">
                                 <div class="my-appointments-person__info-cont1 mr-3 my-appointments-person-img">
-                                    <img class="my-appointments-person__info-img .info_imgg" src="{{ asset('web_sayt/img_customer/'.$InProcessVal->img) }}" alt="">
+                                    <img class="my-appointments-person__info-img info_imgg" src="{{ asset('web_sayt/img_customer/'.$InProcessVal->img) }}" alt="">
                                 </div>
                                 <div class="my-appointments-person__info-cont2">
                                     <div class="my-appointments-person__info-name">{{$InProcessVal->first_name}} {{$InProcessVal->last_name}}</div>
-                                    <div class="my-appointments-person__info-specialist">Acne Specialist &amp; Holistic
-                                        nutritionist (CNP)</div>
-                                    <div class="my-appointments-person__info-data">{{date('M-jS, Y  H:i:s', strtotime($InProcessVal->start)) }}</div>
+                                    <div class="my-appointments-person__info-specialist">{{$InProcessVal->title}}</div>
+                                    <div class="my-appointments-person__info-data">{{date('M-jS, Y  h:i A', strtotime($InProcessVal->start)) }}</div>
                                 </div>
                             </div>
                             <div class="my-appointments-person__complete-process">
@@ -91,10 +92,8 @@
                                     'practitioner_id'=>$InCompleteVal->practitioner_id,
                                     'service_id'=>$InCompleteVal->service_id
                                     ])--}}">{{$InCompleteVal->first_name}} {{$InCompleteVal->last_name}}</a></div>
-                                    <div class="my-appointments-person__info-specialist">Acne Specialist &amp; Holistic
-                                        nutritionist (CNP)
-                                    </div>
-                                    <div class="my-appointments-person__info-data">{{date('M-jS, Y  H:i:s', strtotime($InCompleteVal->start)) }}</div>
+                                    <div class="my-appointments-person__info-specialist">{{$InCompleteVal->title}}</div>
+                                    <div class="my-appointments-person__info-data">{{date('M-jS, Y  h:i A', strtotime($InCompleteVal->start)) }}</div>
                                 </div>
                             </div>
                             <div class="my-appointments-person__complete-process">

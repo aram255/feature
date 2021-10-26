@@ -62,6 +62,16 @@
                                     <input type="tel" id="phone" class="fadeIn" value="{{auth()->user()->phone_number }}" name="phone_number">
                                 </div>
                             </div>
+                            <div class="user-info">
+                                <div class="user-info odd p-3">
+                                    <p class="user-info-p">Api Key (Zoom)</p>
+                                    <input type="text" id="firsName" value="{{auth()->user()->api_key }}" class="fadeIn" name="api_key">
+                                </div>
+                                <div class="user-info p-3">
+                                    <p class="user-info-p">API Secret (Zoom)</p>
+                                    <input type="text" class="fadeIn" value="{{auth()->user()->api_secret }}" name="secret_key">
+                                </div>
+                            </div>
                             <div class="d-flex flex-column flex-lg-row">
                                 <div class="user-info odd p-3">
                                     <p class="user-info-p">Password</p>
@@ -79,6 +89,8 @@
 
                                 </div>
                             </div>
+
+
 
 
                                 <div class="user-info create__checkbox user-info-editprofile p-3">

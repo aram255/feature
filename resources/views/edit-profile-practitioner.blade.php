@@ -116,6 +116,12 @@
                                                 </select>
                                             </div>
                                         </div>
+                                        <div class="d-flex align-items-center">
+                                            <div class="user-info odd">
+                                                <p class="user-info-p">Type Form Personal Token</p>
+                                                <input autocomplete="off" type="text" id="typeform" class="fadeIn" value="{{$Practitioners->personal_token_typeform}}" name="type_form" >
+                                            </div>
+                                        </div>
                                         <div class="stripe-payment" id="stripe-payment">
                                             <p class="user-info-p">Card Number<span>*</span></p>
                                             <div style="margin-right: -47px; position: relative" class="user-info odd mb-0 pb-0 pr-0">
@@ -138,8 +144,11 @@
                                                         <button type="button" class="bg-yellow  px-2 add_card" style="height: 45px; font-size: medium">Add</button>
                                                     </div>
                                                     @endif
+
                                             </div>
+
                                         </div>
+
                                          <div class="lg-sg__button mob_save" style="width: 20%!important;">
                                             <input type="submit"  class="btn bg-yellow" value="Save">
                                         </div>

@@ -27,7 +27,7 @@
 
     </style>
 @endsection
-
+i
 @section('title', __('site.Home') )
 
 @extends('app.layouts.app_home')
@@ -78,7 +78,7 @@
                     <div class="form-group ml-3">
                         <div class="dropdown">
                             <button type="button" class="form-control select-acne-box dropdown-item" id="exampleFormControlSelect1" data-toggle="dropdown">
-                                Dropdown button <i class="fas fa-chevron-down ml-2"></i>
+                                Choose Protocol <i class="fas fa-chevron-down ml-2"></i>
                             </button>
                             <div class="dropdown-menu w-100">
 {{--                                {{dd($GetProtocol)}}--}}
@@ -139,16 +139,16 @@
                                 <input type="hidden" name="id_another[]" >
                                 <div class="d-block content-input remove_another" id="protocol__section-heading-text-another0">
                                     <div class="input-group content-input-group ml-4 mb-3">
-                                        <input type="text" class="form-control form-input ml-4" name="another[]"  aria-label="Text input with checkbox">
+                                        <input type="text" class="form-control form-input ml-4 another_ap" name="another[]"  aria-label="Text input with checkbox">
                                     </div>
                                 </div>
                             </div>
-
                             <div class="d-flex mt-5" id="add-text-another" style="cursor: pointer">
                                 <p class="add-section mb-3">Add Another Section</p>
                                 <i class="fas fa-plus-circle ml-4 mt-2 add-icon"></i>
                             </div>
                         </div>
+
                     </div>
                 </div>
             </div>
@@ -157,18 +157,18 @@
             <h3 class="diet ml-5 mt-5">Diet:</h3>
             <div class="diet-content-container">
                 <div class="d-block diet-content mt-5 text_heading" id="protocol__section-heading-text0">
-                    <textarea class='diet-content-paragraph' required name='text_heading[]' rows='6' cols='100' style='resize: none;' placeholder='Pinch of Himalayan salt first thing in the morning (appetite and energy) and before and directly after EVERY meal.'></textarea>
+                    <textarea class='diet-content-paragraph heading_apend' required name='text_heading[]' rows='6' cols='100' style='resize: none;' placeholder='Pinch of Himalayan salt first thing in the morning (appetite and energy) and before and directly after EVERY meal.'></textarea>
                 </div>
                 <div class="d-block diet-add-section mt-5">
-                    <div class="d-flex">
-                        <i class="fas fa-plus-circle add-section-plus"></i>
-                        <p   class="add-another-section ml-3 protocol__section-add" id="add-text">Add Another Section</p>
-                    </div>
+
                 </div>
-
             </div>
-
-
+            <div class="d-block diet-add-section mt-5">
+                <div class="d-flex">
+                    <i class="fas fa-plus-circle add-section-plus"></i>
+                    <p   class="add-another-section ml-3 protocol__section-add" id="add-text" style="cursor: pointer">Add Another Section</p>
+                </div>
+           </div>
         </div>
         <div class="container">
             <h4 class="product ml-5 mt-5">Product:</h4>
@@ -196,7 +196,7 @@
             <div class="d-block product-add-section">
                 <div class="d-flex protocol__section-add"  id="add-product" data-id="0">
                     <i class="fas fa-plus-circle add-section-plus mr-3"></i>
-                    <p class="add-another-section">Add Another Section</p>
+                    <p class="add-another-section" style="cursor: pointer">Add Another Section</p>
                 </div>
             </div>
         </div>
@@ -217,14 +217,13 @@
                         </div>
                     </div><br>
 
-
-                    <div class="d-flex mt-5">
-                        <i class="fas fa-plus-circle add-section-plus mr-3 protocol__section-add"  id="add-link"></i>
-                        <p class="add-another-section">Add Another Section</p>
-                    </div>
-                    <div class="d-flex justify-content-center mt-5">
-                        <button type="submit" class="btn link-save-btn">Save</button>
-                    </div>
+                </div>
+                <div class="d-flex mt-5 col-6 mx-auto">
+                    <i class="fas fa-plus-circle add-section-plus mr-3 protocol__section-add"  id="add-link"></i>
+                    <p class="add-another-section" style="cursor: pointer">Add Another Section</p>
+                </div>
+                <div class="d-flex justify-content-center mt-5">
+                    <button type="submit" class="btn link-save-btn">Save</button>
                 </div>
             </div>
 
@@ -269,10 +268,10 @@
 
                         $.each(data.ProtocolAnother, function(k_another, v_another) {
 
-                            $('.content-background').append(
-                         "<div class='d-block content-input remove_another' id='protocol__section-heading-text-another0'>"+
+                            $('.content-background-child').append(
+                         "<div class='d-block content-input remove_another' id='protocol__section-heading-text-another"+k_another+"'>"+
                                 "<div class='input-group content-input-group ml-4 mb-3'>"+
-                                "<input type='text' class='form-control form-input ml-4' value='"+v_another.name+"' required name='another[]' aria-label='Text input with checkbox'>"+
+                                "<input type='text' class='form-control form-input ml-4 another_ap' value='"+v_another.name+"' required name='another[]' aria-label='Text input with checkbox'>"+
                                 "</div>"+
                                 "</div>"
                             )
@@ -281,8 +280,8 @@
                         $.each(data.ProtocolHeading, function(k_heading, v_heading) {
 
                             $('.diet-content-container').append(
-                            "<div class='d-block diet-content mt-5 text_heading' id='protocol__section-heading-text0' >"+
-                                "<textarea class='diet-content-paragraph' required name='text_heading[]' rows='6' cols='100' style='resize: none;' placeholder='Pinch of Himalayan salt first thing in the morning (appetite and energy) and before and directly after EVERY meal.'>"+v_heading.text_heading+"</textarea>"+
+                            "<div class='d-block diet-content mt-5 text_heading' id='protocol__section-heading-text"+k_heading+"' >"+
+                                "<textarea class='diet-content-paragraph heading_apend' required name='text_heading[]' rows='6' cols='100' style='resize: none;' placeholder='Pinch of Himalayan salt first thing in the morning (appetite and energy) and before and directly after EVERY meal.'>"+v_heading.text_heading+"</textarea>"+
                                 "</div>"
                             )
                         });
@@ -346,9 +345,9 @@
                         $.each(data.ProtocolLink, function(k_link, v_link) {
 
                             $('.link-container').append(
-                            "<div class='link-name d-md-flex justify-content-md-between justify-content-center align-items-center remove_link' id='protocol__section-link-cont"+k_link+"'>"+
+                            "<div class='link-name d-md-flex justify-content-md-between justify-content-center align-items-center remove_link link_apend' id='protocol__section-link-cont"+k_link+"'>"+
                                " <div class='mb-3 col-md-5'>"+
-                               " <label for='formGroupExampleInput' class='form-label link-name-label'>Name:</label>"+
+                               " <label for='formGroupExampleInput' class='form-label link-name-label' >Name:</label>"+
                            "<input type='text' class='form-control link-name-form' id='formGroupExampleInput' name='link_title[]' value='"+v_link.link_title+"' required>"+
                              "</div>"+
                                 "<div class='mb-3 col-md-5 link-input'>"+
@@ -370,6 +369,9 @@
             });
 
         });
+
+        let url_chek = "{{ Request::segment(2) }}"
+
     </script>
     <script type="text/javascript" src="{{ asset('web_sayt/js/bootstrap/bootstrap.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('web_sayt/js/bootstrap/bootstrap.bundle.min.js') }}"></script>

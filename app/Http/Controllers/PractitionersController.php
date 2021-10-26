@@ -78,6 +78,26 @@ class PractitionersController extends Controller
 
     }
 
+    public function speciality()
+    {
+        return DB::table('specialities')
+               ->join('practitioner_specialities','practitioner_specialities.specialities_id', 'specialities.id')
+               ->where('specialities.published', '=', 1)
+               ->where('practitioner_specialities.practitioner_id','=', session()->get('UserID'))
+               ->get();
+    }
+
+    public function countSession(request $request)
+    {
+        $Complete  = DB::table('users')
+            ->join('zoom_meetings_list', 'users.id', 'zoom_meetings_list.user_id')
+            ->where('zoom_meetings_list.practitioner_id',$request->session()->get('UserID'))
+            ->whereDate("zoom_meetings_list.start", "<=",date('Y-m-d H:i:s'))
+            ->count();
+
+        return $Complete;
+    }
+
     public function getPractitioners()
     {
         return PractitionersModel::where('id',session()->get('UserID'))->first();
@@ -174,10 +194,11 @@ class PractitionersController extends Controller
 
         $Rate = floor($ReviewRate);
 
+        $Speciality = $this->speciality();
 
+        $SessionCount =  $this->countSession($request);
 
-
-        return view('profile-practitioner',compact('Complete','GetServiceID','Review','TagManagements','MyTagManagements','PractitionerInfo','ThisWeekMeetingsList','Service','ServiceSession','ServiceDescription','Rate'));
+        return view('profile-practitioner',compact('Complete','GetServiceID','Review','TagManagements','MyTagManagements','PractitionerInfo','ThisWeekMeetingsList','Service','ServiceSession','ServiceDescription','Rate','Speciality','SessionCount'));
     }
 
     public function calendarAddFreeDate(request $request)
@@ -377,6 +398,8 @@ class PractitionersController extends Controller
                      ->orderBy('zoom_meetings_list.id','DESC')
                      ->paginate(5);
 
+    ;
+
 
             $StatusProtocol = DB::table('protocol_heading')->where('practitioner_id',$request->session()->get('UserID'))->get();
 
@@ -571,6 +594,7 @@ class PractitionersController extends Controller
             $EditPractitioner->email        = $request->email;
             $EditPractitioner->insurance    = $request->insurance;
             $EditPractitioner->description  = $request->description;
+            $EditPractitioner->personal_token_typeform  = $request->type_form;
             if ($EditPractitioner && in_array($request->gender, array('Male', 'Famale', 'Other'))) {
                 $EditPractitioner->gender = $request->gender;
             }
@@ -593,6 +617,7 @@ class PractitionersController extends Controller
             $EditPractitioner->email        = $request->email;
             $EditPractitioner->insurance    = $request->insurance;
             $EditPractitioner->description  = $request->description;
+            $EditPractitioner->personal_token_typeform  = $request->type_form;
             if ($EditPractitioner && in_array($request->gender, array('Male', 'Famale', 'Other'))) {
                 $EditPractitioner->gender = $request->gender;
             }
@@ -613,6 +638,7 @@ class PractitionersController extends Controller
             $EditPractitioner->email        = $request->email;
             $EditPractitioner->insurance    = $request->insurance;
             $EditPractitioner->description  = $request->description;
+            $EditPractitioner->personal_token_typeform  = $request->type_form;
             if ($EditPractitioner && in_array($request->gender, array('Male', 'Famale', 'Other'))) {
                 $EditPractitioner->gender = $request->gender;
             }
@@ -641,6 +667,7 @@ class PractitionersController extends Controller
             $EditPractitioner->email = $request->email;
             $EditPractitioner->insurance = $request->insurance;
             $EditPractitioner->description = $request->description;
+            $EditPractitioner->personal_token_typeform  = $request->type_form;
             if ($EditPractitioner && in_array($request->gender, array('Male', 'Famale', 'Other'))) {
                 $EditPractitioner->gender = $request->gender;
             }

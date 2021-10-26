@@ -137,6 +137,7 @@
             events:'/en/Search/'+ practitionerId,
             selectable:true,
             selectHelper: true,
+            timeFormat: 'hh:mm a',
             select:function(start, end, allDay,event,element,view)
             {
 
@@ -176,6 +177,81 @@
 
                     // Close Calendar
                     $("#myModal").modal('hide');
+
+                    // Offline Meeting
+                    $('#offline').click(function () {
+
+                        var  duration = diff_time/(60000);
+                            @if(isset(Auth::user()->id))
+                        var add_user_id = "{{Auth::user()->id}}";
+                        @endif
+
+
+                        $.ajax({
+                            url: "{{ route('add-offline-meeting',app()->getLocale()) }}",
+                            type: "POST",
+                            data: {
+                                title: serviceName,
+                                start: start,
+                                end: end,
+                                practitionerId: practitionerId,
+                                add_user_id: add_user_id,
+                                phone_number: phone_number,
+                                last_name: last_name,
+                                first_name: first_name,
+                                email: email,
+                                duration: duration,
+                                practitionerID: practitionerID,
+                                service_id: service_id,
+                                LiveDateTime:LiveDateTime,
+                                user_email:user_email,
+                                type: 'add'
+                            },
+                            success: function (data) {
+
+                                calendar.fullCalendar('refetchEvents');
+
+
+                                if(data.select_error == null)
+                                {
+                                    if(data.NoRepeatService != null)
+                                    {
+                                        // alert(data.NoRepeatService)
+
+                                        // Show Error No Repeat Service
+                                        $("#error-NoRepeatService").modal('hide');
+
+                                        // Close Select Meeting
+                                        $("#myModal2").modal('hide');
+                                    }else{
+                                        // Show Success Meeting
+                                        $('#succes-meeting').modal('show');
+
+                                        // Close Select Meeting
+                                        $("#myModal2").modal('hide');
+                                        //alert("Event Created Successfully");
+                                    }
+                                }else{
+                                    // Show Error No Repeat Service
+                                    $("#select_error").modal('show');
+
+                                    // Close Select Meeting
+                                    $("#myModal2").modal('hide');
+                                    //  alert(data.select_error);
+                                }
+
+                            },
+                            error: function(data) {
+                                // alert('Your appointment has not been created');
+
+                                // Show Error No not been created
+                                $("#not-been-created").modal('show');
+
+                                // Close Select Meeting
+                                $("#myModal2").modal('hide');
+                            }
+                        });
+                    })
 
                     $("#zoom").click(function () {
 

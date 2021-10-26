@@ -31,6 +31,7 @@ function initMap() {
         infowindow.close();
         marker.setVisible(false);
         const place = autocomplete.getPlace();
+        console.log(place);
 
         if (!place.geometry || !place.geometry.location) {
             // User entered the name of a Place that was not suggested and

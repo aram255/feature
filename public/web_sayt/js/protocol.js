@@ -1,7 +1,35 @@
+
+
 let addTextButton = document.getElementById("add-text");
 addTextButton.addEventListener('click', addText)
-let i = 0
+
+//let i = 0;
+
+let i;
+
+if(url_chek == "edit-protocol-practitioner-view")
+{
+    i = $('.headingg').length-1;
+}
+
+
 function addText() {
+
+
+    if(url_chek == "add-edit-protocol-practitioner")
+    {
+        //  i =0;
+        var numItems = $('.heading_apend').length
+
+        if(numItems == 0)
+        {
+
+            i = $('.heading_apend').length-1;
+
+        }else{
+            i = $('.heading_apend').length-1;
+        }
+    }
 
    let addText = document.getElementById('protocol__section-heading-text' + i);
    let textClone = addText.cloneNode(true);
@@ -39,10 +67,34 @@ function addProduct() {
 
 }
 
+
+
 let addLinkButton = document.getElementById("add-link");
 addLinkButton.addEventListener('click', addLink)
-let k = 0
+
+//let k = 0;
+
+let k;
+
+if(url_chek == "edit-protocol-practitioner-view")
+{
+     k = $('.linkk').length-1;
+}
+
 function addLink() {
+
+    if(url_chek == "add-edit-protocol-practitioner")
+    {
+        var numItems = $('.link_apend').length
+
+         if(numItems == 0)
+        {
+             k = 0;
+        }else{
+             k = $('.link_apend').length-1;
+        }
+    }
+
 
    let addLink = document.getElementById('protocol__section-link-cont' + k);
    let linkClone = addLink.cloneNode(true);
@@ -54,9 +106,29 @@ function addLink() {
 
 let addAnotherButton = document.getElementById("add-text-another");
 addAnotherButton.addEventListener('click', addTextAnother)
-let c = 0
 
+
+ //let c = 0
+
+let c;
+
+if(url_chek == "edit-protocol-practitioner-view")
+{
+    c = 0;
+}
 function addTextAnother() {
+
+    if(url_chek == "add-edit-protocol-practitioner")
+    {
+        var numItems = $('.another_ap').length
+
+        if(numItems == 0)
+        {
+            c = 0;
+        }else{
+            c = $('.another_ap').length-1;
+        }
+    }
 
     let main = document.getElementsByClassName('content-background-child')[0];
     let addTextAnother = document.getElementById('protocol__section-heading-text-another' + c);

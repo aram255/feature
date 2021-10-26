@@ -206,14 +206,14 @@
                                   <input type="hidden" name="id_another[]" value="{{$valAnother->id}}">
                                   <div class="d-block content-input remove_another" id="protocol__section-heading-text-another0">
                                       <div class="input-group content-input-group ml-4 mb-3">
-                                          <input type="text" class="form-control form-input ml-4" name="another[]" value="{{$valAnother->name}}"  aria-label="Text input with checkbox">
+                                          <input type="text" class="form-control form-input ml-4 another_ap" name="another[]" value="{{$valAnother->name}}"  aria-label="Text input with checkbox">
                                       </div>
                                   </div>
                               @endforeach
                           </div>
 
                             <div class="d-flex mt-5" id="add-text-another">
-                                <p class="add-section" >Add Another Section</p>
+                                <p class="add-section" style="cursor: pointer" >Add Another Section</p>
                                 <i class="fas fa-plus-circle ml-4 mt-2 add-icon"></i>
                             </div>
                         </div>
@@ -226,19 +226,18 @@
                 <div class="diet-content-container">
                     @foreach($ProtocolHeading as $keyHeading => $ValHeading)
                     <div class="d-block diet-content mt-5 text_heading" id="protocol__section-heading-text{{$keyHeading}}">
+                        <input type="hidden" class="headingg" value="{{$keyHeading}}">
                         <input type="hidden" name="id_text_heading[]" value="{{$ValHeading->id}}">
                         <textarea class='diet-content-paragraph' required name='text_heading[]' rows='6' cols='100' style='resize: none;' placeholder='Pinch of Himalayan salt first thing in the morning (appetite and energy) and before and directly after EVERY meal.'>{{$ValHeading->text_heading}}</textarea>
                     </div>
                     @endforeach
-                    <div class="d-block diet-add-section mt-5">
-                        <div class="d-flex">
-                            <i class="fas fa-plus-circle add-section-plus"></i>
-                            <p   class="add-another-section ml-3 protocol__section-add" id="add-text">Add Another Section</p>
-                        </div>
-                    </div>
-
                 </div>
-
+                <div class="d-block diet-add-section mt-5">
+                    <div class="d-flex">
+                        <i class="fas fa-plus-circle add-section-plus"></i>
+                        <p   class="add-another-section ml-3 protocol__section-add" id="add-text" style="cursor: pointer">Add Another Section</p>
+                    </div>
+                </div>
 
             </div>
             <div class="container">
@@ -270,7 +269,7 @@
                 <div class="d-block product-add-section " >
                     <div class="d-flex protocol__section-add"  id="add-product" data-id="{{$keyProduct}}">
                         <i class="fas fa-plus-circle add-section-plus mr-3"></i>
-                        <p class="add-another-section">Add Another Section</p>
+                        <p class="add-another-section" style="cursor: pointer">Add Another Section</p>
                     </div>
                 </div>
             </div>
@@ -279,7 +278,8 @@
                     <h4 class="mt-5 ml-5">Link:</h4>
                     <div class="d-block link-container">
                         @foreach($ProtocolLink as $keyLink => $ValLink)
-                        <div class="link-name d-md-flex justify-content-md-between justify-content-center align-items-center remove_link" id="protocol__section-link-cont{{$keyLink}}">
+                            <input type="hidden" class="linkk"  value="{{$keyLink}}">
+                        <div class="link-name mb-3 d-md-flex justify-content-md-between justify-content-center align-items-center remove_link" id="protocol__section-link-cont{{$keyLink}}">
                             <div class="mb-3 col-md-5">
                                 <input type="hidden" value="{{$ValLink->id}}" name="link_id[]">
                                 <label for="formGroupExampleInput" class="form-label link-name-label">Name:</label>
@@ -293,15 +293,13 @@
                             </div>
                         </div><br>
                         @endforeach
-
-
-                        <div class="d-flex mt-5">
-                            <i class="fas fa-plus-circle add-section-plus mr-3 protocol__section-add"  id="add-link"></i>
-                            <p class="add-another-section">Add Another Section</p>
-                        </div>
-                        <div class="d-flex justify-content-center mt-5">
-                            <button type="submit" class="btn link-save-btn">Save</button>
-                        </div>
+                    </div>
+                    <div class="d-flex mt-5 col-6 mx-auto">
+                        <i class="fas fa-plus-circle add-section-plus mr-3 protocol__section-add"  id="add-link"></i>
+                        <p class="add-another-section" style="cursor: pointer">Add Another Section</p>
+                    </div>
+                    <div class="d-flex justify-content-center mt-5">
+                        <button type="submit" class="btn link-save-btn">Save</button>
                     </div>
                 </div>
 
@@ -312,13 +310,14 @@
 @endsection
 
 @section('style')
+    <script>
+        var url_chek= "{{ Request::segment(2) }}";
 
+    </script>
     <script type="text/javascript" src="{{ asset('web_sayt/js/bootstrap/bootstrap.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('web_sayt/js/bootstrap/bootstrap.bundle.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('web_sayt/js/protocol.js') }}"></script>
     <script type="text/javascript" src="{{ asset('web_sayt/js/script.js') }}"></script>
-
-
 
 
 @endsection

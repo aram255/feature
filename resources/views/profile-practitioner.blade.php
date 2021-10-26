@@ -15,7 +15,14 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="stylesheet" href="{{ asset('web_sayt/css/calendar2_parctitioner/calendar.css') }}">
 
+    <style>
+        /*.activeUser {*/
+        /*    inset:647.5px -17px -694.5px 1px !important;*/
+        /*}*/
+    </style>
+    <script>
 
+    </script>
 @endsection
 
 @section('title', __('site.Home') )
@@ -29,6 +36,7 @@
     <!---  0000000  ---->
     <main>
         <div class="container">
+
             <div class="profile-practitioner">
                 <div class="profile-practitioner__user nl">
                     <div class="person__info">
@@ -42,7 +50,11 @@
 
 
                             </div>
-                            <div class="person__info-specialist">Acne Specialist &amp; Holistic nutritionist (CNP)</div>
+                            <div class="person__info-specialist">
+                                @foreach($Speciality as $ValSpeciality)
+                                    <span class="person__info-skin-tag">{{$ValSpeciality->title}}</span>
+                                @endforeach
+                            </div>
                             <div class="person__info-skin">
                                 @foreach($MyTagManagements as $GetTagManagements)
                                   <span class="person__info-skin-tag">{{$GetTagManagements->name}}</span>
@@ -78,12 +90,13 @@
                                 </span>
                             </div>
                             @endif
-                            <p class="perion__info-session">256<span> Sessions</span></p>
+                            <p class="perion__info-session">{{$SessionCount}}<span> Sessions</span></p>
                         </div>
 
                     </div>
                 </div>
                 <div class="profile-practitioner__consultation nl">
+                    <div class="fs-24 text-center mb-4" style="color: #00309E;"> Available appointment time</div>
                     <div class="d-flex flex-md-row flex-column align-items-center">
 
 {{--                            @if($PractitionerInfo->video != null)--}}
@@ -115,54 +128,56 @@
 {{--                        </div>--}}
 
                         <div class="container"  >
-                            <div class="calendar-section" >
-                                <div class="row" >
 
-                                    <div class="col-sm-6 detail-btn" data-toggle="modal" data-target="#myModal">
+                            <div id="calendar"></div>
+{{--                            <div class="calendar-section" >--}}
+{{--                                <div class="row" >--}}
 
-                                        <div class="calendar calendar-first " id="calendar_first">
-                                            <div class="calendar_header ">
-                                                <button class="switch-month switch-left">
-                                                    <i class="glyphicon glyphicon-chevron-left"></i>
-                                                </button>
-                                                <h2></h2>
-                                                <button class="switch-month switch-right">
-                                                    <i class="glyphicon glyphicon-chevron-right"></i>
-                                                </button>
-                                            </div>
-                                            <div class="calendar_weekdays"></div>
-                                            <div class="calendar_content"></div>
-                                        </div>
+{{--                                    <div class="col-sm-6 detail-btn" data-toggle="modal" data-target="#myModal">--}}
 
-                                    </div>
-                                    <div class="col-sm-6 detail-btn" data-toggle="modal" data-target="#myModal">
+{{--                                        <div class="calendar calendar-first " id="calendar_first">--}}
+{{--                                            <div class="calendar_header ">--}}
+{{--                                                <button class="switch-month switch-left">--}}
+{{--                                                    <i class="glyphicon glyphicon-chevron-left"></i>--}}
+{{--                                                </button>--}}
+{{--                                                <h2></h2>--}}
+{{--                                                <button class="switch-month switch-right">--}}
+{{--                                                    <i class="glyphicon glyphicon-chevron-right"></i>--}}
+{{--                                                </button>--}}
+{{--                                            </div>--}}
+{{--                                            <div class="calendar_weekdays"></div>--}}
+{{--                                            <div class="calendar_content"></div>--}}
+{{--                                        </div>--}}
 
-                                        <div class="calendar calendar-second " id="calendar_second">
-                                            <div class="calendar_header">
-                                                <button class="switch-month switch-left">
-                                                    <i class="glyphicon glyphicon-chevron-left"></i>
-                                                </button>
-                                                <h2></h2>
-                                                <button class="switch-month switch-right">
-                                                    <i class="glyphicon glyphicon-chevron-right"></i>
-                                                </button>
-                                            </div>
-                                            <div class="calendar_weekdays"></div>
-                                            <div class="calendar_content"></div>
-                                        </div>
+{{--                                    </div>--}}
+{{--                                    <div class="col-sm-6 detail-btn" data-toggle="modal" data-target="#myModal">--}}
 
-                                    </div>
+{{--                                        <div class="calendar calendar-second " id="calendar_second">--}}
+{{--                                            <div class="calendar_header">--}}
+{{--                                                <button class="switch-month switch-left">--}}
+{{--                                                    <i class="glyphicon glyphicon-chevron-left"></i>--}}
+{{--                                                </button>--}}
+{{--                                                <h2></h2>--}}
+{{--                                                <button class="switch-month switch-right">--}}
+{{--                                                    <i class="glyphicon glyphicon-chevron-right"></i>--}}
+{{--                                                </button>--}}
+{{--                                            </div>--}}
+{{--                                            <div class="calendar_weekdays"></div>--}}
+{{--                                            <div class="calendar_content"></div>--}}
+{{--                                        </div>--}}
 
-                                </div> <!-- End Row -->
+{{--                                    </div>--}}
 
-                            </div> <!-- End Calendar -->
+{{--                                </div> <!-- End Row -->--}}
+
+{{--                            </div> <!-- End Calendar -->--}}
                         </div> <!-- End Container -->
                     </div>
                     <div class="profile-practitioner__consultation-time">
                         <div class="profile-practitioner__consultation-time-content">
                             <p class="time-content-title">VIDEO CONSULTATION <img src="{{ asset('web_sayt/img/zoom-icon-logo.png') }}" alt=""></p>
                             @foreach($ThisWeekMeetingsList as $Value)
-                            <button class="btn bg-yellow">{{date('H:i:s', strtotime($Value->start)) }}</button>
+                            <button class="btn bg-yellow">{{date('h:i A', strtotime($Value->start)) }}</button>
                             @endforeach
                         </div>
                     </div>
@@ -362,41 +377,50 @@
         </div>
     </div>
 
-    <!---  0000000 ----->
-    <div class="modal" tabindex="-1" id="myModal">
-        <div class="modal-dialog max-dialog">
-            <div class="modal-content ">
-                <div class="modal-header border-bottom-0">
-                    <h2 class="text-center w-100 title">List of available periods</h2>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <div id="calendar"></div>
-                </div>
-            </div>
-        </div>
-    </div>
+{{--    <!---  0000000 ----->--}}
+{{--    <div class="modal" tabindex="-1" id="myModal">--}}
+{{--        <div class="modal-dialog max-dialog">--}}
+{{--            <div class="modal-content ">--}}
+{{--                <div class="modal-header border-bottom-0">--}}
+{{--                    <h2 class="text-center w-100 title">Available appointment time</h2>--}}
+{{--                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">--}}
+{{--                        <span aria-hidden="true">&times;</span>--}}
+{{--                    </button>--}}
+{{--                </div>--}}
+{{--                <div class="modal-body">--}}
+{{--                    <div id="calendar"></div>--}}
+{{--                </div>--}}
+{{--            </div>--}}
+{{--        </div>--}}
+{{--    </div>--}}
 
 @include('modal-list')
 @endsection
 
 @section('style')
-    <script type="text/javascript" src="{{ asset('web_sayt/js/jquery.js') }}"></script>
-    <script>
-        $(document).on('click','.detail-btn', function()  {
 
+
+    <script type="text/javascript" src="{{ asset('web_sayt/js/jquery.js') }}"></script>
+
+
+    <script>
+        $(function() {
+            $('#myModal').modal('show');
+        });
+    </script>
+    <script>
+
+
+
+        // $(document).on('click','.detail-btn', function()  {
+
+        $( document ).ready(function() {
 
             var practitionerId = $(this).attr('data-id');
             var calendar = null;
 
             var service_id     = $('.serviceid').val();
 
-            // var arrServiceId= new Array();
-            // $('.serviceid').each(function(){
-            //     arrServiceId.push($(this).val());
-            // })
 
 
             if(service_id == null)
@@ -425,6 +449,7 @@
                 events:'/en/profile-practitioner/'+ practitionerId,
                 selectable:true,
                 selectHelper: true,
+                timeFormat: 'hh:mm a',
                 select:function(start, end, allDay)
                 {
                     // console.log(arrText)
@@ -516,6 +541,7 @@
                     setTimeout(() => {
                         $(".DeactiveUser" ).css( "display", "none" );
                         $(".DeactiveUser" ).next().css( "display", "none" );
+                        $(".activeUser").next('.activeNull').css( "display", "none" );;
                     }, 20);
                 },
 

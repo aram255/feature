@@ -19,6 +19,7 @@
 
 @section('content')
     <script>var body = document.body; body.classList.add("body");</script>
+
 {{--    @if(isset(Auth::user()->id))--}}
     <!---  0000000  ---->
     <main>
@@ -30,9 +31,13 @@
                             <img class="person__info-img" src="@if($Practitioner->img){{asset('web_sayt/img_practitioners/'.$Practitioner->img)}}@else{{asset('web_sayt/img/person-foto.png')}}@endif" alt="">
                             <div class="person__info-name">
                                 <span class="profile-practitioner-name">{{$Practitioner->first_name}} {{$Practitioner->last_name}}</span>
-
                             </div>
-                            <div class="person__info-specialist">Acne Specialist &amp; Holistic nutritionist (CNP)</div>
+                            <div class="person__info-specialist">
+
+                                @foreach($SpecialitiesPractitioner as $ValSpecialitiesPractitioner)
+                                    {{$ValSpecialitiesPractitioner->title}}
+                                @endforeach
+                            </div>
                             <div class="person__info-skin">
                                 @foreach($MyTagManagements as $GetTagManagements)
                                     <span class="person__info-skin-tag">{{$GetTagManagements->name}}</span>
@@ -69,14 +74,14 @@
                                 </span>
                          </div>
                             @endif
-                            <p class="perion__info-session">256<span> Sessions</span></p>
+                            <p class="perion__info-session">{{$SessionCount}}<span> Sessions</span></p>
                         </div>
 
                     </div>
                 </div>
                 <div class="profile-practitioner__consultation nl">
                     <div class="d-flex align-items-start">
-                        <div class="d-flex flex-md-row flex-column flex-1">
+                        <div class="d-flex flex-md-row flex-column col-md-9">
                             <div class="profile-practitioner__consultation-video flex-1 mr-md-3">
                                 {{--                            <input type="file" id="video-file" name="video-file">--}}
                                 {{--                            <label for="video-file"><img class="upload" src="{{ asset('web_sayt/img/video-file.svg') }}" alt=""></label>--}}
@@ -88,11 +93,11 @@
                             </div>
 
                         </div>
-                        <div class="profile-practitioner__consultation-time m-0 flex-1">
+                        <div class="profile-practitioner__consultation-time m-0 col-md-3">
                             <div class="profile-practitioner__consultation-time-content">
                                 <p class="time-content-title">VIDEO CONSULTATION <img src="{{ asset('web_sayt/img/zoom-icon-logo.png') }}" alt=""></p>
                                 @foreach($ThisWeekMeetingsList as $Value)
-                                    <button class="btn bg-yellow">{{date('H:i:s', strtotime($Value->start)) }}</button>
+                                    <button class="btn bg-yellow">{{date('h:i A', strtotime($Value->start)) }}</button>
                                 @endforeach
                             </div>
                         </div>
@@ -102,7 +107,7 @@
                         <div class="d-flex flex-lg-row flex-column">
                        @if(count($Review)>0)
                          @foreach($Review as $valR)
-                             @if(!empty($valR->practitoner_id))
+{{--                             @if(!empty($valR->practitoner_id))--}}
 
                                     @if(!empty($valR->description))
                             <div class="profile__reviews-block">
@@ -136,10 +141,11 @@
                                     </div>
                                 </div>
                             </div>
-                                @endif
-                                    @else
-                                        No reviews yet
-                                    @endif
+
+{{--                                @endif--}}
+                                 @else
+                                     No reviews yet
+                                 @endif
                                 @endforeach
                            @endif
                         </div>
@@ -210,6 +216,7 @@
                                                 @endforeach
                                             </ul>
 {{--                                            ($ServizeID->where('practitioner_id',$Practitioner->id)->where('service_id',$Value->id))}}--}}
+
                                             <input type="hidden" name="user_email" value="@if(isset(Auth::user()->email)){{Auth::user()->email}}@endif">
                                             <input type="hidden" name="service_name" value="{{$Value->title}}">
                                             <input type="hidden" name="service_id" value="{{$Value->id}}">
@@ -288,7 +295,7 @@
                         </a>
                     </div>
                     <div id="offline" class="modal-body mx-4 flex-1">
-                        <a href="#">
+                        <a href="#" id="offline">
                             <img src="{{ asset('web_sayt/img/Group 2013.svg') }}" alt="" style="width: 32px; height: 32px">
                             In-person visit
                         </a>
@@ -486,6 +493,7 @@
             events:'/en/Search/'+ practitionerId+'/'+service_id,
             selectable:true,
             selectHelper: true,
+            timeFormat: 'hh:mm a',
             select:function(start, end, allDay,event,element,view)
             {
 // alert(service_id)
@@ -517,12 +525,107 @@
                 var diff_time = d5-d1;
 
 
+
+
+
+
                 if (d1 >= d2) {
                     $("#myModal2").modal("show");
 
                     // Close Calendar
                     $("#myModal").modal('hide');
 
+                    // Offline
+                    $("#offline").click(function () {
+
+                        var  duration = diff_time/(60000);
+                            @if(isset(Auth::user()->id))
+                        var add_user_id = "{{Auth::user()->id}}";
+                        @endif
+
+                        // alert('start '+start)
+                        // alert('end'+end)
+                        // alert('practitionerId'+practitionerId)
+                        // alert('add_user_id'+add_user_id)
+                        // alert('phone_number'+phone_number)
+                        // alert('last_name '+last_name)
+                        // alert('first_name'+first_name)
+                        // alert('email'+email)
+                        // alert('duration'+duration)
+                        // alert('password'+password)
+                        // alert('practitionerID'+practitionerID)
+                        // alert('service_id'+service_id)
+                        // alert('user_email'+user_email)
+
+                        $.ajax({
+                            url: "{{ route('add-offline-meeting',app()->getLocale()) }}",
+                            type: "POST",
+                            data: {
+                                title: service_name,
+                                start: start,
+                                end: end,
+                                practitionerId: practitionerId,
+                                add_user_id: add_user_id,
+                                phone_number: phone_number,
+                                last_name: last_name,
+                                first_name: first_name,
+                                email: email,
+                                duration: duration,
+                                password: password,
+                                practitionerID: practitionerID,
+                                service_id: service_id,
+                                user_email:user_email,
+                                LiveDateTime:LiveDateTime,
+                                type: 'add'
+                            },
+                            success: function (data) {
+                                calendar.fullCalendar('refetchEvents');
+
+
+                                if(data.select_error == null)
+                                {
+                                    if(data.NoRepeatService != null)
+                                    {
+                                        //alert(data.NoRepeatService)
+                                        // Show Error No Repeat Service
+                                        $("#error-NoRepeatService").modal('hide');
+
+                                        // Close Select Meeting
+                                        $("#myModal2").modal('hide');
+                                    }else{
+                                        //alert("Event Created Successfully");
+
+                                        // Show Success Meeting
+                                        $('#succes-meeting').modal('show');
+
+                                        // Close Select Meeting
+                                        $("#myModal2").modal('hide');
+                                    }
+                                }else{
+                                    // alert(data.select_error);
+
+                                    // Show Error No Repeat Service
+                                    $("#select_error").modal('show');
+
+                                    // Close Select Meeting
+                                    $("#myModal2").modal('hide');
+                                }
+
+                            },
+                            error: function(data) {
+                                // alert('Your appointment has not been created');
+
+                                // Show Error No not been created
+                                $("#not-been-created").modal('show');
+
+                                // Close Select Meeting
+                                $("#myModal2").modal('hide');
+                            }
+                        });
+                    })
+
+
+                    // Zoom Meeting
                     $("#zoom").click(function () {
 
                         var  duration = diff_time/(60000);

@@ -72,8 +72,27 @@ class IndexController extends Controller
         return $request->teg_management;
     }
 
-    public function search(Request $request,$lang, $practitioner_id = null, $service_id = null)
+    public function search(Request $request,$lang, $practitioner_id = null, $service_id = null,$meeting_id = null)
     {
+//        $_SERVER['HTTP_CLIENT_IP'];
+//        $ip=  $_SERVER['REMOTE_ADDR'];
+
+//        function get_ip_address(){
+//            foreach (array('HTTP_CLIENT_IP', 'HTTP_X_FORWARDED_FOR', 'HTTP_X_FORWARDED', 'HTTP_X_CLUSTER_CLIENT_IP', 'HTTP_FORWARDED_FOR', 'HTTP_FORWARDED', 'REMOTE_ADDR') as $key){
+//                if (array_key_exists($key, $_SERVER) === true){
+//                    foreach (explode(',', $_SERVER[$key]) as $ip){
+//                        $ip = trim($ip); // just to be safe
+//
+//                        if (filter_var($ip, FILTER_VALIDATE_IP, FILTER_FLAG_NO_PRIV_RANGE | FILTER_FLAG_NO_RES_RANGE) !== false){
+//                            echo  $ip;
+//                        }
+//                    }
+//                }
+//            }
+//        }
+
+
+//        dd('$ip');
 //        dd($request->search_go);
 
 //        $tags=null;
@@ -151,6 +170,28 @@ class IndexController extends Controller
 
             })
             ->get();
+
+        $SpecialitiesPractitioner = [];
+        $SessionCount = [];
+
+        foreach ($Practitioner as $valSpecialities)
+        {
+            $SpecialitiesPractitioner[] = DB::table('specialities')
+                                          ->join('practitioner_specialities','practitioner_specialities.specialities_id', 'specialities.id')
+                                          ->where('specialities.published', '=', 1)
+                                          ->where('practitioner_specialities.practitioner_id','=', $valSpecialities->id)
+                                          ->get();
+
+            $SessionCount[]  = DB::table('users')
+                ->join('zoom_meetings_list', 'users.id', 'zoom_meetings_list.user_id')
+                ->where('zoom_meetings_list.practitioner_id',$valSpecialities->id)
+                ->whereDate("zoom_meetings_list.start", "<=",date('Y-m-d H:i:s'))
+                ->count();
+        }
+
+
+
+
 
 
         // Show Rate
@@ -319,6 +360,17 @@ class IndexController extends Controller
 
                 })
 
+                ->where(function ($query) use($practitioner_id,$meeting_id) {
+
+                    if(!empty($meeting_id))
+                    {
+                        $query->where('user_id',Auth::id())
+                            ->where('id',$meeting_id)
+                            ->OrWhere('user_id',null);
+                    }
+
+                })
+
 //                ->when(isset($a), function ($query) {
 //
 //                        $query->addSelect([
@@ -341,7 +393,7 @@ class IndexController extends Controller
 
 
 
-        return view('filter',compact('ZommInfo','Practitioners','Languages','TegManagements','Tag','Virtual','Person','Gender','Lang','Service','ServiceSession','ServiceDescription','Week','Favorite','Rate'));
+        return view('filter',compact('ZommInfo','Practitioners','Languages','TegManagements','Tag','Virtual','Person','Gender','Lang','Service','ServiceSession','ServiceDescription','Week','Favorite','Rate','SpecialitiesPractitioner','SessionCount'));
 
     }
 
@@ -389,6 +441,13 @@ class IndexController extends Controller
     public function profileViewCustomer($lang,$practitionerID)
     {
         $Practitioner = PractitionersModel::where('id',$practitionerID)->first();
+
+        $SpecialitiesPractitioner = DB::table('specialities')
+            ->join('practitioner_specialities','practitioner_specialities.specialities_id', 'specialities.id')
+            ->where('specialities.published', '=', 1)
+            ->where('practitioner_specialities.practitioner_id','=', $Practitioner->id)
+            ->get();
+
 
         $ServizeID = ZoomModel::where('user_id',Auth::id())->get();
         //dd($ServizeID);
@@ -444,6 +503,8 @@ class IndexController extends Controller
             ->where('reviews.description','!=',null)
             ->get();
 
+//        dd($Review);
+
         $ReviewRate = DB::table('reviews')
             ->select('reviews.rate','reviews.description','users.last_name','users.first_name','users.img','reviews.created_at')
             ->join('users', 'users.id', 'reviews.user_id')
@@ -468,12 +529,18 @@ class IndexController extends Controller
             ->orderBy('zoom_meetings_list.id','DESC')
             ->get();
 
+        $SessionCount  = DB::table('users')
+                         ->join('zoom_meetings_list', 'users.id', 'zoom_meetings_list.user_id')
+                         ->where('zoom_meetings_list.practitioner_id',$practitionerID)
+                         ->whereDate("zoom_meetings_list.start", "<=",date('Y-m-d H:i:s'))
+                         ->count();
+
 
         $ReviewCheckMeetingId = ReviewModel::where('practitoner_id', $practitionerID)->count();
 
         $ThisWeekMeetingsList = ZoomModel::whereBetween('start', [Carbon::now()->startOfWeek(), Carbon::now()->endOfWeek()])->where('practitioner_id',$practitionerID)->where('user_id','!=',null)->get();
 
-        return view('profile-view-as-a-customer',compact('Practitioner','Service','ServiceSession','ServiceDescription','TagManagements','MyTagManagements','ThisWeekMeetingsList','Review','ServizeID','Rate','ReviewCheckMeetingId'));
+        return view('profile-view-as-a-customer',compact('Practitioner','Service','ServiceSession','ServiceDescription','TagManagements','MyTagManagements','ThisWeekMeetingsList','Review','ServizeID','Rate','ReviewCheckMeetingId','SpecialitiesPractitioner','SessionCount'));
     }
 
     public function typeFormPractitioner($lang,$practitionerID)
@@ -523,7 +590,16 @@ class IndexController extends Controller
          $output .= '<li><a href="'.$url.'">'.$row->first_name.' '.$row->first_name.'</a></li>';
         }
         $output .= '</ul>';
-        echo $output;
+
+        if(count($SearchGo) > 0)
+        {
+            echo $output;
+        }else{
+            echo   '<ul class="dropdown-menu" style="display:block; position:relative">
+                                <li><a>Nothing Found</a></li>
+                    </ul>';
+        }
+
 
     }
 

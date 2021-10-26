@@ -7,14 +7,14 @@
 .profile-practitioner__user {
     position: relative;
     width: 100%;
-    flex: 0 0 33.333333%;
-    max-width: 33.333333%;
+    flex: 0 0 20%;
+    max-width: 20%;
 }
 .profile-practitioner__consultation {
     position: relative;
     width: 100%;
-    flex: 0 0 66.666667%;
-    max-width: 66.666667%;
+    flex: 0 0 80%;
+    max-width: 79%;
     padding-left: 69px;
 }
 .profile-practitioner .gl-star-rating--stars::before {
@@ -132,7 +132,7 @@
     text-align: center;
     background-color: #eff4fe;
     border-radius: 10px;
-    max-height: 266px;
+    /*max-height: 266px;*/
 }
 .profile-practitioner__consultation-carusel-block {
     padding: 0 30px!important;
@@ -432,12 +432,14 @@ a .fa-times {
 .avatar-img {
     display: flex;
     align-items: center;
-    border-radius: 10px;
+    /*border-radius: 10px;*/
     width: 150px;
     height: 150px;
     overflow: hidden;
     justify-content: center;
 }
+
+
 .avatar-img img{
     width: 100%;
 }
@@ -500,11 +502,13 @@ a .fa-times {
 }
 
  div > .activeNull .fc-content{
-    color:#80b68c  !important;
+    /*color:#80b68c  !important;*/
+     color:black  !important;
 }
 
 td  .activeNull{
-    color: #569e66 !important;
+    /*color: #569e66 !important;*/
+    color:black  !important;
 }
 
 .activeUser{
@@ -680,6 +684,21 @@ td  .activeNull{
     text-align: center;
 }
 
+.profile-customer__blok2 .profile-customer-reviews-cont__info .reviews-clock-data {
+    font-size: 15px;
+}
+.profile-customer__blok2 .profile-customer-reviews-cont__info-name-rat-clock .profile-customer-cont-clock {
+    padding-left: 40px;
+}
+
+#edit-icon{
+    display: block;
+    text-align: right;
+    margin-bottom: 16px;
+}
+.fs-24 {
+    font-size: 24px!important;
+}
 @media (max-width: 768px) {
     .profile-practitioner__consultation {
         padding-left: 0;

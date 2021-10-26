@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="{{ asset('web_sayt/css/star-rating.css') }}">
     <link rel="stylesheet" href="{{ asset('web_sayt/css/css/main.css') }}">
     <link rel="stylesheet" href="{{ asset('web_sayt/css/ProtocolViewAsACustomer.css') }}">
+    <link rel="stylesheet" href="{{ asset('web_sayt/css/service.css') }}">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     {{--    calendar css--}}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/fullcalendar.css" />
@@ -22,6 +23,13 @@
         }
         .protocol_imgg{
             width: 100%;
+        }
+
+        .ThisActiveMeeting{
+            background: #1f44c7 !important;
+            color: white !important;
+            border: 1px solid #abab95 !important;
+
         }
 
     </style>
@@ -59,19 +67,29 @@
                         @csrf
                         <div class="content-background">
                             <div class="d-block content-checkbox">
+
+                             @if(count($ProtocolAnother) > 0)
+
                                 @foreach($ProtocolAnother as $key => $value)
+
                                 <div class="form-group form-check mt-3">
                                     <input  type="hidden"  value="{{$value->service_id}}">
                                     <input  type="hidden"  value="{{$value->user_id}}">
                                     <input type="hidden" name="another_id[]" value="{{$value->id}}">
                                     <input type="checkbox" value="yes" @if($value->selected == 'yes') checked @endif class="form-check-input" name="another[]" id="exampleCheck{{$key}}">
                                     <label class="form-check-label ml-4" for="exampleCheck{{$key}}">{{$value->name}}</label>
-
                                 </div>
                                 @endforeach
+
+                                @endif
+
                             </div>
                               @if($CheckCountSelected == 0)
                                     <div class="d-flex justify-content-center mt-5">
+
+                                        <input type="hidden"  value="{{$Services->price}}">
+                                        <input type="hidden"  value="{{$Practitioner->first_name}} {{$Practitioner->last_name}}">
+                                        <input type="hidden"  value="{{$meetingID}}">
                                         <input type="hidden"  value="{{auth()->user()->first_name}}">
                                         <input type="hidden"  value="{{auth()->user()->last_name}}">
                                         <input type="hidden"  value="{{auth()->user()->phone_number}}">
@@ -230,6 +248,8 @@
 
     {{--     Calendar--}}
     <script>
+
+
         $(document).on('click','.detail-btn', function()  {
 
 
@@ -240,11 +260,30 @@
             var phone_number = $(this).prev().prev().prev().prev().val();
             var last_name =    $(this).prev().prev().prev().prev().prev().val();
             var first_name =    $(this).prev().prev().prev().prev().prev().prev().val();
+            var meetings_id =    $(this).prev().prev().prev().prev().prev().prev().prev().val();
 
+
+            var practitioner =    $(this).prev().prev().prev().prev().prev().prev().prev().prev().val();
+            var price =    $(this).prev().prev().prev().prev().prev().prev().prev().prev().prev().val();
 
 
             var  service_id = $(this).parent().prev().children().children().val();
             var  serviceName =    $("#service_name").val();
+
+
+            // alert('title ' +title)
+            // alert('start ' +start)
+            // alert('end ' +end)
+            // alert('practitionerId ' +practitionerId)
+            // alert('phone_number ' +phone_number)
+            // alert('last_name ' +last_name)
+            // alert('first_name ' +first_name)
+            // alert('email ' +email)
+            // alert('duration ' +duration)
+            // alert('password ' +pasword)
+            // alert('service_id ' +service_id)
+            // alert('LiveDateTime ' +LiveDateTime)
+            // alert('add_user_id ' +add_user_id)
 
 
 
@@ -270,10 +309,12 @@
                     center:'title',
                     right:'month,agendaWeek,agendaDay'
                 },
-                events:'/en/Search/'+ practitionerID,
+              //  events:'/en/Search/'+ practitionerID+'/'+service_id,
+             //  events:'/en/Search/'+ practitionerID+'/'+service_id+'/'+meetings_id,
+               events:'/en/Search/'+ practitionerID,
                 selectable:true,
                 selectHelper: true,
-
+                timeFormat: 'hh:mm a',
                 select:function(start, end, allDay)
                 {
                     // Generate password zoom
@@ -289,7 +330,7 @@
 
                     var start = $.fullCalendar.formatDate(start, 'Y-MM-DD HH:mm:ss');
 
-                    var end = $.fullCalendar.formatDate(end, 'Y-MM-DD HH:mm:ss');
+                    var end   = $.fullCalendar.formatDate(end, 'Y-MM-DD HH:mm:ss');
 
 
                     // Check live DateTime
@@ -312,6 +353,105 @@
                         // Close Calendar
                         $("#myModal").modal('hide');
 
+                        // Offline Meeting
+                        {{--$('#offline').click(function () {--}}
+                        {{--    alert('sddsd')--}}
+                        {{--    var  duration = diff_time/(60000);--}}
+                        {{--    //alert(password)--}}
+
+                        {{--    // var title       = prompt('Event Title:');--}}
+                        {{--    //  var pasword     = prompt('Event password:');--}}
+                        {{--    // var duration    = prompt('Event Duration:');--}}
+                        {{--        @if(isset(auth()->user()->id))--}}
+                        {{--    var add_user_id = "{{auth()->user()->id}}";--}}
+                        {{--    @endif--}}
+
+
+                        {{--    $.ajax({--}}
+                        {{--        url: "{{ route('add-offline-meeting',app()->getLocale()) }}",--}}
+                        {{--        type: "POST",--}}
+                        {{--        // data: {--}}
+                        {{--        //     title: serviceName,--}}
+                        {{--        //     start: start,--}}
+                        {{--        //     end: end,--}}
+                        {{--        //     practitionerId: practitionerId,--}}
+                        {{--        //     add_user_id: add_user_id,--}}
+                        {{--        //     phone_number: phone_number,--}}
+                        {{--        //     last_name: last_name,--}}
+                        {{--        //     first_name: first_name,--}}
+                        {{--        //     email: email,--}}
+                        {{--        //     duration: duration,--}}
+                        {{--        //     practitionerID: practitionerID,--}}
+                        {{--        //     service_id: service_id,--}}
+                        {{--        //     LiveDateTime:LiveDateTime,--}}
+                        {{--        //     user_email:user_email,--}}
+                        {{--        //     type: 'add'--}}
+                        {{--        // },--}}
+                        {{--        data: {--}}
+                        {{--            title: serviceName,--}}
+                        {{--            start: start,--}}
+                        {{--            end: end,--}}
+                        {{--            practitionerID: practitionerID,--}}
+                        {{--            add_user_id: add_user_id,--}}
+                        {{--            phone_number: phone_number,--}}
+                        {{--            last_name: last_name,--}}
+                        {{--            first_name: first_name,--}}
+                        {{--            user_email: user_email,--}}
+                        {{--            email: "{{Auth::user()->email}}",--}}
+                        {{--            duration: duration,--}}
+                        {{--            service_id: service_id,--}}
+                        {{--            LiveDateTime:LiveDateTime,--}}
+                        {{--            type: 'add-add',--}}
+                        {{--            too_meet: 'yes'--}}
+                        {{--        },--}}
+                        {{--        success: function (data) {--}}
+
+                        {{--            calendar.fullCalendar('refetchEvents');--}}
+
+
+                        {{--            if(data.select_error == null)--}}
+                        {{--            {--}}
+                        {{--                if(data.NoRepeatService != null)--}}
+                        {{--                {--}}
+                        {{--                    // alert(data.NoRepeatService)--}}
+
+                        {{--                    // Show Error No Repeat Service--}}
+                        {{--                    $("#error-NoRepeatService").modal('hide');--}}
+
+                        {{--                    // Close Select Meeting--}}
+                        {{--                    $("#myModal2").modal('hide');--}}
+                        {{--                }else{--}}
+                        {{--                    // Show Success Meeting--}}
+                        {{--                    $('#succes-meeting').modal('show');--}}
+
+                        {{--                    // Close Select Meeting--}}
+                        {{--                    $("#myModal2").modal('hide');--}}
+                        {{--                    //alert("Event Created Successfully");--}}
+                        {{--                }--}}
+                        {{--            }else{--}}
+                        {{--                // Show Error No Repeat Service--}}
+                        {{--                $("#select_error").modal('show');--}}
+
+                        {{--                // Close Select Meeting--}}
+                        {{--                $("#myModal2").modal('hide');--}}
+                        {{--                //  alert(data.select_error);--}}
+                        {{--            }--}}
+
+                        {{--        },--}}
+                        {{--        error: function(data) {--}}
+                        {{--            // alert('Your appointment has not been created');--}}
+
+                        {{--            // Show Error No not been created--}}
+                        {{--            $("#not-been-created").modal('show');--}}
+
+                        {{--            // Close Select Meeting--}}
+                        {{--            $("#myModal2").modal('hide');--}}
+                        {{--        }--}}
+                        {{--    });--}}
+                        {{--})--}}
+
+
+                        // Zoom Meeting
                         $("#zoom").click(function () {
 
                          var  duration = diff_time/(60000);
@@ -323,23 +463,6 @@
                             @if(isset(auth()->user()->id))
                         var add_user_id = "{{auth()->user()->id}}";
                         @endif
-
-
-                        // alert('title ' +title)
-                        // alert('start ' +start)
-                        // alert('end ' +end)
-                        // alert('practitionerId ' +practitionerId)
-                        // alert('phone_number ' +phone_number)
-                        // alert('last_name ' +last_name)
-                        // alert('first_name ' +first_name)
-                        // alert('email ' +email)
-                        // alert('duration ' +duration)
-                        // alert('password ' +pasword)
-                        // alert('service_id ' +service_id)
-                        // alert('LiveDateTime ' +LiveDateTime)
-                        // alert('add_user_id ' +add_user_id)
-
-
 
                      //   if(title !== "" && pasword !== "" && duration !== ""){
 
@@ -365,7 +488,7 @@
                                     too_meet: 'yes'
                                 },
                                 success: function (data) {
-                                    console.log(data)
+
                                 //     calendar.fullCalendar('refetchEvents');
                                 //     alert("Event Created Successfully");
                                 //     console.log(data)
@@ -389,10 +512,21 @@
                                         }else{
                                            // alert("Event Created Successfully");
                                             // Show Success Meeting
-                                            $('#succes-meeting').modal('show');
+                                            $('#succes-meeting-my-app').modal('show');
 
                                             // Close Select Meeting
                                             $("#myModal2").modal('hide');
+                                            $('#practition').text(practitioner)
+                                            $('#service_n').text(serviceName)
+                                            $('#date_time').text(start)
+                                            $('#prc').text(price)
+
+                                                setTimeout(() => {
+                                                    var newURL = window.location.protocol + "//" + window.location.host;
+                                                    location.replace(newURL+"/en/my-appointments-customer/2");
+                                                            //location.replace(newURL+"/en/my-appointments-customer/2/Practitioner/Service_name/Date-time/price");
+                                                }, 3000)
+
 
                                         }
                                     }else{
@@ -403,6 +537,7 @@
 
                                         // Close Select Meeting
                                         $("#myModal2").modal('hide');
+
                                     }
 
                                 },
@@ -414,6 +549,7 @@
 
                                     // Close Select Meeting
                                     $("#myModal2").modal('hide');
+
                                 }
                             });
 
@@ -432,100 +568,160 @@
                     }
 
                 },
-                eventRender: function(event, element,start, end, allDay) {
-                    var us_id = "{{Auth::user()->id}}";
-                    if(event['status'] == null) {
+  {{--              eventRender: function(event, element,start, end, allDay) {--}}
+  {{--                  var us_id = "{{Auth::user()->id}}";--}}
+  {{--                  if(event['status'] == null) {--}}
 
-  // console.log(event)
-                        setTimeout(() => {
+  {{--// console.log(event)--}}
+  {{--                      setTimeout(() => {--}}
 
-                            element[0].setAttribute('class', 'activeNull  fc-day-grid-event fc-h-event fc-event fc-start fc-end fc-draggable');
+  {{--                          element[0].setAttribute('class', 'activeNull  fc-day-grid-event fc-h-event fc-event fc-start fc-end fc-draggable');--}}
 
-                            // let day = document.getElementsByClassName('fc-day-grid-event');
-                            //
-                            // for (let a of day) {
-                            //     a.setAttribute('izNull', `${event.id}`)
-                            //     console.log(a);
-                            // }
+  {{--                          // let day = document.getElementsByClassName('fc-day-grid-event');--}}
+  {{--                          //--}}
+  {{--                          // for (let a of day) {--}}
+  {{--                          //     a.setAttribute('izNull', `${event.id}`)--}}
+  {{--                          //     console.log(a);--}}
+  {{--                          // }--}}
 
-                            let x = document.querySelector('.fc-event-container');
-                            x.removeAttribute('class');
-
-
-                            // let y = document.querySelector('div .fc-event-container');
-                            // y.removeAttribute('class');
-                            // alert('edede')
-                            // x.style.backgroundColor = "red";
-                            // x.style.color = "white";
-
-                            // for (let a of day) {
-                            //     if (event.id === a.getAttribute('id')) {
-                            //         console.log('000000000000000000', a);
-                            //         a.style.backgroundColor = "#FED638";
-                            //         a.style.color = "black";
-                            //         a.style.border = "1px solid #abab95";
-                            //     }
-                            //
-                            // }
-
-                        }, 10)
-
-                        // var ssss =  document.querySelector('.fc-time-grid-event');
-                        //  ssss.style.backgroundColor = "#00d210ba";
-                    }else{
-
-                        if(event['user_id'] == us_id)
-                        {
-
-                            setTimeout(() => {
-                                element[0].setAttribute('class', ' activeUser fc-day-grid-event fc-h-event fc-event fc-start fc-end fc-draggable');
-                                element[0].setAttribute('active', 'activeUser');
-                                let div = document.getElementsByClassName('fc-content-col');
-                                let aArray = div[0].childNodes[1].childNodes;
-                                // console.log('5555555555',aArray[0]?.getAttribute('active'));
-                                for(let key of aArray) {
-                                    if (key.getAttribute('active') === 'activeUser') {
-                                        let aDiv = document.createElement('div');
-                                        aDiv.setAttribute('class', 'fc-event-container');
-                                        aDiv.appendChild(element[0])
-                                        div[0].childNodes[1].appendChild(aDiv)
-                                    }
-                                }
-                               // console.log( '***************************************', aArray)
-
-                            }, 20)
-                        }
-                        if(event['user_id'] != us_id)
-                            {
-                                setTimeout(() => {
-                                    // let x = document.querySelector('.fc-event-container');
-                                    // x.removeAttribute('class');
-
-                                    element[0].setAttribute('class', 'DeactiveUser fc-day-grid-event fc-h-event fc-event fc-start fc-end fc-draggable');
-                                }, 10)
-                            }
-
-                        if(event['service_id'] != service_id)
-                        {
-                            setTimeout(() => {
-                                element[0].setAttribute('class', 'DeactiveUser fc-day-grid-event fc-h-event fc-event fc-start fc-end fc-draggable');
-                            }, 10)
-                        }
-                        $($(element[0]).find('.DeactiveUser')).prepend('<div class="kkkkkkkkkkkk">'+element[0]+'</div>');
-
-                        //console.log($(element[0]).find('.DeactiveUser').prepend('<ol>eeeeeee</ol>'))
-
-                        // Display none booking date
-                        setTimeout(() => {
-                            $(".DeactiveUser" ).css( "display", "none" );
-                            $(".DeactiveUser" ).next().css( "display", "none" );
-                        }, 20);
-
-                        }
-                },
+  {{--                          let x = document.querySelector('.fc-event-container');--}}
+  {{--                          x.removeAttribute('class');--}}
 
 
+  {{--                          // let y = document.querySelector('div .fc-event-container');--}}
+  {{--                          // y.removeAttribute('class');--}}
+  {{--                          // alert('edede')--}}
+  {{--                          // x.style.backgroundColor = "red";--}}
+  {{--                          // x.style.color = "white";--}}
 
+  {{--                          // for (let a of day) {--}}
+  {{--                          //     if (event.id === a.getAttribute('id')) {--}}
+  {{--                          //         console.log('000000000000000000', a);--}}
+  {{--                          //         a.style.backgroundColor = "#FED638";--}}
+  {{--                          //         a.style.color = "black";--}}
+  {{--                          //         a.style.border = "1px solid #abab95";--}}
+  {{--                          //     }--}}
+  {{--                          //--}}
+  {{--                          // }--}}
+
+  {{--                      }, 10)--}}
+
+  {{--                      // var ssss =  document.querySelector('.fc-time-grid-event');--}}
+  {{--                      //  ssss.style.backgroundColor = "#00d210ba";--}}
+  {{--                  }else{--}}
+
+  {{--                      if(event['user_id'] == us_id)--}}
+  {{--                      {--}}
+
+  {{--                          setTimeout(() => {--}}
+  {{--                              element[0].setAttribute('class', ' activeUser fc-day-grid-event fc-h-event fc-event fc-start fc-end fc-draggable');--}}
+  {{--                              element[0].setAttribute('active', 'activeUser');--}}
+  {{--                              let div = document.getElementsByClassName('fc-content-col');--}}
+  {{--                              let aArray = div[0].childNodes[1].childNodes;--}}
+  {{--                              // console.log('5555555555',aArray[0]?.getAttribute('active'));--}}
+  {{--                              for(let key of aArray) {--}}
+  {{--                                  if (key.getAttribute('active') === 'activeUser') {--}}
+  {{--                                      let aDiv = document.createElement('div');--}}
+  {{--                                      aDiv.setAttribute('class', 'fc-event-container');--}}
+  {{--                                      aDiv.appendChild(element[0])--}}
+  {{--                                      div[0].childNodes[1].appendChild(aDiv)--}}
+  {{--                                  }--}}
+  {{--                              }--}}
+  {{--                             // console.log( '***************************************', aArray)--}}
+
+  {{--                          }, 20)--}}
+  {{--                      }--}}
+  {{--                      if(event['user_id'] != us_id)--}}
+  {{--                          {--}}
+  {{--                              setTimeout(() => {--}}
+  {{--                                  // let x = document.querySelector('.fc-event-container');--}}
+  {{--                                  // x.removeAttribute('class');--}}
+
+  {{--                                  element[0].setAttribute('class', 'DeactiveUser fc-day-grid-event fc-h-event fc-event fc-start fc-end fc-draggable');--}}
+  {{--                              }, 10)--}}
+  {{--                          }--}}
+
+  {{--                      if(event['service_id'] != service_id)--}}
+  {{--                      {--}}
+  {{--                          setTimeout(() => {--}}
+  {{--                              element[0].setAttribute('class', 'DeactiveUser fc-day-grid-event fc-h-event fc-event fc-start fc-end fc-draggable');--}}
+  {{--                          }, 10)--}}
+  {{--                      }--}}
+  {{--                      $($(element[0]).find('.DeactiveUser')).prepend('<div class="kkkkkkkkkkkk">'+element[0]+'</div>');--}}
+
+  {{--                      //console.log($(element[0]).find('.DeactiveUser').prepend('<ol>eeeeeee</ol>'))--}}
+
+  {{--                      // Display none booking date--}}
+  {{--                      setTimeout(() => {--}}
+  {{--                          $(".DeactiveUser" ).css( "display", "none" );--}}
+  {{--                          $(".DeactiveUser" ).next().css( "display", "none" );--}}
+  {{--                      }, 20);--}}
+
+  {{--                      }--}}
+  {{--              },--}}
+
+  eventRender: function(event, element,start, end, allDay) {
+
+          @if(isset(Auth::user()->id))
+      var us_id = "{{Auth::user()->id}}";
+      if (event['status'] == null) {
+
+          setTimeout(() => {
+              element[0].setAttribute('class', 'activeNull  fc-day-grid-event fc-h-event fc-event fc-start fc-end fc-draggable');
+              let x = document.querySelector('.fc-event-container');
+              x.removeAttribute('class');
+
+          }, 10)
+
+      } else {
+
+          if (event['user_id'] == us_id && event['service_id'] == service_id) {
+
+              setTimeout(() => {
+                  element[0].setAttribute('class', ' activeUser fc-day-grid-event fc-h-event fc-event fc-start fc-end');
+                  element[0].setAttribute('active', 'activeUser');
+                  let div = document.getElementsByClassName('fc-content-col');
+                  let aArray = div[0].childNodes[1].childNodes;
+
+                  for (let key of aArray) {
+                      console.log(key.getAttribute('active'))
+                      if (key.getAttribute('active') === 'activeUser') {
+                          let aDiv = document.createElement('div');
+                          aDiv.setAttribute('class', 'fc-event-container');
+                          aDiv.appendChild(element[0])
+                          div[0].childNodes[1].appendChild(aDiv)
+                      }
+                  }
+              }, 20)
+          }
+          if (event['user_id'] != us_id) {
+              setTimeout(() => {
+                  element[0].setAttribute('class', 'DeactiveUser fc-day-grid-event fc-h-event fc-event fc-start fc-end fc-draggable');
+              }, 10)
+          }
+
+          if (event['service_id'] != service_id) {
+              setTimeout(() => {
+                  element[0].setAttribute('class', 'DeactiveUser fc-day-grid-event fc-h-event fc-event fc-start fc-end fc-draggable');
+              }, 10)
+          }
+
+          if (event['id'] == meetings_id) {
+              setTimeout(() => {
+                  element[0].setAttribute('class', 'ThisActiveMeeting fc-day-grid-event fc-h-event fc-event fc-start fc-end fc-draggable');
+              }, 50)
+          }
+      }
+      @endif
+
+
+
+      // Display none booking date
+      setTimeout(() => {
+          $(".DeactiveUser" ).css( "display", "none" );
+          $(".DeactiveUser" ).next().css( "display", "none" );
+      }, 20);
+  },
                     eventClick:function(event)
                     {
                         // Check live DateTime

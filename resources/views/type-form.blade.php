@@ -64,7 +64,7 @@
                                         @foreach($TypeForm as $val)
                                         <tr>
                                             @if(session()->get('UserID'))
-                                            <td><input class="group-checkable sb-checkbox" type="checkbox" name="form_id[]" value="{{$val->id}}"></td>
+                                            <td><input class="group-checkable sb-checkbox" type="checkbox" name="form_id[]" @if($val->defaultt == 1) checked @endif value="{{$val->id}}"></td>
                                             <td><a href="{{route('type-form-practitioner-view',[app()->getLocale(),'id'=>$val->id])}}">{{$val->title}}</a></td>
                                             <td><a data-toggle="modal" data-target="#edit{{$val->id}}" href="javascript:;"  class="btn-light-blue px-4 item_edit btn-sm btn-circle">Edit</a></td>
                                             @endif

@@ -56,13 +56,13 @@
                     <div class="protocol__section">
                         <div class="protocol__section-heading">
                             <div class="protocol__section-title">Heading</div>
-                            <a href="{{route('edit-protocol-practitioner-view',[
+                            <a id="edit-icon" href="{{route('edit-protocol-practitioner-view',[
                                      app()->getLocale(),
                                     'user_id'=> Request::segment(4),
                                     'practitioner_id'=>Request::segment(5),
                                     'service_id'=>Request::segment(3),
                                     'meeting_id'=>Request::segment(6)
-                                    ])}}">Edit</a>
+                                    ])}}"><img src="{{ asset('img/edit.svg') }}" alt=""></a>
                             <div class="protocol__section-heading-view">
                                 <div class="protocol__section-heading-view-title">
                                     Diet:

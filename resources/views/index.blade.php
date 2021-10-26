@@ -28,10 +28,12 @@
 
                 <div class="find__form">
                     <div class="input-group mb-3">
+
                         <div class="input-group-prepend ">
                             <img src="{{ asset('web_sayt/img/Group 1763.svg') }}" alt="" width="24px" height="25px">
                         </div>
-                        <input type="text" id="search_go" class="find__input" placeholder="Service, Symptom or Practitioners"
+
+                        <input autocomplete="off" type="text" id="search_go" class="find__input" placeholder="Service, Symptom or Practitioners"
                                aria-label="Service" aria-describedby="basic-addon1" name="search_go">
                     </div>
                     <div class="find__form-settings">
@@ -172,9 +174,9 @@
                             </div>
 
                             <div class="create__checkbox">
-                                <p>Avalible appointments this week</p>
                                 <input  type="checkbox" name="yesNo" value="No"  id="no"   class="lg-sg__checkin" />
-                                <label for="no" class="ml-2"></label>
+
+                                <label for="no" class="ml-2" style="font-size: 16px;"> Avalible appointments this week</label>
 {{--                                    <input type="radio" name="yesNo" value="Yes" id="yes" class="lg-sg__checkin">--}}
 {{--                                    <label for="yes" class="ml-2">Yes</label>--}}
 {{--                                    <input type="radio" name="yesNo" value="No"  id="no" class="lg-sg__checkin">--}}

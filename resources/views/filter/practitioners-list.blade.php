@@ -21,12 +21,17 @@
                         </span>
                 </div>
                 @endif
-                <p class="perion__info-session">256<span> Sessions</span></p>
+                <p class="perion__info-session">{{$SessionCount[$k]}}<span> Sessions</span></p>
                 <a href="" class="btn bg-yellow" data-toggle="modal" data-target="#service-modal{{$Result->id}}">Book</a>
             </div>
             <div class="person__info-cont2">
                 <div class="person__info-name"><a href="{{route('profile-view-customer',[app()->getLocale(),$Result->id])}}">{{$Result->first_name}} {{$Result->last_name}}</a></div>
-                <div class="person__info-specialist">Acne Specialist &amp; Holistic nutritionist (CNP)</div>
+                <div class="person__info-specialist">
+
+                    @foreach($SpecialitiesPractitioner[$k] as $ValSpecialitiesPractitioner)
+                        {{$ValSpecialitiesPractitioner->title}}
+                    @endforeach
+                </div>
                 {{--                                <div class="person__info-skin">--}}
                 {{--                                    @foreach($Result->tags as $Tag)--}}
                 {{--                                        <span class="person__info-skin-tag">{{ $Tag->name }}</span>--}}

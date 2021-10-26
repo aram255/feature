@@ -56,7 +56,10 @@
         .activeNull{
             background-color: #569e66 !important;
         }
-
+        .info_imgg{
+            width: 100%;
+            height: 128px;
+        }
 
     </style>
 @endsection
@@ -76,10 +79,10 @@
                 <div class="profile-customer__blok1 nl">
                     <div class="profile-customer__blok1-info">
                         <div class="person__info-cont1">
-                            <div class="edit-profile__contact-img">
+                            <div class="edit-profile__contact-img" style="border-radius:0;">
 {{--                                <input type="file" id="img-file" name="img-file">--}}
 
-                                <label for="img-file"><img class="upload" src="@if(auth()->user()->img){{ asset('web_sayt/img_customer/'.auth()->user()->img) }} @else {{ asset('web_sayt/img/img-file.svg') }}@endif" alt=""></label>
+                                <label for="img-file"><img class="upload info_imgg" src="@if(auth()->user()->img){{ asset('web_sayt/img_customer/'.auth()->user()->img) }} @else {{ asset('web_sayt/img/img-file.svg') }}@endif" alt=""></label>
                             </div>
                             <div class="person__info-name">
                                 <span class="person-customer-name">{{auth()->user()->first_name }} {{auth()->user()->last_name }}</span>
@@ -146,14 +149,14 @@
                                     <div class="my-appointments__complete-process-content-flex">
                                         <div class="my-appointments-person__info">
                                             <div class="my-appointments-person__info-cont1 mr-4">
-                                                <div style="width: 150px; height: 150px; overflow: hidden;border-radius: 10px">
+                                                <div style="width: 150px; height: 150px; overflow: hidden;">
                                                     <img class="my-appointments-person__info-img w-100" src="{{ asset('web_sayt/img_practitioners/'.$InProcessVal->img) }}" alt="">
                                                 </div>
                                             </div>
                                             <div class="my-appointments-person__info-cont2">
                                                 <div class="my-appointments-person__info-name">{{$InProcessVal->first_name}} {{$InProcessVal->last_name}}</div>
                                                 <div class="my-appointments-person__info-specialist">{{$InProcessVal->service_name}}</div>
-                                                <div class="my-appointments-person__info-data">{{date('M-jS, Y  H:i:s', strtotime($InProcessVal->start)) }}</div>
+                                                <div class="my-appointments-person__info-data">{{date('M-jS, Y  h:i A', strtotime($InProcessVal->start)) }}</div>
                                             </div>
                                         </div>
 
@@ -246,7 +249,7 @@
                                 <div class="person__info">
                                     <div class=" d-flex flex-column">
                                         @php $rt = floor($Rate[$key]);  @endphp
-                                        <div class="person__info-cont1" style="width: 150px; height: 150px; overflow: hidden;border-radius: 10px">
+                                        <div class="person__info-cont1" style="width: 150px; height: 150px; overflow: hidden;">
                                             <img class="my-appointments-person__info-img w-100" src="{{ asset('web_sayt/img_practitioners/'.$PractitionerFavoriteVal->img) }}" alt="">
                                         </div>
                                         <div>
@@ -264,20 +267,25 @@
                                    </span>
                               </span>
                                             </div>
-                                            <p class="perion__info-session">256<span>Sessions</span></p>
+                                            <p class="perion__info-session">{{$SessionCountFavorite[$key]}} <span>Sessions</span></p>
                                             <a href=""   class="btn bg-yellow" data-toggle="modal" data-target="#service-modal{{$PractitionerFavoriteVal->partit_id}}">Book</a>
                                         </div>
                                     </div>
                                     <div class="person__info-cont2">
                                         <div class="person__info-name">{{$PractitionerFavoriteVal->first_name}} {{$PractitionerFavoriteVal->last_name}}</div>
-                                        <div class="person__info-specialist">Acne Specialist &amp; Holistic nutritionist (CNP)</div>
+                                        <div class="person__info-specialist">
+
+                                            @foreach($SpecialitiesFavorite[$key] as $ValSpecialitiesFavorite)
+                                                {{$ValSpecialitiesFavorite->title}}
+                                            @endforeach
+                                        </div>
                                         <div class="person__info-skin">
                                             @foreach($Teg->where("practitioner_id",$PractitionerFavoriteVal->partit_id) as $TegVal)
                                              <span class="person__info-skin-tag">{{$TegVal->name}}</span>
                                             @endforeach
                                         </div>
-                                        <div class="person__info-rate">HOURLY RATE FROM</div>
-                                        <div class="person__info-aed">AED <span class="person__info-aed-number">42.24</span></div>
+{{--                                        <div class="person__info-rate">HOURLY RATE FROM</div>--}}
+{{--                                        <div class="person__info-aed">AED <span class="person__info-aed-number">42.24</span></div>--}}
                                     </div>
                                         <div class="person__info-heart active active-pr" id="{{$PractitionerFavoriteVal->partit_id}}"></div>
                                 </div>
@@ -330,12 +338,12 @@
                         </div>
 
                @if(count($Review)>0)
-                    @foreach($Review as $ReviewVal)
+                    @foreach($Review as $keyReview => $ReviewVal)
 
                         <div class="profile-customer-reviews-cont">
                             <div class="profile-customer-reviews-cont__info">
                                 <div class="profile-customer-reviews-cont__info-cont1">
-                                    <div style="width: 150px; height: 150px; overflow: hidden; border-radius: 10px">
+                                    <div style="width: 150px; height: 150px; overflow: hidden; ">
                                         <img class="profile-customer-reviews-cont__info-img w-100" src="{{asset('web_sayt/img_practitioners/'.$ReviewVal->img)}}" alt="">
                                     </div>
                                 </div>
@@ -362,12 +370,16 @@
                                             </div>
                                             <div class="profile-customer-cont-clock">
                                                 <img src="{{ asset('web_sayt/img/clock.svg') }}" alt="" srcset="">
-                                                <span class="reviews-clock-data">{{ date('M-d',strtotime($ReviewVal->created_at)) }}</span>
+                                                <span class="reviews-clock-data"> {{ date('M-d',strtotime($ReviewVal->created_at)) }}</span>
                                             </div>
                                         </div>
 
                                     </div>
-                                    <div class="profile-customer-reviews-cont__info-specialist">Acne Specialist &amp; Holistic nutritionist (CNP)
+                                    <div class="profile-customer-reviews-cont__info-specialist">
+
+                                        @foreach($SpecialitiesReview[$keyReview] as $ValSpecialitiesReview)
+                                            {{$ValSpecialitiesReview->title}}
+                                        @endforeach
                                     </div>
                                     <div class="profile-customer-reviews-cont__info-text">
                                         {{$ReviewVal->description}}
@@ -408,7 +420,7 @@
     <div class="modal fade show" id="editHour" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-modal="true" >
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
-                <div class="modal__form lg-header-form">
+                <div class="modal__form lg-header-form modal__formm lg-header-formm">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span class="x" aria-hidden="true">×</span>
                     </button>
@@ -506,6 +518,7 @@ if(service_id == null)
                 selectable:true,
                 selectHelper: true,
                 editable:true,
+                timeFormat: 'hh:mm a',
                 eventDrop: function(event) {
 
                     // Generate password zoom
@@ -543,7 +556,82 @@ if(service_id == null)
                         var user_id = event.user_id;
                         var meeting_id = event.meeting_id;
 
-                            // submitTimeChanges(event.id);
+
+
+                        if(join_url === "")
+                        {
+
+
+                            $.ajax({
+                                url: "/en/update-offline-meeting",
+                                type: "POST",
+                                data: {
+                                    title: serviceName,
+                                    start: start,
+                                    end: end,
+                                    id: id,
+                                    duration: duration,
+                                    phone_number: phone_number,
+                                    last_name: last_name,
+                                    first_name: first_name,
+                                    email:email,
+                                    user_email:user_email,
+                                    LiveDateTime:LiveDateTime,
+                                    type: 'update'
+                                },
+                                success: function (response) {
+                                    // calendar.fullCalendar('refetchEvents');
+                                    // alert("Event Updated Successfully");
+                                    //
+                                    // if(response.Hour != null)
+                                    // {
+                                    //     alert(response.Hour)
+                                    // }else{
+                                    //     alert("Event Updated Successfully");
+                                    // }
+                                    calendar.fullCalendar('refetchEvents');
+
+
+                                    if(response.select_error == null)
+                                    {
+                                        if(response.Hour != null)
+                                        {
+                                            alert(response.Hour)
+                                        }else{
+                                            // alert("Event Updated Successfully");
+
+                                            // Show Success Delete
+                                            $("#update-success").modal('show');
+
+                                            // Close Select Meeting
+                                            $("#myModal").modal('hide');
+                                        }
+                                    }else{
+
+                                        //alert(response.select_error);
+                                        // Show Error No Repeat Service
+                                        $("#select_error").modal('show');
+
+                                        // Close Select Meeting
+                                        $("#myModal2").modal('hide');
+                                        //  alert(data.select_error);
+                                    }
+
+                                },
+                                error: function(data) {
+                                    console.log(data)
+                                    // alert('Your appointment has not been created');
+                                    // Show Error No not been created
+                                    $("#not-been-created").modal('show');
+
+                                    // Close Select Meeting
+                                    $("#myModal2").modal('hide');
+                                }
+
+                            })
+                        }
+
+                        // Zoom update meeting
                             $.ajax({
                                 url: "/en/update-zoom-meeting",
                                 type: "POST",
@@ -552,14 +640,13 @@ if(service_id == null)
                                     start: start,
                                     end: end,
                                     meeting_id: meeting_id,
-                                    password: password,
                                     duration: duration,
                                     phone_number: phone_number,
                                     last_name: last_name,
                                     first_name: first_name,
                                     email:email,
-                                    join_url:join_url,
                                     user_email:user_email,
+                                    LiveDateTime:LiveDateTime,
                                     type: 'update'
                                 },
                                 success: function (response) {

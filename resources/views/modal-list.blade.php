@@ -1,3 +1,24 @@
+<div class="modal fade show" id="succes-meeting-my-app" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-modal="true" >
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal__form lg-header-form modal__formm lg-header-formm">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span class="x" aria-hidden="true">×</span>
+                </button>
+                <div class="lg-sg__form">
+                    <div style="line-height: 30px;font-size: 23px;">Practitioner: <span id="practition">ppppppp</span> </div>
+                    <div style="line-height: 30px;font-size: 23px;" >Service Name: <span id="service_n"> ppppppp</span> </div>
+                    <div style="line-height: 30px;font-size: 23px;" >Date Time: <span id="date_time">ppppppp</span> </div>
+                    <div style="line-height: 30px;font-size: 23px;" >Price: <span id="prc">ppppppp</span> </div>
+
+                    <div class="lg-sg__form-text mb-0">Your appointment was booked successfully</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 {{--    Meeting MS--}}
 <div class="modal fade show" id="succes-meeting" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-modal="true" >
     <div class="modal-dialog modal-dialog-centered" role="document">
@@ -22,7 +43,7 @@
                     <span class="x" aria-hidden="true">×</span>
                 </button>
                 <div class="lg-sg__form">
-                    <div class="lg-sg__form-text mb-0" >Avalible Time Allocated successfully</div>
+                    <div class="lg-sg__form-text mb-0" >Available Time Allocated successfully</div>
                 </div>
             </div>
         </div>
@@ -69,7 +90,7 @@
                     <span class="x" aria-hidden="true">×</span>
                 </button>
                 <div class="lg-sg__form">
-                    <div class="lg-sg__form-text mb-0">The date you specified does not match the date provided by your doctor</div>
+                    <div class="lg-sg__form-text mb-0">The date you specified does not match the date provided by the practioner</div>
                 </div>
             </div>
         </div>

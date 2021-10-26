@@ -58,7 +58,7 @@ Route::group(['prefix' => '{locale?}','where' => ['locale' => '[a-zA-Z]{2}']], f
 
 
     Route::get('/', [IndexController::class, 'index'])->name('index');
-    Route::match(['get', 'post'],'Search/{protocolId?}/{service_id?}', [IndexController::class, 'search'])->name('search');
+    Route::match(['get', 'post'],'Search/{protocolId?}/{service_id?}/{meetings_id?}', [IndexController::class, 'search'])->name('search');
     Route::match(['get', 'post'],'reset-field', [IndexController::class, 'resetField'])->name('reset-field');
     Route::get('/blog', [IndexController::class, 'blog'])->name('blog');
     Route::get('/balance', [IndexController::class, 'balance'])->name('balance');
@@ -106,7 +106,7 @@ Route::group(['prefix' => '{locale?}','where' => ['locale' => '[a-zA-Z]{2}']], f
     Route::post('/add-star', [CustomerController::class, 'addStarPractitioner'])->name('add-star');
 
     // Protocol
-    Route::get('/my-appointments-customer/{id}', [CustomerController::class, 'myAppointmentsCustomer'])->name('my-appointments-customer');
+    Route::match(['get', 'post'],'/my-appointments-customer/{id}/{practitionrers?}/{service_name?}/{date_time?}/{price?}', [CustomerController::class, 'myAppointmentsCustomer'])->name('my-appointments-customer');
     Route::get('/view-protocol-customer/{service_id}/{user_id}/{practitioner_id}/{meeting_id}', [CustomerController::class, 'ViewProtocol'])->name('view-protocol-customer');
     Route::post('/add-select-another/{practitioner_id}/{service_id}', [CustomerController::class, 'addSelectProtocol'])->name('add-select-another');
 
@@ -119,6 +119,11 @@ Route::group(['prefix' => '{locale?}','where' => ['locale' => '[a-zA-Z]{2}']], f
     Route::get('/confirm-meeting/{Code}/{Status}/{email}/{title}/{first_name}/{last_name}', [PractitionersController::class, 'confirmMeeting'])->name('confirm-meeting');
 
     Route::post('/update-zoom-meeting', [ZoomController::class, 'update'])->name('update-zoom-meeting');
+
+
+    // Offline
+    Route::post('/add-offline-meeting', [ZoomController::class, 'addOfflineMeeting'])->name('add-offline-meeting');
+    Route::post('/update-offline-meeting', [ZoomController::class, 'updateOffline'])->name('update-offline-meeting');
 
     // Practitioners
     Route::post('/custom-registration', [AuthPractitionersController::class, 'customRegistration'])->name('register.custom');

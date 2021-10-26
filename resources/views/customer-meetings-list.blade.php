@@ -97,7 +97,7 @@
                     {{--  Edit category title--}}
                     <div class="card-body">
                         <div class="table-responsive">
-                            <table class="table table-bordered"  width="100%" cellspacing="0">
+                            <table class="table table-bordered"  width="100%" cellspacing="0" style="text-align: center">
                                 <thead>
                                 <tr>
                                     <th>Practitioner</th>
@@ -109,20 +109,21 @@
                                     <th>Edit</th>
                                 </tr>
                                 </thead>
-                                <tbody>
+                                <tbody style="font-size: 20px;">
                                 @foreach($data as $val)
                                     <tr>
                                         <td>{{$val->first_name}} {{$val->last_name}}</td>
                                         <td><a href="{{$val->join_url}}" target="_blank">{{$val->title}}</a></td>
-                                        <td>{{date('d-m-Y-H:i:s', strtotime($val->start)) }}</td>
+                                        <td>{{date('d-m-Y-h:i A', strtotime($val->start)) }}</td>
                                         <td>{{$val->duration}}</td>
                                         <td style="font-weight:bold;color: @if($val->status == 'Pending') red; @elseif($val->status == 'Accept') #1c7430; @endif">{{$val->status}}</td>
                                         <td>
-                                            <input type="hidden" name="delete_id" value="{{$val->id}}">
+                                            <input type="hidden"  name="delete_id" value="{{$val->id}}">
                                             <input type="hidden" name="delete_meeting_id" value="{{$val->meeting_id}}">
                                             <button  type="submit" class="fas fa-times" style="margin:0 10px 0 55px;"></button>
                                         </td>
                                         <td>
+                                            <input type="hidden"  class="meetingg_id"  value="{{$val->id}}">
                                             <input type="hidden"  class="user_email" value=" @if(isset(Auth::user()->email)){{Auth::user()->email}}@endif">
                                             <input type="hidden"  class="user_email" value=" @if(isset(Auth::user()->email)){{Auth::user()->email}}@endif">
                                             <input type="hidden"  class="user_email" value=" @if(isset(Auth::user()->email)){{Auth::user()->email}}@endif">
@@ -256,9 +257,11 @@
                 //  var password       = $(this).prev().prev().prev().prev().prev().prev().prev().prev().val();
                 var join_url       = $(this).prev().prev().prev().prev().prev().prev().prev().prev().prev().val();
                 var serviceName    = $(this).prev().prev().prev().prev().prev().prev().prev().prev().prev().prev().prev().val();
-                var user_email          = $(this).prev().prev().prev().prev().prev().prev().prev().prev().prev().prev().prev().prev().val();
+                var user_email     = $(this).prev().prev().prev().prev().prev().prev().prev().prev().prev().prev().prev().prev().val();
 
+                var  meetings_id   = $(this).prev().prev().prev().prev().prev().prev().prev().prev().prev().prev().prev().prev().prev().prev().prev().val();
 
+                // alert(meetings_id)
 
 
                 // alert('title ' +serviceName)
@@ -299,10 +302,11 @@
                         right:'month,agendaWeek,agendaDay'
                     },
                     //events:'/en/Search/'+ practitionerId+'/'+service_id,
-                    events:'/en/Search/'+ practitionerId,
+                    events:'/en/Search/'+ practitionerId+'/'+service_id+'/'+meetings_id,
                     selectable:true,
                     selectHelper: true,
                     editable:true,
+                    timeFormat: 'hh:mm a',
                     eventDrop: function(event) {
                         // Generate password zoom
                         const characters =
@@ -356,6 +360,7 @@
                                     email:email,
                                     join_url:join_url,
                                     user_email:user_email,
+                                    LiveDateTime:LiveDateTime,
                                     type: 'update'
                                 },
                                 success: function (response) {
