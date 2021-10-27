@@ -699,6 +699,57 @@ td  .activeNull{
 .fs-24 {
     font-size: 24px!important;
 }
+#LeaveReview .modal-title {
+    font: normal normal 600 30px/37px Montserrat;
+    color: #00309E;
+}
+#LeaveReview .small-title {
+    font: normal normal 500 18px/25px Montserrat;
+    color: #462847;
+}
+#LeaveReview .abs {
+    top: 20px;
+    right: 30px;
+    position: absolute;
+}
+
+#LeaveReview .rate {
+    padding: 0 10px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+}
+#LeaveReview .rate:not(:checked) > input {
+    position:absolute;
+    top:-9999px;
+}
+#LeaveReview .rate:not(:checked) > label {
+    float: right;
+    width: 1em;
+    overflow: hidden;
+    white-space: nowrap;
+    cursor: pointer;
+    font-size: 53px;
+    line-height: 63px;
+    color: #ccc;
+}
+#LeaveReview .rate:not(:checked) > label:before {
+    content: '☆ ';
+}
+#LeaveReview .rate > input:checked ~ label {
+    color: #ffc700;
+}
+#LeaveReview .rate:not(:checked) > label:hover,
+#LeaveReview .rate:not(:checked) > label:hover ~ label {
+    color: #deb217;
+}
+#LeaveReview .rate > input:checked + label:hover,
+#LeaveReview .rate > input:checked + label:hover ~ label,
+#LeaveReview .rate > input:checked ~ label:hover,
+#LeaveReview .rate > input:checked ~ label:hover ~ label,
+#LeaveReview .rate > label:hover ~ input:checked ~ label {
+    color: #c59b08;
+}
 @media (max-width: 768px) {
     .profile-practitioner__consultation {
         padding-left: 0;

@@ -88,6 +88,7 @@
                                     </div>
                                     <div class="my-appointments-person__complete-process">
                                         <div class="my-appointments-person__complete-process-time">{{$InProcessVal->duration}} Mins Consultation</div>
+
                                         <div class="my-appointments-person__complete-process-session"><a target="_blank" href="{{$InProcessVal->join_url}}">Join session</a></div>
 
                                         @foreach( $TypeForm->where('practitioner_id',$InProcessVal->practitioner_id) as $valTypeForm)
@@ -205,9 +206,13 @@
                                             $CheckStatusProtocol = $StatusProtocol->where('user_id','=',$InCompleteVal->user_id)->where('service_id','=',$InCompleteVal->service_id);
                                         @endphp
 
+                                        <button type="button" class="btn-light-blue px-3 mx-auto" data-toggle="modal" data-target="#LeaveReview">
+                                            Leave Review
+                                        </button>
+
                                         @if((count($CheckStatusProtocol)>0))
                                             <button
-                                                class="my-appointments-person__complete-process-button procces-button btn bg-yellow">
+                                                class="my-appointments-person__complete-process-button procces-button btn bg-yellow mt-4">
                                                 <a href="{{route('view-protocol-customer',[
                                      app()->getLocale(),
                                     'user_id'=>$InCompleteVal->user_id,
@@ -257,6 +262,45 @@
 
 
     @include('modal-list')
+    <div class="modal fade" id="LeaveReview" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="position-relative text-center pt-4">
+                    <button type="button" class="close abs" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h5 class="modal-title mx-auto" id="exampleModalLongTitle">Leave Review</h5>
+                </div>
+                <div class="modal-body text-center pb-5 px-5">
+                    <div class="small-title">Rating</div>
+                    <div class="rate mb-4">
+                        <input type="radio" id="star1" name="rate" value="1" checked />
+                        <label for="star1" title="text">1 star</label>
+                        <input type="radio" id="star2" name="rate" value="2" />
+                        <label for="star2" title="text">2 stars</label>
+                        <input type="radio" id="star3" name="rate" value="3" />
+                        <label for="star3" title="text">3 stars</label>
+                        <input type="radio" id="star4" name="rate" value="4" />
+                        <label for="star4" title="text">4 stars</label>
+                        <input type="radio" id="star5" name="rate" value="5" />
+                        <label for="star5" title="text">5 stars</label>
+                    </div>
+
+                    <form action="#" class="px-lg-5">
+                        <div class="form-group">
+                            <textarea class="form-control" id="Textarea" rows="6"></textarea>
+                        </div>
+
+                        <div class="d-flex justify-content-center mt-5">
+                            <button type="submit" class="btn-yellow px-4 py-2">
+                                Submit
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection
 
 @section('style')
