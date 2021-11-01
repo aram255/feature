@@ -57,7 +57,7 @@
 {{--                            </div>--}}
 
 
-
+{{--{{dd($ReviewCheckMeetingId)}}--}}
                          @if(isset($ReviewCheckMeetingId) and $ReviewCheckMeetingId>0)
                                 <div class="person__info-rating qew">
                                 <span class="gl-star-rating gl-star-rating--ltr " data-star-rating="">

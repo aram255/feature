@@ -47,6 +47,7 @@ class ZoomController extends Controller
     public function index(request $request)
     {
         $this->jwt();
+        dd($this->jwt);
         //create guzzle client
         $client = new \GuzzleHttp\Client(['base_uri' => 'https://api.zoom.us']);
 
@@ -741,6 +742,39 @@ class ZoomController extends Controller
 
         }else{
             return  response()->json(['select_error' => 'The date you specified does not match the date provided by your doctor.']);
+        }
+    }
+
+    public function test()
+    {
+
+        $curl = curl_init();
+
+        curl_setopt_array($curl, array(
+            CURLOPT_URL => "https://api.zoom.us/v2/users?status=active&page_size=30&page_number=1",
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => "",
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 30,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => "GET",
+            CURLOPT_HTTPHEADER => array(
+                "authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiI4aWZfTUh3bVN0Mm5CYnN4UzU1cXp3IiwiZXhwIjoxNjM1NzQ5MDQ2fQ.VCEXZdSM2JnbgxKapBuIv-At27081om158wOz2Grbaw",
+                "content-type: application/json"
+            ),
+        ));
+
+        $response = curl_exec($curl);
+        $err = curl_error($curl);
+
+        curl_close($curl);
+
+        if ($err) {
+            echo "cURL Error #:" . $err;
+        } else {
+            echo '<pre>';
+            echo $response;
+            echo '<pre>';
         }
     }
 }

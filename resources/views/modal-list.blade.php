@@ -14,7 +14,8 @@
                     <div class="lg-sg__form-text mb-0">Your appointment was booked successfully</div>
                 </div>
             </div>
-        </div>
+        </div>The date you specified does not match the date provided by the practioner
+
     </div>
 </div>
 

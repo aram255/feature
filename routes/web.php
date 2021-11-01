@@ -104,6 +104,7 @@ Route::group(['prefix' => '{locale?}','where' => ['locale' => '[a-zA-Z]{2}']], f
     Route::post('/edit-response-id', [CustomerController::class, 'editTypeForm'])->name('edit-response-id');
     // Add Star
     Route::post('/add-star', [CustomerController::class, 'addStarPractitioner'])->name('add-star');
+    Route::post('/add-review', [CustomerController::class, 'addReview'])->name('add-review');
 
     // Protocol
     Route::match(['get', 'post'],'/my-appointments-customer/{id}/{practitionrers?}/{service_name?}/{date_time?}/{price?}', [CustomerController::class, 'myAppointmentsCustomer'])->name('my-appointments-customer');
@@ -119,6 +120,8 @@ Route::group(['prefix' => '{locale?}','where' => ['locale' => '[a-zA-Z]{2}']], f
     Route::get('/confirm-meeting/{Code}/{Status}/{email}/{title}/{first_name}/{last_name}', [PractitionersController::class, 'confirmMeeting'])->name('confirm-meeting');
 
     Route::post('/update-zoom-meeting', [ZoomController::class, 'update'])->name('update-zoom-meeting');
+
+    Route::get('/test', [ZoomController::class, 'test'])->name('test');
 
 
     // Offline

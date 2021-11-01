@@ -94,7 +94,7 @@
 .profile-practitioner .profile__reviews-person {
     display: flex;
     align-items: center;
-    padding: 36.58px 31px 36.18px 31px;
+    padding: 20px 30px;
 }
 .profile-practitioner .profile__reviews-person>img {
     width: 87px;
@@ -116,7 +116,7 @@
     display: inline-block;
 }
 .profile-practitioner .profile__reviews-content-clock .reviews-clock-data {
-    font-size: 10px;
+    font-size: 12px;
     line-height: 13px;
     vertical-align: text-top;
 }
@@ -699,31 +699,31 @@ td  .activeNull{
 .fs-24 {
     font-size: 24px!important;
 }
-#LeaveReview .modal-title {
+.LeaveReview .modal-title {
     font: normal normal 600 30px/37px Montserrat;
     color: #00309E;
 }
-#LeaveReview .small-title {
+.LeaveReview .small-title {
     font: normal normal 500 18px/25px Montserrat;
     color: #462847;
 }
-#LeaveReview .abs {
+.LeaveReview .abs {
     top: 20px;
     right: 30px;
     position: absolute;
 }
 
-#LeaveReview .rate {
+.LeaveReview .rate {
     padding: 0 10px;
     margin: 0 auto;
     display: flex;
     justify-content: center;
 }
-#LeaveReview .rate:not(:checked) > input {
+.LeaveReview .rate:not(:checked) > input {
     position:absolute;
     top:-9999px;
 }
-#LeaveReview .rate:not(:checked) > label {
+.LeaveReview .rate:not(:checked) > label {
     float: right;
     width: 1em;
     overflow: hidden;
@@ -733,21 +733,21 @@ td  .activeNull{
     line-height: 63px;
     color: #ccc;
 }
-#LeaveReview .rate:not(:checked) > label:before {
+.LeaveReview .rate:not(:checked) > label:before {
     content: '☆ ';
 }
-#LeaveReview .rate > input:checked ~ label {
+.LeaveReview .rate > input:checked ~ label {
     color: #ffc700;
 }
-#LeaveReview .rate:not(:checked) > label:hover,
-#LeaveReview .rate:not(:checked) > label:hover ~ label {
+.LeaveReview .rate:not(:checked) > label:hover,
+.LeaveReview .rate:not(:checked) > label:hover ~ label {
     color: #deb217;
 }
-#LeaveReview .rate > input:checked + label:hover,
-#LeaveReview .rate > input:checked + label:hover ~ label,
-#LeaveReview .rate > input:checked ~ label:hover,
-#LeaveReview .rate > input:checked ~ label:hover ~ label,
-#LeaveReview .rate > label:hover ~ input:checked ~ label {
+.LeaveReview .rate > input:checked + label:hover,
+.LeaveReview .rate > input:checked + label:hover ~ label,
+.LeaveReview .rate > input:checked ~ label:hover,
+.LeaveReview .rate > input:checked ~ label:hover ~ label,
+.LeaveReview .rate > label:hover ~ input:checked ~ label {
     color: #c59b08;
 }
 @media (max-width: 768px) {

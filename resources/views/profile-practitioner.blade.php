@@ -79,7 +79,7 @@
                                    <select class="star-rating">
                                    @for($Rate; $Rate >=1 ; $Rate--)
                                            <option value="{{$Rate}}">{{$Rate}}.0</option>
-                                       @endfor
+                                    @endfor
                                    </select>
 
                                    <span class="gl-star-rating--stars s{{$Rt}}0" role="tooltip" aria-label="{{$Rt}}.0">
@@ -183,7 +183,7 @@
                     </div>
                     <div class="profile__reviews">
                         <p class="profile__reviews-title">REVIEWS</p>
-                        <div class="d-flex flex-lg-row flex-column">
+                        <div class="d-flex flex-column">
                             @if(count($Review)>0)
                                 @foreach($Review as $valR)
                             <div class="profile__reviews-block">

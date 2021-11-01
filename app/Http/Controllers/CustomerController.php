@@ -371,6 +371,8 @@ class CustomerController extends Controller
                     ->orderBy('zoom_meetings_list.id','DESC')
                     ->paginate(5);
 
+
+
         $ReviewRate = [];
         $SpecialitiesComplete = [];
 
@@ -507,67 +509,88 @@ class CustomerController extends Controller
     }
 
 //
-    public function addStarPractitioner(request $request)
+//    public function addStarPractitioner(request $request)
+//    {
+//        $CompleteCount  = DB::table('practitioner')
+//            ->join('zoom_meetings_list', 'practitioner.id', 'zoom_meetings_list.practitioner_id')
+//            ->where('zoom_meetings_list.user_id',Auth::id())
+//            ->whereDate("zoom_meetings_list.start", "<=",date('Y-m-d'))
+//            ->orderBy('zoom_meetings_list.id','DESC')
+//            ->count();
+//
+//
+//        $CompleteCountCheckAdd  = DB::table('practitioner')
+//            ->join('zoom_meetings_list', 'practitioner.id', 'zoom_meetings_list.practitioner_id')
+//            ->where('zoom_meetings_list.user_id',Auth::id())
+//            ->whereDate("zoom_meetings_list.start", "<=",date('Y-m-d'))
+//            ->orderBy('zoom_meetings_list.id','DESC')
+//            ->get();
+//
+//
+//
+//
+//       $reviewCount = DB::table('reviews')->where('user_id',Auth::id())->where('practitoner_id',$request->practitioner_id)->where('description','=',null)->count();
+//
+//
+////        return $request->practitioner_id;
+//
+////       if($CompleteCount != $reviewCount)
+////       {
+//
+//          $reviewCheckMeetingId = ReviewModel::where('user_id',Auth::id())->where('practitoner_id',$request->practitioner_id)->where('description','=',null)->where('meeting_id',$request->meeting_id)->first();
+//
+//            if(empty($reviewCheckMeetingId))
+//            {
+//                $AddStar =  DB::table('reviews')->insert(
+//                    [
+//                        'rate' => $request->star,
+//                        'practitoner_id' => $request->practitioner_id,
+//                        'user_id' => Auth::id(),
+//                        'meeting_id' => $request->meeting_id
+//                    ]
+//                );
+//
+//                if(!empty($AddStar))
+//                {
+//                    return response()->json(['success' => 'Yes']);
+//                }else{
+//                    return response()->json(['error' => 'No']);
+//                }
+//
+//
+//            }else{
+//                return response()->json(['error' => 'No']);
+//            }
+////        }
+//
+//
+////           return response()->json(['success' => 'Yes']);
+////       }else{
+////           return response()->json(['error' => 'No']);
+////       }
+//
+//    }
+
+    public function addReview(Request $request)
     {
-        $CompleteCount  = DB::table('practitioner')
-            ->join('zoom_meetings_list', 'practitioner.id', 'zoom_meetings_list.practitioner_id')
-            ->where('zoom_meetings_list.user_id',Auth::id())
-            ->whereDate("zoom_meetings_list.start", "<=",date('Y-m-d'))
-            ->orderBy('zoom_meetings_list.id','DESC')
-            ->count();
+
+        $validator = \Illuminate\Support\Facades\Validator::make($request->all(), [
+            'add_rate' => 'required',
+            'add_review' => 'required',
+            'practitioner_id' => 'required',
+            'meeting_id' => 'required',
+        ]);
 
 
-        $CompleteCountCheckAdd  = DB::table('practitioner')
-            ->join('zoom_meetings_list', 'practitioner.id', 'zoom_meetings_list.practitioner_id')
-            ->where('zoom_meetings_list.user_id',Auth::id())
-            ->whereDate("zoom_meetings_list.start", "<=",date('Y-m-d'))
-            ->orderBy('zoom_meetings_list.id','DESC')
-            ->get();
+        $Add = new ReviewModel;
+        $Add->rate = $request->add_rate;
+        $Add->description = $request->add_review;
+        $Add->practitoner_id = $request->practitioner_id;
+        $Add->user_id = Auth::id();
+        $Add->meeting_id  = $request->meeting_id;
+        $Add->save();
 
-
-
-
-       $reviewCount = DB::table('reviews')->where('user_id',Auth::id())->where('practitoner_id',$request->practitioner_id)->where('description','=',null)->count();
-
-
-//        return $request->practitioner_id;
-
-//       if($CompleteCount != $reviewCount)
-//       {
-
-          $reviewCheckMeetingId = ReviewModel::where('user_id',Auth::id())->where('practitoner_id',$request->practitioner_id)->where('description','=',null)->where('meeting_id',$request->meeting_id)->first();
-
-            if(empty($reviewCheckMeetingId))
-            {
-                $AddStar =  DB::table('reviews')->insert(
-                    [
-                        'rate' => $request->star,
-                        'practitoner_id' => $request->practitioner_id,
-                        'user_id' => Auth::id(),
-                        'meeting_id' => $request->meeting_id
-                    ]
-                );
-
-                if(!empty($AddStar))
-                {
-                    return response()->json(['success' => 'Yes']);
-                }else{
-                    return response()->json(['error' => 'No']);
-                }
-
-
-            }else{
-                return response()->json(['error' => 'No']);
-            }
-//        }
-
-
-//           return response()->json(['success' => 'Yes']);
-//       }else{
-//           return response()->json(['error' => 'No']);
-//       }
-
-
+        return back()->with('status','Review saved');
 
     }
 }

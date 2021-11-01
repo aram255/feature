@@ -250,12 +250,14 @@
                     <button type="button" class="close position-absolute" data-dismiss="modal" aria-hidden="true" style="right: 20px; top: 16px">×</button>
                     <div class="w-100 text-center mt-4">
                         <h3 id="myModalLabel" class="text-center title">Communication Tool</h3>
+
                         <div class="info-text text-center">
                             Please choose your preferred communication tool
                         </div>
                     </div>
                 </div>
-                <div class="d-flex justify-content-center my-5">
+                <div class="d-flex flex-column my-5">
+                    <div class="d-flex flex-row">
                     <div id="zoom" class="modal-body mx-4 flex-1">
                         <a href="#">
                             <img src="{{ asset('web_sayt/img/zoom-icon-logo.png') }}" alt="">
@@ -268,7 +270,36 @@
                             In-person visit
                         </a>
                     </div>
+                    </div>
+{{--            <div class="pac-card map-pac-card"  >--}}
+{{--                    <div id="pac-container">--}}
+{{--                        <input id="pac-input" type="text" placeholder="Enter a location" />--}}
+{{--                    </div>--}}
+{{--                    <div>--}}
+{{--                        <div id="title" style="display: none">Autocomplete search</div>--}}
+{{--                        <div style="display: none;" id="type-selector" class="pac-controls">--}}
+{{--                            <input style="display: none;"--}}
+{{--                                   type="radio"--}}
+{{--                                   name="type"--}}
+{{--                                   id="changetype-all"--}}
+{{--                                   checked="checked"--}}
+{{--                            />--}}
+{{--                            <label for="changetype-all">All</label>--}}
+
+
+{{--                        </div>--}}
+{{--                        <br />--}}
+
+{{--                    </div>--}}
+
+{{--                      </div>--}}
+{{--                    <div id="map"></div>--}}
+{{--                    <div id="infowindow-content">--}}
+{{--                        <span id="place-name" class="title"></span><br />--}}
+{{--                        <span id="place-address"></span>--}}
+{{--                    </div>--}}
                 </div>
+
             </div>
         </div>
     </div>
@@ -397,6 +428,7 @@
                     if (d1 >= d2) {
                         // Show Select meeting Online Or Offline
                         $("#myModal2").modal("show");
+
 
                         // Close Calendar
                         $("#myModal").modal('hide');

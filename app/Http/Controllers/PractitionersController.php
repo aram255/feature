@@ -194,6 +194,8 @@ class PractitionersController extends Controller
 
         $Rate = floor($ReviewRate);
 
+//        dd($Rate);
+
         $Speciality = $this->speciality();
 
         $SessionCount =  $this->countSession($request);

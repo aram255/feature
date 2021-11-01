@@ -91,33 +91,33 @@
                 <form method="post" style="position: relative" action="{{route('add-zoom-meeting',[app()->getLocale()])}}">
                     {{csrf_field()}}
 
-                    <div class="pac-card map-pac-card"  >
-                        <div id="pac-container">
-                            <input id="pac-input" type="text" placeholder="Enter a location" />
-                        </div>
-                        <div>
-                            <div id="title" style="display: none">Autocomplete search</div>
-                            <div style="display: none;" id="type-selector" class="pac-controls">
-                                <input style="display: none;"
-                                       type="radio"
-                                       name="type"
-                                       id="changetype-all"
-                                       checked="checked"
-                                />
-                                <label for="changetype-all">All</label>
+{{--                    <div class="pac-card map-pac-card"  >--}}
+{{--                        <div id="pac-container">--}}
+{{--                            <input id="pac-input" type="text" placeholder="Enter a location" />--}}
+{{--                        </div>--}}
+{{--                        <div>--}}
+{{--                            <div id="title" style="display: none">Autocomplete search</div>--}}
+{{--                            <div style="display: none;" id="type-selector" class="pac-controls">--}}
+{{--                                <input style="display: none;"--}}
+{{--                                       type="radio"--}}
+{{--                                       name="type"--}}
+{{--                                       id="changetype-all"--}}
+{{--                                       checked="checked"--}}
+{{--                                />--}}
+{{--                                <label for="changetype-all">All</label>--}}
 
 
-                            </div>
-                            <br />
+{{--                            </div>--}}
+{{--                            <br />--}}
 
-                        </div>
+{{--                        </div>--}}
 
-                    </div>
-                    <div id="map"></div>
-                    <div id="infowindow-content">
-                        <span id="place-name" class="title"></span><br />
-                        <span id="place-address"></span>
-                    </div>
+{{--                    </div>--}}
+{{--                    <div id="map"></div>--}}
+{{--                    <div id="infowindow-content">--}}
+{{--                        <span id="place-name" class="title"></span><br />--}}
+{{--                        <span id="place-address"></span>--}}
+{{--                    </div>--}}
 
                 </form>
             </div>

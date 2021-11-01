@@ -74,6 +74,9 @@ class IndexController extends Controller
 
     public function search(Request $request,$lang, $practitioner_id = null, $service_id = null,$meeting_id = null)
     {
+
+//        $ip=  Request::getClientIp();
+//        dd($ip);
 //        $_SERVER['HTTP_CLIENT_IP'];
 //        $ip=  $_SERVER['REMOTE_ADDR'];
 
@@ -82,7 +85,7 @@ class IndexController extends Controller
 //                if (array_key_exists($key, $_SERVER) === true){
 //                    foreach (explode(',', $_SERVER[$key]) as $ip){
 //                        $ip = trim($ip); // just to be safe
-//
+// 0
 //                        if (filter_var($ip, FILTER_VALIDATE_IP, FILTER_FLAG_NO_PRIV_RANGE | FILTER_FLAG_NO_RES_RANGE) !== false){
 //                            echo  $ip;
 //                        }
@@ -536,7 +539,13 @@ class IndexController extends Controller
                          ->count();
 
 
-        $ReviewCheckMeetingId = ReviewModel::where('practitoner_id', $practitionerID)->count();
+      //  $ReviewCheckMeetingId = ReviewModel::where('practitoner_id', $practitionerID)->count();
+        $ReviewRate = DB::table('reviews')
+            ->where('reviews.practitoner_id',$practitionerID)
+            ->avg('rate');
+
+        $ReviewCheckMeetingId = floor($ReviewRate);
+
 
         $ThisWeekMeetingsList = ZoomModel::whereBetween('start', [Carbon::now()->startOfWeek(), Carbon::now()->endOfWeek()])->where('practitioner_id',$practitionerID)->where('user_id','!=',null)->get();
 
