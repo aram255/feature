@@ -24,15 +24,7 @@
     <nav class="navbar navbar-expand-lg nav-top">
         <div class="container">
             <a class="navbar-brand" href="{{route('index',[app()->getLocale()])}}">Balancd</a>
-{{--            <div class="dropdown lang-mob">--}}
-{{--                <div class="dropdown-toggle" data-toggle="dropdown">--}}
-{{--                    En--}}
-{{--                </div>--}}
-{{--                <div class="dropdown-menu">--}}
-{{--                    <a class="dropdown-item" href="#">Fr</a>--}}
 
-{{--                </div>--}}
-{{--            </div>--}}
 
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                     aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -55,16 +47,7 @@
                         <a class="nav-link" href="#" ml-3="" data-toggle="modal" data-target="#sign-up">Sign Up</a>
                     </li>
                     @endif
-{{--                    <li class="nav-items">--}}
-{{--                    @if (isset(auth()->user()->id))--}}
-{{--                        <form class="nav-items" method="POST" action="{{route("logout",[app()->getLocale()])}}">--}}
-{{--                            @csrf--}}
-{{--                            <a class="nav-link" href="{{route("logout",[app()->getLocale()])}}" onclick="event.preventDefault();--}}
-{{--                                                this.closest('form').submit();">Log Out</a>--}}
-{{--                        </form>--}}
-{{--                    </li>--}}
-{{--                    @endif--}}
-{{--                    {{dd(session()->get('UserID'))}}--}}
+
                     @if(Session::has('UserID') and  !empty(session()->get('UserID')))
                     <li class="nav-items">
                         <a class="nav-link" href="{{route('profile-practitioner',[app()->getLocale()])}}" ml-3=""  >{{session()->get('UserLastName')}}</a>
@@ -85,39 +68,9 @@
                     </li>
                     @endif
 
-{{--                    <li class="nav-items dropdown lang">--}}
 
-{{--                        @if(app()->getLocale() != 'en')--}}
-{{--                                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">--}}
-{{--                                    <a class="dropdown-a" href="javascript:;" onclick="var url = window.location.toString(); window.location = url.replace('/{{ app()->getLocale() }}',--}}
-{{--                                        '/'+'en');">En</a>--}}
-{{--                                </div>--}}
-{{--                        @endif--}}
-
-{{--                        @if(app()->getLocale() != 'fr')--}}
-{{--                                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">--}}
-{{--                                    <a class="dropdown-a" href="javascript:;" onclick="var url = window.location.toString(); window.location = url.replace('/{{ app()->getLocale() }}',--}}
-{{--                                        '/'+'fr');">Fr</a>--}}
-{{--                                </div>--}}
-{{--                        @endif--}}
-
-{{--                        @if(app()->getLocale() == 'en')--}}
-{{--                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown"--}}
-{{--                                   aria-haspopup="true" aria-expanded="false">--}}
-{{--                                    En--}}
-{{--                                </a>--}}
-{{--                        @endif--}}
-
-{{--                        @if(app()->getLocale() == 'fr')--}}
-{{--                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown"--}}
-{{--                               aria-haspopup="true" aria-expanded="false">--}}
-{{--                                Fr--}}
-{{--                            </a>--}}
-{{--                        @endif--}}
-
-{{--                    </li>--}}
                     </li>
-{{--                    {{dd(auth()->user()->id)}}--}}
+
                     <li class="nav-items">
                         @if (isset(auth()->user()->id) and !empty(auth()->user()->id))
                             <form class="nav-items" method="POST" action="{{route("logout",[app()->getLocale()])}}">
@@ -132,7 +85,7 @@
             </div>
         </div>
     </nav>
-{{--    <!-- Login  --> {{ auth()->user()->id }}--}}
+
 
 
 </header>
@@ -204,41 +157,7 @@
         </div>
     </div>
 </div>
-<!-- Reset Password -->
-{{--<div class="modal fade show" id="reset-user-pass" tabindex="-1" role="dialog"--}}
-{{--     aria-labelledby="exampleModalCenterTitle" aria-hidden="true">--}}
-{{--    <div class="modal-dialog modal-dialog-centered" role="document">--}}
-{{--        <div class="modal-content">--}}
-{{--            <div class="modal__form sg-header-form">--}}
-{{--                <button type="button" class="close" data-dismiss="modal" aria-label="Close">--}}
-{{--                    <span class="x" aria-hidden="true">×</span>--}}
-{{--                </button>--}}
-{{--                <div class="change-pass lg-sg__form">--}}
-{{--                    <div class="lg-sg__form-text">Change Password</div>--}}
-{{--                    <form method="POST">--}}
 
-{{--                        <p class="lg-sg-p">New Password</p>--}}
-{{--                        <input class="change-control fadeIn" id="password_1" name="password" type="password">--}}
-{{--                        <img src="{{ asset('web_sayt/img/eye.svg') }}" alt="" toggle="#password_1"--}}
-{{--                             class="fa fa-fw fa-eye field-icon toggle-password">--}}
-
-{{--                        <p class="lg-sg-p">Confirm New Password</p>--}}
-{{--                        <input class="change-control fadeIn" id="password_2" name="password_2" type="password">--}}
-{{--                        <img src="{{ asset('web_sayt/img/eye.svg') }}" alt="" toggle="#password_2"--}}
-{{--                             class="fa fa-fw fa-eye field-icon toggle-password">--}}
-
-
-
-{{--                        <div class="lg-sg__button">--}}
-{{--                            <a href="./index.html"><input type="submit" form="auth" class="btn bg-yellow"--}}
-{{--                                                          value="Save Password"></a>--}}
-{{--                        </div>--}}
-{{--                    </form>--}}
-{{--                </div>--}}
-{{--            </div>--}}
-{{--        </div>--}}
-{{--    </div>--}}
-{{--</div>--}}
 
 <div class="modal fade show" id="login" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
      aria-hidden="true">

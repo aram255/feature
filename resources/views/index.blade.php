@@ -5,6 +5,7 @@
     <link rel="stylesheet" href="{{ asset('web_sayt/css/bootstrap/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('web_sayt/css/css/main.css') }}">
     <link rel="stylesheet" href="{{ asset('web_sayt/css/css/responsive.css') }}">
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
 @endsection
 
 @section('title', __('site.Home') )
@@ -13,8 +14,6 @@
 
 
 @section('content')
-
-
 
     <section class="section1">
         <div class="container d-flex align-items-center justify-content-center" style="min-height: 88vh">
@@ -134,6 +133,8 @@
                 </div>
             </div>
         </div>
+
+
         <!-- Find Setting Window -->
         <div class="modal fade show" id="find__filter" tabindex="-1" role="dialog"
              aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -177,15 +178,7 @@
                                 <input  type="checkbox" name="yesNo" value="No"  id="no"   class="lg-sg__checkin" />
 
                                 <label for="no" class="ml-2" style="font-size: 16px;"> Avalible appointments this week</label>
-{{--                                    <input type="radio" name="yesNo" value="Yes" id="yes" class="lg-sg__checkin">--}}
-{{--                                    <label for="yes" class="ml-2">Yes</label>--}}
-{{--                                    <input type="radio" name="yesNo" value="No"  id="no" class="lg-sg__checkin">--}}
-{{--                                    <label for="no" class="ml-2">No</label>--}}
-{{--                                --}}
-{{--                                @foreach($TegManagements as $key=>$TegManagements)--}}
-{{--                                    <input type="checkbox" id="check"  name="teg_management[{{$key}}]" value="{{$TegManagements->id}}" class="lg-sg__checkin">--}}
-{{--                                    <label for="check">{{$TegManagements->name}}</label>--}}
-{{--                                @endforeach--}}
+
                             </div>
 
 
@@ -233,6 +226,11 @@
 <script type="text/javascript" src="{{ asset('web_sayt/js/bootstrap/bootstrap.min.js') }}"></script>
 <script type="text/javascript" src="{{ asset('web_sayt/js/script.js') }}"></script>
 
+
+<script
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDtOVd66AerMgd0A-mwKEFqdBQTrKGfngc&callback&callback=initMap&v=weekly"
+    async
+></script>
 {{--    Search Autocomplete--}}
 <script>
     $(document).ready(function(){

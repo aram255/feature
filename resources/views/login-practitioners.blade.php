@@ -20,7 +20,6 @@
         <div class="mt-5">
             <a href="{{route('index')}}" style="color: #585858; font-size: 26px">
                 <i class="fas fa-times"></i>
-{{--                <i class="fas fa-long-arrow-alt-left mr-1"></i>Back--}}
             </a>
         </div>
         <div class="lg-sg">
@@ -71,9 +70,7 @@
                     <div class="lg-sg__button">
                         <input type="submit"  class="btn bg-yellow" value="Log In">
                     </div>
-{{--                    <div class="lg-sg__button">--}}
-{{--                        <a href="{{ url('en/customer-redirect',['id'=>2]) }}" class="btn bg-yellow">Login Google</a>--}}
-{{--                    </div>--}}
+
                     <div class="lg-sg__signup">
                         <p class="lg-sg-p"> Don't have an account? <a href="{{route('register-practitioners',[app()->getLocale()])}}"><span> Sign Up
                            </span></a></p>

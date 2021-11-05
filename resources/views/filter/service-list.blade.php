@@ -65,10 +65,10 @@
                                                 @endforeach
                                             </ul>
 
-
-{{--                                            <input type="hidden" name="join_url" value="{{$Result->join_url}}">--}}
-{{--                                            <input type="hidden" name="password" value="{{$Result->password}}">--}}
-{{--                                            <input type="hidden" name="duration" value="{{$Result->duration}}">--}}
+                                            <input type="hidden" class="lat" value="{{$Value->price}}">
+                                            <input type="hidden" class="lat" value="{{$Result->lat}}">
+                                            <input type="hidden" value="{{$Result->lng}}">
+                                            <input type="hidden" value="{{$Result->location}}">
                                             <input type="hidden" name="user_email" value="@if(isset(Auth::user()->email)){{Auth::user()->email}}@endif">
                                             <input type="hidden" name="service_name" value="{{$Value->title}}">
                                             <input type="hidden" name="service_id" value="{{$Value->id}}">

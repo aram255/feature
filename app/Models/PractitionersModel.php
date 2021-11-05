@@ -37,8 +37,5 @@ class PractitionersModel extends Model
         'email_verified_at' => 'datetime',
     ];
 
-//    public function langs()
-//    {
-//        return $this->hasMany(PractitionerLanguageModel::class, 'practitioner_id', 'id');
-//    }
+
 }

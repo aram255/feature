@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="{{ asset('web_sayt/css/css/responsive.css') }}">
     {{--    calendar css--}}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/fullcalendar.css" />
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
 
     <style>
         .create__checkbox input.lg-sg__checkin + label::before {
@@ -73,6 +74,7 @@
         }
     </style>
 
+    <script src="{{ asset('web_sayt/maps/map.js') }}"></script>
     <meta name="csrf-token" content="{{ csrf_token() }}">
 @endsection
 
@@ -123,20 +125,8 @@
                         <label for="female" class="ml-2">Female</label>
                     </div>
                     <div class="create__checkbox">
-
                             <input  type="checkbox" name="yesNo" value="No" id="check" @if(!empty($Week)) @if($Week == 'No') checked="checked"  @endif @endif class="lg-sg__checkin delivery" />
                             <label for="check">Available appointments this week</label>
-
-
-{{--                        <input type="radio" name="yesNo" value="Yes" id="yes" @if(!empty($Week)) @if($Week == 'Yes') checked="checked"  @endif @endif class="lg-sg__checkin">--}}
-{{--                        <label for="yes" class="ml-2">Yes</label>--}}
-{{--                        <input type="radio" name="yesNo" value="No"  id="no" @if(!empty($Week)) @if($Week == 'No') checked="checked"  @endif @endif class="lg-sg__checkin">--}}
-{{--                        <label for="no" class="ml-2">No</label>--}}
-
-{{--                                        @foreach($TegManagements as $key=>$TegManagement)--}}
-{{--                                                <input  type="checkbox" name="teg_management[{{$TegManagement->id}}]" @if(!empty($Tag)) @if(in_array($TegManagement->id, $Tag)) checked="checked"  @endif @endif value="{{$TegManagement->id}}" class="lg-sg__checkin">--}}
-{{--                                                <label for="remember">{{$TegManagement->name}}</label>--}}
-{{--                                        @endforeach--}}
                 </form>
             </div>
             {{-- Reset fild--}}
@@ -205,6 +195,8 @@
     </section>
 
 
+
+
     {{--    Service Modal--}}
     @foreach($Practitioners as $Result)
 
@@ -240,7 +232,9 @@
             </div>
         </div>
     </div>
-    <div id="myModal2" class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+
+<div id="myModal2" class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header border-bottom-0">
@@ -264,42 +258,49 @@
                             zoom
                         </a>
                     </div>
-                    <div id="offline" class="modal-body mx-4 flex-1">
-                        <a href="#">
-                            <img src="{{ asset('web_sayt/img/Group 2013.svg') }}" alt="" style="width: 32px; height: 32px">
-                            In-person visit
-                        </a>
+
+                        <div id="open_map" class="modal-body mx-4 flex-1">
+                            <a href="#">
+                                <img src="{{ asset('web_sayt/img/Group 2013.svg') }}" alt="" style="width: 32px; height: 32px">
+                                In-person visit
+                            </a>
+                        </div>
                     </div>
-                    </div>
-{{--            <div class="pac-card map-pac-card"  >--}}
-{{--                    <div id="pac-container">--}}
-{{--                        <input id="pac-input" type="text" placeholder="Enter a location" />--}}
-{{--                    </div>--}}
-{{--                    <div>--}}
-{{--                        <div id="title" style="display: none">Autocomplete search</div>--}}
-{{--                        <div style="display: none;" id="type-selector" class="pac-controls">--}}
-{{--                            <input style="display: none;"--}}
-{{--                                   type="radio"--}}
-{{--                                   name="type"--}}
-{{--                                   id="changetype-all"--}}
-{{--                                   checked="checked"--}}
-{{--                            />--}}
-{{--                            <label for="changetype-all">All</label>--}}
 
-
-{{--                        </div>--}}
-{{--                        <br />--}}
-
-{{--                    </div>--}}
-
-{{--                      </div>--}}
-{{--                    <div id="map"></div>--}}
-{{--                    <div id="infowindow-content">--}}
-{{--                        <span id="place-name" class="title"></span><br />--}}
-{{--                        <span id="place-address"></span>--}}
-{{--                    </div>--}}
                 </div>
 
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+      <div id="open_map_modal" class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header border-bottom-0">
+                    <button type="button" class="position-absolute back-btn" data-dismiss="modal" aria-hidden="true" style="left: 20px; top: 16px">
+                        <i class="fa fa-angle-left"></i> Back
+                    </button>
+                    <button type="button" class="close position-absolute" data-dismiss="modal" aria-hidden="true" style="right: 20px; top: 16px">×</button>
+                    <div class="w-100 text-center mt-4">
+                        <h3 id="myModalLabel" class="text-center title">View location on map</h3>
+
+                        <div class="info-text text-center"  style="display: flex;justify-content: center;align-items: center">
+                            <img src="{{ asset('web_sayt/img/map-pin.svg') }}" alt="" style="width: 15px; height: 18px;margin-right: 10px">
+
+                                <span id="location">3056 W County Line Rd, Littleton, CO 80129, United States</span>
+                        </div>
+                    </div>
+                </div>
+                <div id="map" style="width:100%;max-width: 924px;height: 453px;margin:0 auto;border-radius: 10px"></div>
+                <div style="display:flex;justify-content: flex-end;margin-right: 10px">
+                    <a href="#" class="btn bg-yellow" style="margin:20px 0;border-radius: 10px;width: 124px;" id="offline">Done</a>
+                </div>
+                </div>
             </div>
         </div>
     </div>
@@ -319,6 +320,9 @@
             </div>
         </div>
     </div>
+
+
+
   @include('modal-list')
 
 
@@ -326,10 +330,11 @@
 @endsection
 
 @section('style')
-    <script type="text/javascript" src="{{ asset('web_sayt/js/jquery.js') }}"></script>
-    <script src="{{ asset('web_sayt/maps/index.js') }}"></script>
 
-    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+    <script type="text/javascript" src="{{ asset('web_sayt/js/jquery.js') }}"></script>
+
+
+
     {{--     Calendar--}}
     <script>
         $(document).ready(function() {
@@ -342,8 +347,10 @@
         });
     </script>
 
-    <script>
+    <script defer>
+
         $(document).on('click','.detail-btn', function()  {
+
             // Hidden service modal
             $(".modal-service").modal('hide');
 
@@ -360,8 +367,18 @@
             var serviceName    = $(this).prev().prev().prev().prev().prev().prev().prev().val();
             var user_email     = $(this).prev().prev().prev().prev().prev().prev().prev().prev().val();
 
+            var location     = $(this).prev().prev().prev().prev().prev().prev().prev().prev().prev().val();
+            var lng     = $(this).prev().prev().prev().prev().prev().prev().prev().prev().prev().prev().val();
+            var lat     = $(this).prev().prev().prev().prev().prev().prev().prev().prev().prev().prev().prev().val();
+
+            var price     = $(this).prev().prev().prev().prev().prev().prev().prev().prev().prev().prev().prev().prev().val();
 
 
+            if (typeof(Storage) !== "undefined") {
+                // Store
+                sessionStorage.setItem("lat", lat);
+                sessionStorage.setItem("lng", lng);
+            }
 
 
             $('#titlee').text(serviceName);
@@ -427,11 +444,19 @@
 
                     if (d1 >= d2) {
                         // Show Select meeting Online Or Offline
-                        $("#myModal2").modal("show");
+                         $("#myModal2").modal("show");
 
 
                         // Close Calendar
                         $("#myModal").modal('hide');
+
+                        $("#open_map").click(function () {
+
+                            $("#open_map_modal").modal("show");
+                                $("#location").html(location)
+                            $("#myModal2").modal("hide");
+
+                        })
 
                         // Offline Meeting
                         $('#offline').click(function () {
@@ -460,10 +485,13 @@
                                     service_id: service_id,
                                     LiveDateTime:LiveDateTime,
                                     user_email:user_email,
+                                    location: location,
+                                    lng:lng,
+                                    lat:lat,
                                     type: 'add'
                                 },
                                 success: function (data) {
-
+                                    $("#open_map_modal").modal('hide');
                                     calendar.fullCalendar('refetchEvents');
 
 
@@ -471,39 +499,45 @@
                                     {
                                         if(data.NoRepeatService != null)
                                         {
-                                            // alert(data.NoRepeatService)
-
                                             // Show Error No Repeat Service
                                             $("#error-NoRepeatService").modal('hide');
 
                                             // Close Select Meeting
-                                            $("#myModal2").modal('hide');
-                                        }else{
-                                            // Show Success Meeting
-                                            $('#succes-meeting').modal('show');
+                                            $("#open_map_modal").modal('hide');
 
-                                            // Close Select Meeting
-                                            $("#myModal2").modal('hide');
-                                            //alert("Event Created Successfully");
+                                        }else{
+                                             // Close Select Meeting
+                                            $("#open_map_modal").modal('hide');
+
+                                            $('#succes-meeting-my-app').modal('show');
+
+                                            $('#practition').text(first_name +" "+ last_name)
+                                            $('#service_n').text(serviceName)
+                                            $('#date_time').text(start)
+                                            $('#prc').text(price)
+
+                                            setTimeout(() => {
+                                                var newURL = window.location.protocol + "//" + window.location.host;
+                                                location.replace(newURL+"/en/my-appointments-customer/2");
+                                                //location.replace(newURL+"/en/my-appointments-customer/2/Practitioner/Service_name/Date-time/price");
+                                            }, 300)
                                         }
                                     }else{
                                         // Show Error No Repeat Service
                                         $("#select_error").modal('show');
 
                                         // Close Select Meeting
-                                        $("#myModal2").modal('hide');
-                                        //  alert(data.select_error);
+                                        $("#open_map_modal").modal('hide');
                                     }
 
                                 },
                                 error: function(data) {
-                                    // alert('Your appointment has not been created');
 
                                     // Show Error No not been created
                                     $("#not-been-created").modal('show');
 
                                     // Close Select Meeting
-                                    $("#myModal2").modal('hide');
+                                    $("#open_map_modal").modal('hide');
                                 }
                             });
                         })
@@ -542,26 +576,34 @@
                                 },
                                 success: function (data) {
                                     calendar.fullCalendar('refetchEvents');
-                                    console.log(data.select_error)
 
                                     if(data.select_error == null)
                                     {
                                         if(data.NoRepeatService != null)
                                         {
-                                          // alert(data.NoRepeatService)
-
                                             // Show Error No Repeat Service
                                             $("#error-NoRepeatService").modal('hide');
 
                                             // Close Select Meeting
                                             $("#myModal2").modal('hide');
                                         }else{
-                                            // Show Success Meeting
-                                            $('#succes-meeting').modal('show');
+
+                                            $("#open_map_modal").modal('hide');
+
+                                            $('#succes-meeting-my-app').modal('show');
 
                                             // Close Select Meeting
                                             $("#myModal2").modal('hide');
-                                            //alert("Event Created Successfully");
+                                            $('#practition').text(first_name +" "+ last_name)
+                                            $('#service_n').text(serviceName)
+                                            $('#date_time').text(start)
+                                            $('#prc').text(price)
+
+                                            setTimeout(() => {
+                                                var newURL = window.location.protocol + "//" + window.location.host;
+                                                location.replace(newURL+"/en/my-appointments-customer/2");
+                                                //location.replace(newURL+"/en/my-appointments-customer/2/Practitioner/Service_name/Date-time/price");
+                                            }, 300)
                                         }
                                     }else{
                                         // Show Error No Repeat Service
@@ -574,7 +616,6 @@
 
                                 },
                                 error: function(data) {
-                                   // alert('Your appointment has not been created');
 
                                     // Show Error No not been created
                                     $("#not-been-created").modal('show');
@@ -585,8 +626,6 @@
                             });
                         });
                     }else{
-                       // alert('You can not make appointments with back date.');
-
                         // Show Error with back date
                         $("#with-back-date").modal('show');
 
@@ -616,7 +655,6 @@
                                 element[0].setAttribute('active', 'activeUser');
                                 let div = document.getElementsByClassName('fc-content-col');
                                 let aArray = div[0].childNodes[1].childNodes;
-                                // console.log('5555555555',aArray[0]?.getAttribute('active'));
                                 for (let key of aArray) {
                                     if (key.getAttribute('active') === 'activeUser') {
                                         let aDiv = document.createElement('div');
@@ -694,7 +732,6 @@
                                     },
                                     success: function (response) {
                                         calendar.fullCalendar('refetchEvents');
-                                        // alert("Event Deleted Successfully");
 
                                         // Show Success Delete
                                         $("#delete-success").modal('show');
@@ -703,8 +740,6 @@
                                         $("#myModal").modal('hide');
                                     },
                                     error: function (returnval) {
-                                      //  alert('Your appointment has not been deleted');
-
                                         // Show Error Delete
                                         $("#delete-error").modal('show');
 
@@ -715,8 +750,6 @@
                           //  }
                         }
                     }else{
-                       // alert('You can not delete this meeting because you did not add it.')
-
                         // Show Error Delete
                         $("#delete-did-not-add-it").modal('show');
 
@@ -741,16 +774,17 @@
         });
 
     </script>
+
     <script type="text/javascript" src="{{ asset('web_sayt/js/bootstrap/bootstrap.min.js') }}"></script>
     <script src="{{ asset('web_sayt/js/star-rating.js') }}"></script>
     <script src="{{ asset('web_sayt/js/star-run.js') }}"></script>
     <script type="text/javascript" src="{{ asset('web_sayt/js/owl.carousel.min.js') }}"></script>
     <script src="{{ asset('web_sayt/js/carusel.js') }}"></script>
-{{--    <script type="text/javascript" src="{{ asset('web_sayt/js/script.js') }}"></script>--}}
+    <script type="text/javascript" src="{{ asset('web_sayt/js/script.js') }}"></script>
     <script type="text/javascript" src="{{ asset('web_sayt/js/readMoreJS.min.js') }}"></script>
     <!-- Async script executes immediately and must be after any DOM elements used in callback. -->
     <script
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDtOVd66AerMgd0A-mwKEFqdBQTrKGfngc&callback=initMap&libraries=places&v=weekly"
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDtOVd66AerMgd0A-mwKEFqdBQTrKGfngc&callback&callback=initMap&v=weekly"
         async
     ></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>

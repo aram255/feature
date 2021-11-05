@@ -57,7 +57,6 @@
             <div class="mt-5">
                 <a href="{{route('index')}}" style="color: #585858;font-size: 26px">
                     <i class="fas fa-times"></i>
-{{--                    <i class="fas fa-long-arrow-alt-left mr-1"></i>Back--}}
                 </a>
             </div>
             <div class="create">
@@ -154,13 +153,6 @@
                                       </select>
                                   </div>
 
-{{--                                  <select class="fadeIn" name="practice_id" class="state">--}}
-{{--                                  <select class="selectpicker" multiple data-live-search="true">--}}
-{{--                                      <option value=""></option>--}}
-{{--                                      @foreach($GetPractice as $Practice)--}}
-{{--                                          <option value="{{$Practice->id}}" @if (old('practice_id') == $Practice->id) selected="selected" @endif>{{$Practice->title}}</option>--}}
-{{--                                      @endforeach--}}
-{{--                                  </select>--}}
                                   <p style="color: red; font-size: 12px">@if ($errors->has('practice_id')){{ $errors->first('practice_id') }}@endif</p>
                               </div>
                               <div class="user-info" style="max-width: 323px; width: 100%">
@@ -173,12 +165,7 @@
                                           @endforeach
                                       </select>
                                   </div>
-{{--                                  <select class="fadeIn" name="speciality_id">--}}
-{{--                                      <option value=""></option>--}}
-{{--                                      @foreach($GetSpecialities as $Specialities)--}}
-{{--                                          <option value="{{$Specialities->id}}" @if (old('speciality_id') == $Specialities->id) selected="selected" @endif>{{$Specialities->title}}</option>--}}
-{{--                                      @endforeach--}}
-{{--                                  </select>--}}
+
                                   <p style="color: red;font-size: 12px">@if ($errors->has('speciality_id')){{ $errors->first('speciality_id') }}@endif</p>
                               </div>
                           </div>
@@ -191,7 +178,7 @@
                                     <input type="checkbox" name="in_persion" id="in-person" value="in_persion" @if(old('in_person') == 'in_persion')   checked @endif class="lg-sg__checkin" />
                                     <label for="in-person">In Person</label>
                                     <p style="color: red; font-size: 12px">@if ($errors->has('virtual')){{ $errors->first('virtual') }}@endif</p>
-{{--                                    <p style="color: red;">@if ($errors->has('in_person')){{ $errors->first('in_person') }}@endif</p>--}}
+
                                 </div>
                                 <div class="user-info box">
                                     <p>ID or Passport</p>
@@ -272,7 +259,6 @@
 
             // Department Change
             $('#country').change(function(){
-                // setTimeout(function(){ alert("Hello"); }, 3000);
                 // Department id
                 var id = $(this).val();
 
@@ -336,10 +322,3 @@
 
     </body>
     </html>
-
-
-
-
-
-
-

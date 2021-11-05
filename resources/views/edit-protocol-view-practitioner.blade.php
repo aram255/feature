@@ -36,17 +36,6 @@
     <script>var body = document.body; body.classList.add("body");</script>
 
 
-
-
-
-
-    {{--    <select class="fadeIn" id="ok" name="country_id" >--}}
-    {{--        <option value="" selected hidden>Choose Protocol</option>--}}
-    {{--        @foreach($GetProtocol as $key => $ValProtocol)--}}
-    {{--            <option value="{{$ValProtocol->user_id}}" title="ddddd" >Protocol {{$key}}</option>--}}
-    {{--        @endforeach--}}
-    {{--    </select>--}}
-
     <div class="dropdown">
         <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
             Dropdown button
@@ -222,32 +211,9 @@
 
                         $.each(data.ProtocolProduct, function(k_product, v_product) {
 
-                            // var button = document.getElementById("clickme");
-                            // count = v_product.id;
-                            // button.onclick = function() {
-                            //     count += 1;
-                            //     var  s = 'k'+count;
-                            //     alert(s)
-                            //
-                            //
-                            // }
-
-
                             if(v_product.img == '')
                             {
-                                {{--    var buttonn = document.getElementById("clickme");--}}
-                                {{--    var countt = v_product.id;--}}
-                                {{--    buttonn.onclick = function() {--}}
-                                {{--        countt += 1;--}}
-                                {{--        var  st = 'k'+countt;--}}
-                                {{--        alert(st)--}}
 
-                                {{--    }--}}
-                                // $('#clickme').click(function () {
-                                //     var g  = (Math.floor(Math.random() * (9999)))
-                                //
-                                // })
-                                //var g  = (Math.floor(Math.random() * (9999)))
                                 $('.product').append("<div class='protocol__section-product-cont product_remove' id='protocol__section-product-cont"+k_product+"'> <div class='protocol__section-product-cont-img'>"
                                     +"<input type='file' id='img-file"+k_product+"'  name='img[]' >"
                                     +"<label for='img-file"+k_product+"' class='img-file'><img class='upload'  src='{{ asset('web_sayt/img/protocol-img.svg') }}'></label>"
@@ -280,17 +246,6 @@
                                     +"</div>");
 
                             }else{
-                                // var button = document.getElementById("clickme");
-                                //     count = k_product;
-                                // button.onclick = function() {
-                                //     count += 1;
-                                //     var  s = 'k'+count;
-                                //     alert(s)
-                                //
-                                // }
-
-
-                                    // alert(k_product)
 
                                 $('.product').append("<div class='protocol__section-product-cont product_remove' id='protocol__section-product-cont"+k_product+"'> <div class='protocol__section-product-cont-img'>"
                                     +"<input class='idd_c' type='file' id='img-file"+k_product+"'  name='img[]' >"

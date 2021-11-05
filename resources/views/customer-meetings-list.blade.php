@@ -38,54 +38,6 @@
         </div>
     @endif
 
-    {{--    {{dd($data)}}--}}
-    {{--    <section>--}}
-    {{--        <div class="container">--}}
-    {{--            <div class="card mb-3">--}}
-    {{--                <h2 style="text-align: center;">My Meetings Zoom  </h2>--}}
-    {{--                <form action="{{route('zoom-delete',[app()->getLocale()])}}" method="post" >--}}
-    {{--                    {{csrf_field()}}--}}
-    {{--                    <div class="card-header py-3">--}}
-    {{--                        <button class="btn btn-danger"  type="submit">Remove</button>--}}
-    {{--                    </div>--}}
-
-    {{--                    --}}{{--  Edit category title--}}
-    {{--                    <div class="card-body">--}}
-    {{--                        <div class="table-responsive">--}}
-    {{--                            <table class="table table-bordered"  width="100%" cellspacing="0">--}}
-    {{--                                <thead>--}}
-    {{--                                <tr>--}}
-    {{--                                    <th style="width: 3%;"><input id="checkAll" class="group-checkable sb-checkbox" type="checkbox" ></th>--}}
-    {{--                                    <th>Title</th>--}}
-    {{--                                    <th>Start Time</th>--}}
-    {{--                                    <th>Duration</th>--}}
-    {{--                                    <th>Time Zone</th>--}}
-    {{--                                    <th>Remove</th>--}}
-    {{--                                </tr>--}}
-    {{--                                </thead>--}}
-    {{--                                <tbody>--}}
-    {{--                                @foreach($data->meetings as $val)--}}
-    {{--                                    <tr>--}}
-    {{--                                        <td><input class="group-checkable sb-checkbox" type="checkbox" name="form_id[]" value=""></td>--}}
-    {{--                                        <td><a href="{{$val->join_url}}" target="_blank">{{$val->topic}}</a></td>--}}
-    {{--                                        <td>{{date('d-m-Y-H:i:s', strtotime($val->start_time)) }}</td>--}}
-    {{--                                        <td>{{$val->duration}}</td>--}}
-    {{--                                        <td>{{$val->timezone}}</td>--}}
-    {{--                                        <td>--}}
-
-    {{--                                                <input type="hidden" name="delete_id" value="{{$val->id}}">--}}
-    {{--                                                <input type="submit" value="Remove">--}}
-
-    {{--                                        </td>--}}
-    {{--                                    </tr>--}}
-    {{--                                @endforeach--}}
-    {{--                                </tbody>--}}
-    {{--                            </table>--}}
-    {{--                        </div>--}}
-    {{--                    </div>--}}
-    {{--                </form>--}}
-    {{--            </div>--}}
-    {{--    </section>--}}
 
     <section>
         <div class="container">
@@ -236,10 +188,7 @@
 
     @include('modal-list')
 @endsection
-{{--<form method="post" action="{{route('update-zoom-meeting',[app()->getLocale()])}}">--}}
-{{--    {{csrf_field()}}--}}
-{{--    <input type="submit">--}}
-{{--</form>--}}
+
 @section('style')
     <script>
         $(document).ready(function() {
@@ -253,37 +202,10 @@
                 var first_name     = $(this).prev().prev().prev().prev().val();
                 var email          = $(this).prev().prev().prev().prev().prev().val();
                 var service_id     = $(this).prev().prev().prev().prev().prev().prev().val();
-                // var duration       = $(this).prev().prev().prev().prev().prev().prev().prev().val();
-                //  var password       = $(this).prev().prev().prev().prev().prev().prev().prev().prev().val();
                 var join_url       = $(this).prev().prev().prev().prev().prev().prev().prev().prev().prev().val();
                 var serviceName    = $(this).prev().prev().prev().prev().prev().prev().prev().prev().prev().prev().prev().val();
                 var user_email     = $(this).prev().prev().prev().prev().prev().prev().prev().prev().prev().prev().prev().prev().val();
-
                 var  meetings_id   = $(this).prev().prev().prev().prev().prev().prev().prev().prev().prev().prev().prev().prev().prev().prev().prev().val();
-
-                // alert(meetings_id)
-
-
-                // alert('title ' +serviceName)
-                // alert('start ' +start)
-                // alert('end ' +end)
-                // alert('practitionerId ' +practitionerId)
-                // alert('phone_number ' +phone_number)
-                // alert('last_name ' +last_name)
-                // alert('first_name ' +first_name)
-                // alert('email ' +email)
-                // alert('duration ' +duration)
-                // alert('password ' +password)
-                // alert('service_id ' +service_id)
-                // alert(user_email)
-                //alert('LiveDateTime ' +LiveDateTime)
-                // alert('add_user_id ' +add_user_id)
-
-
-                // if(service_id == null)
-
-                //   service_id = '';
-
 
                 $('#calendar').fullCalendar('destroy');
 
@@ -301,7 +223,6 @@
                         center:'title',
                         right:'month,agendaWeek,agendaDay'
                     },
-                    //events:'/en/Search/'+ practitionerId+'/'+service_id,
                     events:'/en/Search/'+ practitionerId+'/'+service_id+'/'+meetings_id,
                     selectable:true,
                     selectHelper: true,
@@ -343,7 +264,6 @@
                             var user_id = event.user_id;
                             var meeting_id = event.meeting_id;
 
-                            // submitTimeChanges(event.id);
                             $.ajax({
                                 url: "/en/update-zoom-meeting",
                                 type: "POST",
@@ -364,19 +284,7 @@
                                     type: 'update'
                                 },
                                 success: function (response) {
-                                    // calendar.fullCalendar('refetchEvents');
-                                    // alert("Event Updated Successfully");
-                                    //
-                                    // if(response.Hour != null)
-                                    // {
-                                    //     alert(response.Hour)
-                                    // }else{
-                                    //     //alert("Event Updated Successfully");
-                                    //     $("#update-success").modal('show');
-                                    //
-                                    //     // Close Select Meeting
-                                    //     $("#myModal").modal('hide');
-                                    // }
+
                                     calendar.fullCalendar('refetchEvents');
                                     console.log(response.select_error)
 
@@ -384,15 +292,12 @@
                                     {
                                         if(response.Hour != null)
                                         {
-                                            //alert(response.Hour)
                                             // Show Error with back date
                                             $("#editHour").modal('show');
 
                                             // Close Select Meeting
                                             $("#myModal2").modal('hide');
                                         }else{
-                                            // alert("Event Updated Successfully");
-
                                             // // Show Success Delete
                                             $("#update-success").modal('show');
 
@@ -400,21 +305,16 @@
                                             $("#myModal").modal('hide');
                                         }
                                     }else{
-
-                                        //alert(response.select_error);
                                         // Show Error No Repeat Service
                                         $("#select_error").modal('show');
 
                                         // Close Select Meeting
                                         $("#myModal2").modal('hide');
-                                        //  alert(data.select_error);
                                     }
 
                                 },
                                 error: function(data) {
-                                    // console.log(data)
-                                    // alert('Your appointment has not been created');
-                                    // Show Error No not been created
+
                                     $("#not-been-created").modal('show');
 
                                     // Close Select Meeting
@@ -510,8 +410,6 @@
                             {
                                 $("#editHour").modal("show");
                             }else{
-
-                                // if (confirm("Are you sure you want to remove it?")) {
                                 $.ajax({
                                     url: "{{ route('zoom-delete',app()->getLocale()) }}",
                                     type: "POST",
@@ -522,7 +420,6 @@
                                     },
                                     success: function (response) {
                                         calendar.fullCalendar('refetchEvents');
-                                        //alert("Event Deleted Successfully");
 
                                         // Show Success Delete
                                         $("#delete-success").modal('show');
@@ -531,8 +428,6 @@
                                         $("#myModal").modal('hide');
                                     },
                                     error: function(returnval) {
-                                        // alert('Your appointment has not been deleted');
-
                                         // Show Error Delete
                                         $("#delete-error").modal('show');
 
@@ -540,11 +435,8 @@
                                         $("#myModal").modal('hide');
                                     }
                                 })
-                                // }
                             }
                         }else{
-                            //alert('You can not delete this meeting because you did not add it.')
-
                             // Show Error Delete
                             $("#delete-did-not-add-it").modal('show');
 

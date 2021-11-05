@@ -184,23 +184,6 @@ Route::group(['prefix' => '{locale?}','where' => ['locale' => '[a-zA-Z]{2}']], f
     Route::get('/customer-redirect/{id}', 'LoginGoogleCustommerController@redirect');
     Route::get('/callback/google/', 'LoginGoogleCustommerController@callback');
 
-
-
-    // Testing
-
-//      Route::get('/redirect', 'SocialController@redirect');
-//      Route::get('/callback/google', 'SocialController@callback');
-//     Route::get('/indexx', 'SocialController@index');
-//
-//    Route::get('redirect', [SocialController::class, 'redirect']);
-//    Route::get('callback/google', [SocialController::class, 'callback']);
-
-    // Calendar
-//    Route::get('calendar', [CalendarController::class, 'index']);
-
-
-
-//    Route::get('/search-go/', [IndexController::class, 'searchHome'])->name('search-go');
     Route::post('/search-go/', [IndexController::class, 'searchHome'])->name('search-go');
 
 

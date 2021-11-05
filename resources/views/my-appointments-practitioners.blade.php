@@ -73,7 +73,6 @@
 
 
                 <!-- Complete -->
-{{--                <div class="my-appointments__complete-process d-none">--}}
             @if($id == 2  and count($Complete)>0)
 
                @foreach($Complete as $keyComp => $InCompleteVal)
@@ -86,12 +85,7 @@
                                     <img class="my-appointments-person__info-img info_imgg" src="{{ asset('web_sayt/img_customer/'.$InCompleteVal->img) }}" alt="">
                                 </div>
                                 <div class="my-appointments-person__info-cont2">
-                                    <div class="my-appointments-person__info-name"><a href="#{{--route('add-edit-protocol-practitioner',[
-                                     app()->getLocale(),
-                                    'user_id'=> $InCompleteVal->user_id,
-                                    'practitioner_id'=>$InCompleteVal->practitioner_id,
-                                    'service_id'=>$InCompleteVal->service_id
-                                    ])--}}">{{$InCompleteVal->first_name}} {{$InCompleteVal->last_name}}</a></div>
+                                    <div class="my-appointments-person__info-name"><a href="#">{{$InCompleteVal->first_name}} {{$InCompleteVal->last_name}}</a></div>
                                     <div class="my-appointments-person__info-specialist">{{$InCompleteVal->title}}</div>
                                     <div class="my-appointments-person__info-data">{{date('M-jS, Y  h:i A', strtotime($InCompleteVal->start)) }}</div>
                                 </div>
@@ -135,8 +129,6 @@
                @endforeach
             @endif
 
-
-
                 @if($id == 2 and count($Complete)>0)
                     {{ $Complete->links() }}
                 @endif
@@ -147,13 +139,6 @@
                             {{ $InProcess->links("pagination::bootstrap-4") }}
                         @endif
                     </div>
-{{--                    <a class="page-item-sign" href="#">&lt;</a>--}}
-{{--                    <a class="page-item page-item-first" href="#">1</a>--}}
-{{--                    <a class="page-item" href="#">2</a>--}}
-{{--                    <a class="page-item" href="#">3</a>--}}
-{{--                    <a class="page-item" href="#">...</a>--}}
-{{--                    <a class="page-item page-item-last" href="#">7</a>--}}
-{{--                    <a class="page-item-sign" href="#">&gt;</a>--}}
                 </div>
             </div>
         </div>

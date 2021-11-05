@@ -36,19 +36,7 @@ class PasswordResetLinkController extends Controller
             'email' => 'required|email',
         ]);
 
-        // We will send the password reset link to this user. Once we have attempted
-        // to send the link, we will examine the response then see the message we
-        // need to show to the user. Finally, we'll send out a proper response.
 
-
-//        $status = Password::sendResetLink(
-//            $request->only('email')
-//        );
-//
-//        return $status == Password::RESET_LINK_SENT
-//                    ? back()->with('status', __($status))
-//                    : back()->withInput($request->only('email'))
-//                            ->withErrors(['email' => __($status)]);
         $token = Str::random(64);
         $CheckEmail =  DB::table('users')->select('email')->where("email",$request->email)->first();
 
@@ -58,10 +46,6 @@ class PasswordResetLinkController extends Controller
                 ['email' => $request->email, 'token' => $token, 'created_at' => Carbon::now()]
             );
 
-            // Mail::send('customauth.verify', ['token' => $token], function($message) use($request){
-            //     $message->to('a480011@mail.ru');
-            //     $message->subject('Reset Password Notification');
-            // });
             Mail::send('customer.verify',['token' => $token], function($message) use ($request) {
                 $message->from($request->email);
                 $message->to($request->email);

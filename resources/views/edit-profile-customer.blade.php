@@ -33,11 +33,6 @@
                     <label  for="img-file"><img class="upload" src="@if(auth()->user()->img){{ asset('web_sayt/img_customer/'.auth()->user()->img) }} @else {{ asset('web_sayt/img/img-file.svg') }}@endif"  alt=""></label>
                 </div>
 
-{{--                <div class="edit-profile__contact-img ">--}}
-{{--                    <input type="file" id="img-file" name="img-file">--}}
-
-{{--                    <label for="img-file"><img class="upload" src="http://feature.loc/web_sayt/img/img-file.svg" alt=""></label>--}}
-{{--                </div>--}}
                 <div class="form-customer">
                     <div class="create__form ">
                         <div class="form-info">
@@ -89,8 +84,6 @@
 
                                 </div>
                             </div>
-
-
 
 
                                 <div class="user-info create__checkbox user-info-editprofile p-3">
@@ -145,16 +138,6 @@
                                     <div>
                                         <p>Expiration Date <span>*</span></p>
 
-                                        {{--  <select class="fadeIn card-expiry-month" >
-                                                   <option value="select-sanguage">Month</option>
-                                                   <option value="January">January</option>
-                                               </select>--}}
-
-                                        {{--  <select class="fadeIn card-expiry-year">
-                                                   <option value="Year">Year</option>
-                                                   <option value="2021">2021</option>
-                                               </select>--}}
-
                                         <input type="number" style="width: 150px;margin-right: 5px"  class="fadeIn fadeIn card-expiry-month" name="month" placeholder="MM">
                                         <input type="number" style="width: 150px;margin-right: 10px"  class="fadeIn fadeIn card-expiry-year" name="year" placeholder="YYYY">
                                     </div>
@@ -171,12 +154,6 @@
                                         <div class='alert-danger alert'>Fix the errors before you begin</div>
                                     </div>
                                 </div>
-
-                                {{--   <div class="user-info create__checkbox flex-container check_addcard check-input edite-card-check">
-                                       <input type="checkbox" name="male" value="Remember me" class="lg-sg__checkin" checked><label
-                                           for="remember"></label>
-                                       <p>Save Credit card information for the next time.</p>
-                                   </div>--}}
 
                                 <div class="lg-sg__button  edit-prof-cust edit-profile-save">
                                     <button class="btn btn-success btn-lg btn-block" type="submit">Add</button>

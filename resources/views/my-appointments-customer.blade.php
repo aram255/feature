@@ -111,12 +111,9 @@
 
 
             <!-- Complete -->
-                {{--                <div class="my-appointments__complete-process d-none">--}}
                 @if($id == 2  and count($Complete)>0)
 
                     @foreach($Complete as $keyInComplete  => $InCompleteVal)
-
-{{--                        {{dd($InCompleteVal->meeting_id)}}--}}
                         <div class="modal fade LeaveReview" id="LeaveReview{{$InCompleteVal->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                             <div class="modal-dialog modal-dialog-centered" role="document">
                                 <div class="modal-content">
@@ -192,24 +189,6 @@
 
                               <input type="hidden" class="meeting_id" value="{{$InCompleteVal->id}}">
                               <input type="hidden" class="practitioner_id" value="{{$InCompleteVal->practitioner_id}}">
-{{--                                 <span class="gl-star-rating gl-star-rating--ltr " data-star-rating="">--}}
-{{--                                   <select class="star-rating">--}}
-{{--                                      <option value="5">5.0</option>--}}
-{{--                                      <option value="4">4.0</option>--}}
-{{--                                      <option value="3">3.0</option>--}}
-{{--                                      <option value="2">2.0</option>--}}
-{{--                                      <option value="1">1.0</option>--}}
-{{--                                   </select>--}}
-
-{{--                                   <span class="gl-star-rating--stars s50" role="tooltip" aria-label="5.0">--}}
-
-{{--                                      <span data-index="0" data-value="1" class="gl-active" style="font-size: 28px;"></span>--}}
-{{--                                      <span data-index="1" data-value="2" class="gl-active"></span>--}}
-{{--                                      <span data-index="2" data-value="3" class="gl-active"></span>--}}
-{{--                                      <span data-index="3" data-value="4" class="gl-active"></span>--}}
-{{--                                      <span data-index="4" data-value="5" class="gl-selected gl-active"></span>--}}
-{{--                                   </span>--}}
-{{--                                </span>--}}
                                  @if(isset($ReviewRate[$keyInComplete]->rate))
                                     <span class="gl-star-rating gl-star-rating--ltr " data-star-rating="">
                                        <select class="star-rating">
@@ -296,13 +275,6 @@
                             {{ $InProcess->links("pagination::bootstrap-4") }}
                         @endif
                     </div>
-                    {{--                    <a class="page-item-sign" href="#">&lt;</a>--}}
-                    {{--                    <a class="page-item page-item-first" href="#">1</a>--}}
-                    {{--                    <a class="page-item" href="#">2</a>--}}
-                    {{--                    <a class="page-item" href="#">3</a>--}}
-                    {{--                    <a class="page-item" href="#">...</a>--}}
-                    {{--                    <a class="page-item page-item-last" href="#">7</a>--}}
-                    {{--                    <a class="page-item-sign" href="#">&gt;</a>--}}
                 </div>
             </div>
         </div>
@@ -323,8 +295,6 @@
     <script src="{{ asset('web_sayt/js/star-rating.js') }}"></script>
     <script src="{{ asset('web_sayt/js/star-run.js') }}"></script>
 
-
-
     <script>
         $(document).ready(function() {
 
@@ -332,46 +302,6 @@
              // alert($(this).val());
              $('.add_rate').val($(this).val())
             });
-
-            // Add Star
-            {{--$('.gl-active').click(function () {--}}
-
-            {{--    var practitioner_id = $(this).parent().prev().parent().prev().val();--}}
-            {{--    var meeting_id = $(this).parent().prev().parent().prev().prev().val();--}}
-
-            {{--    var star = $(this).attr('data-value');--}}
-            {{--    var _token = $('input[name="_token"]').val();--}}
-            {{--    // alert(practitioner_id)--}}
-            {{--    $.ajax({--}}
-            {{--        url: "{{route('add-star',[app()->getLocale()])}}",--}}
-            {{--        type: "POST",--}}
-            {{--        data: {--}}
-            {{--            star: star,--}}
-            {{--            practitioner_id: practitioner_id,--}}
-            {{--            meeting_id:meeting_id,--}}
-            {{--            _token:_token--}}
-            {{--        },--}}
-            {{--        success: function (data) {--}}
-            {{--            console.log(data)--}}
-
-            {{--            if(data.success)--}}
-            {{--            {--}}
-            {{--                $("#add_star").modal("show");--}}
-            {{--            }--}}
-
-            {{--            if(data.error)--}}
-            {{--            {--}}
-
-            {{--                $("#no_add_star").modal("show");--}}
-            {{--            }--}}
-
-            {{--        },--}}
-            {{--        error: function(returnval) {--}}
-            {{--          //  alert('The tag you selected has not been added to your list, or it has already been added.');--}}
-            {{--            $("#has_already_been_added").modal("show");--}}
-            {{--        }--}}
-            {{--    });--}}
-            {{--})--}}
 
             $('input[type="radio"],input[type="checkbox"],#state').on('change', function () {
                 $(this).closest("form").submit();

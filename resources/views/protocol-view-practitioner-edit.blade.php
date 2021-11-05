@@ -39,20 +39,6 @@
                     <div class="protocol__title">
                         <p class="protocol__title-p">Protocol</p>
                     </div>
-                    {{--                    <div class="user-info">--}}
-                    {{--                        <select class="fadeIn" id="country" name="country_id" onchange="location = this.value;">--}}
-                    {{--                            <option value="" selected hidden>Choose Protocol</option>--}}
-                    {{--                        @foreach($GetProtocol as $key => $ValProtocol)--}}
-                    {{--                            <option value="{{route('view-protocol-practitioner',[--}}
-                    {{--                                     app()->getLocale(),--}}
-                    {{--                                    'user_id'      => $ValProtocol->user_id,--}}
-                    {{--                                    'practitioner_id' => session()->get('UserID'),--}}
-                    {{--                                    'service_id' => $ValProtocol->service_id--}}
-                    {{--                                    ])}}" >Protocol {{$key}}</option>--}}
-                    {{--                        @endforeach--}}
-                    {{--                        </select>--}}
-
-                    {{--                    </div>--}}
                     <div class="protocol__section">
                         <div class="protocol__section-heading">
                             <div class="protocol__section-title">Heading</div>
@@ -94,18 +80,6 @@
                                                     <th class="protocol-product-table-tbody-tr-th">Product title:</th>
                                                     <td class="protocol-product-table-tbody-tr-td">{{$ValProduct->title_product}}</td>
                                                 </tr>
-{{--                                                <tr>--}}
-{{--                                                    <th class="protocol-product-table-tbody-tr-th">Brand:</th>--}}
-{{--                                                    <td class="protocol-product-table-tbody-tr-td">{{$ValProduct->brand}}</td>--}}
-{{--                                                </tr>--}}
-{{--                                                <tr>--}}
-{{--                                                    <th class="protocol-product-table-tbody-tr-th">Dosage:</th>--}}
-{{--                                                    <td class="protocol-product-table-tbody-tr-td">{{$ValProduct->dosage}}</td>--}}
-{{--                                                </tr>--}}
-{{--                                                <tr>--}}
-{{--                                                    <th class="protocol-product-table-tbody-tr-th">Instructions:</th>--}}
-{{--                                                    <td class="protocol-product-table-tbody-tr-td">{{$ValProduct->instructions}}</td>--}}
-{{--                                                </tr>--}}
 
                                                 <tr>
                                                     <th class="protocol-product-table-tbody-tr-th">Link:</th>

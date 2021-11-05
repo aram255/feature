@@ -36,28 +36,6 @@ i
 @section('content')
     <script>var body = document.body; body.classList.add("body");</script>
 
-
-
-
-
-
-
-
-{{--    <div class="dropdown">--}}
-{{--        <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">--}}
-{{--            Dropdown button--}}
-{{--        </button>--}}
-{{--        <div class="dropdown-menu">--}}
-{{--            @foreach($GetProtocol as $key => $ValProtocol)--}}
-{{--                <a class="dropdown-item"  title="{{$ValProtocol->user_id}}" data-toggle="{{$ValProtocol->service_id}}">Protocol {{$key}}</a>--}}
-{{--            @endforeach--}}
-{{--        </div>--}}
-{{--    </div>--}}
-
-
-
-
-
     <main class="main mt-5">
         <form id="protocol" action="{{route('add-protocol',[app()->getLocale()])}}" method="post" enctype="multipart/form-data">
         <div class="container">
@@ -81,7 +59,6 @@ i
                                 Choose Protocol <i class="fas fa-chevron-down ml-2"></i>
                             </button>
                             <div class="dropdown-menu w-100">
-{{--                                {{dd($GetProtocol)}}--}}
                                 @foreach($ShowProtocol as $key => $ValProtocol)
 
                                     <a id="{{$ValProtocol->meeting_id}}" class="dropdown-item click_a"  title="{{$ValProtocol->user_id}}" data-toggle="{{$ValProtocol->service_id}}">Protocol {{$key}}</a>
@@ -110,25 +87,6 @@ i
 
             </div>
         </div>
-{{--        <div class="my-plan-background">--}}
-{{--            <img class="load img-fluid" src="{{ asset('web_sayt/img/protocol-img/Group 2004.svg') }}" alt="img" >--}}
-{{--            <div class="d-flex justify-content-center align-items-center mt-5">--}}
-{{--                <div class="content mt-5">--}}
-{{--                    <div class="content-background">--}}
-
-{{--                        <div class="d-block content-input remove_another" id="protocol__section-heading-text-another0">--}}
-{{--                            <div class="input-group content-input-group ml-4 mb-3">--}}
-{{--                                <input type="text" class="form-control form-input ml-4" name="another[]" aria-label="Text input with checkbox">--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
-{{--                        <div class="d-flex mt-5" id="add-text-another">--}}
-{{--                            <p class="add-section" >Add Another Section</p>--}}
-{{--                            <i class="fas fa-plus-circle ml-4 mt-2 add-icon"></i>--}}
-{{--                        </div>--}}
-{{--                    </div>--}}
-{{--                </div>--}}
-{{--            </div>--}}
-{{--        </div>--}}
 
             <div class="my-plan-background">
                 <img class="load img-fluid" src="http://new-feature/web_sayt/img/protocol-img/Group 2004.svg" alt="img">
@@ -264,7 +222,7 @@ i
                         $(".product_remove").remove();
                         $(".remove_link").remove();
                         $(".remove_another").remove();
-                      //  $('.diet-content-container').remove();
+
 
                         $.each(data.ProtocolAnother, function(k_another, v_another) {
 
@@ -296,9 +254,6 @@ i
                                 var g  = (Math.floor(Math.random() * (9999)))
 
                             })
-                                // $('#add-product').attr('data-id', 222);
-
-
 
                          $('.product').append(
                             "<div class='product-item1 product_remove' id='protocol__section-product-cont"+k_product+"'>"+

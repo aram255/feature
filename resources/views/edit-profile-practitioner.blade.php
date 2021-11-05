@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="{{ asset('web_sayt/css/multiSelect.css') }}">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="stylesheet" href="{{ asset('web_sayt/css/service.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('web_sayt/maps/style.css') }}" />
 @endsection
 
 @section('title', __('site.Home') )
@@ -195,6 +196,34 @@
                             <p class="user-info-p">About me</p>
                             <textarea class="fadeIn" name="description" rows="6" cols="100" style="resize: none;">{{$Practitioners->description}}</textarea>
                         </div>
+                        <div>
+                            <div>
+                                <div id="title" style="display: none">Autocomplete search</div>
+                                <div style="display: none;" id="type-selector" class="pac-controls">
+                                    <input style="display: none;"
+                                           type="radio"
+                                           name="type"
+                                           id="changetype-all"
+                                           checked="checked"
+                                    />
+                                    <label for="changetype-all">All</label>
+
+
+                                </div>
+                                <!-- Map -->
+                                <div class="pac-card map-pac-card"  style="width: 90%;top: 50px">
+                                    <div id="pac-container">
+                                        <input id="pac-input" type="text" placeholder="Enter a location" />
+                                    </div>
+
+                                    <br />
+
+                                </div>
+
+                            </div>
+                            <div id="map" style="width:100%;max-width: 924px;height: 300px;margin:0 auto;border-radius: 10px"></div>
+                        </div>
+
                     </div>
                 </div>
             </div>
@@ -203,6 +232,16 @@
                 <input type="submit"  class="btn bg-yellow" value="Save">
             </div>
         </form>
+
+
+
+
+
+
+        <div id="infowindow-content">
+            <span id="place-name" class="title"></span><br />
+            <span id="place-address"></span>
+        </div>
     </section>
 
     <section>
@@ -305,15 +344,7 @@
                                             <button class="bg-yellow br-10 px-4 py-2 fs-16 mt-4 save">Save</button>
                                         </div>
                                     </form>
-{{--                                    <script>--}}
-{{--                                        $('.removeee').on('click',function () {--}}
 
-{{--                                            if (confirm("2555 Are you sure you want to remove it?")) {--}}
-{{--                                                $(this).attr("href", "http://www.google.com/")--}}
-{{--                                            }--}}
-{{--                                        })--}}
-
-{{--                                    </script>--}}
                                 @endforeach
 
                             </div>
@@ -323,6 +354,8 @@
                 </div>
             </div>
         </div>
+
+
     </section>
         @endsection
 
@@ -332,14 +365,11 @@
             <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
             <script src="{{ asset('web_sayt/js/star-rating.js') }}"></script>
             <script type="text/javascript" src="{{ asset('web_sayt/js/jquery.js') }}"></script>
+            <script src="{{ asset('web_sayt/maps/index.js') }}"></script>
             <script type="text/javascript" src="{{ asset('web_sayt/js/bootstrap/bootstrap.min.js') }}"></script>
             <script type="text/javascript" src="{{ asset('web_sayt/js/bootstrap/bootstrap.bundle.min.js') }}"></script>
             <script type="text/javascript" src="{{ asset('web_sayt/js/owl.carousel.min.js') }}"></script>
             <script type="text/javascript" src="{{ asset('web_sayt/js/carusel.js') }}"></script>
-{{--            <script src="{{ asset('web_sayt/js/filter.js') }}"></script>--}}
-            <script type="text/javascript" src="{{ asset('web_sayt/js/script.js') }}"></script>
-{{--            <script type="text/javascript" src="{{ asset('web_sayt/js/slidebar.js') }}"></script>--}}
-
             <script>
                 $(document).ready(function(){
                     $(function() {
@@ -364,9 +394,6 @@
                       }
                   });
               })
-
-
-
 
 
                     $('.remove_service_id').on('click',function () {
@@ -584,11 +611,10 @@
                                     _token:_token
                                 },
                                 success: function (data) {
-                                    console.log(data)
-                                    //alert("The language you selected has been added.");
+
                                 },
                                 error: function(returnval) {
-                                    //alert('The language you selected has not been added.');
+
                                 }
                             });
                         },
@@ -609,11 +635,10 @@
                                     _token:_token
                                 },
                                 success: function (data) {
-                                    console.log(data)
-                                    //alert("Your specified language removed.");
+
                                 },
                                 error: function(returnval) {
-                                    //alert('The language you specified was not removed.');
+
                                 }
                             });
 
@@ -627,13 +652,7 @@
                     multipleCancelButton.passedElement.element.addEventListener(
                         'removeItem',
                         function(event) {
-                            // console.log('removeItem');
-                            // do something creative here...
-                            //console.log(event.detail.id);
-                             console.log(event.detail.value);
-                            // console.log(event.detail.label);
-                            // console.log(event.detail.customProperties);
-                            // console.log(event.detail.groupValue);
+
                             var _token = $('input[name="_token"]').val();
                             $.ajax({
                                 url: "{{route('delete-tag-management',[app()->getLocale()])}}",
@@ -643,11 +662,10 @@
                                     _token:_token
                                 },
                                 success: function (data) {
-                                    console.log(data)
-                                    // alert("Your tag has been removed.");
+
                                 },
                                 error: function(returnval) {
-                                    // alert('Your tag has not been removed.');
+
                                 }
                             });
                         },
@@ -657,13 +675,6 @@
                     multipleCancelButton.passedElement.element.addEventListener(
                         'addItem',
                         function(event) {
-                          //  console.log('add');
-                            // do something creative here...
-                           // console.log(event.detail.id);
-                            console.log(event.detail.value);
-                            // console.log(event.detail.label);
-                            // console.log(event.detail.customProperties);
-                            // console.log(event.detail.groupValue);
                             var _token = $('input[name="_token"]').val();
                             $.ajax({
                                 url: "{{route('add-tag-my-list-management',[app()->getLocale()])}}",
@@ -673,11 +684,10 @@
                                     _token:_token
                                 },
                                 success: function (data) {
-                                    console.log(data)
-                                    // alert("The tag you selected has been added to your list.");
+
                                 },
                                 error: function(returnval) {
-                                    // alert('The tag you selected has not been added to your list, or it has already been added.');
+
                                 }
                             });
                         },
@@ -737,5 +747,10 @@
                     reader.readAsDataURL(files[0]);
                 });
             </script>
+
+            <script
+                src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDtOVd66AerMgd0A-mwKEFqdBQTrKGfngc&callback=initMap&libraries=places&v=weekly"
+                async
+            ></script>
 
 @endsection

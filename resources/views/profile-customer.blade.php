@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="{{ asset('web_sayt/css/service.css') }}">
     <link rel="stylesheet" href="{{ asset('web_sayt/css/css/responsive.css') }}">
     <script src="{{ asset('web_sayt/js/jquery.js') }}"></script>
-
+    <link rel="stylesheet" type="text/css" href="{{ asset('web_sayt/maps/style.css') }}" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/fullcalendar.css" />
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
@@ -40,18 +40,6 @@
             vertical-align: top;
             line-height: 0px;
         }
-        /*.activeNull{*/
-        /*    background-color: #569e66;*/
-        /*    border: 1px solid #35e74d !important;*/
-        /*}*/
-
-        /*div > .activeNull .fc-content{*/
-        /*    color:#80b68c  !important;*/
-        /*}*/
-
-        /*td  .activeNull{*/
-        /*    color: red !important;*/
-        /*}*/
 
         .activeNull{
             background-color: #569e66 !important;
@@ -80,8 +68,6 @@
                     <div class="profile-customer__blok1-info">
                         <div class="person__info-cont1">
                             <div class="edit-profile__contact-img" style="border-radius:0;">
-{{--                                <input type="file" id="img-file" name="img-file">--}}
-
                                 <label for="img-file"><img class="upload info_imgg" src="@if(auth()->user()->img){{ asset('web_sayt/img_customer/'.auth()->user()->img) }} @else {{ asset('web_sayt/img/img-file.svg') }}@endif" alt=""></label>
                             </div>
                             <div class="person__info-name">
@@ -188,10 +174,6 @@
                                                 <input type="hidden" name="phone_number" value="{{$InProcessVal->phone_number}}">
                                                 <input type="hidden" name="practitioner_id" value="{{$InProcessVal->id}}">
 
-                                                {{--                                                <button--}}
-{{--                                                    class="profile-customer__my-appointments-button my-appointments-person__complete-process-button btn bg-yellow detail-btn" data-toggle="modal" data-target="#myModal" data-id="{{ $InProcessVal->id }}">Edit--}}
-{{--                                                </button>--}}
-
                                                 @php
                                                     $date1 = $InProcessVal->create;
                                                     $date2 = now()->toDateTimeString();
@@ -213,14 +195,6 @@
                                     </div>
                                 </div>
                             </div>
-
-{{--                                @php--}}
-{{--                                    $t1 = strtotime($InProcessVal->create);--}}
-{{--                                    $t2 = strtotime(now()->toDateTimeString() );--}}
-{{--                                    $diff = $t2 - $t1;--}}
-{{--                                   // echo $hours = $diff / ( 60 * 60 );--}}
-{{--echo floor($diff).'<br>';--}}
-{{--                                @endphp--}}
                             @endforeach
                         @endif
 
@@ -228,15 +202,6 @@
                         @if(count($InProcess)>0)
                             {{ $InProcess->links() }}
                         @endif
-{{--                        <div class="my-appointments__pagination">--}}
-{{--                            <a class="page-item-sign" href="#">&lt;</a>--}}
-{{--                            <a class="page-item page-item-first" href="#">1</a>--}}
-{{--                            <a class="page-item" href="#">2</a>--}}
-{{--                            <a class="page-item" href="#">3</a>--}}
-{{--                            <a class="page-item" href="#">...</a>--}}
-{{--                            <a class="page-item page-item-last" href="#">7</a>--}}
-{{--                            <a class="page-item-sign" href="#">&gt;</a>--}}
-{{--                        </div>--}}
                     </div>
 
                     <div class="profile-customer-favorites">
@@ -284,8 +249,6 @@
                                              <span class="person__info-skin-tag">{{$TegVal->name}}</span>
                                             @endforeach
                                         </div>
-{{--                                        <div class="person__info-rate">HOURLY RATE FROM</div>--}}
-{{--                                        <div class="person__info-aed">AED <span class="person__info-aed-number">42.24</span></div>--}}
                                     </div>
                                         <div class="person__info-heart active active-pr" id="{{$PractitionerFavoriteVal->partit_id}}"></div>
                                 </div>
@@ -293,7 +256,6 @@
                                     <ul class="person__content-nav">
                                         <li class="borderbg"><a class="person__content-nav-category active">Video</a></li>
                                         <li class="borderbg"><a class="person__content-nav-category">Intro</a></li>
-{{--                                        <li class="borderbg"><a class="person__content-nav-category">Calendar</a></li>--}}
                                     </ul>
 
                                     <div class="person__content-video">
@@ -314,23 +276,10 @@
                                         <a class="profile-customer-favorites-social-a" href="#"><i class="fab fa-linkedin-in"></i></a>
                                     </div>
                                 </div>
-                                <!-- <div class="profile-customer-favorites-social"> -->
-
-                                <!-- </div> -->
-
                             </div>
                         </div>
                             @include('profile-customer.service-list')
                         @endforeach
-{{--                        <div class="profile-customer__pagination">--}}
-{{--                            <a class="page-item-sign" href="#">&lt;</a>--}}
-{{--                            <a class="page-item page-item-first" href="#">1</a>--}}
-{{--                            <a class="page-item" href="#">2</a>--}}
-{{--                            <a class="page-item" href="#">3</a>--}}
-{{--                            <a class="page-item" href="#">...</a>--}}
-{{--                            <a class="page-item page-item-last" href="#">7</a>--}}
-{{--                            <a class="page-item-sign" href="#">&gt;</a>--}}
-{{--                        </div>--}}
                     </div>
                     <div class="profile-customer-reviews">
                         <div class="profile-customer-reviews__title">
@@ -433,8 +382,7 @@
     </div>
 
 
-
-    <div id="myModal2" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div id="myModal2" class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header border-bottom-0">
@@ -444,34 +392,81 @@
                     <button type="button" class="close position-absolute" data-dismiss="modal" aria-hidden="true" style="right: 20px; top: 16px">×</button>
                     <div class="w-100 text-center mt-4">
                         <h3 id="myModalLabel" class="text-center title">Communication Tool</h3>
+
                         <div class="info-text text-center">
                             Please choose your preferred communication tool
                         </div>
                     </div>
                 </div>
-                <div class="d-flex justify-content-center my-5">
-                    <div id="zoom" class="modal-body mx-4 flex-1">
-                        <a href="#">
-                            <img src="{{ asset('web_sayt/img/zoom-icon-logo.png') }}" alt="">
-                            zoom
-                        </a>
+                <div class="d-flex flex-column my-5">
+                    <div class="d-flex flex-row">
+                        <div id="zoom" class="modal-body mx-4 flex-1">
+                            <a href="#">
+                                <img src="{{ asset('web_sayt/img/zoom-icon-logo.png') }}" alt="">
+                                zoom
+                            </a>
+                        </div>
+                        <div id="open_map" class="modal-body mx-4 flex-1">
+                            <a href="#">
+                                <img src="{{ asset('web_sayt/img/Group 2013.svg') }}" alt="" style="width: 32px; height: 32px">
+                                In-person visit
+                            </a>
+                        </div>
                     </div>
-                    <div id="offline" class="modal-body mx-4 flex-1">
-                        <a href="#">
-                            <img src="{{ asset('web_sayt/img/Group 2013.svg') }}" alt="" style="width: 32px; height: 32px">
-                            In-person visit
-                        </a>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+    <div id="open_map_modal" class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header border-bottom-0">
+                    <button type="button" class="position-absolute back-btn" data-dismiss="modal" aria-hidden="true" style="left: 20px; top: 16px">
+                        <i class="fa fa-angle-left"></i> Back
+                    </button>
+                    <button type="button" class="close position-absolute" data-dismiss="modal" aria-hidden="true" style="right: 20px; top: 16px">×</button>
+                    <div class="w-100 text-center mt-4">
+                        <h3 id="myModalLabel" class="text-center title">View location on map</h3>
+
+                        <div class="info-text text-center"  style="display: flex;justify-content: center;align-items: center">
+                            <img src="{{ asset('web_sayt/img/map-pin.svg') }}" alt="" style="width: 15px; height: 18px;margin-right: 10px">
+
+                            <span>3056 W County Line Rd, Littleton, CO 80129, United States</span>
+                        </div>
                     </div>
+                </div>
+                <div id="map" style="width:100%;max-width: 924px;height: 453px;margin:0 auto;border-radius: 10px"></div>
+                <div style="display:flex;justify-content: flex-end;margin-right: 10px">
+                    <a href="#" class="btn bg-yellow" style="margin:20px 0;border-radius: 10px;width: 124px;" id="offline">Done</a>
+                </div>
+
+                <div id="infowindow-content">
+                    <span id="place-name" class="title"></span><br />
+                    <span id="place-address"></span>
                 </div>
             </div>
         </div>
     </div>
+    </div>
+
+
 
     @include('modal-list')
 @endsection
 
 @section('style')
 
+
+
+    <script src="{{ asset('web_sayt/maps/map.js') }}"></script>
     <script>
         $(document).on('click','.detail-btn', function()  {
 
@@ -485,7 +480,6 @@
             var email          = $(this).prev().prev().prev().prev().prev().val();
             var service_id     = $(this).prev().prev().prev().prev().prev().prev().val();
             var durationn      = $(this).prev().prev().prev().prev().prev().prev().prev().val();
-          //  var password       = $(this).prev().prev().prev().prev().prev().prev().prev().prev().val();
             var join_url       = $(this).prev().prev().prev().prev().prev().prev().prev().prev().prev().val();
             var serviceName    = $(this).prev().prev().prev().prev().prev().prev().prev().prev().prev().prev().prev().val();
             var user_email     =  $(this).prev().prev().prev().prev().prev().prev().prev().prev().prev().prev().prev().prev().val();
@@ -513,7 +507,6 @@ if(service_id == null)
                     center:'title',
                     right:'month,agendaWeek,agendaDay'
                 },
-                //events:'/en/Search/'+ practitionerId+'/'+service_id,
                 events:'/en/Search/'+ practitionerId,
                 selectable:true,
                 selectHelper: true,
@@ -580,15 +573,7 @@ if(service_id == null)
                                     type: 'update'
                                 },
                                 success: function (response) {
-                                    // calendar.fullCalendar('refetchEvents');
-                                    // alert("Event Updated Successfully");
-                                    //
-                                    // if(response.Hour != null)
-                                    // {
-                                    //     alert(response.Hour)
-                                    // }else{
-                                    //     alert("Event Updated Successfully");
-                                    // }
+
                                     calendar.fullCalendar('refetchEvents');
 
 
@@ -598,8 +583,6 @@ if(service_id == null)
                                         {
                                             alert(response.Hour)
                                         }else{
-                                            // alert("Event Updated Successfully");
-
                                             // Show Success Delete
                                             $("#update-success").modal('show');
 
@@ -607,20 +590,15 @@ if(service_id == null)
                                             $("#myModal").modal('hide');
                                         }
                                     }else{
-
-                                        //alert(response.select_error);
                                         // Show Error No Repeat Service
                                         $("#select_error").modal('show');
 
                                         // Close Select Meeting
                                         $("#myModal2").modal('hide');
-                                        //  alert(data.select_error);
                                     }
 
                                 },
                                 error: function(data) {
-                                    console.log(data)
-                                    // alert('Your appointment has not been created');
                                     // Show Error No not been created
                                     $("#not-been-created").modal('show');
 
@@ -650,15 +628,7 @@ if(service_id == null)
                                     type: 'update'
                                 },
                                 success: function (response) {
-                                    // calendar.fullCalendar('refetchEvents');
-                                    // alert("Event Updated Successfully");
-                                    //
-                                    // if(response.Hour != null)
-                                    // {
-                                    //     alert(response.Hour)
-                                    // }else{
-                                    //     alert("Event Updated Successfully");
-                                    // }
+
                                     calendar.fullCalendar('refetchEvents');
                                     console.log(response.select_error)
 
@@ -668,8 +638,6 @@ if(service_id == null)
                                         {
                                             alert(response.Hour)
                                         }else{
-                                           // alert("Event Updated Successfully");
-
                                             // Show Success Delete
                                             $("#update-success").modal('show');
 
@@ -677,20 +645,15 @@ if(service_id == null)
                                             $("#myModal").modal('hide');
                                         }
                                     }else{
-
-                                        //alert(response.select_error);
                                         // Show Error No Repeat Service
                                         $("#select_error").modal('show');
 
                                         // Close Select Meeting
                                         $("#myModal2").modal('hide');
-                                        //  alert(data.select_error);
                                     }
 
                                 },
                                 error: function(data) {
-                                    console.log(data)
-                                   // alert('Your appointment has not been created');
                                     // Show Error No not been created
                                     $("#not-been-created").modal('show');
 
@@ -722,7 +685,6 @@ if(service_id == null)
                                 element[0].setAttribute('active', 'activeUser');
                                 let div = document.getElementsByClassName('fc-content-col');
                                 let aArray = div[0].childNodes[1].childNodes;
-                                // console.log('5555555555',aArray[0]?.getAttribute('active'));
                                 for(let key of aArray) {
                                     if (key.getAttribute('active') === 'activeUser') {
                                         let aDiv = document.createElement('div');
@@ -788,7 +750,6 @@ if(service_id == null)
                         $("#editHour").modal("show");
                     }else{
 
-                    // if (confirm("Are you sure you want to remove it?")) {
                         $.ajax({
                             url: "{{ route('zoom-delete',app()->getLocale()) }}",
                             type: "POST",
@@ -799,7 +760,6 @@ if(service_id == null)
                             },
                             success: function (response) {
                                 calendar.fullCalendar('refetchEvents');
-                                //alert("Event Deleted Successfully");
 
                                 // Show Success Delete
                                 $("#delete-success").modal('show');
@@ -808,8 +768,6 @@ if(service_id == null)
                                 $("#myModal").modal('hide');
                             },
                             error: function(returnval) {
-                               // alert('Your appointment has not been deleted');
-
                                 // Show Error Delete
                                 $("#delete-error").modal('show');
 
@@ -817,11 +775,8 @@ if(service_id == null)
                                 $("#myModal").modal('hide');
                             }
                         })
-                    // }
                 }
                 }else{
-                    //alert('You can not delete this meeting because you did not add it.')
-
                     // Show Error Delete
                     $("#delete-did-not-add-it").modal('show');
 
@@ -846,12 +801,10 @@ if(service_id == null)
     <script type="text/javascript" src="{{ asset('web_sayt/js/readMoreJS.min.js') }}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/fullcalendar.js"></script>
-
-{{--    <script>--}}
-{{--        $('.person__info-heart').click(function () {--}}
-{{--            $(this).parent().parent().parent().remove();--}}
-{{--        });--}}
-{{--    </script>--}}
-
+    <!-- Async script executes immediately and must be after any DOM elements used in callback. -->
+    <script
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDtOVd66AerMgd0A-mwKEFqdBQTrKGfngc&callback=initMap&libraries=places&v=weekly"
+        async
+    ></script>
 
 @endsection

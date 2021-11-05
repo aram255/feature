@@ -42,31 +42,6 @@ class PractitionersController extends Controller
         include  base_path("vendor/autoload.php");
         $this->middleware('CheckLoginPractitioner');
 
-        /*
-        $client = new \GuzzleHttp\Client();
-
-        $response = $client->request('GET','https://api.typeform.com/forms/XUM3YVna/responses', [
-            "headers" => [addEditProtocol
-                "Authorization" => "Bearer FV9vg5moHUTBwAjPV987cErmTPv4AHtX7cqXf4rhcwjW"
-            ]
-        ]);
-
-
-        $data = json_decode($response->getBody());
-        $answers = array_column($data->items, 'answers');
-        $mail=[];
-
-        foreach ($answers as $val)
-        {
-            $email =  array_column($val, 'email');
-
-            if (isset($email[0])) {
-                $mail[] = $email[0];
-            }
-        }
-*/
-//        dd($mail);
-
     }
 
     public function getLanguage()
@@ -194,7 +169,6 @@ class PractitionersController extends Controller
 
         $Rate = floor($ReviewRate);
 
-//        dd($Rate);
 
         $Speciality = $this->speciality();
 
@@ -242,9 +216,7 @@ class PractitionersController extends Controller
     public function calendarDeleteFreeDate(request $request)
     {
 
-//        $GetList = ZoomModel::where('practitioner_id',$request->practitioner_id)->where('join_url','=',null)->get();
-//        foreach ($GetList as $GetFreeId)
-//        {
+
 
         $CheckSelectMeeting = ZoomModel::where('practitioner_id',session()->get('UserID'))
             ->where('start',$request->start)
@@ -263,19 +235,10 @@ class PractitionersController extends Controller
                 return response()->json(['error' => 'No puedes eliminarlo porque ya está arreglado.']);
         }
 
-//        if(empty($CheckSelectMeeting))
-//        {
-//            $Delete = ZoomModel::where('id',$request->event_id)->where('join_url','=',null)->first();
-//            $Delete->delete();
-//        }
-
-       // return response()->json(['success'=>'The list of your busy hours has been removed.','error'=>'The list of your busy hours has not been removed.']);
     }
 
     public  function addTagMyListManagements(request $request)
     {
-
-
         $AddProtocol = new TegManagementsPractitionerModel;
         $AddProtocol->practitioner_id = session()->get('UserID');
         $AddProtocol->teg_managements_id    = $request->teg_managements_id;
@@ -308,7 +271,6 @@ class PractitionersController extends Controller
         $Add->name       = $request->add_teg;
         $Add->save();
 
-       // return back()->withInput();
         return response()->json($Add);
     }
 
@@ -371,15 +333,6 @@ class PractitionersController extends Controller
     public function myAppointmentsPractitioners(request $request,$lang,$id)
     {
 
-     //  dd(date('Y-m-d H:i:s'));
-
-        //$tz = 'Asia/Russian';
-//        $timestamp = time();
-//        $dt = new DateTime("now", new DateTimeZone($tz)); //first argument "must" be a string
-//        $dt->setTimestamp($timestamp); //adjust the object to correct timestamp
-//        echo $dt->format('Y-m-d H:i:s');
-
-
         $InProcess = DB::table('users')
                      ->join('zoom_meetings_list', 'users.id', 'zoom_meetings_list.user_id')
                      ->where('zoom_meetings_list.practitioner_id',$request->session()->get('UserID'))
@@ -393,14 +346,9 @@ class PractitionersController extends Controller
         $Complete  = DB::table('users')
                      ->join('zoom_meetings_list', 'users.id', 'zoom_meetings_list.user_id')
                      ->where('zoom_meetings_list.practitioner_id',$request->session()->get('UserID'))
-          //  ->join('protocol_heading','protocol_heading.meeting_id','zoom_meetings_list.id')
-                    // ->whereDate("zoom_meetings_list.start", "<=",$dt->format('Y-m-d H:i:s'))
                      ->whereDate("zoom_meetings_list.start", "<=",date('Y-m-d H:i:s'))
-            //->GroupBy('user_id','practitioner_idd','user_img','service_id','users.first_name','users.last_name','services.title','zoom_meetings_list.title','zoom_meetings_list.meeting_id')
                      ->orderBy('zoom_meetings_list.id','DESC')
                      ->paginate(5);
-
-    ;
 
 
             $StatusProtocol = DB::table('protocol_heading')->where('practitioner_id',$request->session()->get('UserID'))->get();
@@ -585,7 +533,6 @@ class PractitionersController extends Controller
     public function EditProfilePractitionerPost(request $request)
     {
 
-//        dd($request->file('img'));
         $EditPractitioner = PractitionersModel::where('id', session()->get('UserID'))->first();
         if(empty($request->file('img')) and empty($request->file('video')))
         {
@@ -608,9 +555,6 @@ class PractitionersController extends Controller
             $ImgName = rand() . '.' . $request->file('img')->getClientOriginalExtension();
             $request->file('img')->move(public_path('web_sayt/img_practitioners/'), $ImgName);
 
-//            if (File::exists(public_path('web_sayt/img_practitioners/' . $EditPractitioner->img))) {
-//                File::delete(public_path('web_sayt/img_practitioners/' . $EditPractitioner->img));
-//            }
 
             $EditPractitioner->img = $ImgName;
             $EditPractitioner->first_name   = $request->first_name;
@@ -629,9 +573,6 @@ class PractitionersController extends Controller
             $VideoName = rand() . '.' . $request->file('video')->getClientOriginalExtension();
             $request->file('video')->move(public_path('web_sayt/video_practitioners/'), $VideoName);
 
-//            if (File::exists(public_path('web_sayt/video_practitioners/' . $EditPractitioner->video))) {
-//                File::delete(public_path('web_sayt/video_practitioners/' . $EditPractitioner->video));
-//            }
 
             $EditPractitioner->video = $VideoName;
             $EditPractitioner->first_name   = $request->first_name;
@@ -650,16 +591,10 @@ class PractitionersController extends Controller
             $ImgName = rand() . '.' . $request->file('img')->getClientOriginalExtension();
             $request->file('img')->move(public_path('web_sayt/img_practitioners/'), $ImgName);
 
-//            if (File::exists(public_path('web_sayt/img_practitioners/' . $EditPractitioner->img))) {
-//                File::delete(public_path('web_sayt/img_practitioners/' . $EditPractitioner->img));
-//            }
 
             $VideoName = rand() . '.' . $request->file('video')->getClientOriginalExtension();
             $request->file('video')->move(public_path('web_sayt/video_practitioners/'), $VideoName);
-//
-//            if (File::exists(public_path('web_sayt/video_practitioners/' . $EditPractitioner->video))) {
-//                File::delete(public_path('web_sayt/video_practitioners/' . $EditPractitioner->video));
-//            }
+
 
             $EditPractitioner->video = $VideoName;
             $EditPractitioner->img = $ImgName;
@@ -756,12 +691,6 @@ class PractitionersController extends Controller
 
     public function protocol($Lang,$UserID,$ServiceID)
     {
-
-//        $ProtocolHeading =   ProtocolHeading::where('service_id',$ServiceID)
-//                             ->where('user_id',$UserID)
-//                             ->where('practitioner_id',session()->get('UserID'))
-//                             ->first();
-
         return view('protocol');
     }
 
@@ -804,9 +733,6 @@ class PractitionersController extends Controller
 
                 if (empty($request->file('img')[$keyProduct])) {
                     $input['title_product'] = $valProduct;
-                    // $input['brand']  = $request->brand[$keyProduct];
-                    // $input['dosage'] = $request->dosage[$keyProduct];
-                    // $input['instructions'] = $request->instructions[$keyProduct];
                     $input['product_link'] = $request->product_link[$keyProduct];
 
                     $input['user_id'] = $request->user_id;
@@ -816,17 +742,12 @@ class PractitionersController extends Controller
                     ProtocolProduct::create($input);
 
                 } else {
-//            $request->validate([
-//                'img' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-//            ]);
+
 
                     $ImgName[$keyProduct] = rand() . '.' . $request->file('img')[$keyProduct]->getClientOriginalExtension();
                     $request->file('img')[$keyProduct]->move(public_path('web_sayt/img_protocol/'), $ImgName[$keyProduct]);
 
                     $input['title_product'] = $valProduct;
-                    // $input['brand']  = $request->brand[$keyProduct];
-                    // $input['dosage'] = $request->dosage[$keyProduct];
-                    //  $input['instructions'] = $request->instructions[$keyProduct];
                     $input['product_link'] = $request->product_link[$keyProduct];
                     $input['user_id'] = $request->user_id;
                     $input['service_id'] = $request->service_id;
@@ -957,10 +878,7 @@ class PractitionersController extends Controller
 
         foreach($request->text_heading  as $KeyHeading => $ValHeading)
         {
-//            if(isset($request->id_text_heading[$KeyHeading]))
-//            {
                $EditProtocolHeading = DB::table('protocol_heading')->where('service_id',$request->service_id)->where('user_id',$request->user_id)->where('practitioner_id',session()->get('UserID'))->where('id',$request->id_text_heading[$KeyHeading])->update(['text_heading' => $ValHeading]);
-//            }
         }
 
         foreach($request->id_Product  as $KeyProduct => $ValProduct)
@@ -970,9 +888,6 @@ class PractitionersController extends Controller
                 $EditProtocolProduct = $ProtocolProduct = DB::table('protocol_product')->where('service_id', $request->service_id)->where('user_id', $request->user_id)->where('practitioner_id', session()->get('UserID'))->where('id', $ValProduct)
                     ->update([
                         'title_product' => $request->title_product[$KeyProduct],
-                        //'brand' => $request->brand[$KeyProduct],
-                        //'dosage' => $request->dosage[$KeyProduct],
-                       // 'instructions' => $request->instructions[$KeyProduct],
                         'product_link' => $request->product_link[$KeyProduct]
                     ]);
             }else{
@@ -985,9 +900,6 @@ class PractitionersController extends Controller
                 $EditProtocolProduct = $ProtocolProduct = DB::table('protocol_product')->where('service_id', $request->service_id)->where('user_id', $request->user_id)->where('practitioner_id', session()->get('UserID'))->where('id', $ValProduct)
                     ->update([
                         'title_product' => $request->title_product[$KeyProduct],
-                        //'brand' => $request->brand[$KeyProduct],
-                        //'dosage' => $request->dosage[$KeyProduct],
-                        //'instructions' => $request->instructions[$KeyProduct],
                         'product_link' => $request->product_link[$KeyProduct],
                         'img' => $ImgName[$KeyProduct]
                     ]);
@@ -1000,11 +912,9 @@ class PractitionersController extends Controller
                 ->update([
                     'link_title' => $request->link_title[$Keylink],
                     'link_link'  => $request->link_link[$Keylink]
-                   // 'iframe'     => $request->iframe[$Keylink]
                 ]);
         }
 
-;
 
         // Insert
             foreach ($request->another as $keyA => $ValAnother) {
@@ -1035,10 +945,6 @@ class PractitionersController extends Controller
         }
 
 
-
-//if(count($request->id_Product)>0) {
-
-
     $request->validate([
 
         'title_product.*' => 'required',
@@ -1057,7 +963,6 @@ class PractitionersController extends Controller
              if(!empty($valProductID))
              {
                  $input['title_product'] = $request->title_product[$keyProduct];
-
                  $input['product_link'] = $request->product_link[$keyProduct];
                  $input['user_id'] = $request->user_id;
                  $input['service_id'] = $request->service_id;
@@ -1094,7 +999,6 @@ class PractitionersController extends Controller
 
       return back()->with('status','Your data has changed.');
 
-
     }
 
 
@@ -1110,27 +1014,6 @@ class PractitionersController extends Controller
     }
 
 
-//    public function getAutocomplete(Request $request)
-//    {
-//
-//
-//        if($request->get('query'))
-//        {
-//            $query = $request->get('query');
-//            $data = DB::table('teg_managements')
-//                ->where('name', 'LIKE', "%{$query}%")
-//                ->get();
-//            $output = '<ul class="dropdown-menu" style="display:block; position:relative">';
-//            foreach($data as $row)
-//            {
-//                $output .= '
-//       <li><a href="#">'.$row->name.'</a></li>
-//       ';
-//            }
-//            $output .= '</ul>';
-//            echo $output;
-//        }
-//    }
 
     public function confirmMeeting(request $request,$lang,$Code,$Status)
     {

@@ -11,8 +11,5 @@ class TegManagements extends Model
     protected $table="teg_managements";
     public $timestamps = false;
 
-//    public function practitionerTag()
-//    {
-//        return $this->hasMany(TegManagementsPractitionerModel::class, 'teg_managements_id', 'id');
-//    }
+
 }

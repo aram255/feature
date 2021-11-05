@@ -86,8 +86,10 @@
                             </div>
                               @if($CheckCountSelected == 0)
                                     <div class="d-flex justify-content-center mt-5">
-
-                                        <input type="hidden"  value="{{$Services->price}}">
+                                        <input type="hidden" value="{{$Practitioner->lat}}">
+                                        <input type="hidden" value="{{$Practitioner->lng}}">
+                                        <input type="hidden" value="{{$Practitioner->location}}">
+                                        <input type="hidden" class="price"  value="{{$Services->price}}">
                                         <input type="hidden"  value="{{$Practitioner->first_name}} {{$Practitioner->last_name}}">
                                         <input type="hidden"  value="{{$meetingID}}">
                                         <input type="hidden"  value="{{auth()->user()->first_name}}">
@@ -190,7 +192,9 @@
         </div>
     </div>
 
-    <div id="myModal2" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+
+    <div id="myModal2" class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header border-bottom-0">
@@ -200,27 +204,61 @@
                     <button type="button" class="close position-absolute" data-dismiss="modal" aria-hidden="true" style="right: 20px; top: 16px">×</button>
                     <div class="w-100 text-center mt-4">
                         <h3 id="myModalLabel" class="text-center title">Communication Tool</h3>
+
                         <div class="info-text text-center">
                             Please choose your preferred communication tool
                         </div>
                     </div>
                 </div>
-                <div class="d-flex justify-content-center my-5">
-                    <div id="zoom" class="modal-body mx-4 flex-1">
-                        <a href="#">
-                            <img src="{{ asset('web_sayt/img/zoom-icon-logo.png') }}" alt="">
-                            zoom
-                        </a>
+                <div class="d-flex flex-column my-5">
+                    <div class="d-flex flex-row">
+                        <div id="zoom" class="modal-body mx-4 flex-1">
+                            <a href="#">
+                                <img src="{{ asset('web_sayt/img/zoom-icon-logo.png') }}" alt="">
+                                zoom
+                            </a>
+                        </div>
+                        <div id="open_map" class="modal-body mx-4 flex-1">
+                            <a href="#">
+                                <img src="{{ asset('web_sayt/img/Group 2013.svg') }}" alt="" style="width: 32px; height: 32px">
+                                In-person visit
+                            </a>
+                        </div>
                     </div>
-                    <div id="offline" class="modal-body mx-4 flex-1">
-                        <a href="#">
-                            <img src="{{ asset('web_sayt/img/Group 2013.svg') }}" alt="" style="width: 32px; height: 32px">
-                            In-person visit
-                        </a>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+
+    <div id="open_map_modal" class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header border-bottom-0">
+                    <button type="button" class="position-absolute back-btn" data-dismiss="modal" aria-hidden="true" style="left: 20px; top: 16px">
+                        <i class="fa fa-angle-left"></i> Back
+                    </button>
+                    <button type="button" class="close position-absolute" data-dismiss="modal" aria-hidden="true" style="right: 20px; top: 16px">×</button>
+                    <div class="w-100 text-center mt-4">
+                        <h3 id="myModalLabel" class="text-center title">View location on map</h3>
+
+                        <div class="info-text text-center"  style="display: flex;justify-content: center;align-items: center">
+                            <img src="{{ asset('web_sayt/img/map-pin.svg') }}" alt="" style="width: 15px; height: 18px;margin-right: 10px">
+
+                            <span id="location"></span>
+                        </div>
                     </div>
+                </div>
+                <div id="map" style="width:100%;max-width: 924px;height: 453px;margin:0 auto;border-radius: 10px"></div>
+                <div style="display:flex;justify-content: flex-end;margin-right: 10px">
+                    <a href="#" class="btn bg-yellow" style="margin:20px 0;border-radius: 10px;width: 124px;" id="offline">Done</a>
                 </div>
             </div>
         </div>
+    </div>
     </div>
 
     <div class="modal fade show" id="editHour" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-modal="true" >
@@ -242,7 +280,7 @@
 
 @section('style')
     <script type="text/javascript" src="{{ asset('web_sayt/js/jquery.js') }}"></script>
-    <script src="{{ asset('web_sayt/maps/index.js') }}"></script>
+    <script src="{{ asset('web_sayt/maps/map.js') }}"></script>
 
     <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
 
@@ -261,30 +299,13 @@
             var last_name =    $(this).prev().prev().prev().prev().prev().val();
             var first_name =    $(this).prev().prev().prev().prev().prev().prev().val();
             var meetings_id =    $(this).prev().prev().prev().prev().prev().prev().prev().val();
-
-
             var practitioner =    $(this).prev().prev().prev().prev().prev().prev().prev().prev().val();
-            var price =    $(this).prev().prev().prev().prev().prev().prev().prev().prev().prev().val();
-
-
+            var price        =    $(this).prev().prev().prev().prev().prev().prev().prev().prev().prev().val();
+            var location    =    $(this).prev().prev().prev().prev().prev().prev().prev().prev().prev().prev().val();
+            var lng         =    $(this).prev().prev().prev().prev().prev().prev().prev().prev().prev().prev().prev().val();
+            var lat         =    $(this).prev().prev().prev().prev().prev().prev().prev().prev().prev().prev().prev().prev().val();
             var  service_id = $(this).parent().prev().children().children().val();
             var  serviceName =    $("#service_name").val();
-
-
-            // alert('title ' +title)
-            // alert('start ' +start)
-            // alert('end ' +end)
-            // alert('practitionerId ' +practitionerId)
-            // alert('phone_number ' +phone_number)
-            // alert('last_name ' +last_name)
-            // alert('first_name ' +first_name)
-            // alert('email ' +email)
-            // alert('duration ' +duration)
-            // alert('password ' +pasword)
-            // alert('service_id ' +service_id)
-            // alert('LiveDateTime ' +LiveDateTime)
-            // alert('add_user_id ' +add_user_id)
-
 
 
             if(service_id == null)
@@ -309,8 +330,6 @@
                     center:'title',
                     right:'month,agendaWeek,agendaDay'
                 },
-              //  events:'/en/Search/'+ practitionerID+'/'+service_id,
-             //  events:'/en/Search/'+ practitionerID+'/'+service_id+'/'+meetings_id,
                events:'/en/Search/'+ practitionerID,
                 selectable:true,
                 selectHelper: true,
@@ -353,118 +372,115 @@
                         // Close Calendar
                         $("#myModal").modal('hide');
 
-                        // Offline Meeting
-                        {{--$('#offline').click(function () {--}}
-                        {{--    alert('sddsd')--}}
-                        {{--    var  duration = diff_time/(60000);--}}
-                        {{--    //alert(password)--}}
 
-                        {{--    // var title       = prompt('Event Title:');--}}
-                        {{--    //  var pasword     = prompt('Event password:');--}}
-                        {{--    // var duration    = prompt('Event Duration:');--}}
-                        {{--        @if(isset(auth()->user()->id))--}}
-                        {{--    var add_user_id = "{{auth()->user()->id}}";--}}
-                        {{--    @endif--}}
+                        $("#open_map").click(function () {
+
+                            $("#open_map_modal").modal("show");
+                            $("#location").html(location)
+                            $("#myModal2").modal("hide");
+
+                        })
 
 
-                        {{--    $.ajax({--}}
-                        {{--        url: "{{ route('add-offline-meeting',app()->getLocale()) }}",--}}
-                        {{--        type: "POST",--}}
-                        {{--        // data: {--}}
-                        {{--        //     title: serviceName,--}}
-                        {{--        //     start: start,--}}
-                        {{--        //     end: end,--}}
-                        {{--        //     practitionerId: practitionerId,--}}
-                        {{--        //     add_user_id: add_user_id,--}}
-                        {{--        //     phone_number: phone_number,--}}
-                        {{--        //     last_name: last_name,--}}
-                        {{--        //     first_name: first_name,--}}
-                        {{--        //     email: email,--}}
-                        {{--        //     duration: duration,--}}
-                        {{--        //     practitionerID: practitionerID,--}}
-                        {{--        //     service_id: service_id,--}}
-                        {{--        //     LiveDateTime:LiveDateTime,--}}
-                        {{--        //     user_email:user_email,--}}
-                        {{--        //     type: 'add'--}}
-                        {{--        // },--}}
-                        {{--        data: {--}}
-                        {{--            title: serviceName,--}}
-                        {{--            start: start,--}}
-                        {{--            end: end,--}}
-                        {{--            practitionerID: practitionerID,--}}
-                        {{--            add_user_id: add_user_id,--}}
-                        {{--            phone_number: phone_number,--}}
-                        {{--            last_name: last_name,--}}
-                        {{--            first_name: first_name,--}}
-                        {{--            user_email: user_email,--}}
-                        {{--            email: "{{Auth::user()->email}}",--}}
-                        {{--            duration: duration,--}}
-                        {{--            service_id: service_id,--}}
-                        {{--            LiveDateTime:LiveDateTime,--}}
-                        {{--            type: 'add-add',--}}
-                        {{--            too_meet: 'yes'--}}
-                        {{--        },--}}
-                        {{--        success: function (data) {--}}
+                        // Zoom Meeting
+                        $("#offline").click(function () {
 
-                        {{--            calendar.fullCalendar('refetchEvents');--}}
+                            var  duration = diff_time/(60000);
+
+                                @if(isset(auth()->user()->id))
+                            var add_user_id = "{{auth()->user()->id}}";
+                            @endif
+
+                            $.ajax({
+                                url: "{{ route('add-offline-meeting',app()->getLocale()) }}",
+                                type: "POST",
+                                data: {
+                                    title: serviceName,
+                                    start: start,
+                                    end: end,
+                                    practitionerID: practitionerID,
+                                    add_user_id: add_user_id,
+                                    phone_number: phone_number,
+                                    last_name: last_name,
+                                    first_name: first_name,
+                                    user_email: user_email,
+                                    email: "{{Auth::user()->email}}",
+                                    duration: duration,
+                                    service_id: service_id,
+                                    LiveDateTime:LiveDateTime,
+                                    location: location,
+                                    lng:lng,
+                                    lat:lat,
+                                    type: 'add-add',
+                                    too_meet: 'yes'
+                                },
+                                success: function (data) {
+
+                                    calendar.fullCalendar('refetchEvents');
+                                    // console.log(data.select_error)
+
+                                    if(data.select_error == null)
+                                    {
+                                        if(data.NoRepeatService != null)
+                                        {
+                                            // Show Error No Repeat Service
+                                            $("#error-NoRepeatService").modal('hide');
+
+                                            // Close Select Meeting
+                                            $("#myModal2").modal('hide');
+                                        }else{
+
+                                            // Show Success Meeting
+                                            $('#succes-meeting-my-app').modal('show');
+
+                                            $("#open_map_modal").modal('hide');
+
+                                            // Close Select Meeting
+                                            $('#practition').text(practitioner)
+                                            $('#service_n').text(serviceName)
+                                            $('#date_time').text(start)
+                                            $('#prc').text(price)
+
+                                            setTimeout(() => {
+
+                                                var newURL = window.location.protocol + "//" + window.location.host;
+                                                location.replace(newURL+"/en/my-appointments-customer/2");
+                                                //location.replace(newURL+"/en/my-appointments-customer/2/Practitioner/Service_name/Date-time/price");
+                                            }, 3000)
 
 
-                        {{--            if(data.select_error == null)--}}
-                        {{--            {--}}
-                        {{--                if(data.NoRepeatService != null)--}}
-                        {{--                {--}}
-                        {{--                    // alert(data.NoRepeatService)--}}
+                                        }
+                                    }else{
 
-                        {{--                    // Show Error No Repeat Service--}}
-                        {{--                    $("#error-NoRepeatService").modal('hide');--}}
+                                        // Show Error No Repeat Service
+                                        $("#select_error").modal('show');
 
-                        {{--                    // Close Select Meeting--}}
-                        {{--                    $("#myModal2").modal('hide');--}}
-                        {{--                }else{--}}
-                        {{--                    // Show Success Meeting--}}
-                        {{--                    $('#succes-meeting').modal('show');--}}
+                                        // Close Select Meeting
+                                        $("#myModal2").modal('hide');
 
-                        {{--                    // Close Select Meeting--}}
-                        {{--                    $("#myModal2").modal('hide');--}}
-                        {{--                    //alert("Event Created Successfully");--}}
-                        {{--                }--}}
-                        {{--            }else{--}}
-                        {{--                // Show Error No Repeat Service--}}
-                        {{--                $("#select_error").modal('show');--}}
+                                    }
 
-                        {{--                // Close Select Meeting--}}
-                        {{--                $("#myModal2").modal('hide');--}}
-                        {{--                //  alert(data.select_error);--}}
-                        {{--            }--}}
+                                },
+                                error: function(data) {
+                                    // Show Error No not been created
+                                    $("#not-been-created").modal('show');
 
-                        {{--        },--}}
-                        {{--        error: function(data) {--}}
-                        {{--            // alert('Your appointment has not been created');--}}
+                                    // Close Select Meeting
+                                    $("#myModal2").modal('hide');
 
-                        {{--            // Show Error No not been created--}}
-                        {{--            $("#not-been-created").modal('show');--}}
-
-                        {{--            // Close Select Meeting--}}
-                        {{--            $("#myModal2").modal('hide');--}}
-                        {{--        }--}}
-                        {{--    });--}}
-                        {{--})--}}
+                                }
+                            });
+                        });
 
 
                         // Zoom Meeting
                         $("#zoom").click(function () {
 
                          var  duration = diff_time/(60000);
-                         //alert(password)
 
-                       // var title       = prompt('Event Title:');
-                      //  var pasword     = prompt('Event password:');
-                       // var duration    = prompt('Event Duration:');
                             @if(isset(auth()->user()->id))
                         var add_user_id = "{{auth()->user()->id}}";
                         @endif
-
-                     //   if(title !== "" && pasword !== "" && duration !== ""){
 
                             $.ajax({
                                 url: "{{ route('add-zoom-meeting',app()->getLocale()) }}",
@@ -489,13 +505,6 @@
                                 },
                                 success: function (data) {
 
-                                //     calendar.fullCalendar('refetchEvents');
-                                //     alert("Event Created Successfully");
-                                //     console.log(data)
-                                // },
-                                // error: function(returnval) {
-                                //     alert('Your appointment has not been created');
-                                // }
                                     calendar.fullCalendar('refetchEvents');
                                    // console.log(data.select_error)
 
@@ -503,14 +512,12 @@
                                     {
                                         if(data.NoRepeatService != null)
                                         {
-                                            //alert(data.NoRepeatService)
                                             // Show Error No Repeat Service
                                             $("#error-NoRepeatService").modal('hide');
 
                                             // Close Select Meeting
                                             $("#myModal2").modal('hide');
                                         }else{
-                                           // alert("Event Created Successfully");
                                             // Show Success Meeting
                                             $('#succes-meeting-my-app').modal('show');
 
@@ -530,8 +537,6 @@
 
                                         }
                                     }else{
-                                       // alert(data.select_error);
-
                                         // Show Error No Repeat Service
                                         $("#select_error").modal('show');
 
@@ -542,8 +547,6 @@
 
                                 },
                                 error: function(data) {
-                                    //alert('Your appointment has not been created');
-
                                     // Show Error No not been created
                                     $("#not-been-created").modal('show');
 
@@ -552,14 +555,9 @@
 
                                 }
                             });
-
-                        // }else{
-                        //     alert('Empty');
-                        // }
                         });
-                    }else{
-                        // alert('You can not make appointments with back date.');
 
+                    }else{
                         // Show Error with back date
                         $("#with-back-date").modal('show');
 
@@ -568,97 +566,7 @@
                     }
 
                 },
-  {{--              eventRender: function(event, element,start, end, allDay) {--}}
-  {{--                  var us_id = "{{Auth::user()->id}}";--}}
-  {{--                  if(event['status'] == null) {--}}
 
-  {{--// console.log(event)--}}
-  {{--                      setTimeout(() => {--}}
-
-  {{--                          element[0].setAttribute('class', 'activeNull  fc-day-grid-event fc-h-event fc-event fc-start fc-end fc-draggable');--}}
-
-  {{--                          // let day = document.getElementsByClassName('fc-day-grid-event');--}}
-  {{--                          //--}}
-  {{--                          // for (let a of day) {--}}
-  {{--                          //     a.setAttribute('izNull', `${event.id}`)--}}
-  {{--                          //     console.log(a);--}}
-  {{--                          // }--}}
-
-  {{--                          let x = document.querySelector('.fc-event-container');--}}
-  {{--                          x.removeAttribute('class');--}}
-
-
-  {{--                          // let y = document.querySelector('div .fc-event-container');--}}
-  {{--                          // y.removeAttribute('class');--}}
-  {{--                          // alert('edede')--}}
-  {{--                          // x.style.backgroundColor = "red";--}}
-  {{--                          // x.style.color = "white";--}}
-
-  {{--                          // for (let a of day) {--}}
-  {{--                          //     if (event.id === a.getAttribute('id')) {--}}
-  {{--                          //         console.log('000000000000000000', a);--}}
-  {{--                          //         a.style.backgroundColor = "#FED638";--}}
-  {{--                          //         a.style.color = "black";--}}
-  {{--                          //         a.style.border = "1px solid #abab95";--}}
-  {{--                          //     }--}}
-  {{--                          //--}}
-  {{--                          // }--}}
-
-  {{--                      }, 10)--}}
-
-  {{--                      // var ssss =  document.querySelector('.fc-time-grid-event');--}}
-  {{--                      //  ssss.style.backgroundColor = "#00d210ba";--}}
-  {{--                  }else{--}}
-
-  {{--                      if(event['user_id'] == us_id)--}}
-  {{--                      {--}}
-
-  {{--                          setTimeout(() => {--}}
-  {{--                              element[0].setAttribute('class', ' activeUser fc-day-grid-event fc-h-event fc-event fc-start fc-end fc-draggable');--}}
-  {{--                              element[0].setAttribute('active', 'activeUser');--}}
-  {{--                              let div = document.getElementsByClassName('fc-content-col');--}}
-  {{--                              let aArray = div[0].childNodes[1].childNodes;--}}
-  {{--                              // console.log('5555555555',aArray[0]?.getAttribute('active'));--}}
-  {{--                              for(let key of aArray) {--}}
-  {{--                                  if (key.getAttribute('active') === 'activeUser') {--}}
-  {{--                                      let aDiv = document.createElement('div');--}}
-  {{--                                      aDiv.setAttribute('class', 'fc-event-container');--}}
-  {{--                                      aDiv.appendChild(element[0])--}}
-  {{--                                      div[0].childNodes[1].appendChild(aDiv)--}}
-  {{--                                  }--}}
-  {{--                              }--}}
-  {{--                             // console.log( '***************************************', aArray)--}}
-
-  {{--                          }, 20)--}}
-  {{--                      }--}}
-  {{--                      if(event['user_id'] != us_id)--}}
-  {{--                          {--}}
-  {{--                              setTimeout(() => {--}}
-  {{--                                  // let x = document.querySelector('.fc-event-container');--}}
-  {{--                                  // x.removeAttribute('class');--}}
-
-  {{--                                  element[0].setAttribute('class', 'DeactiveUser fc-day-grid-event fc-h-event fc-event fc-start fc-end fc-draggable');--}}
-  {{--                              }, 10)--}}
-  {{--                          }--}}
-
-  {{--                      if(event['service_id'] != service_id)--}}
-  {{--                      {--}}
-  {{--                          setTimeout(() => {--}}
-  {{--                              element[0].setAttribute('class', 'DeactiveUser fc-day-grid-event fc-h-event fc-event fc-start fc-end fc-draggable');--}}
-  {{--                          }, 10)--}}
-  {{--                      }--}}
-  {{--                      $($(element[0]).find('.DeactiveUser')).prepend('<div class="kkkkkkkkkkkk">'+element[0]+'</div>');--}}
-
-  {{--                      //console.log($(element[0]).find('.DeactiveUser').prepend('<ol>eeeeeee</ol>'))--}}
-
-  {{--                      // Display none booking date--}}
-  {{--                      setTimeout(() => {--}}
-  {{--                          $(".DeactiveUser" ).css( "display", "none" );--}}
-  {{--                          $(".DeactiveUser" ).next().css( "display", "none" );--}}
-  {{--                      }, 20);--}}
-
-  {{--                      }--}}
-  {{--              },--}}
 
   eventRender: function(event, element,start, end, allDay) {
 
@@ -715,7 +623,6 @@
       @endif
 
 
-
       // Display none booking date
       setTimeout(() => {
           $(".DeactiveUser" ).css( "display", "none" );
@@ -755,7 +662,7 @@
                             $("#editHour").modal("show");
                         }else {
 
-                        // if (confirm("Are you sure you want to remove it?")) {
+
 
                             $.ajax({
                                 url: "{{ route('zoom-delete',app()->getLocale()) }}",
@@ -767,7 +674,6 @@
                                 },
                                 success: function (response) {
                                     calendar.fullCalendar('refetchEvents');
-                                   // alert("Event Deleted Successfully");
 
                                     // Show Success Delete
                                     $("#delete-success").modal('show');
@@ -776,7 +682,6 @@
                                     $("#myModal").modal('hide');
                                 },
                                 error: function(returnval) {
-                                    //alert('Your appointment has not been deleted');
 
                                     // Show Error Delete
                                     $("#delete-error").modal('show');
@@ -786,8 +691,8 @@
                                 }
                             })
                          }
+
                     }else{
-                        //alert('You can not delete this meeting because you did not add it.')
 
                         // Show Error Delete
                         $("#delete-did-not-add-it").modal('show');
@@ -801,20 +706,14 @@
 
         });
 
-
         function displayMessage(message) {
             toastr.success(message, 'Event');
         }
-
-
-
     </script>
     <script type="text/javascript" src="{{ asset('web_sayt/js/bootstrap/bootstrap.min.js') }}"></script>
-
-
     <!-- Async script executes immediately and must be after any DOM elements used in callback. -->
     <script
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDtOVd66AerMgd0A-mwKEFqdBQTrKGfngc&callback=initMap&libraries=places&v=weekly"
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDtOVd66AerMgd0A-mwKEFqdBQTrKGfngc&callback&callback=initMap&v=weekly"
         async
     ></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>

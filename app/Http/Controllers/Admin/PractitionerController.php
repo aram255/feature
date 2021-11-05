@@ -111,7 +111,7 @@ class PractitionerController extends Controller
                 )),
                 'status' => 1)
             );
-        // return response()->json($profile);
+
         return $data;
     }
 
@@ -119,8 +119,6 @@ class PractitionerController extends Controller
         $id = (int)$request['p_id'];
 
         $status = $request['status'];
-
-
 
         $practitioner = Practitioner::find($id);
 

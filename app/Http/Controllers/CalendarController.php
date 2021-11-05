@@ -17,22 +17,6 @@ class CalendarController extends Controller
          $event->endDateTime = Carbon\Carbon::now()->addHour();
          $event->save();
 
-        // $a = Event::get();
-
-        // dd(Event::get());
-
-
-
-        // return view('calendar');
-
-//         foreach ($a as $val)
-//         {
-//             echo '<pre>';
-//             echo($val->htmlLink);
-//             echo '<pre>';
-//         }
-
-       //  print_r($a->htmlLink);
 
 
      }

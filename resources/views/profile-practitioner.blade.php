@@ -14,12 +14,6 @@
 
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="stylesheet" href="{{ asset('web_sayt/css/calendar2_parctitioner/calendar.css') }}">
-
-    <style>
-        /*.activeUser {*/
-        /*    inset:647.5px -17px -694.5px 1px !important;*/
-        /*}*/
-    </style>
     <script>
 
     </script>
@@ -98,79 +92,10 @@
                 <div class="profile-practitioner__consultation nl">
                     <div class="fs-24 text-center mb-4" style="color: #00309E;"> Available appointment time</div>
                     <div class="d-flex flex-md-row flex-column align-items-center">
-
-{{--                            @if($PractitionerInfo->video != null)--}}
-{{--                                <div class="profile-practitioner__consultation-video flex-1 mr-md-3 p-0 overflow-hidden">--}}
-{{--                                    <video id="video" src="{{ asset('web_sayt/video_practitioners/'.$PractitionerInfo->video) }}"  width="100%" height="100%" controls>--}}
-
-{{--                                    </video>--}}
-{{--                                </div>--}}
-{{--                            @else--}}
-{{--                                <div class="profile-practitioner__consultation-video flex-1 mr-md-3">--}}
-{{--                                    <label for="file-input">--}}
-{{--                                        <img  class="upload" width="100%" height="100%" src="{{ asset('web_sayt/img/video-file.svg') }}" alt="">--}}
-{{--                                    </label>--}}
-{{--                                </div>--}}
-{{--                            @endif--}}
-
-
-{{--                        <div class="person__content-calendar ds-none flex-1">--}}
-
-{{--                            <div  class="jquery-calendar bg-yellow br-10 px-4 py-2 mt-4 fs-16 view-more detail-btn" data-toggle="modal" data-target="#myModal"  >fff</div>--}}
-{{--                            @foreach($GetServiceID as $ServiceId)--}}
-{{--                            <input type="hidden" class="serviceid" >--}}
-{{--                            @endforeach--}}
-{{--                            <div class="calendar-wrapper">--}}
-{{--                                <button id="btnPrev" type="button">Prev</button>--}}
-{{--                                <button id="btnNext" type="button">Next</button>--}}
-{{--                                <div id="divCal" ></div>--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
-
                         <div class="container"  >
 
                             <div id="calendar"></div>
-{{--                            <div class="calendar-section" >--}}
-{{--                                <div class="row" >--}}
 
-{{--                                    <div class="col-sm-6 detail-btn" data-toggle="modal" data-target="#myModal">--}}
-
-{{--                                        <div class="calendar calendar-first " id="calendar_first">--}}
-{{--                                            <div class="calendar_header ">--}}
-{{--                                                <button class="switch-month switch-left">--}}
-{{--                                                    <i class="glyphicon glyphicon-chevron-left"></i>--}}
-{{--                                                </button>--}}
-{{--                                                <h2></h2>--}}
-{{--                                                <button class="switch-month switch-right">--}}
-{{--                                                    <i class="glyphicon glyphicon-chevron-right"></i>--}}
-{{--                                                </button>--}}
-{{--                                            </div>--}}
-{{--                                            <div class="calendar_weekdays"></div>--}}
-{{--                                            <div class="calendar_content"></div>--}}
-{{--                                        </div>--}}
-
-{{--                                    </div>--}}
-{{--                                    <div class="col-sm-6 detail-btn" data-toggle="modal" data-target="#myModal">--}}
-
-{{--                                        <div class="calendar calendar-second " id="calendar_second">--}}
-{{--                                            <div class="calendar_header">--}}
-{{--                                                <button class="switch-month switch-left">--}}
-{{--                                                    <i class="glyphicon glyphicon-chevron-left"></i>--}}
-{{--                                                </button>--}}
-{{--                                                <h2></h2>--}}
-{{--                                                <button class="switch-month switch-right">--}}
-{{--                                                    <i class="glyphicon glyphicon-chevron-right"></i>--}}
-{{--                                                </button>--}}
-{{--                                            </div>--}}
-{{--                                            <div class="calendar_weekdays"></div>--}}
-{{--                                            <div class="calendar_content"></div>--}}
-{{--                                        </div>--}}
-
-{{--                                    </div>--}}
-
-{{--                                </div> <!-- End Row -->--}}
-
-{{--                            </div> <!-- End Calendar -->--}}
                         </div> <!-- End Container -->
                     </div>
                     <div class="profile-practitioner__consultation-time">
@@ -264,8 +189,6 @@
                                     @endforeach
                                 @endforeach
                             </ul>
-
-                            {{--                                    <button class="bg-yellow br-10 px-4 py-2 mt-4 fs-16 view-more">View More >></button>--}}
                         </div>
                     @endforeach
                 </div>
@@ -377,23 +300,6 @@
         </div>
     </div>
 
-{{--    <!---  0000000 ----->--}}
-{{--    <div class="modal" tabindex="-1" id="myModal">--}}
-{{--        <div class="modal-dialog max-dialog">--}}
-{{--            <div class="modal-content ">--}}
-{{--                <div class="modal-header border-bottom-0">--}}
-{{--                    <h2 class="text-center w-100 title">Available appointment time</h2>--}}
-{{--                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">--}}
-{{--                        <span aria-hidden="true">&times;</span>--}}
-{{--                    </button>--}}
-{{--                </div>--}}
-{{--                <div class="modal-body">--}}
-{{--                    <div id="calendar"></div>--}}
-{{--                </div>--}}
-{{--            </div>--}}
-{{--        </div>--}}
-{{--    </div>--}}
-
 @include('modal-list')
 @endsection
 
@@ -401,18 +307,13 @@
 
 
     <script type="text/javascript" src="{{ asset('web_sayt/js/jquery.js') }}"></script>
-
-
     <script>
         $(function() {
             $('#myModal').modal('show');
         });
     </script>
+
     <script>
-
-
-
-        // $(document).on('click','.detail-btn', function()  {
 
         $( document ).ready(function() {
 
@@ -445,7 +346,6 @@
                     center:'title',
                     right:'month,agendaWeek,agendaDay'
                 },
-                //events:'/en/profile-practitioner/'+ practitionerId+'/'+service_id,
                 events:'/en/profile-practitioner/'+ practitionerId,
                 selectable:true,
                 selectHelper: true,
@@ -478,7 +378,6 @@
                                     title: 'Practitioner',
                                     start: start,
                                     end: end,
-                                    // service_id: arrServiceId,
                                     LiveDateTime:LiveDateTime,
                                     type: 'add'
                                 },
@@ -486,7 +385,6 @@
                                     calendar.fullCalendar('refetchEvents');
                                     if(data.success !== undefined)
                                     {
-                                     //   alert(data.success)
                                         //calendar.fullCalendar('refetchEvents');
                                         // Show Success Meeting
                                         $('#succes-meeting-free').modal('show');
@@ -497,7 +395,7 @@
 
                                     if(data.error !== undefined)
                                     {
-                                        //alert(data.error);
+
                                         // Show Error No Repeat Service
                                         $("#select_error").modal('show');
 
@@ -508,7 +406,6 @@
                                 },
                             });
                     }else{
-                        //alert('You can not make appointments with back date.');
 
                         // Show Error with back date
                         $("#with-back-date").modal('show');
@@ -567,9 +464,6 @@
 
                         var event_id = event.id;
 
-                        // if (confirm("Do you want to change your meeting details?")) {
-
-                            // submitTimeChanges(event.id);
                             $.ajax({
                                 url: "/en/free-date-time-update",
                                 type: "POST",
@@ -580,9 +474,7 @@
                                     type: 'update'
                                 },
                                 success: function (response) {
-                                    console.log(response)
                                     calendar.fullCalendar('refetchEvents');
-                                    //alert("Event Updated Successfully");
 
                                     // Show Success Delete
                                     $("#update-success").modal('show');
@@ -591,9 +483,6 @@
                                     $("#myModal").modal('hide');
                                 },
                                 error: function(response) {
-                                    console.log(response)
-                                    // alert("The event has not been updated.");
-
                                     // Show Error No not been created
                                     $("#not-been-created").modal('show');
 
@@ -601,10 +490,7 @@
                                     $("#myModal2").modal('hide');
                                 }
                             })
-                        // }
                     }else{
-                       // alert('You can not make appointments with back date.');
-
                         // Show Error with back date
                         $("#with-back-date").modal('show');
 
@@ -630,8 +516,6 @@
 
                     if((AuthID === event.practitioner_id) &&  (user_id == null)) {
 
-                        // if (confirm("Are you sure you want to remove it?")) {
-
                             $.ajax({
                                 url: "{{ route('free-date-time-delete',app()->getLocale()) }}",
                                 type: "POST",
@@ -646,7 +530,6 @@
 
                                     if(data.success !== undefined)
                                     {
-                                        //alert(data.success)
                                         // Show Success Delete
                                         $("#delete-success-free").modal('show');
 
@@ -656,8 +539,6 @@
 
                                     if(data.error !== undefined)
                                     {
-                                       // alert(data.error);
-
                                         // Show Error Delete
                                         $("#delete-error").modal('show');
 
@@ -666,10 +547,7 @@
                                     }
                                 },
                             })
-                        // }
                     }else{
-                       // alert('You can not delete this meeting because you did not add it.')
-
                     // Show Error Delete
                     $("#delete-did-not-add-it").modal('show');
 
@@ -681,7 +559,6 @@
             });
 
         });
-
 
         function displayMessage(message) {
             toastr.success(message, 'Event');
@@ -696,18 +573,14 @@
     </script>
 
     <script type="text/javascript" src="{{ asset('web_sayt/js/calendar/calendar.js') }}"></script>
-{{--    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>--}}
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="{{ asset('web_sayt/js/star-rating.js') }}"></script>
-{{--    <script type="text/javascript" src="{{ asset('web_sayt/js/jquery.js') }}"></script>--}}
     <script type="text/javascript" src="{{ asset('web_sayt/js/bootstrap/bootstrap.min.js') }}"></script>
-{{--    <script type="text/javascript" src="{{ asset('web_sayt/js/bootstrap/bootstrap.bundle.min.js') }}"></script>--}}
     <script type="text/javascript" src="{{ asset('web_sayt/js/owl.carousel.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('web_sayt/js/carusel.js') }}"></script>
     <script src="{{ asset('web_sayt/js/filter.js') }}"></script>
     <script type="text/javascript" src="{{ asset('web_sayt/js/script.js') }}"></script>
     <script type="text/javascript" src="{{ asset('web_sayt/js/readMoreJS.min.js') }}"></script>
-
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/fullcalendar.js"></script>
 
@@ -795,13 +668,11 @@
                 method:"POST",
                 data:{user_id:user_id,practitioner_id:practitioner_id,service_id:service_id,meeting_id:meeting_id, _token:_token},
                 success:function(data){
-                    console.log(data)
 
-                   // alert('The tag you entered has been added.')
                 },error: function (error) {
                     if(error.status == 500)
                     {
-                        //alert('The tag you entered was not entered, or it currently exists.')
+
                     }
                 }
             });

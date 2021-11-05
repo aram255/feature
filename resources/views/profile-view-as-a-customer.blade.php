@@ -20,7 +20,6 @@
 @section('content')
     <script>var body = document.body; body.classList.add("body");</script>
 
-{{--    @if(isset(Auth::user()->id))--}}
     <!---  0000000  ---->
     <main>
         <div class="container">
@@ -45,19 +44,8 @@
                             </div>
 
                             <input type="hidden" id="practitioner_id" value="{{$Practitioner->id}}"><br>
-{{--                            <div class="person__info-my">--}}
-
-{{--                            <div class="person__info-my">--}}
 
 
-
-{{--                                <a href="{{route('view-type-form-practitioner',[app()->getLocale(),$Practitioner->id])}}" class="mb-4 text-black d-block">My Intake Forms</a>--}}
-{{--                                <div role="button" class="mb-3 cursor-pointer bg-yellow px-3 py-2 br-5 text-center" data-toggle="modal" data-target="#myProtocolsModal">My Protocols</div>--}}
-{{--                                {{$Practitioner->description}}--}}
-{{--                            </div>--}}
-
-
-{{--{{dd($ReviewCheckMeetingId)}}--}}
                          @if(isset($ReviewCheckMeetingId) and $ReviewCheckMeetingId>0)
                                 <div class="person__info-rating qew">
                                 <span class="gl-star-rating gl-star-rating--ltr " data-star-rating="">
@@ -83,8 +71,7 @@
                     <div class="d-flex align-items-start">
                         <div class="d-flex flex-md-row flex-column col-md-9">
                             <div class="profile-practitioner__consultation-video flex-1 mr-md-3">
-                                {{--                            <input type="file" id="video-file" name="video-file">--}}
-                                {{--                            <label for="video-file"><img class="upload" src="{{ asset('web_sayt/img/video-file.svg') }}" alt=""></label>--}}
+
                                 <div class="profile-practitioner__consultation-video flex-1 mr-md-3 p-0 overflow-hidden">
                                     <video id="video" src="{{asset('web_sayt/video_practitioners/'.$Practitioner->video)}}" width="100%" height="100%" controls="">
 
@@ -104,10 +91,10 @@
                     </div>
                     <div class="profile__reviews">
                         <p class="profile__reviews-title">REVIEWS</p>
-                        <div class="d-flex flex-lg-row flex-column">
+                        <div class="d-flex flex-column">
                        @if(count($Review)>0)
                          @foreach($Review as $valR)
-{{--                             @if(!empty($valR->practitoner_id))--}}
+
 
                                     @if(!empty($valR->description))
                             <div class="profile__reviews-block">
@@ -141,8 +128,6 @@
                                     </div>
                                 </div>
                             </div>
-
-{{--                                @endif--}}
                                  @else
                                      No reviews yet
                                  @endif
@@ -156,20 +141,6 @@
             @if(@isset($Service) and  @count($Service) > 0 )
 
                 <div class="service pb-5 container">
-
-                    <?php
-//                    $count =  count($Service->where('practitioner_id',$Result->id));
-//
-//                    if(!empty(count($Service->where('practitioner_id',$Result->id))))
-//                    {
-//                        echo   '<h2 class="text-center" >My Services</h2>
-//                            <h4 class="text-uppercase text-center" >ONE ON ONE PROGRAMS</h4>';
-//                    }
-//                    else{
-//                        echo '<h2 class="text-center" >No services yet</h2>';
-//                    }
-
-                    ?>
 
                     <div class="col-lg-12">
                         <div class="">
@@ -215,8 +186,11 @@
                                                     @endforeach
                                                 @endforeach
                                             </ul>
-{{--                                            ($ServizeID->where('practitioner_id',$Practitioner->id)->where('service_id',$Value->id))}}--}}
 
+                                            <input type="hidden" value="{{$Value->price}}">
+                                            <input type="hidden" value="{{$Practitioner->lat}}">
+                                            <input type="hidden" value="{{$Practitioner->lng}}">
+                                            <input type="hidden" value="{{$Practitioner->location}}">
                                             <input type="hidden" name="user_email" value="@if(isset(Auth::user()->email)){{Auth::user()->email}}@endif">
                                             <input type="hidden" name="service_name" value="{{$Value->title}}">
                                             <input type="hidden" name="service_id" value="{{$Value->id}}">
@@ -225,21 +199,6 @@
                                             <input type="hidden" name="last_name" value="{{$Practitioner->last_name}}">
                                             <input type="hidden" name="phone_number" value="{{$Practitioner->phone_number}}">
                                             <input type="hidden" name="practitioner_id" value="{{$Practitioner->id}}">
-{{--                                            @if(count($ServizeID)>0)--}}
-
-{{--                                                @foreach($ServizeID->where('practitioner_id',$Practitioner->id) as $v)--}}
-
-{{--                                                    {{dd($v->service_id)}}--}}
-{{--                                            @if($Value->id == $v->service_id)--}}
-{{--                                                    <button class="bg-yellow br-10 px-4 py-2 mt-4 fs-16 view-more detail-btn" data-toggle="modal" @if(isset(Auth::user()->id))data-target="#myModal" @else data-target="#loginn" @endif" data-id="{{ $Practitioner->id }}" >Service Reserved</button>--}}
-{{--                                            @else--}}
-{{--                                            <button class="bg-yellow br-10 px-4 py-2 mt-4 fs-16 view-more detail-btn" data-toggle="modal" @if(isset(Auth::user()->id))data-target="#myModal" @else data-target="#loginn" @endif" data-id="{{ $Practitioner->id }}" >Book</button>--}}
-{{--                                                @endif--}}
-{{--                                                @endforeach--}}
-{{--                                            @endif--}}
-{{--                                            @if(count($ServizeID)<0)--}}
-{{--                                                <button class="bg-yellow br-10 px-4 py-2 mt-4 fs-16 view-more detail-btn" data-toggle="modal" @if(isset(Auth::user()->id))data-target="#myModal" @else data-target="#loginn" @endif" data-id="{{ $Practitioner->id }}" >Book</button>--}}
-{{--                                            @endif--}}
                                             <button class="bg-yellow br-10 px-4 py-2 mt-4 fs-16 view-more detail-btn" data-toggle="modal" @if(isset(Auth::user()->id))data-target="#myModal" @else data-target="#loginn" @endif" data-id="{{ $Practitioner->id }}" >Book</button>
                                         </div>
                                     @endforeach
@@ -272,7 +231,7 @@
         </div>
     </div>
 
-    <div id="myModal2" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div id="myModal2" class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header border-bottom-0">
@@ -282,27 +241,63 @@
                     <button type="button" class="close position-absolute" data-dismiss="modal" aria-hidden="true" style="right: 20px; top: 16px">×</button>
                     <div class="w-100 text-center mt-4">
                         <h3 id="myModalLabel" class="text-center title">Communication Tool</h3>
+
                         <div class="info-text text-center">
                             Please choose your preferred communication tool
                         </div>
                     </div>
                 </div>
-                <div class="d-flex justify-content-center my-5">
-                    <div id="zoom" class="modal-body mx-4 flex-1">
-                        <a href="#">
-                            <img src="{{ asset('web_sayt/img/zoom-icon-logo.png') }}" alt="">
-                            zoom
-                        </a>
+                <div class="d-flex flex-column my-5">
+                    <div class="d-flex flex-row">
+                        <div id="zoom" class="modal-body mx-4 flex-1">
+                            <a href="#">
+                                <img src="{{ asset('web_sayt/img/zoom-icon-logo.png') }}" alt="">
+                                zoom
+                            </a>
+                        </div>
+
+                        <div id="open_map" class="modal-body mx-4 flex-1">
+                            <a href="#">
+                                <img src="{{ asset('web_sayt/img/Group 2013.svg') }}" alt="" style="width: 32px; height: 32px">
+                                In-person visit
+                            </a>
+                        </div>
                     </div>
-                    <div id="offline" class="modal-body mx-4 flex-1">
-                        <a href="#" id="offline">
-                            <img src="{{ asset('web_sayt/img/Group 2013.svg') }}" alt="" style="width: 32px; height: 32px">
-                            In-person visit
-                        </a>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+
+    <div id="open_map_modal" class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header border-bottom-0">
+                    <button type="button" class="position-absolute back-btn" data-dismiss="modal" aria-hidden="true" style="left: 20px; top: 16px">
+                        <i class="fa fa-angle-left"></i> Back
+                    </button>
+                    <button type="button" class="close position-absolute" data-dismiss="modal" aria-hidden="true" style="right: 20px; top: 16px">×</button>
+                    <div class="w-100 text-center mt-4">
+                        <h3 id="myModalLabel" class="text-center title">View location on map</h3>
+
+                        <div class="info-text text-center"  style="display: flex;justify-content: center;align-items: center">
+                            <img src="{{ asset('web_sayt/img/map-pin.svg') }}" alt="" style="width: 15px; height: 18px;margin-right: 10px">
+
+                            <span id="location"></span>
+                        </div>
                     </div>
+                </div>
+
+                <div id="map" style="width:100%;max-width: 924px;height: 453px;margin:0 auto;border-radius: 10px"></div>
+                <div style="display:flex;justify-content: flex-end;margin-right: 10px">
+                    <a href="#" class="btn bg-yellow" style="margin:20px 0;border-radius: 10px;width: 124px;" id="offline">Done</a>
                 </div>
             </div>
         </div>
+    </div>
     </div>
 
     <div class="modal fade show" id="editHour" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-modal="true" >
@@ -400,46 +395,12 @@
 
 
 <script type="text/javascript" src="{{ asset('web_sayt/js/jquery.js') }}"></script>
-<script src="{{ asset('web_sayt/maps/index.js') }}"></script>
+<script src="{{ asset('web_sayt/maps/map.js') }}"></script>
 
 <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
 {{--     Calendar--}}
 <script>
     $(document).ready(function() {
-
-        // Add Star
-        {{--$('.gl-active').click(function () {--}}
-
-        {{--    var star = $(this).attr('data-value');--}}
-        {{--    var _token = $('input[name="_token"]').val();--}}
-        {{--    alert($("#practitioner_id").val())--}}
-        {{--    $.ajax({--}}
-        {{--        url: "{{route('add-star',[app()->getLocale()])}}",--}}
-        {{--        type: "POST",--}}
-        {{--        data: {--}}
-        {{--            star: star,--}}
-        {{--            practitioner_id: $("#practitioner_id").val(),--}}
-        {{--            _token:_token--}}
-        {{--        },--}}
-        {{--        success: function (data) {--}}
-        {{--             console.log(data)--}}
-        {{--           //  alert("The tag you selected has been added to your list.");--}}
-        {{--            if(data.success)--}}
-        {{--            {--}}
-        {{--                $("#add_star").modal("show");--}}
-        {{--            }--}}
-
-        {{--            if(data.error)--}}
-        {{--            {--}}
-        {{--                $("#no_add_star").modal("show");--}}
-        {{--            }--}}
-
-        {{--        },--}}
-        {{--        error: function(returnval) {--}}
-        {{--             alert('The tag you selected has not been added to your list, or it has already been added.');--}}
-        {{--        }--}}
-        {{--    });--}}
-        {{--})--}}
 
         $('input[type="radio"],input[type="checkbox"],#state').on('change', function () {
             $(this).closest("form").submit();
@@ -467,6 +428,26 @@
         var service_id     = $(this).prev().prev().prev().prev().prev().prev().val();
         var service_name   = $(this).prev().prev().prev().prev().prev().prev().prev().val();
         var user_email     = $(this).prev().prev().prev().prev().prev().prev().prev().prev().val();
+
+        var location         = $(this).prev().prev().prev().prev().prev().prev().prev().prev().prev().val();
+        var lng             = $(this).prev().prev().prev().prev().prev().prev().prev().prev().prev().prev().val();
+        var lat             = $(this).prev().prev().prev().prev().prev().prev().prev().prev().prev().prev().prev().val();
+        var price             = $(this).prev().prev().prev().prev().prev().prev().prev().prev().prev().prev().prev().prev().val();
+
+        if (typeof(Storage) !== "undefined") {
+            // Store
+            sessionStorage.setItem("lat", lat);
+            sessionStorage.setItem("lng", lng);
+        }
+
+
+        if (typeof(Storage) !== "undefined") {
+
+            // Store
+            sessionStorage.setItem("lat", lat);
+            sessionStorage.setItem("lng", lng);
+        }
+
         $('#titlee').text(service_name);
         if(service_id == null)
 
@@ -496,7 +477,7 @@
             timeFormat: 'hh:mm a',
             select:function(start, end, allDay,event,element,view)
             {
-// alert(service_id)
+
                 // Generate password zoom
                 const characters =
                     "abcdefghijklmnopqrstuvwxyz0123456789";
@@ -525,15 +506,17 @@
                 var diff_time = d5-d1;
 
 
-
-
-
-
                 if (d1 >= d2) {
                     $("#myModal2").modal("show");
 
                     // Close Calendar
                     $("#myModal").modal('hide');
+
+                    $("#open_map").click(function () {
+                        $("#open_map_modal").modal("show");
+                        $("#myModal2").modal("hide");
+                        $("#location").html(location)
+                    })
 
                     // Offline
                     $("#offline").click(function () {
@@ -543,19 +526,6 @@
                         var add_user_id = "{{Auth::user()->id}}";
                         @endif
 
-                        // alert('start '+start)
-                        // alert('end'+end)
-                        // alert('practitionerId'+practitionerId)
-                        // alert('add_user_id'+add_user_id)
-                        // alert('phone_number'+phone_number)
-                        // alert('last_name '+last_name)
-                        // alert('first_name'+first_name)
-                        // alert('email'+email)
-                        // alert('duration'+duration)
-                        // alert('password'+password)
-                        // alert('practitionerID'+practitionerID)
-                        // alert('service_id'+service_id)
-                        // alert('user_email'+user_email)
 
                         $.ajax({
                             url: "{{ route('add-offline-meeting',app()->getLocale()) }}",
@@ -576,6 +546,9 @@
                                 service_id: service_id,
                                 user_email:user_email,
                                 LiveDateTime:LiveDateTime,
+                                location: location,
+                                lng:lng,
+                                lat:lat,
                                 type: 'add'
                             },
                             success: function (data) {
@@ -586,40 +559,48 @@
                                 {
                                     if(data.NoRepeatService != null)
                                     {
-                                        //alert(data.NoRepeatService)
                                         // Show Error No Repeat Service
                                         $("#error-NoRepeatService").modal('hide');
 
+
                                         // Close Select Meeting
-                                        $("#myModal2").modal('hide');
+                                        $("#open_map_modal").modal('hide');
                                     }else{
-                                        //alert("Event Created Successfully");
+                                        // Close Select Meeting
+                                        $("#open_map_modal").modal('hide');
 
-                                        // Show Success Meeting
-                                        $('#succes-meeting').modal('show');
+
+                                        $('#succes-meeting-my-app').modal('show');
 
                                         // Close Select Meeting
                                         $("#myModal2").modal('hide');
+                                        $('#practition').text(first_name +" "+ last_name)
+                                        $('#service_n').text(service_name)
+                                        $('#date_time').text(start)
+                                        $('#prc').text(price)
+
+                                        setTimeout(() => {
+                                            var newURL = window.location.protocol + "//" + window.location.host;
+                                            location.replace(newURL+"/en/my-appointments-customer/2");
+                                            //location.replace(newURL+"/en/my-appointments-customer/2/Practitioner/Service_name/Date-time/price");
+                                        }, 300)
                                     }
                                 }else{
-                                    // alert(data.select_error);
-
                                     // Show Error No Repeat Service
                                     $("#select_error").modal('show');
 
+
                                     // Close Select Meeting
-                                    $("#myModal2").modal('hide');
+                                    $("#open_map_modal").modal('hide');
                                 }
 
                             },
                             error: function(data) {
-                                // alert('Your appointment has not been created');
-
                                 // Show Error No not been created
                                 $("#not-been-created").modal('show');
 
                                 // Close Select Meeting
-                                $("#myModal2").modal('hide');
+                                $("#open_map_modal").modal('hide');
                             }
                         });
                     })
@@ -662,24 +643,33 @@
                                 {
                                     if(data.NoRepeatService != null)
                                     {
-                                        //alert(data.NoRepeatService)
                                         // Show Error No Repeat Service
                                         $("#error-NoRepeatService").modal('hide');
 
                                         // Close Select Meeting
                                         $("#myModal2").modal('hide');
                                     }else{
-                                        //alert("Event Created Successfully");
 
-                                        // Show Success Meeting
-                                        $('#succes-meeting').modal('show');
+                                        // Close Select Meeting
+                                        $("#open_map_modal").modal('hide');
+
+
+                                        $('#succes-meeting-my-app').modal('show');
 
                                         // Close Select Meeting
                                         $("#myModal2").modal('hide');
+                                        $('#practition').text(first_name +" "+ last_name)
+                                        $('#service_n').text(service_name)
+                                        $('#date_time').text(start)
+                                        $('#prc').text(price)
+
+                                        setTimeout(() => {
+                                            var newURL = window.location.protocol + "//" + window.location.host;
+                                            location.replace(newURL+"/en/my-appointments-customer/2");
+                                            //location.replace(newURL+"/en/my-appointments-customer/2/Practitioner/Service_name/Date-time/price");
+                                        }, 300)
                                     }
                                 }else{
-                                   // alert(data.select_error);
-
                                     // Show Error No Repeat Service
                                     $("#select_error").modal('show');
 
@@ -689,8 +679,6 @@
 
                             },
                             error: function(data) {
-                               // alert('Your appointment has not been created');
-
                                 // Show Error No not been created
                                 $("#not-been-created").modal('show');
 
@@ -700,8 +688,6 @@
                         });
                     });
                 }else{
-                  //  alert('You can not make appointments with back date.');
-
                     // Show Error with back date
                     $("#with-back-date").modal('show');
 
@@ -757,8 +743,6 @@
                 }
                 @endif
 
-
-
                 // Display none booking date
                 setTimeout(() => {
                     $(".DeactiveUser" ).css( "display", "none" );
@@ -795,7 +779,6 @@
                     $("#editHour").modal("show");
                 }else {
 
-                    // if (confirm("Are you sure you want to remove it?")) {
 
                         $.ajax({
                             url: "{{ route('zoom-delete',app()->getLocale()) }}",
@@ -807,7 +790,6 @@
                             },
                             success: function (response) {
                                 calendar.fullCalendar('refetchEvents');
-                                //alert("Event Deleted Successfully");
 
                                 // Show Success Delete
                                 $("#delete-success").modal('show');
@@ -816,8 +798,6 @@
                                 $("#myModal").modal('hide');
                             },
                             error: function (returnval) {
-                                //alert('Your appointment has not been deleted');
-
                                 // Show Error Delete
                                 $("#delete-error").modal('show');
 
@@ -825,11 +805,8 @@
                                 $("#myModal").modal('hide');
                             }
                         })
-                    // }
                 }
             }else{
-                //alert('You can not delete this meeting because you did not add it.')
-
                 // Show Error Delete
                 $("#delete-did-not-add-it").modal('show');
 
@@ -841,7 +818,6 @@
         });
 
     });
-
 
     function displayMessage(message) {
         toastr.success(message, 'Event');

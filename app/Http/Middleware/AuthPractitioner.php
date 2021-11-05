@@ -18,13 +18,7 @@ class AuthPractitioner
      */
     public function handle(Request $request, Closure $next)
     {
-//        if (!Session::has('UserID')) {
-//            return redirect(app()->getLocale()."/login");
-//        }else
-//         {
-//
-//
-//        }
+
         if (Session::has('UserID')) {
             if ($request->segment(2) == "login-practitioners" || $request->segment(2) == "register-practitioners") {
                 return redirect(app()->getLocale() . "/profile-practitioner");

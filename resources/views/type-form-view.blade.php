@@ -23,11 +23,6 @@
             <div  data-tf-on-submit="submit" data-tf-widget="{{$TypeFormView->url}}" style="width:100%;height:400px;"></div><script src="//embed.typeform.com/next/embed.js"></script>
             <input type="hidden" name="" value="{{ Request::segment(4) }}" id="meeting_id">
             <script>
-
-
-
-
-
                 function submit(event) { // this needs to be available on global scope (window)
 
 

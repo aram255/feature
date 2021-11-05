@@ -41,10 +41,6 @@ class CustomerController extends Controller
     public function profileCustomer()
     {
 
-        //  $t1 = strtotime($InProcessVal->create);
-//        $t2 = strtotime( '2006-04-14 12:30:00' );
-//        $diff = $t2 - $t1;
-//        echo $hours = $diff / ( 60 * 60 );
 
         $InProcess = DB::table('practitioner')
             ->select('practitioner.id','practitioner.img','practitioner.first_name','practitioner.last_name','practitioner.email','practitioner.phone_number',
@@ -59,7 +55,7 @@ class CustomerController extends Controller
             ->orderBy('zoom_meetings_list.id','DESC')
             ->paginate(5);
 
-      // dd($InProcess);
+
 
 
         $Review = DB::table('reviews')
@@ -80,16 +76,8 @@ class CustomerController extends Controller
         }
 
 
-
-
-//        $PractitionerFavorite =  DB::table('practitioner')
-//                                ->select('practitioner.first_name','practitioner.last_name','practitioner.description','practitioner.video','practitioner.img','favorite.practitioner_id','practitioner.id as partit_id','practitioner.email','practitioner.phone_number','zoom_meetings_list.password','zoom_meetings_list.duration','zoom_meetings_list.join_url','zoom_meetings_list.service_id','zoom_meetings_list.create')
-//                                ->join('favorite', 'practitioner.id', 'favorite.practitioner_id')
-//                                ->join('zoom_meetings_list', 'favorite.user_id', 'zoom_meetings_list.user_id')
-//                                ->where('favorite.user_id',Auth::id())
-//                                ->get();
         $PractitionerFavorite =  DB::table('practitioner')
-            ->select('practitioner.first_name','practitioner.last_name','practitioner.description','practitioner.video','practitioner.img','favorite.practitioner_id','practitioner.id as partit_id','practitioner.email','practitioner.phone_number')
+            ->select('practitioner.first_name','practitioner.last_name','practitioner.description','practitioner.video','practitioner.img','favorite.practitioner_id','practitioner.id as partit_id','practitioner.email','practitioner.phone_number','practitioner.lat','practitioner.lng','practitioner.location')
             ->join('favorite', 'practitioner.id', 'favorite.practitioner_id')
             ->where('favorite.user_id',Auth::id())
             ->get();
@@ -123,8 +111,6 @@ class CustomerController extends Controller
 
 
 
-
-//       dd($PractitionerFavorite);
 
         $Teg = DB::table('teg_managements')
             ->join('practitioner_teg_managements', 'teg_managements.id', 'practitioner_teg_managements.teg_managements_id')
@@ -188,11 +174,7 @@ class CustomerController extends Controller
 
     public function editProfileCustmerPost(request $request)
     {
-//        $request->validate([
-//            "password" => 'required|confirmed|min:6'
-//        ]);
 
-        //dd($request->gender);
         $EditCustomer = CustomerModel::where('id',Auth::id())->first();
 
         if(!empty($request->file('img')))
@@ -231,8 +213,7 @@ class CustomerController extends Controller
         if($request->password != null) {
             $EditCustomerPassword = CustomerModel::where('id', Auth::id())->first();
 
-//            if (Hash::check($request->password, $EditCustomerPassword->password))
-//            {
+
 
             if (Hash::check($request->password, Hash::make($request->password_confirmation)))
             {
@@ -294,18 +275,10 @@ class CustomerController extends Controller
     public function myAppointmentsCustomer(request $request,$lang,$id,$practitionrers = null,$service_name = null,$date_time = null,$price = null)
     {
 
-        //  dd(date('Y-m-d H:i:s'));
-
-//        $tz = 'Asia/Russian';
-//        $timestamp = time();
-//        $dt = new DateTime("now", new DateTimeZone($tz)); //first argument "must" be a string
-//        $dt->setTimestamp($timestamp); //adjust the object to correct timestamp
-//        echo $dt->format('Y-m-d H:i:s');
 
         $InProcess = DB::table('practitioner')
             ->join('zoom_meetings_list', 'practitioner.id', 'zoom_meetings_list.practitioner_id')
             ->where('zoom_meetings_list.user_id',Auth::id())
-            //  ->whereDate("zoom_meetings_list.start", ">=",$dt->format('Y-m-d H:i:s'))
             ->whereDate("zoom_meetings_list.start", ">=",date('Y-m-d H:i:s'))
             ->orderBy('zoom_meetings_list.id','DESC')
             ->paginate(5);
@@ -397,24 +370,8 @@ class CustomerController extends Controller
 
         $StatusProtocol = DB::table('protocol_heading')->where('user_id',Auth::id())->get();
 
-//        $a  = Carbon::now()->add('2021-08-27');
-//        dd($a);
-//        $dateTime = date('m/d/Y');
-//        $h =  Carbon::createFromFormat('Y-m-d', $dateTime)->format('m/d/Y');
         Carbon::createFromFormat('m/d/Y', '08/31/2021')->format('m/d/Y');
 
-
-//        $now = Carbon::now();
-//        $weekStartDate = $now->startOfWeek()->format('Y-m-d H:i');
-//        $weekEndDate = $now->endOfWeek()->format('Y-m-d H:i');
-//
-//
-//        $a  =  $weekStartDate - $weekEndDate;
-//
-//        dd($a);
-
-//        $current_week = ZoomModel::whereBetween('start', [Carbon::now()->startOfWeek(), Carbon::now()->endOfWeek()])->get();
-//        dd($current_week);
 
         function week_between_two_dates($date1, $date2)
         {
@@ -426,10 +383,7 @@ class CustomerController extends Controller
 
         $StartDate = Carbon::createFromFormat('m/d/Y', '08/31/2021')->format('m/d/Y');
         $LiveDate = Carbon::now()->format('m/d/Y');
-       // week_between_two_dates($StartDate, $LiveDate);
-//        $a = $request->user;
-//        $b = $request->passwd;
-//       dd($request->all());
+
         return view('my-appointments-customer',compact('InProcess','Complete','id','StatusProtocol','TypeForm','CheckTypeForm','ReviewRate','SpecialitiesComplete','SpecialitiesInProcess'));
     }
 
@@ -499,7 +453,6 @@ class CustomerController extends Controller
                 $Edit = DB::table('protocol_another')->where('service_id', $serviceID)->where('user_id', Auth::id())->where('practitioner_id', $practitionerID)->where('id', $value)->update(['selected' => $request->another[$key]]);
             } else {
                 return back();
-             //   $Edit = DB::table('protocol_another')->where('service_id', $serviceID)->where('user_id', Auth::id())->where('practitioner_id', $practitionerID)->where('id', $request->another_id[$key]);
             }
         }
 
@@ -508,68 +461,6 @@ class CustomerController extends Controller
 
     }
 
-//
-//    public function addStarPractitioner(request $request)
-//    {
-//        $CompleteCount  = DB::table('practitioner')
-//            ->join('zoom_meetings_list', 'practitioner.id', 'zoom_meetings_list.practitioner_id')
-//            ->where('zoom_meetings_list.user_id',Auth::id())
-//            ->whereDate("zoom_meetings_list.start", "<=",date('Y-m-d'))
-//            ->orderBy('zoom_meetings_list.id','DESC')
-//            ->count();
-//
-//
-//        $CompleteCountCheckAdd  = DB::table('practitioner')
-//            ->join('zoom_meetings_list', 'practitioner.id', 'zoom_meetings_list.practitioner_id')
-//            ->where('zoom_meetings_list.user_id',Auth::id())
-//            ->whereDate("zoom_meetings_list.start", "<=",date('Y-m-d'))
-//            ->orderBy('zoom_meetings_list.id','DESC')
-//            ->get();
-//
-//
-//
-//
-//       $reviewCount = DB::table('reviews')->where('user_id',Auth::id())->where('practitoner_id',$request->practitioner_id)->where('description','=',null)->count();
-//
-//
-////        return $request->practitioner_id;
-//
-////       if($CompleteCount != $reviewCount)
-////       {
-//
-//          $reviewCheckMeetingId = ReviewModel::where('user_id',Auth::id())->where('practitoner_id',$request->practitioner_id)->where('description','=',null)->where('meeting_id',$request->meeting_id)->first();
-//
-//            if(empty($reviewCheckMeetingId))
-//            {
-//                $AddStar =  DB::table('reviews')->insert(
-//                    [
-//                        'rate' => $request->star,
-//                        'practitoner_id' => $request->practitioner_id,
-//                        'user_id' => Auth::id(),
-//                        'meeting_id' => $request->meeting_id
-//                    ]
-//                );
-//
-//                if(!empty($AddStar))
-//                {
-//                    return response()->json(['success' => 'Yes']);
-//                }else{
-//                    return response()->json(['error' => 'No']);
-//                }
-//
-//
-//            }else{
-//                return response()->json(['error' => 'No']);
-//            }
-////        }
-//
-//
-////           return response()->json(['success' => 'Yes']);
-////       }else{
-////           return response()->json(['error' => 'No']);
-////       }
-//
-//    }
 
     public function addReview(Request $request)
     {

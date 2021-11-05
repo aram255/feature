@@ -1,20 +1,20 @@
 <div class="modal fade show" id="succes-meeting-my-app" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-modal="true" >
     <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-            <div class="modal__form lg-header-form modal__formm lg-header-formm">
+        <div class="modal-content" style="padding: 20px;text-align: center;display: flex;justify-content: center;width: 600px;margin:0 auto">
+            <div class="">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span class="x" aria-hidden="true">×</span>
                 </button>
                 <div class="lg-sg__form">
-                    <div style="line-height: 30px;font-size: 23px;">Practitioner: <span id="practition">ppppppp</span> </div>
-                    <div style="line-height: 30px;font-size: 23px;" >Service Name: <span id="service_n"> ppppppp</span> </div>
-                    <div style="line-height: 30px;font-size: 23px;" >Date Time: <span id="date_time">ppppppp</span> </div>
-                    <div style="line-height: 30px;font-size: 23px;" >Price: <span id="prc">ppppppp</span> </div>
+                    <div style="line-height: 30px;font-size: 23px;">Practitioner: <span id="practition"></span> </div>
+                    <div style="line-height: 30px;font-size: 23px;" >Service Name: <span id="service_n"></span> </div>
+                    <div style="line-height: 30px;font-size: 23px;" >Date Time: <span id="date_time"></span> </div>
+                    <div style="line-height: 30px;font-size: 23px;" >Price: <span id="prc"></span> </div>
 
                     <div class="lg-sg__form-text mb-0">Your appointment was booked successfully</div>
                 </div>
             </div>
-        </div>The date you specified does not match the date provided by the practioner
+        </div>
 
     </div>
 </div>

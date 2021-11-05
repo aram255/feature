@@ -11,5 +11,5 @@ class ServicesModel extends Model
 
     protected $table = "services";
     public $timestamps = false;
-  //  protected $fillable = ['title', 'price'];
+
 }

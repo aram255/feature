@@ -130,7 +130,7 @@ class AuthPractitionersController extends Controller
 
     public function create(array $form_data,$Certifications,$data,$id_or_passport,$practiceID,$specialitiesID)
     {
-//        dd($data['city_id']);
+
 
         $practitioner = new AuthPractitionersModel;
 
@@ -198,7 +198,7 @@ class AuthPractitionersController extends Controller
         ]);
 
         $userInfo = AuthPractitionersModel::where('email','=', $request->email)->first();
-//        dd($userInfo->status);
+
         if($userInfo and $userInfo->status == 'accept')
         {
 
@@ -210,11 +210,11 @@ class AuthPractitionersController extends Controller
                 $request->session()->put('UserLastName', $userInfo->last_name);
                 $request->session()->put('UserImg', $userInfo->img);
 
-              // Auth::login($userInfo);
+
                 return redirect(app()->getLocale()."/");
 
             }else{
-//                dd('sddd');
+
                 return redirect(app()->getLocale()."/login-practitioners")->with('fail','Incorrect password');
             }
 
@@ -240,11 +240,7 @@ class AuthPractitionersController extends Controller
     public function LogOut(Request $request)
     {
         $RemoveAll =  Session::flush();
-//        if($RemoveAll)
-//        {
             return redirect(app()->getLocale().'/login-practitioners');
-        //}
-
     }
 
 
